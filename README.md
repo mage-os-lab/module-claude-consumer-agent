@@ -80,6 +80,8 @@ Stores > Configuration > Services > AI Integration > Shopping Assistant. Every
 field has default, website and store view scope. Config paths start with
 `ai_integration/aiagent/`.
 
+![The section under Services > AI Integration](docs/images/admin-ai-integration.png)
+
 ### General
 
 ![General group](docs/images/admin-general.png)
