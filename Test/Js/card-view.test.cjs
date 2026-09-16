@@ -87,6 +87,14 @@ test('a checkout card formats line totals and the subtotal', () => {
     assert.equal(view.fulfillmentLine, 'Fulfillment: Flat rate');
 });
 
+test('cards restored without the data their view needs produce no view', () => {
+    const cardView = loadCardView();
+    assert.equal(cardView.create({component: 'order_status', id: 'toolu_1', payload: {order_id: '100', summary: 'On its way', next_step: 'Wait'}}, CONFIG, () => undefined), null);
+    assert.equal(cardView.create({component: 'checkout', id: 'toolu_2', payload: {note: 'Check the size', fulfillment_method: 'delivery'}}, CONFIG, () => undefined), null);
+    assert.equal(cardView.create({component: 'products', id: 'toolu_3', payload: {layout: 'carousel'}}, CONFIG, () => undefined), null);
+    assert.equal(cardView.create({component: 'comparison', id: 'toolu_4', payload: {title: 'Bags'}}, CONFIG, () => undefined), null);
+});
+
 test('unknown components and cards without a payload produce no view', () => {
     const cardView = loadCardView();
     assert.equal(cardView.create({component: 'mystery', payload: {}}, CONFIG, () => undefined), null);

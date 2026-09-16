@@ -110,10 +110,34 @@ define([
     }
 
     builders = {
-        products: {template: 'products', build: products},
-        comparison: {template: 'comparison', build: comparison},
-        order_status: {template: 'order-status', build: orderStatus},
-        checkout: {template: 'checkout', build: checkout}
+        products: {
+            template: 'products',
+            build: products,
+            ready: function (payload) {
+                return Array.isArray(payload.items);
+            }
+        },
+        comparison: {
+            template: 'comparison',
+            build: comparison,
+            ready: function (payload) {
+                return Array.isArray(payload.entries);
+            }
+        },
+        order_status: {
+            template: 'order-status',
+            build: orderStatus,
+            ready: function (payload) {
+                return !!payload.order;
+            }
+        },
+        checkout: {
+            template: 'checkout',
+            build: checkout,
+            ready: function (payload) {
+                return !!payload.cart;
+            }
+        }
     };
 
     return {
@@ -121,7 +145,7 @@ define([
             var builder = builders[card.component],
                 view;
 
-            if (!builder || !card.payload) {
+            if (!builder || !card.payload || !builder.ready(card.payload)) {
                 return null;
             }
             view = builder.build(card, config, send);
