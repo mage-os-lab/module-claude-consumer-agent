@@ -258,13 +258,13 @@ define([
                     this.turn.status(data.message);
                     break;
                 case 'error':
-                    last.notice(data.message || '');
+                    last.notice(data.message || this.config.i18n.interrupted);
                     last.retryAfter(data.retry_after || null);
                     last.sessionCap(data.kind === 'session_cap');
                     last.streaming(false);
                     this.turn.running(false);
                     this.turn.status('');
-                    this.announcement(data.message || '');
+                    this.announcement(data.message || this.config.i18n.interrupted);
                     break;
                 case 'turn_complete':
                     last.streaming(false);
@@ -289,6 +289,9 @@ define([
             var messages = this.transcript(),
                 index = messages.indexOf(message);
 
+            if (this.turn.running()) {
+                return;
+            }
             while (index >= 0 && messages[index].role !== 'user') {
                 index--;
             }

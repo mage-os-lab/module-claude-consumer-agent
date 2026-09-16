@@ -107,16 +107,16 @@ test('an error ends the turn and keeps retry details on the message', () => {
     assert.equal(state.announcement(), 'Busy');
 });
 
-test('an error without a message ends the turn with an empty notice', () => {
+test('an error without a message ends the turn with the interrupted notice', () => {
     const {state} = loadState();
     const assistant = startedTurn(state);
     state.apply('error', {});
-    assert.equal(assistant.notice(), '');
+    assert.equal(assistant.notice(), 'Interrupted');
     assert.equal(assistant.retryAfter(), null);
     assert.equal(assistant.sessionCap(), false);
     assert.equal(assistant.streaming(), false);
     assert.equal(state.turn.running(), false);
-    assert.equal(state.announcement(), '');
+    assert.equal(state.announcement(), 'Interrupted');
 });
 
 test('turn_complete ends the turn and adopts a 64 character session id', () => {
@@ -225,4 +225,16 @@ test('retry sends the closest earlier user message again', () => {
     assistant.retry();
     assert.equal(assistant.notice(), '');
     assert.deepEqual(calls.runs, ['hello', 'hello']);
+});
+
+test('retry while a turn is running keeps the notice and sends nothing', () => {
+    const {state, calls} = loadState();
+    const assistant = startedTurn(state);
+    state.apply('error', {message: 'Busy', retry_after: 5});
+    state.send('something else');
+    assistant.retry();
+    assert.equal(assistant.notice(), 'Busy');
+    assert.equal(assistant.retryAfter(), 5);
+    assert.equal(state.transcript().length, 4);
+    assert.deepEqual(calls.runs, ['hello', 'something else']);
 });
