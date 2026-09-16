@@ -1,0 +1,18 @@
+<?php
+declare(strict_types=1);
+
+use Magento\Framework\Escaper;
+use MageOS\ClaudeConsumerAgent\Block\ProductAsk;
+
+/** @var Escaper $escaper */
+/** @var ProductAsk $block */
+$widgetConfig = (string)json_encode(
+    ['MageOS_ClaudeConsumerAgent/js/luma/ask-product' => ['productId' => $block->getProductId()]],
+    JSON_UNESCAPED_SLASHES
+);
+?>
+<button type="button"
+        class="action ai-agent-ask"
+        data-mage-init="<?= $escaper->escapeHtmlAttr($widgetConfig) ?>">
+    <?= $escaper->escapeHtml(__('Ask about this product')) ?>
+</button>

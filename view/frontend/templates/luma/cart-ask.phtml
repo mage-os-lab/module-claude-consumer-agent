@@ -1,0 +1,21 @@
+<?php
+declare(strict_types=1);
+
+use Magento\Framework\Escaper;
+
+/** @var Escaper $escaper */
+?>
+<div class="ai-agent-cart-ask">
+    <label for="ai-agent-cart-ask-input" class="ai-agent-cart-ask__label">
+        <?= $escaper->escapeHtml(__('Ask the assistant about this cart')) ?>
+    </label>
+    <form class="ai-agent-cart-ask__row" data-mage-init='{"MageOS_ClaudeConsumerAgent/js/luma/ask-cart": {}}'>
+        <input type="text"
+               id="ai-agent-cart-ask-input"
+               name="message"
+               placeholder="<?= $escaper->escapeHtmlAttr(__('Ask about your cart, delivery or a product')) ?>"/>
+        <button type="submit" class="action primary">
+            <?= $escaper->escapeHtml(__('Ask')) ?>
+        </button>
+    </form>
+</div>
