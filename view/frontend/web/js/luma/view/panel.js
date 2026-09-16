@@ -75,6 +75,12 @@ define([
             this.transcriptElement = element;
         },
 
+        afterInputRender: function (element) {
+            if (state.isOpen()) {
+                element.focus({preventScroll: true});
+            }
+        },
+
         openPanel: function (opener) {
             var self = this,
                 scrollY = window.scrollY;

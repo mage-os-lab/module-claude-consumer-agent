@@ -5,7 +5,7 @@
     <div class="ai-agent-composer__row">
         <textarea class="ai-agent-composer__input"
                   rows="1"
-                  data-bind="textInput: text, event: {keydown: onKeydown}, disable: state.turn.running, attr: {placeholder: placeholder, 'aria-label': $t('Message the assistant')}"></textarea>
+                  data-bind="textInput: text, event: {keydown: onKeydown}, disable: state.turn.running, attr: {placeholder: placeholder, 'aria-label': $t('Message the assistant')}, afterRender: afterInputRender"></textarea>
         <button type="submit"
                 class="action primary ai-agent-composer__send"
                 data-bind="disable: cannotSend, attr: {'aria-label': $t('Send')}">
