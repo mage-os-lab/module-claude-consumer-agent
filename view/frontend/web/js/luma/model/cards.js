@@ -1,7 +1,7 @@
 define([], function () {
     'use strict';
 
-    var SAFE_URL = /^(https?:\/\/|\/(?!\/))/i;
+    var SAFE_URL = /^(https?:\/\/|\/(?![\/\\]))/i;
 
     function hasText(value) {
         return value !== null && value !== undefined && value !== '';

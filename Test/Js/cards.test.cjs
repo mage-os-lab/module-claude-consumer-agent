@@ -59,6 +59,7 @@ test('only web links and site paths pass as safe urls', () => {
     assert.equal(cards.safeUrl('JAVASCRIPT:alert(1)'), '');
     assert.equal(cards.safeUrl('data:text/html,<script>alert(1)</script>'), '');
     assert.equal(cards.safeUrl('//evil.example/checkout/'), '');
+    assert.equal(cards.safeUrl('/\\evil.example'), '');
     assert.equal(cards.safeUrl(' javascript:alert(1)'), '');
     assert.equal(cards.safeUrl(''), '');
     assert.equal(cards.safeUrl(null), '');
