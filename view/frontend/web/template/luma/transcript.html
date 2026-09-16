@@ -1,7 +1,7 @@
 <div class="ai-agent-transcript" data-bind="afterRender: afterTranscriptRender">
     <!-- ko foreach: {data: state.transcript, as: 'message'} -->
     <div class="ai-agent-bubble"
-         data-bind="css: {'ai-agent-bubble--user': message.role === 'user', 'ai-agent-bubble--assistant': message.role === 'assistant'}, attr: {'aria-busy': message.streaming() ? 'true' : 'false'}">
+         data-bind="visible: !message.isEmpty(), css: {'ai-agent-bubble--user': message.role === 'user', 'ai-agent-bubble--assistant': message.role === 'assistant'}, attr: {'aria-busy': message.streaming() ? 'true' : 'false'}">
         <div class="ai-agent-bubble__text" data-bind="aiAgentMarkdown: {text: message.text, streaming: message.streaming}"></div>
         <div class="ai-agent-typing" aria-hidden="true" data-bind="visible: message.isTyping">
             <span></span><span></span><span></span>

@@ -61,6 +61,34 @@ test('text_delta appends to the streaming assistant message', () => {
     assert.equal(assistant.isTyping(), false);
 });
 
+test('a streaming assistant message is not empty', () => {
+    const {state} = loadState();
+    const assistant = startedTurn(state);
+    assert.equal(assistant.isEmpty(), false);
+});
+
+test('an assistant message that finished without text, cards or notice is empty', () => {
+    const {state} = loadState();
+    const assistant = startedTurn(state);
+    state.apply('ui', {component: 'suggestions', payload: {suggestions: ['a']}});
+    state.apply('turn_complete', {usage: null});
+    assert.equal(assistant.isEmpty(), true);
+});
+
+test('a finished assistant message with a card or a notice is not empty', () => {
+    const {state} = loadState();
+    const withCard = startedTurn(state);
+    state.apply('ui', {component: 'products', stream_id: 's1', payload: {items: [
+        {product: {product_id: '1', title: 'Bag', price: 34, in_stock: true}, reason: ''}
+    ]}});
+    state.apply('turn_complete', {usage: null});
+    assert.equal(withCard.isEmpty(), false);
+    state.send('again');
+    const withNotice = state.transcript()[3];
+    state.apply('error', {message: 'Busy'});
+    assert.equal(withNotice.isEmpty(), false);
+});
+
 test('a text_delta without text appends nothing', () => {
     const {state} = loadState();
     const assistant = startedTurn(state);

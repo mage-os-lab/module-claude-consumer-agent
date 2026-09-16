@@ -113,6 +113,13 @@ define([
             message.isTyping = ko.pureComputed(function () {
                 return message.streaming() && message.text() === '';
             });
+            message.isEmpty = ko.pureComputed(function () {
+                return message.role === 'assistant'
+                    && !message.streaming()
+                    && message.text() === ''
+                    && message.cards().length === 0
+                    && message.notice() === '';
+            });
             message.retry = function () {
                 self.retry(message);
             };
