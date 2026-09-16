@@ -14,8 +14,8 @@ define([
         return {
             productId: product.product_id,
             title: product.title,
-            url: product.url,
-            imageUrl: product.image_url,
+            url: cards.safeUrl(product.url),
+            imageUrl: cards.safeUrl(product.image_url),
             showImage: productsConfig.image !== false,
             priceText: productsConfig.price !== false ? format.price(product.price) : '',
             optionValuesText: cards.optionValuesText(product),
@@ -76,7 +76,9 @@ define([
     function orderStatus(card, config) {
         var payload = card.payload,
             labels = config.i18n.orderStatus,
-            status = labels[payload.order.status] ? payload.order.status : 'unknown';
+            status = Object.prototype.hasOwnProperty.call(labels, payload.order.status)
+                ? payload.order.status
+                : 'unknown';
 
         return {
             status: status,
@@ -84,7 +86,7 @@ define([
             summary: payload.summary || '',
             nextStep: payload.next_step || '',
             items: payload.order.items || [],
-            trackingUrl: payload.order.tracking_url || ''
+            trackingUrl: cards.safeUrl(payload.order.tracking_url)
         };
     }
 
@@ -95,7 +97,7 @@ define([
             lines: (payload.cart.items || []).map(function (line) {
                 return {
                     title: line.title,
-                    imageUrl: line.image_url || '',
+                    imageUrl: cards.safeUrl(line.image_url),
                     quantity: line.quantity,
                     totalText: format.price(line.line_total)
                 };
@@ -105,7 +107,7 @@ define([
                 ? format.str(config.i18n.fulfillment, payload.fulfillment_method)
                 : '',
             note: payload.note || '',
-            checkoutUrl: payload.checkout_url
+            checkoutUrl: cards.safeUrl(payload.checkout_url)
         };
     }
 
@@ -135,7 +137,7 @@ define([
             template: 'checkout',
             build: checkout,
             ready: function (payload) {
-                return !!payload.cart;
+                return !!payload.cart && cards.safeUrl(payload.checkout_url) !== '';
             }
         }
     };

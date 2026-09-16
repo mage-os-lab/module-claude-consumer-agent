@@ -1,8 +1,16 @@
 define([], function () {
     'use strict';
 
+    var SAFE_URL = /^(https?:\/\/|\/(?!\/))/i;
+
     function hasText(value) {
         return value !== null && value !== undefined && value !== '';
+    }
+
+    function safeUrl(value) {
+        var url = String(value);
+
+        return SAFE_URL.test(url) ? url : '';
     }
 
     function optionValuesText(product) {
@@ -104,6 +112,7 @@ define([], function () {
 
     return {
         hasText: hasText,
+        safeUrl: safeUrl,
         optionValuesText: optionValuesText,
         needsPageChoice: needsPageChoice,
         customOptionLines: customOptionLines,

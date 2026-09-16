@@ -59,6 +59,51 @@ test('an unknown order status falls back to unknown', () => {
     assert.equal(view.template, 'MageOS_ClaudeConsumerAgent/luma/cards/order-status');
     assert.equal(view.status, 'unknown');
     assert.equal(view.statusLabel, 'Unknown');
+
+    const inherited = loadCardView().create({component: 'order_status', payload: {summary: 'On its way', order: {status: 'constructor', items: []}}}, CONFIG, () => undefined);
+
+    assert.equal(inherited.status, 'unknown');
+    assert.equal(inherited.statusLabel, 'Unknown');
+});
+
+test('a checkout card without a web checkout link produces no view', () => {
+    const view = loadCardView().create({component: 'checkout', payload: {
+        checkout_url: 'javascript:alert(1)',
+        cart: {subtotal: 49, items: [{title: 'Jacket', quantity: 1, line_total: 49}]}
+    }}, CONFIG, () => undefined);
+
+    assert.equal(view, null);
+});
+
+test('a checkout line keeps only a web image link', () => {
+    const view = loadCardView().create({component: 'checkout', payload: {
+        checkout_url: '/checkout/',
+        cart: {subtotal: 98, items: [
+            {title: 'Jacket', quantity: 1, line_total: 49, image_url: 'javascript:alert(1)'},
+            {title: 'Scarf', quantity: 1, line_total: 49, image_url: '/scarf.jpg'}
+        ]}
+    }}, CONFIG, () => undefined);
+
+    assert.deepEqual(view.lines.map((line) => line.imageUrl), ['', '/scarf.jpg']);
+    assert.equal(view.checkoutUrl, '/checkout/');
+});
+
+test('an order status card keeps only a web tracking link', () => {
+    const cardView = loadCardView();
+    const unsafe = cardView.create({component: 'order_status', payload: {summary: 'On its way', order: {status: 'shipped', items: [], tracking_url: 'javascript:alert(1)'}}}, CONFIG, () => undefined);
+    const safe = cardView.create({component: 'order_status', payload: {summary: 'On its way', order: {status: 'shipped', items: [], tracking_url: 'https://track.example/1'}}}, CONFIG, () => undefined);
+
+    assert.equal(unsafe.trackingUrl, '');
+    assert.equal(safe.trackingUrl, 'https://track.example/1');
+});
+
+test('a products item keeps only web links for the product and its image', () => {
+    const view = loadCardView().create({component: 'products', payload: {items: [
+        {product: {product_id: '7', title: 'Bag', url: 'javascript:alert(1)', image_url: 'data:image/svg+xml,<svg/>', price: 34}},
+        {product: {product_id: '8', title: 'Tote', url: '/tote.html', image_url: 'https://cdn.example/tote.jpg', price: 20}}
+    ]}}, CONFIG, () => undefined);
+
+    assert.deepEqual(view.items.map((item) => [item.url, item.imageUrl]), [['', ''], ['/tote.html', 'https://cdn.example/tote.jpg']]);
 });
 
 test('a comparison marks the recommended entry and formats the price delta', () => {
