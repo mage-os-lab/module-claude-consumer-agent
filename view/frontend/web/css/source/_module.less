@@ -609,6 +609,13 @@
     }
 }
 
+.media-width(@extremum, @break) when (@extremum = 'max') and (@break = @screen__m) {
+    .ai-agent-cart-ask {
+        margin-left: @layout__width-xs-indent;
+        margin-right: @layout__width-xs-indent;
+    }
+}
+
 .media-width(@extremum, @break) when (@extremum = 'min') and (@break = @screen__s) {
     .ai-agent-products__tiles--grid {
         grid-template-columns: repeat(2, minmax(0, 1fr));
