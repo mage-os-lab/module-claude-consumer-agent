@@ -28,14 +28,29 @@ final class ProductAskTest extends TestCase
         $context->method('getStoreManager')->willReturn($storeManager);
         $catalogHelper = $this->createMock(CatalogHelper::class);
         $catalogHelper->method('getProduct')->willReturn($product);
+        $block = $this->getMockBuilder(ProductAsk::class)
+            ->setConstructorArgs([
+                $context,
+                new StoreConfig($scopeConfig, $storeManager),
+                $catalogHelper,
+                ['template' => 'MageOS_ClaudeConsumerAgent::product/ask.phtml'],
+            ])
+            ->onlyMethods(['fetchView', 'getTemplateFile'])
+            ->getMock();
+        $block->method('fetchView')->willReturn('rendered');
 
-        return new ProductAsk($context, new StoreConfig($scopeConfig, $storeManager), $catalogHelper, []);
+        return $block;
     }
 
     private function invokeToHtml(ProductAsk $block): string
     {
         $method = new ReflectionMethod(ProductAsk::class, '_toHtml');
         return (string)$method->invoke($block);
+    }
+
+    public function testRendersTemplateWhenEnabledWithACurrentProduct(): void
+    {
+        $this->assertSame('rendered', $this->invokeToHtml($this->buildBlock(true, $this->createMock(Product::class))));
     }
 
     public function testRendersNothingWithoutACurrentProduct(): void
