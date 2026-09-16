@@ -133,6 +133,7 @@ define([
             }
             state.send(value);
             this.text('');
+            this.fitInput();
             return false;
         },
 
