@@ -1,11 +1,10 @@
 <?xml version="1.0"?>
 <page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
     <body>
-        <referenceBlock name="aiagent.luma.cart.ask" remove="true"/>
         <referenceContainer name="checkout.cart.widget">
-            <block name="aiagent.cart.ask"
+            <block name="aiagent.luma.cart.ask"
                    class="MageOS\ClaudeConsumerAgent\Block\CartAsk"
-                   template="MageOS_ClaudeConsumerAgent::cart/ask.phtml"
+                   template="MageOS_ClaudeConsumerAgent::luma/cart-ask.phtml"
                    ifconfig="ai_integration/aiagent/general/enabled"/>
         </referenceContainer>
     </body>

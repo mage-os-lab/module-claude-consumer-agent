@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <body>
+        <referenceContainer name="before.body.end">
+            <block name="aiagent.luma.root"
+                   class="Magento\Framework\View\Element\Template"
+                   template="MageOS_ClaudeConsumerAgent::luma/root.phtml"
+                   ifconfig="ai_integration/aiagent/general/enabled">
+                <arguments>
+                    <argument name="view_model" xsi:type="object">MageOS\ClaudeConsumerAgent\ViewModel\LumaConfig</argument>
+                </arguments>
+            </block>
+            <block name="aiagent.luma.launcher"
+                   class="MageOS\ClaudeConsumerAgent\Block\Launcher"
+                   template="MageOS_ClaudeConsumerAgent::luma/launcher.phtml"
+                   ifconfig="ai_integration/aiagent/general/launcher_enabled"/>
+        </referenceContainer>
+    </body>
+</page>
