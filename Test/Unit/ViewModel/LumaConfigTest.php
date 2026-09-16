@@ -72,4 +72,13 @@ final class LumaConfigTest extends TestCase
         $this->assertStringNotContainsString('<img', $json);
         $this->assertSame($greeting, json_decode($json, true)['greeting']);
     }
+
+    public function testJsonStaysValidWhenAValueHoldsInvalidUtf8(): void
+    {
+        $json = $this->buildLumaConfig("Hi \xFF")->json();
+        $decoded = json_decode($json, true);
+
+        $this->assertIsArray($decoded);
+        $this->assertSame("Hi \u{FFFD}", $decoded['greeting']);
+    }
 }

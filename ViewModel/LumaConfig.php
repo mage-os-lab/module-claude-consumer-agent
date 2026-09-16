@@ -7,7 +7,8 @@ use Magento\Framework\View\Element\Block\ArgumentInterface;
 
 final class LumaConfig implements ArgumentInterface
 {
-    private const JSON_FLAGS = JSON_HEX_TAG | JSON_HEX_AMP | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_UNESCAPED_SLASHES;
+    private const JSON_FLAGS = JSON_HEX_TAG | JSON_HEX_AMP | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_UNESCAPED_SLASHES
+        | JSON_INVALID_UTF8_SUBSTITUTE;
 
     public function __construct(
         private readonly \MageOS\ClaudeConsumerAgent\ViewModel\Assistant $assistant,
