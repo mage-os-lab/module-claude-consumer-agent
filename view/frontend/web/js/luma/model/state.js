@@ -194,7 +194,9 @@ define([
                 return;
             }
             if (!this.started) {
+                this.turn.running(true);
                 this.start().then(function () {
+                    self.turn.running(false);
                     self.send(text);
                 }, function () {
                     self.pushTurn(text);

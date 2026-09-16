@@ -144,6 +144,41 @@ test('send before the session started waits for start, then runs the turn', asyn
     assert.deepEqual(calls.runs, ['hello']);
 });
 
+test('a second message while the session starts is blocked', async () => {
+    const {state, calls} = loadState();
+    state.send('first');
+    assert.equal(state.turn.running(), true);
+    state.send('second');
+    assert.equal(state.turn.running(), true);
+    assert.equal(state.transcript().length, 0);
+    await flush();
+    assert.equal(calls.posts.length, 1);
+    assert.deepEqual(calls.runs, ['first']);
+    assert.equal(state.transcript().length, 2);
+    assert.equal(state.transcript()[0].text(), 'first');
+});
+
+test('a message sent while a stored session starts follows the restored transcript', async () => {
+    const {state, calls} = loadState({
+        '/aiagent/session/start': {session: SESSION, fresh: false},
+        '/aiagent/session/transcript': {messages: [
+            {role: 'user', text: 'show bags'},
+            {role: 'assistant', text: 'Here you go', cards: []}
+        ]}
+    });
+    state.sessionId = SESSION;
+    state.send('cheaper ones');
+    await flush();
+    assert.deepEqual(state.transcript().map((message) => [message.role, message.text()]), [
+        ['user', 'show bags'],
+        ['assistant', 'Here you go'],
+        ['user', 'cheaper ones'],
+        ['assistant', '']
+    ]);
+    assert.equal(state.transcript()[3].streaming(), true);
+    assert.deepEqual(calls.runs, ['cheaper ones']);
+});
+
 test('start restores the transcript of a stored session', async () => {
     const {state} = loadState({
         '/aiagent/session/start': {session: SESSION, fresh: false},
