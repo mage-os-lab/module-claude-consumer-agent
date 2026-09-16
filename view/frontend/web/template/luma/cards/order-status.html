@@ -1,0 +1,16 @@
+<div class="ai-agent-order">
+    <span class="ai-agent-badge" data-bind="css: 'ai-agent-badge--status-' + status, text: statusLabel"></span>
+    <p class="ai-agent-order__summary" data-bind="text: summary"></p>
+    <!-- ko if: nextStep -->
+    <p class="ai-agent-product__meta" data-bind="text: nextStep"></p>
+    <!-- /ko -->
+    <ul class="ai-agent-order__items" data-bind="foreach: items">
+        <li>
+            <span data-bind="text: title"></span>
+            <span data-bind="text: quantity"></span>
+        </li>
+    </ul>
+    <!-- ko if: trackingUrl -->
+    <a class="action ai-agent-order__track" data-bind="attr: {href: trackingUrl}" translate="'Track shipment'"></a>
+    <!-- /ko -->
+</div>

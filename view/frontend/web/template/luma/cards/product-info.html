@@ -1,0 +1,26 @@
+<a class="ai-agent-product__name" data-bind="attr: {href: url}, text: title"></a>
+<!-- ko if: optionValuesText -->
+<p class="ai-agent-product__meta" data-bind="text: optionValuesText"></p>
+<!-- /ko -->
+<!-- ko if: customOptionLines.length -->
+<ul class="ai-agent-product__meta" data-bind="foreach: customOptionLines">
+    <li data-bind="text: $data"></li>
+</ul>
+<!-- /ko -->
+<!-- ko if: description -->
+<p class="ai-agent-product__meta ai-agent-product__description" data-bind="text: description"></p>
+<!-- /ko -->
+<!-- ko if: reason -->
+<p class="ai-agent-product__meta" data-bind="text: reason"></p>
+<!-- /ko -->
+<div class="ai-agent-product__price-row">
+    <!-- ko if: priceText -->
+    <p class="ai-agent-product__price" data-bind="text: priceText"></p>
+    <!-- /ko -->
+    <!-- ko if: stock === 'in' -->
+    <span class="ai-agent-badge ai-agent-badge--success" translate="'In stock'"></span>
+    <!-- /ko -->
+    <!-- ko if: stock === 'out' -->
+    <span class="ai-agent-badge ai-agent-badge--error" translate="'Out of stock'"></span>
+    <!-- /ko -->
+</div>

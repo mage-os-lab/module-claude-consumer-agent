@@ -1,0 +1,23 @@
+<div class="ai-agent-checkout">
+    <ul class="ai-agent-checkout__lines" data-bind="foreach: lines">
+        <li class="ai-agent-checkout__line">
+            <!-- ko if: imageUrl -->
+            <img class="ai-agent-checkout__image" data-bind="attr: {src: imageUrl, alt: title}"/>
+            <!-- /ko -->
+            <span class="ai-agent-checkout__name" data-bind="text: title"></span>
+            <span class="ai-agent-product__meta" data-bind="text: quantity"></span>
+            <span class="ai-agent-checkout__total" data-bind="text: totalText"></span>
+        </li>
+    </ul>
+    <dl class="ai-agent-checkout__subtotal">
+        <dt translate="'Subtotal'"></dt>
+        <dd data-bind="text: subtotalText"></dd>
+    </dl>
+    <!-- ko if: fulfillmentLine -->
+    <p class="ai-agent-product__meta" data-bind="text: fulfillmentLine"></p>
+    <!-- /ko -->
+    <!-- ko if: note -->
+    <p class="ai-agent-product__meta" data-bind="text: note"></p>
+    <!-- /ko -->
+    <a class="action primary ai-agent-checkout__go" data-bind="attr: {href: checkoutUrl}" translate="'Go to checkout'"></a>
+</div>

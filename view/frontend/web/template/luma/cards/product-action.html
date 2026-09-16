@@ -1,0 +1,9 @@
+<!-- ko if: action === 'view' -->
+<a class="action ai-agent-product__action" data-bind="attr: {href: url}" translate="'View product'"></a>
+<!-- /ko -->
+<!-- ko if: action === 'custom_options' || action === 'choose_options' -->
+<button type="button" class="action primary ai-agent-product__action" data-bind="click: runAction" translate="'Choose options'"></button>
+<!-- /ko -->
+<!-- ko if: action === 'add' -->
+<button type="button" class="action primary ai-agent-product__action" data-bind="click: runAction" translate="'Add to cart'"></button>
+<!-- /ko -->
