@@ -8,7 +8,7 @@ define([
             opener.open({
                 opener: element,
                 page: {type: 'product', productId: String(config.productId || '')}
-            });
+            }).catch(function () {});
         });
     };
 });

@@ -6,19 +6,29 @@ define([
     'use strict';
 
     var PANEL_NAME = 'aiAgentPanel',
-        registered = false;
+        PANEL_COMPONENT = 'MageOS_ClaudeConsumerAgent/js/luma/view/panel',
+        loading = null;
 
     function panel() {
-        if (!registered) {
-            registered = true;
-            layout([{
-                name: PANEL_NAME,
-                component: 'MageOS_ClaudeConsumerAgent/js/luma/view/panel'
-            }]);
+        if (loading) {
+            return loading;
         }
-        return new Promise(function (resolve) {
-            registry.get(PANEL_NAME, resolve);
+        loading = new Promise(function (resolve, reject) {
+            require([PANEL_COMPONENT], function () {
+                layout([{
+                    name: PANEL_NAME,
+                    component: PANEL_COMPONENT
+                }]);
+                registry.get(PANEL_NAME, resolve);
+            }, function (error) {
+                [PANEL_COMPONENT].concat(error.requireModules || []).forEach(function (id) {
+                    require.undef(id);
+                });
+                loading = null;
+                reject(error);
+            });
         });
+        return loading;
     }
 
     return {
@@ -33,6 +43,9 @@ define([
             }).then(function (view) {
                 view.openPanel(options.opener || null);
                 return view;
+            }).catch(function (error) {
+                console.error(error);
+                throw error;
             });
         }
     };

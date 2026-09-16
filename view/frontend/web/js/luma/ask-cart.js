@@ -8,18 +8,16 @@ define([
         var input = form.querySelector('#ai-agent-cart-ask-input');
 
         form.addEventListener('submit', function (event) {
-            var text = input.value.trim(),
-                page = {type: 'cart'};
+            var text = input.value.trim();
 
             event.preventDefault();
-            if (!text || state.turn.running()) {
-                opener.open({opener: input, page: page});
-                return;
-            }
-            input.value = '';
-            opener.open({opener: input, page: page}).then(function () {
+            opener.open({opener: input, page: {type: 'cart'}}).then(function () {
+                if (!text || state.turn.running()) {
+                    return;
+                }
+                input.value = '';
                 state.send(text);
-            });
+            }, function () {});
         });
     };
 });

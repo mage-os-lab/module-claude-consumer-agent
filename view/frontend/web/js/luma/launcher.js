@@ -9,7 +9,7 @@ define([
             element.hidden = open;
         });
         element.addEventListener('click', function () {
-            opener.open({opener: element});
+            opener.open({opener: element}).catch(function () {});
         });
     };
 });
