@@ -198,6 +198,26 @@ test('start restores the transcript of a stored session', async () => {
     assert.deepEqual(state.suggestions(), ['Cheaper']);
 });
 
+test('a message sent while the reset request is pending still ends its turn', async () => {
+    const {state, calls} = loadState();
+    global.window = {crypto: {randomUUID: () => 'fresh-id'}};
+    try {
+        startedTurn(state);
+        state.apply('turn_complete', {usage: null});
+        state.sessionId = SESSION;
+        const pending = state.reset();
+        state.send('again');
+        await pending;
+        state.apply('turn_complete', {usage: null});
+        assert.equal(state.turn.running(), false);
+        assert.deepEqual(state.transcript().map((message) => message.text()), ['again', '']);
+        assert.deepEqual(calls.posts[calls.posts.length - 1], ['/aiagent/session/reset', {session: SESSION}]);
+        assert.equal(state.sessionId, 'fresh-id');
+    } finally {
+        delete global.window;
+    }
+});
+
 test('retry sends the closest earlier user message again', () => {
     const {state, calls} = loadState();
     const assistant = startedTurn(state);

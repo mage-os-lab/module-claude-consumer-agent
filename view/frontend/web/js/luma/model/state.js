@@ -306,18 +306,17 @@ define([
         },
 
         reset: function () {
-            var self = this;
+            var previous = this.sessionId;
 
             if (this.turnController) {
                 this.turnController.abort();
             }
-            return transport.postJson(this.config.urls.reset, {session: this.sessionId}).then(function () {
-                self.transcript([]);
-                self.suggestions([]);
-                self.sessionId = generateSessionId();
-                self.persistSession();
-                self.touch();
-            });
+            this.transcript([]);
+            this.suggestions([]);
+            this.sessionId = generateSessionId();
+            this.persistSession();
+            this.touch();
+            return transport.postJson(this.config.urls.reset, {session: previous});
         },
 
         persistSession: function () {
