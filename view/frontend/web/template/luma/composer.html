@@ -1,0 +1,29 @@
+<form class="ai-agent-composer" data-bind="submit: submit">
+    <div class="ai-agent-composer__chips" data-bind="visible: hasSuggestions, foreach: state.suggestions">
+        <button type="button" class="action ai-agent-chip" data-bind="text: $data, click: $parent.pick, disable: $parent.state.turn.running"></button>
+    </div>
+    <div class="ai-agent-composer__row">
+        <textarea class="ai-agent-composer__input"
+                  rows="1"
+                  data-bind="textInput: text, event: {keydown: onKeydown}, disable: state.turn.running, attr: {placeholder: placeholder, 'aria-label': $t('Message the assistant')}"></textarea>
+        <button type="submit"
+                class="action primary ai-agent-composer__send"
+                data-bind="disable: cannotSend, attr: {'aria-label': $t('Send')}">
+            <!-- ko ifnot: state.turn.running -->
+            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" viewBox="0 0 24 24" aria-hidden="true"><path d="M14.536 21.686a.5.5 0 0 0 .937-.024l6.5-19a.496.496 0 0 0-.635-.635l-19 6.5a.5.5 0 0 0-.024.937l7.93 3.18a2 2 0 0 1 1.112 1.11zM21.854 2.147l-10.94 10.939"/></svg>
+            <!-- /ko -->
+            <!-- ko if: state.turn.running -->
+            <span class="ai-agent-spinner" aria-hidden="true"></span>
+            <!-- /ko -->
+        </button>
+    </div>
+    <p class="ai-agent-composer__hint">
+        <span data-bind="text: hintPrefix"></span>
+        <!-- ko if: settings.contact.url -->
+        <a data-bind="attr: {href: settings.contact.url}, text: settings.contact.label"></a>
+        <!-- /ko -->
+        <!-- ko if: !settings.contact.url && settings.contact.label -->
+        <span data-bind="text: settings.contact.label"></span>
+        <!-- /ko -->
+    </p>
+</form>

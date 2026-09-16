@@ -1,0 +1,19 @@
+<div class="ai-agent-transcript" data-bind="afterRender: afterTranscriptRender">
+    <!-- ko foreach: {data: state.transcript, as: 'message'} -->
+    <div class="ai-agent-bubble"
+         data-bind="css: {'ai-agent-bubble--user': message.role === 'user', 'ai-agent-bubble--assistant': message.role === 'assistant'}, attr: {'aria-busy': message.streaming() ? 'true' : 'false'}">
+        <div class="ai-agent-bubble__text" data-bind="aiAgentMarkdown: {text: message.text, streaming: message.streaming}"></div>
+        <div class="ai-agent-typing" aria-hidden="true" data-bind="visible: message.isTyping">
+            <span></span><span></span><span></span>
+        </div>
+        <!-- ko foreach: {data: message.cards, as: 'card'} -->
+        <div class="ai-agent-card" data-bind="template: {name: card.template, data: card}"></div>
+        <!-- /ko -->
+        <p class="ai-agent-bubble__notice" data-bind="visible: message.notice, text: message.notice"></p>
+        <button type="button" class="action ai-agent-bubble__action" data-bind="visible: message.retryAfter, click: message.retry" translate="'Retry'"></button>
+        <button type="button" class="action ai-agent-bubble__action" data-bind="visible: message.sessionCap, click: message.startNew" translate="'Start a new conversation'"></button>
+    </div>
+    <!-- /ko -->
+    <p class="ai-agent-transcript__status" data-bind="visible: state.turn.status, text: state.turn.status"></p>
+</div>
+<div class="ai-agent-sr-only" aria-live="polite" aria-atomic="true" data-bind="text: state.announcement"></div>

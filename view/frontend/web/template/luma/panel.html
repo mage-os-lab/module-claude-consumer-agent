@@ -1,0 +1,33 @@
+<section class="ai-agent-panel"
+         role="dialog"
+         aria-modal="false"
+         aria-labelledby="ai-agent-panel-title"
+         data-bind="visible: state.isOpen, afterRender: afterPanelRender">
+    <div class="ai-agent-panel__cart">
+        <span data-bind="text: cartLabel"></span>
+        <a class="ai-agent-panel__cart-link" data-bind="attr: {href: settings.cartUrl}" translate="'View cart'"></a>
+    </div>
+    <div class="ai-agent-panel__header">
+        <div class="ai-agent-panel__title-group">
+            <p id="ai-agent-panel-title" class="ai-agent-panel__title" data-bind="text: settings.assistantName"></p>
+            <!-- ko if: settings.showAiLabel -->
+            <span class="ai-agent-panel__badge" translate="'AI'"></span>
+            <!-- /ko -->
+        </div>
+        <div class="ai-agent-panel__actions">
+            <button type="button"
+                    class="ai-agent-panel__icon"
+                    data-bind="visible: hasTranscript, disable: state.turn.running, click: newConversation, attr: {'aria-label': $t('New conversation')}">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" viewBox="0 0 24 24" aria-hidden="true"><path d="M2.992 16.342a2 2 0 0 1 .094 1.167l-1.065 3.29a1 1 0 0 0 1.236 1.168l3.413-.998a2 2 0 0 1 1.099.092 10 10 0 1 0-4.777-4.719M8 12h8M12 8v8"/></svg>
+            </button>
+            <button type="button"
+                    class="ai-agent-panel__icon"
+                    data-bind="click: closePanel, attr: {'aria-label': $t('Close assistant')}">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" viewBox="0 0 24 24" aria-hidden="true"><path d="M18 6 6 18M6 6l12 12"/></svg>
+            </button>
+        </div>
+    </div>
+    <!-- ko template: 'MageOS_ClaudeConsumerAgent/luma/start' --><!-- /ko -->
+    <!-- ko template: 'MageOS_ClaudeConsumerAgent/luma/transcript' --><!-- /ko -->
+    <!-- ko template: 'MageOS_ClaudeConsumerAgent/luma/composer' --><!-- /ko -->
+</section>
