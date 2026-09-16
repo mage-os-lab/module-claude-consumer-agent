@@ -10,19 +10,20 @@ function loadState(responses) {
     const ko = createKo();
     const calls = {reloads: [], runs: [], posts: []};
     const replies = Object.assign({'/aiagent/session/start': {session: SESSION, fresh: true}}, responses || {});
+    const transport = {
+        run: (current, text) => calls.runs.push(text),
+        postJson: (url, body) => {
+            calls.posts.push([url, body]);
+            return Promise.resolve({json: () => Promise.resolve(replies[url] || {})});
+        }
+    };
     const state = load('MageOS_ClaudeConsumerAgent/js/luma/model/state', {
         ko: ko,
         'Magento_Customer/js/customer-data': {
             get: () => ko.observable({}),
             reload: (names) => calls.reloads.push(names)
         },
-        'MageOS_ClaudeConsumerAgent/js/luma/model/transport': {
-            run: (current, text) => calls.runs.push(text),
-            postJson: (url, body) => {
-                calls.posts.push([url, body]);
-                return Promise.resolve({json: () => Promise.resolve(replies[url] || {})});
-            }
-        },
+        'MageOS_ClaudeConsumerAgent/js/luma/model/transport': transport,
         'MageOS_ClaudeConsumerAgent/js/luma/model/format': {
             setPriceFormat: () => undefined,
             price: (amount) => '$' + Number(amount).toFixed(2),
@@ -41,7 +42,7 @@ function loadState(responses) {
         i18n: {products: 'Products', interrupted: 'Interrupted'}
     };
     state.page = {type: 'home'};
-    return {state, calls};
+    return {state, calls, transport};
 }
 
 function startedTurn(state) {
@@ -214,6 +215,27 @@ test('a message sent while the reset request is pending still ends its turn', as
         assert.deepEqual(calls.posts[calls.posts.length - 1], ['/aiagent/session/reset', {session: SESSION}]);
         assert.equal(state.sessionId, 'fresh-id');
     } finally {
+        delete global.window;
+    }
+});
+
+test('starting over after a session cap ignores a failed reset request', async () => {
+    const {state, transport} = loadState();
+    const unhandled = [];
+    const onUnhandled = (reason) => unhandled.push(reason);
+    global.window = {crypto: {randomUUID: () => 'fresh-id'}};
+    process.on('unhandledRejection', onUnhandled);
+    try {
+        const assistant = startedTurn(state);
+        state.apply('error', {message: 'Limit reached', kind: 'session_cap'});
+        transport.postJson = () => Promise.reject(new Error('offline'));
+        assistant.startNew();
+        await flush();
+        assert.deepEqual(unhandled, []);
+        assert.equal(state.transcript().length, 0);
+        assert.equal(state.sessionId, 'fresh-id');
+    } finally {
+        process.off('unhandledRejection', onUnhandled);
         delete global.window;
     }
 });

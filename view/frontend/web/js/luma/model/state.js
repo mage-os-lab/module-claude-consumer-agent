@@ -117,7 +117,7 @@ define([
                 self.retry(message);
             };
             message.startNew = function () {
-                self.reset();
+                self.reset().catch(function () {});
             };
             return message;
         },
