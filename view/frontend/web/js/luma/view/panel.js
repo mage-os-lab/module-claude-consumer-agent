@@ -64,6 +64,12 @@ define([
                     self.closePanel();
                 }
             });
+            $('[data-block="minicart"]').on('dropdowndialogopen.aiAgentPanel', function () {
+                self.hidePanel();
+            });
+            $(document).on('click.aiAgentPanel', '[data-action="toggle-nav"]', function () {
+                self.hidePanel();
+            });
             return this;
         },
 
@@ -111,6 +117,10 @@ define([
             if (this.opener && typeof this.opener.focus === 'function') {
                 this.opener.focus();
             }
+        },
+
+        hidePanel: function () {
+            state.isOpen(false);
         },
 
         newConversation: function () {
