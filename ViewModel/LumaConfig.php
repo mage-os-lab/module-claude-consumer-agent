@@ -9,6 +9,7 @@ final class LumaConfig implements ArgumentInterface
 {
     private const JSON_FLAGS = JSON_HEX_TAG | JSON_HEX_AMP | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_UNESCAPED_SLASHES
         | JSON_INVALID_UTF8_SUBSTITUTE;
+    private const STARTER_LIMIT = 5;
 
     public function __construct(
         private readonly \MageOS\ClaudeConsumerAgent\ViewModel\Assistant $assistant,
@@ -19,7 +20,9 @@ final class LumaConfig implements ArgumentInterface
 
     public function config(): array
     {
-        return array_merge($this->assistant->snapshot(), [
+        $snapshot = $this->assistant->snapshot();
+        return array_merge($snapshot, [
+            'starters' => array_slice($snapshot['starters'], 0, self::STARTER_LIMIT),
             'priceFormat' => $this->localeFormat->getPriceFormat(),
             'cartUrl' => $this->cartSection->cartUrl(),
         ]);

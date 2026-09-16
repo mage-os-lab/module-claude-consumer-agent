@@ -22,12 +22,14 @@ use PHPUnit\Framework\TestCase;
 final class LumaConfigTest extends TestCase
 {
     private const GREETING_PATH = 'ai_integration/aiagent/voice/greeting';
+    private const STARTERS_PATH = 'ai_integration/aiagent/voice/starters';
 
-    private function buildLumaConfig(?string $greeting = null): LumaConfig
+    private function buildLumaConfig(?string $greeting = null, ?string $starters = null): LumaConfig
     {
+        $values = [self::GREETING_PATH => $greeting, self::STARTERS_PATH => $starters];
         $scopeConfig = $this->createMock(ScopeConfigInterface::class);
         $scopeConfig->method('getValue')->willReturnCallback(
-            static fn (string $path): ?string => $path === self::GREETING_PATH ? $greeting : null
+            static fn (string $path): ?string => $values[$path] ?? null
         );
         $scopeConfig->method('isSetFlag')->willReturn(false);
         $store = $this->createMock(StoreInterface::class);
@@ -61,6 +63,13 @@ final class LumaConfigTest extends TestCase
         $this->assertArrayHasKey('i18n', $config);
         $this->assertSame('$%s', $config['priceFormat']['pattern']);
         $this->assertSame('/checkout/cart', $config['cartUrl']);
+    }
+
+    public function testConfigShowsAtMostFiveStarters(): void
+    {
+        $config = $this->buildLumaConfig(null, "One\nTwo\nThree\nFour\nFive\nSix")->config();
+
+        $this->assertSame(['One', 'Two', 'Three', 'Four', 'Five'], $config['starters']);
     }
 
     public function testJsonCannotCloseTheScriptTagItIsPrintedIn(): void
