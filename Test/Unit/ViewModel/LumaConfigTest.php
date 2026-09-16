@@ -23,10 +23,18 @@ final class LumaConfigTest extends TestCase
 {
     private const GREETING_PATH = 'ai_integration/aiagent/voice/greeting';
     private const STARTERS_PATH = 'ai_integration/aiagent/voice/starters';
+    private const CONTACT_URL_PATH = 'ai_integration/aiagent/privacy/contact_url';
 
-    private function buildLumaConfig(?string $greeting = null, ?string $starters = null): LumaConfig
-    {
-        $values = [self::GREETING_PATH => $greeting, self::STARTERS_PATH => $starters];
+    private function buildLumaConfig(
+        ?string $greeting = null,
+        ?string $starters = null,
+        ?string $contactUrl = null
+    ): LumaConfig {
+        $values = [
+            self::GREETING_PATH => $greeting,
+            self::STARTERS_PATH => $starters,
+            self::CONTACT_URL_PATH => $contactUrl,
+        ];
         $scopeConfig = $this->createMock(ScopeConfigInterface::class);
         $scopeConfig->method('getValue')->willReturnCallback(
             static fn (string $path): ?string => $values[$path] ?? null
@@ -70,6 +78,27 @@ final class LumaConfigTest extends TestCase
         $config = $this->buildLumaConfig(null, "One\nTwo\nThree\nFour\nFive\nSix")->config();
 
         $this->assertSame(['One', 'Two', 'Three', 'Four', 'Five'], $config['starters']);
+    }
+
+    public function testConfigDropsAContactUrlThatIsNotAWebMailOrPhoneLink(): void
+    {
+        $contactUrls = ['javascript:alert(1)', ' javascript:x', 'data:text/html,x', '//evil.example', '/\\evil.example'];
+        foreach ($contactUrls as $contactUrl) {
+            $config = $this->buildLumaConfig(null, null, $contactUrl)->config();
+
+            $this->assertSame('', $config['contact']['url'], $contactUrl);
+            $this->assertSame('Contact us', $config['contact']['label'], $contactUrl);
+        }
+    }
+
+    public function testConfigKeepsWebMailAndPhoneContactUrls(): void
+    {
+        $contactUrls = ['https://example.com/contact', '/contact', 'mailto:help@example.com', 'tel:+123'];
+        foreach ($contactUrls as $contactUrl) {
+            $config = $this->buildLumaConfig(null, null, $contactUrl)->config();
+
+            $this->assertSame($contactUrl, $config['contact']['url']);
+        }
     }
 
     public function testJsonCannotCloseTheScriptTagItIsPrintedIn(): void
