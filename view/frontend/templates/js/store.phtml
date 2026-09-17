@@ -353,6 +353,45 @@ $configJson = json_encode(
                 } catch (e) {
                     return;
                 }
+            },
+            rememberOpen(view) {
+                if (!this.config.keepOpen) {
+                    return;
+                }
+                try {
+                    if (window.sessionStorage) {
+                        window.sessionStorage.setItem('aiagent_open', view);
+                    }
+                } catch (e) {
+                    return;
+                }
+            },
+            forgetOpen() {
+                if (!this.config.keepOpen) {
+                    return;
+                }
+                try {
+                    if (window.sessionStorage) {
+                        window.sessionStorage.removeItem('aiagent_open');
+                    }
+                } catch (e) {
+                    return;
+                }
+            },
+            reopenView() {
+                if (!this.config.keepOpen) {
+                    return null;
+                }
+                let stored = null;
+                try {
+                    stored = window.sessionStorage ? window.sessionStorage.getItem('aiagent_open') : null;
+                } catch (e) {
+                    return null;
+                }
+                if (stored === null || !window.matchMedia('(min-width: 768px)').matches) {
+                    return null;
+                }
+                return stored === 'cart' ? 'cart' : 'chat';
             }
         });
 
@@ -393,6 +432,20 @@ $configJson = json_encode(
             }
             store.mount();
         });
+        const drawerShell = document.getElementById('ai-agent-drawer-shell');
+        const drawerDialog = drawerShell ? drawerShell.closest('dialog') : null;
+        if (drawerDialog) {
+            drawerDialog.addEventListener('close', () => {
+                Alpine.store('aiAgent').forgetOpen();
+            });
+        }
+        window.addEventListener('alpine:initialized', () => {
+            const view = Alpine.store('aiAgent').reopenView();
+            if (!view) {
+                return;
+            }
+            window.dispatchEvent(new CustomEvent('ai-agent:open', {detail: {view: view, focus: false}}));
+        }, {once: true});
     }, {once: true});
 </script>
 <?php $hyvaCsp->registerInlineScript() ?>
