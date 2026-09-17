@@ -189,6 +189,7 @@ $configJson = json_encode(
                 this.startPromise.then(() => {
                     this.restoring = false;
                 }, () => {
+                    this.startPromise = null;
                     this.restoring = false;
                 });
                 return this.startPromise;
@@ -224,13 +225,27 @@ $configJson = json_encode(
                 if (this.turn.running || !text) {
                     return;
                 }
+                if (!this.started) {
+                    this.turn.running = true;
+                    this.start().then(() => {
+                        this.turn.running = false;
+                        this.send(text);
+                    }, () => {
+                        this.pushTurn(text);
+                        this.apply('error', {message: this.config.i18n.interrupted});
+                    });
+                    return;
+                }
+                this.pushTurn(text);
+                window.aiAgentReader.run(this, text);
+            },
+            pushTurn(text) {
                 this.suggestions = [];
                 this.transcript.push({role: 'user', text: text});
                 this.turn.running = true;
                 this.turn.status = '';
                 this.turn.id++;
                 this.transcript.push({role: 'assistant', text: '', cards: [], streaming: true});
-                window.aiAgentReader.run(this, text);
             },
             apply(type, data) {
                 const last = this.transcript[this.transcript.length - 1];
