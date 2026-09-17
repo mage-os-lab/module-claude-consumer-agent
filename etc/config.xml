@@ -7,6 +7,7 @@
                     <enabled>0</enabled>
                     <surface_mode>overlay</surface_mode>
                     <launcher_enabled>1</launcher_enabled>
+                    <keep_open>1</keep_open>
                     <product_block_enabled>1</product_block_enabled>
                     <header_icon_view>cart</header_icon_view>
                     <streaming>auto</streaming>

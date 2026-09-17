@@ -15,6 +15,7 @@ final class StoreConfig
     private const PATH_GENERAL_ENABLED = 'ai_integration/aiagent/general/enabled';
     private const PATH_GENERAL_SURFACE_MODE = 'ai_integration/aiagent/general/surface_mode';
     private const PATH_GENERAL_LAUNCHER_ENABLED = 'ai_integration/aiagent/general/launcher_enabled';
+    private const PATH_GENERAL_KEEP_OPEN = 'ai_integration/aiagent/general/keep_open';
     private const PATH_GENERAL_PRODUCT_BLOCK_ENABLED = 'ai_integration/aiagent/general/product_block_enabled';
     private const PATH_GENERAL_HEADER_ICON_VIEW = 'ai_integration/aiagent/general/header_icon_view';
     private const PATH_MODEL_API_KEY = 'ai_integration/aiagent/model/api_key';
@@ -236,6 +237,7 @@ final class StoreConfig
                 $storeId,
                 $defaults->launcherEnabled
             ),
+            keepOpen: $this->readBool(self::PATH_GENERAL_KEEP_OPEN, $storeId, $defaults->keepOpen),
             productBlockEnabled: $this->readBool(
                 self::PATH_GENERAL_PRODUCT_BLOCK_ENABLED,
                 $storeId,

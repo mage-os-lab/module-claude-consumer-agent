@@ -35,6 +35,14 @@
                             product page block, the cart page box and, in Cart mode, the header cart icon.
                         </comment>
                     </field>
+                    <field id="keep_open" translate="label comment" type="select" sortOrder="35" showInDefault="1"
+                           showInWebsite="1" showInStore="1">
+                        <label>Keep Open Across Pages</label>
+                        <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                        <comment>Reopens the assistant on the next page when the shopper left it open. Phones keep it
+                            closed.
+                        </comment>
+                    </field>
                     <field id="product_block_enabled" translate="label comment" type="select" sortOrder="40"
                            showInDefault="1" showInWebsite="1" showInStore="1">
                         <label>Product Page Block</label>

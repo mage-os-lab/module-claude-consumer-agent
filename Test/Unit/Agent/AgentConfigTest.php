@@ -60,6 +60,7 @@ final class AgentConfigTest extends TestCase
         $this->assertFalse($config->enabled);
         $this->assertSame('overlay', $config->surfaceMode);
         $this->assertTrue($config->launcherEnabled);
+        $this->assertTrue($config->keepOpen);
         $this->assertTrue($config->productBlockEnabled);
         $this->assertSame('cart', $config->headerIconView);
         $this->assertSame(
