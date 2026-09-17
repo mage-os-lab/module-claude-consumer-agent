@@ -514,6 +514,7 @@ function initAiAgentTranscript() {
             });
         },
         init() {
+            this.scrollToEnd();
             this.$watch(
                 () => Alpine.store('aiAgent').transcript.length,
                 () => {
