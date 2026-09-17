@@ -417,7 +417,7 @@ preference on a base concrete class.
 
 - Unit: `vendor/bin/phpunit -c dev/tests/unit/phpunit.xml.dist app/code/MageOS/ClaudeConsumerAgent/Test/Unit`
   (no Magento bootstrap, no database)
-- JS (Luma models): `node --test app/code/MageOS/ClaudeConsumerAgent/Test/Js/*.test.cjs`
+- JS (Luma models, Hyvä store and transcript): `node --test app/code/MageOS/ClaudeConsumerAgent/Test/Js/*.test.cjs`
 - Integration: `Test/Integration` with the project's integration test
   configuration
 - Evals: `bin/magento aiagent:eval:run`
