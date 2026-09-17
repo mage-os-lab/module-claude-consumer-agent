@@ -39,6 +39,9 @@ define([
                 if (options.page) {
                     state.mergePage(options.page);
                 }
+                state.start().catch(function () {
+                    return null;
+                });
                 return panel();
             }).then(function (view) {
                 view.openPanel(options.opener || null);

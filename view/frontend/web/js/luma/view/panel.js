@@ -35,7 +35,7 @@ define([
                 return state.transcript().length > 0;
             });
             this.showStart = ko.pureComputed(function () {
-                return state.transcript().length === 0;
+                return state.transcript().length === 0 && !state.restoring();
             });
             this.hasSuggestions = ko.pureComputed(function () {
                 return state.suggestions().length > 0;
