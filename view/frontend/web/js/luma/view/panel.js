@@ -8,7 +8,8 @@ define([
 ], function (Component, ko, $, state, format) {
     'use strict';
 
-    var MAX_INPUT_HEIGHT = 120;
+    var MAX_INPUT_HEIGHT = 120,
+        FOLLOW_THRESHOLD = 4;
 
     return Component.extend({
         defaults: {
@@ -25,6 +26,9 @@ define([
             this.transcriptElement = null;
             this.opener = null;
             this.scrollFrame = null;
+            this.transcriptObserver = null;
+            this.following = true;
+            this.lastScrollTop = 0;
             this.text = ko.observable('');
             this.productChipsVisible = ko.observable(false);
             this.hasTranscript = ko.pureComputed(function () {
@@ -57,6 +61,7 @@ define([
                 state.send(text);
             };
             state.activity.subscribe(this.scrollToEnd, this);
+            state.turn.id.subscribe(this.followLatest, this);
             this.text.subscribe(this.fitInput, this);
             this.placeholder.subscribe(this.fitInput, this);
             $(document).on('keydown.aiAgentPanel', function (event) {
@@ -78,7 +83,23 @@ define([
         },
 
         afterTranscriptRender: function (element) {
+            var self = this;
+
             this.transcriptElement = element;
+            $(element).off('scroll.aiAgentPanel').on('scroll.aiAgentPanel', function () {
+                self.updateFollowing();
+            });
+            if (!window.ResizeObserver) {
+                return;
+            }
+            if (!this.transcriptObserver) {
+                this.transcriptObserver = new window.ResizeObserver(function () {
+                    self.keepAtEnd();
+                });
+            }
+            this.transcriptObserver.disconnect();
+            this.transcriptObserver.observe(element);
+            this.transcriptObserver.observe(element.querySelector('.ai-agent-transcript__content'));
         },
 
         afterInputRender: function (element) {
@@ -92,6 +113,7 @@ define([
                 scrollY = window.scrollY;
 
             this.opener = opener;
+            this.following = true;
             this.productChipsVisible(state.page.type === 'product');
             state.isOpen(true);
             if (!state.started) {
@@ -161,6 +183,33 @@ define([
             input.style.height = Math.min(input.scrollHeight, MAX_INPUT_HEIGHT) + 'px';
         },
 
+        followLatest: function () {
+            this.following = true;
+            this.scrollToEnd();
+        },
+
+        updateFollowing: function () {
+            var element = this.transcriptElement,
+                top = element.scrollTop;
+
+            if (element.scrollHeight - top - element.clientHeight <= FOLLOW_THRESHOLD) {
+                this.following = true;
+            } else if (top < this.lastScrollTop) {
+                this.following = false;
+            }
+            this.lastScrollTop = top;
+        },
+
+        keepAtEnd: function () {
+            var element = this.transcriptElement;
+
+            if (!element || !this.following) {
+                return;
+            }
+            element.scrollTop = element.scrollHeight;
+            this.lastScrollTop = element.scrollTop;
+        },
+
         scrollToEnd: function () {
             var self = this;
 
@@ -169,9 +218,7 @@ define([
             }
             this.scrollFrame = window.requestAnimationFrame(function () {
                 self.scrollFrame = null;
-                if (self.transcriptElement) {
-                    self.transcriptElement.scrollTop = self.transcriptElement.scrollHeight;
-                }
+                self.keepAtEnd();
             });
         }
     });
