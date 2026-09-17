@@ -223,7 +223,7 @@ function initAiAgentDrawer() {
         },
         lastLine() {
             const transcript = Alpine.store('aiAgent').transcript;
-            const assistantMessages = transcript.filter((message) => message.role === 'assistant');
+            const assistantMessages = transcript.filter((message) => message.role === 'assistant' && !!message.text);
             const lastMessage = assistantMessages[assistantMessages.length - 1];
             return lastMessage ? lastMessage.text.slice(0, 80) : '';
         },

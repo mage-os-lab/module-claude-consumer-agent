@@ -46,3 +46,14 @@ test('an assistant message with text or cards keeps its bubble', () => {
 test('a user message keeps its bubble', () => {
     assert.equal(bubble({role: 'user', text: 'show me bags'}).isVisible(), true);
 });
+
+test('the cart view summary shows the latest assistant message that has text', () => {
+    const drawer = loadComponents({transcript: [
+        {role: 'user', text: 'show me bags'},
+        {role: 'assistant', text: 'Here are some bags.', cards: [{component: 'products', payload: {}, id: 'p1'}]},
+        {role: 'user', text: 'cheaper ones'},
+        {role: 'assistant', text: '', cards: [], streaming: false}
+    ]}).initAiAgentDrawer();
+
+    assert.equal(drawer.lastLine(), 'Here are some bags.');
+});
