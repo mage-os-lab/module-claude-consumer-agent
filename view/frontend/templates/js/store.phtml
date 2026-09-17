@@ -214,7 +214,9 @@ $configJson = json_encode(
                         return false;
                     });
                     return Object.assign({}, message, {cards: cards});
-                });
+                }).filter((message) => message.role !== 'assistant'
+                    || !!message.text
+                    || (Array.isArray(message.cards) && message.cards.length > 0));
                 this.suggestions = suggestions;
                 window.dispatchEvent(new CustomEvent('ai-agent:transcript-restored'));
             },
