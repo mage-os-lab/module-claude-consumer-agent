@@ -127,6 +127,21 @@
         overflow-y: auto;
     }
 
+    .ai-agent-loader {
+        display: flex;
+        flex: 1 1 auto;
+        align-items: center;
+        justify-content: center;
+        min-height: 0;
+        padding: @indent__base;
+        color: @ai-agent__muted;
+
+        .ai-agent-spinner {
+            width: 24px;
+            height: 24px;
+        }
+    }
+
     .ai-agent-transcript__content {
         display: flex;
         flex-direction: column;

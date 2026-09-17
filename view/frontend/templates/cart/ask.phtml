@@ -36,14 +36,7 @@ $hyvaCsp = $viewModels->require(HyvaCsp::class);
                 });
             },
             deliver(text) {
-                const store = Alpine.store('aiAgent');
-                if (!store.started) {
-                    store.start().then(() => {
-                        store.send(text);
-                    });
-                    return;
-                }
-                store.send(text);
+                Alpine.store('aiAgent').send(text);
             }
         };
     }

@@ -1,3 +1,7 @@
+<div class="ai-agent-loader" role="status" aria-busy="true" data-bind="visible: showLoader">
+    <span class="ai-agent-spinner" aria-hidden="true"></span>
+    <span class="ai-agent-sr-only" translate="'Loading your conversation'"></span>
+</div>
 <div class="ai-agent-start" data-bind="visible: showStart">
     <p class="ai-agent-start__greeting" data-bind="text: settings.greeting"></p>
     <div class="ai-agent-start__list" data-bind="foreach: settings.starters">

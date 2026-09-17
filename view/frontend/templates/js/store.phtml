@@ -107,6 +107,7 @@ $configJson = json_encode(
             cart: {count: 0, subtotal: ''},
             surface: {mode: config.surface, resolved: config.surface, view: 'chat', open: false},
             started: false,
+            restoring: false,
             ready: false,
             mounting: null,
             startPromise: null,
@@ -157,6 +158,7 @@ $configJson = json_encode(
                 if (this.startPromise) {
                     return this.startPromise;
                 }
+                this.restoring = !!this.sessionId;
                 this.startPromise = (async () => {
                     const hadStoredId = !!this.sessionId;
                     const response = await fetch(this.config.urls.start, {
@@ -184,6 +186,12 @@ $configJson = json_encode(
                     }
                     this.started = true;
                 })();
+                this.startPromise.then(() => {
+                    this.restoring = false;
+                }, () => {
+                    this.startPromise = null;
+                    this.restoring = false;
+                });
                 return this.startPromise;
             },
             async restore() {
@@ -217,13 +225,27 @@ $configJson = json_encode(
                 if (this.turn.running || !text) {
                     return;
                 }
+                if (!this.started) {
+                    this.turn.running = true;
+                    this.start().then(() => {
+                        this.turn.running = false;
+                        this.send(text);
+                    }, () => {
+                        this.pushTurn(text);
+                        this.apply('error', {message: this.config.i18n.interrupted});
+                    });
+                    return;
+                }
+                this.pushTurn(text);
+                window.aiAgentReader.run(this, text);
+            },
+            pushTurn(text) {
                 this.suggestions = [];
                 this.transcript.push({role: 'user', text: text});
                 this.turn.running = true;
                 this.turn.status = '';
                 this.turn.id++;
                 this.transcript.push({role: 'assistant', text: '', cards: [], streaming: true});
-                window.aiAgentReader.run(this, text);
             },
             apply(type, data) {
                 const last = this.transcript[this.transcript.length - 1];
@@ -345,6 +367,11 @@ $configJson = json_encode(
             if (store.ready) {
                 return;
             }
+            if (store.sessionId) {
+                store.start().catch(() => {
+                    return;
+                });
+            }
             store.mount().then(() => {
                 window.dispatchEvent(new CustomEvent('ai-agent:open', {detail: event.detail}));
             }).catch(() => {
@@ -358,6 +385,11 @@ $configJson = json_encode(
             }
             if (!document.getElementById('ai-agent-drawer-shell')) {
                 return;
+            }
+            if (store.sessionId) {
+                store.start().catch(() => {
+                    return;
+                });
             }
             store.mount();
         });
