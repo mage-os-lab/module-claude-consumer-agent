@@ -59,7 +59,7 @@ final class Products
                 if ($cachedVariants !== null) {
                     $matchingVariants = $this->matchingVariants($cachedVariants, $wanted);
                     if ($matchingVariants === []) {
-                        $unmatched[] = $this->noteUnmatched($product, $wanted, $ctx);
+                        $unmatched[] = $this->noteUnmatched($productId, $product, $wanted, $ctx);
                     }
                     foreach ($this->buildVariantItems($matchingVariants, $product, $reason) as $variantItem) {
                         $items[] = $variantItem;
@@ -71,7 +71,7 @@ final class Products
                     if ($variantItems !== null) {
                         $expandedFamilies++;
                         if ($variantItems === []) {
-                            $unmatched[] = $this->noteUnmatched($product, $wanted, $ctx);
+                            $unmatched[] = $this->noteUnmatched($productId, $product, $wanted, $ctx);
                         }
                         foreach ($variantItems as $variantItem) {
                             $items[] = $variantItem;
@@ -95,7 +95,8 @@ final class Products
         }
         if ($items === [] && $unmatched !== []) {
             throw new PresentationRefused(
-                'No variant matches the requested option_values: ' . implode('; ', $unmatched) . '.'
+                'No variant matches the requested option_values. ' . implode(' ', $unmatched)
+                . ' Present the product without option_values or pick another product.'
             );
         }
         if ($items === []) {
@@ -182,16 +183,63 @@ final class Products
         ));
     }
 
-    private function noteUnmatched(array $product, array $wanted, EnrichmentContext $ctx): string
+    private function noteUnmatched(string $productId, array $product, array $wanted, EnrichmentContext $ctx): string
     {
-        $pairs = [];
-        foreach ($wanted as $label => $value) {
-            $pairs[] = $label . ': ' . $value;
-        }
         $title = $this->sanitizer->text((string)($product['title'] ?? ''), self::NOTE_TITLE_MAX_CHARS);
-        $values = $this->sanitizer->text(implode(', ', $pairs), self::NOTE_VALUES_MAX_CHARS);
-        $ctx->notes[] = 'No variant of ' . $title . ' matches ' . $values . ', so it is not on the card.';
-        return $title . ' (' . $values . ')';
+        $labels = array_map('strval', array_keys(is_array($product['options'] ?? null) ? $product['options'] : []));
+        $variantRecords = $this->cachedVariants($productId, $ctx) ?? [];
+        $unknownLabels = [];
+        $pairs = [];
+        $available = [];
+        foreach ($wanted as $label => $value) {
+            $familyLabel = $this->familyLabel((string)$label, $labels);
+            if ($familyLabel === null) {
+                $unknownLabels[] = (string)$label;
+                continue;
+            }
+            $pairs[] = $label . ': ' . $value;
+            $values = $this->variantValues($familyLabel, $variantRecords);
+            if ($values !== []) {
+                $available[] = $this->sanitizer->text(
+                    'its ' . $familyLabel . ' values are ' . implode(', ', $values),
+                    self::NOTE_VALUES_MAX_CHARS
+                );
+            }
+        }
+        if ($unknownLabels !== []) {
+            $detail = $title . ' has no option '
+                . $this->sanitizer->text(implode(', ', $unknownLabels), self::NOTE_VALUES_MAX_CHARS)
+                . '; its options are ' . $this->sanitizer->text(implode(', ', $labels), self::NOTE_VALUES_MAX_CHARS)
+                . '.';
+        } else {
+            $detail = 'No variant of ' . $title . ' matches '
+                . $this->sanitizer->text(implode(', ', $pairs), self::NOTE_VALUES_MAX_CHARS)
+                . ($available !== [] ? '; ' . implode('; ', $available) : '') . '.';
+        }
+        $ctx->notes[] = $detail . ' It is not on the card.';
+        return $detail;
+    }
+
+    private function familyLabel(string $label, array $labels): ?string
+    {
+        foreach ($labels as $candidate) {
+            if (self::normalizeOption($candidate) === self::normalizeOption($label)) {
+                return $candidate;
+            }
+        }
+        return null;
+    }
+
+    private function variantValues(string $label, array $variantRecords): array
+    {
+        $values = [];
+        foreach ($variantRecords as $record) {
+            $value = $record['option_values'][$label] ?? null;
+            if (is_string($value) && $value !== '' && !in_array($value, $values, true)) {
+                $values[] = $value;
+            }
+        }
+        return $values;
     }
 
     private static function normalizeOption(string $text): string
