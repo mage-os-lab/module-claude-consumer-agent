@@ -1,6 +1,6 @@
 {
     "name": "mage-os/module-claude-consumer-agent",
-    "description": "AI shopping assistant for Hyva storefronts, backed by the Claude Messages API.",
+    "description": "AI shopping assistant for Hyva and Luma storefronts, backed by the Claude Messages API.",
     "type": "magento2-module",
     "license": "OSL-3.0",
     "require": {
