@@ -119,11 +119,13 @@ function stripAiAgentTags(html) {
 
 function releaseAiAgentFocusOnOpen(dialog) {
     if (!dialog || dialog.open) {
-        return;
+        return null;
     }
-    dialog.addEventListener('focusin', (event) => {
+    const release = (event) => {
         event.target.blur();
-    }, {once: true});
+    };
+    dialog.addEventListener('focusin', release, {once: true});
+    return release;
 }
 
 function initAiAgentCartLine() {
@@ -258,11 +260,12 @@ function initAiAgentDrawer() {
 function initAiAgentOverlay() {
     return {
         open: false,
+        focusRelease: null,
         show(focus) {
             const store = Alpine.store('aiAgent');
             const scrollY = window.scrollY;
             if (!focus) {
-                releaseAiAgentFocusOnOpen(this.$root);
+                this.focusRelease = releaseAiAgentFocusOnOpen(this.$root);
             }
             this.open = true;
             store.surface.open = true;
@@ -284,6 +287,10 @@ function initAiAgentOverlay() {
         },
         close() {
             this.open = false;
+            if (this.focusRelease) {
+                this.$root.removeEventListener('focusin', this.focusRelease);
+                this.focusRelease = null;
+            }
             Alpine.store('aiAgent').surface.open = false;
             Alpine.store('aiAgent').forgetOpen();
             const launcher = document.getElementById('ai-agent-launcher');
