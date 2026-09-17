@@ -45,6 +45,39 @@ function loadState(responses) {
     return {state, calls, transport};
 }
 
+function fakeWindow(stored, wide) {
+    const items = new Map(Object.entries(stored || {}));
+    const calls = [];
+    return {
+        calls: calls,
+        items: items,
+        sessionStorage: {
+            getItem: (key) => {
+                calls.push(['get', key]);
+                return items.has(key) ? items.get(key) : null;
+            },
+            setItem: (key, value) => {
+                calls.push(['set', key, String(value)]);
+                items.set(key, String(value));
+            },
+            removeItem: (key) => {
+                calls.push(['remove', key]);
+                items.delete(key);
+            }
+        },
+        matchMedia: (query) => ({matches: wide && query === '(min-width: 768px)'})
+    };
+}
+
+function withWindow(win, run) {
+    global.window = win;
+    try {
+        return run();
+    } finally {
+        delete global.window;
+    }
+}
+
 function startedTurn(state) {
     state.started = true;
     state.send('hello');
@@ -343,4 +376,53 @@ test('retry while a turn is running keeps the notice and sends nothing', () => {
     assert.equal(assistant.retryAfter(), 5);
     assert.equal(state.transcript().length, 4);
     assert.deepEqual(calls.runs, ['hello', 'something else']);
+});
+
+test('opening the assistant stores the open flag for this tab', () => {
+    const {state} = loadState();
+    const win = fakeWindow({}, true);
+    state.config.keepOpen = true;
+    withWindow(win, () => state.rememberOpen());
+    assert.equal(win.items.get('aiagent_open'), '1');
+});
+
+test('closing the assistant removes the open flag', () => {
+    const {state} = loadState();
+    const win = fakeWindow({aiagent_open: '1'}, true);
+    state.config.keepOpen = true;
+    withWindow(win, () => state.forgetOpen());
+    assert.equal(win.items.has('aiagent_open'), false);
+});
+
+test('the assistant reopens when it was left open and the viewport is wider than a phone', () => {
+    const {state} = loadState();
+    state.config.keepOpen = true;
+    assert.equal(withWindow(fakeWindow({aiagent_open: '1'}, true), () => state.shouldReopen()), true);
+});
+
+test('the assistant stays closed on a phone and keeps the open flag for a wider load', () => {
+    const {state} = loadState();
+    const win = fakeWindow({aiagent_open: '1'}, false);
+    state.config.keepOpen = true;
+    assert.equal(withWindow(win, () => state.shouldReopen()), false);
+    assert.equal(win.items.get('aiagent_open'), '1');
+});
+
+test('the assistant stays closed when it was not left open', () => {
+    const {state} = loadState();
+    state.config.keepOpen = true;
+    assert.equal(withWindow(fakeWindow({}, true), () => state.shouldReopen()), false);
+});
+
+test('with keep open switched off the open flag is never read or written', () => {
+    const {state} = loadState();
+    const win = fakeWindow({aiagent_open: '1'}, true);
+    state.config.keepOpen = false;
+    withWindow(win, () => {
+        state.rememberOpen();
+        state.forgetOpen();
+        assert.equal(state.shouldReopen(), false);
+    });
+    assert.deepEqual(win.calls, []);
+    assert.equal(win.items.get('aiagent_open'), '1');
 });

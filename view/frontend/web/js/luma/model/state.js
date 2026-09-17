@@ -10,6 +10,8 @@ define([
 
     var SESSION_KEY = 'aiagent_session',
         MODE_KEY = 'aiagent_mode',
+        OPEN_KEY = 'aiagent_open',
+        WIDE_VIEWPORT_QUERY = '(min-width: 768px)',
         SESSION_ID_LENGTH = 64,
         MAX_SUGGESTIONS = 4,
         resolveReady;
@@ -38,6 +40,18 @@ define([
         try {
             if (storage) {
                 storage.setItem(key, value);
+            }
+        } catch (e) {
+            return;
+        }
+    }
+
+    function removeStorage(name, key) {
+        var storage = storageOf(name);
+
+        try {
+            if (storage) {
+                storage.removeItem(key);
             }
         } catch (e) {
             return;
@@ -335,6 +349,27 @@ define([
 
         persistSession: function () {
             writeStorage('sessionStorage', SESSION_KEY, this.sessionId);
+        },
+
+        rememberOpen: function () {
+            if (!this.config.keepOpen) {
+                return;
+            }
+            writeStorage('sessionStorage', OPEN_KEY, '1');
+        },
+
+        forgetOpen: function () {
+            if (!this.config.keepOpen) {
+                return;
+            }
+            removeStorage('sessionStorage', OPEN_KEY);
+        },
+
+        shouldReopen: function () {
+            if (!this.config.keepOpen || readStorage('sessionStorage', OPEN_KEY) === null) {
+                return false;
+            }
+            return typeof window.matchMedia === 'function' && window.matchMedia(WIDE_VIEWPORT_QUERY).matches;
         }
     };
 });

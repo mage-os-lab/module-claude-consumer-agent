@@ -25,6 +25,7 @@ define([
             this.panelElement = null;
             this.transcriptElement = null;
             this.opener = null;
+            this.focusOnOpen = true;
             this.scrollFrame = null;
             this.transcriptObserver = null;
             this.following = true;
@@ -106,19 +107,21 @@ define([
         },
 
         afterInputRender: function (element) {
-            if (state.isOpen()) {
+            if (state.isOpen() && this.focusOnOpen) {
                 element.focus({preventScroll: true});
             }
         },
 
-        openPanel: function (opener) {
+        openPanel: function (opener, focus) {
             var self = this,
                 scrollY = window.scrollY;
 
             this.opener = opener;
+            this.focusOnOpen = focus !== false;
             this.following = true;
             this.productChipsVisible(state.page.type === 'product');
             state.isOpen(true);
+            state.rememberOpen();
             if (!state.started) {
                 state.start().catch(function () {
                     return null;
@@ -127,7 +130,7 @@ define([
             window.requestAnimationFrame(function () {
                 var input = self.input();
 
-                if (input) {
+                if (input && self.focusOnOpen) {
                     input.focus({preventScroll: true});
                 }
                 if (window.scrollY !== scrollY) {
@@ -139,6 +142,7 @@ define([
 
         closePanel: function () {
             state.isOpen(false);
+            state.forgetOpen();
             if (this.opener && typeof this.opener.focus === 'function') {
                 this.opener.focus();
             }
@@ -146,6 +150,7 @@ define([
 
         hidePanel: function () {
             state.isOpen(false);
+            state.forgetOpen();
         },
 
         newConversation: function () {
