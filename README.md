@@ -112,6 +112,9 @@ field has default, website and store view scope. Config paths start with
 - Launcher: the round button bottom right. With No, the assistant opens only
   from the product page button, the cart page box and, in Cart mode, the
   header cart icon.
+- Keep Open Across Pages: when the shopper leaves the assistant open, it opens
+  again on the next page with the conversation restored. In Cart mode the
+  drawer comes back in the view it was left in. Phones keep it closed.
 - Product Page Block: the "Ask about this product" button on product pages.
 - Streaming Replies: Auto streams each reply word by word. Set Off when a
   proxy or CDN in front of the store buffers responses. See
