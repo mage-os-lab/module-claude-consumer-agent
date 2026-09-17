@@ -39,8 +39,8 @@
                            showInWebsite="1" showInStore="1">
                         <label>Keep Open Across Pages</label>
                         <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
-                        <comment>Reopens the assistant on the next page when the shopper left it open. Phones keep it
-                            closed.
+                        <comment>Reopens the overlay panel and the Luma panel on the next page when the shopper left it
+                            open. Hyvä Cart mode and phones keep it closed.
                         </comment>
                     </field>
                     <field id="product_block_enabled" translate="label comment" type="select" sortOrder="40"

@@ -354,13 +354,13 @@ $configJson = json_encode(
                     return;
                 }
             },
-            rememberOpen(view) {
+            rememberOpen() {
                 if (!this.config.keepOpen) {
                     return;
                 }
                 try {
                     if (window.sessionStorage) {
-                        window.sessionStorage.setItem('aiagent_open', view);
+                        window.sessionStorage.setItem('aiagent_open', '1');
                     }
                 } catch (e) {
                     return;
@@ -378,20 +378,17 @@ $configJson = json_encode(
                     return;
                 }
             },
-            reopenView() {
-                if (!this.config.keepOpen) {
-                    return null;
+            shouldReopen() {
+                if (!this.config.keepOpen || !document.getElementById('ai-agent-shell')) {
+                    return false;
                 }
                 let stored = null;
                 try {
                     stored = window.sessionStorage ? window.sessionStorage.getItem('aiagent_open') : null;
                 } catch (e) {
-                    return null;
+                    return false;
                 }
-                if (stored === null || !window.matchMedia('(min-width: 768px)').matches) {
-                    return null;
-                }
-                return stored === 'cart' ? 'cart' : 'chat';
+                return stored !== null && window.matchMedia('(min-width: 768px)').matches;
             }
         });
 
@@ -432,19 +429,11 @@ $configJson = json_encode(
             }
             store.mount();
         });
-        const drawerShell = document.getElementById('ai-agent-drawer-shell');
-        const drawerDialog = drawerShell ? drawerShell.closest('dialog') : null;
-        if (drawerDialog) {
-            drawerDialog.addEventListener('close', () => {
-                Alpine.store('aiAgent').forgetOpen();
-            });
-        }
         window.addEventListener('alpine:initialized', () => {
-            const view = Alpine.store('aiAgent').reopenView();
-            if (!view) {
+            if (!Alpine.store('aiAgent').shouldReopen()) {
                 return;
             }
-            window.dispatchEvent(new CustomEvent('ai-agent:open', {detail: {view: view, focus: false}}));
+            window.dispatchEvent(new CustomEvent('ai-agent:open', {detail: {view: 'chat', focus: false}}));
         }, {once: true});
     }, {once: true});
 </script>

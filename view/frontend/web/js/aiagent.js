@@ -173,7 +173,6 @@ function initAiAgentDrawer() {
             } else {
                 this.view = 'cart';
             }
-            store.rememberOpen(this.view);
             this.$watch(() => Alpine.store('aiAgent').turn.id, () => {
                 if (this.view === 'cart') {
                     this.showChat();
@@ -207,14 +206,12 @@ function initAiAgentDrawer() {
         showChat() {
             this.view = 'chat';
             Alpine.store('aiAgent').surface.view = 'chat';
-            Alpine.store('aiAgent').rememberOpen('chat');
             this.ensureStarted();
             this.focusComposer();
         },
         showCart() {
             this.view = 'cart';
             Alpine.store('aiAgent').surface.view = 'cart';
-            Alpine.store('aiAgent').rememberOpen('cart');
         },
         close() {
             this.$dispatch('toggle-cart', { isOpen: false });
@@ -245,12 +242,8 @@ function initAiAgentDrawer() {
                 if (event.detail.page) {
                     store.page = Object.assign({}, store.page, event.detail.page);
                 }
-                if (event.detail.focus === false) {
-                    releaseAiAgentFocusOnOpen(this.$root.closest('dialog'));
-                }
                 this.$dispatch('toggle-cart', { isOpen: true });
                 this.view = event.detail.view || 'chat';
-                store.rememberOpen(this.view);
                 this.ensureStarted();
             },
             ['@toggle-cart.window'](event) {
@@ -273,7 +266,7 @@ function initAiAgentOverlay() {
             }
             this.open = true;
             store.surface.open = true;
-            store.rememberOpen('chat');
+            store.rememberOpen();
             if (!store.started) {
                 store.start();
             }
