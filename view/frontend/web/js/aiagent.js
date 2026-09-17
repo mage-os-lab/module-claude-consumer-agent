@@ -309,7 +309,12 @@ function initAiAgentOverlay() {
 function initAiAgentStart() {
     return {
         visible() {
-            return Alpine.store('aiAgent').transcript.length === 0;
+            const store = Alpine.store('aiAgent');
+            return store.transcript.length === 0 && !store.restoring;
+        },
+        loading() {
+            const store = Alpine.store('aiAgent');
+            return store.transcript.length === 0 && store.restoring;
         },
         greeting() {
             return Alpine.store('aiAgent').config.greeting;

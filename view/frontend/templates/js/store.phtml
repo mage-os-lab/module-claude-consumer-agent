@@ -107,6 +107,7 @@ $configJson = json_encode(
             cart: {count: 0, subtotal: ''},
             surface: {mode: config.surface, resolved: config.surface, view: 'chat', open: false},
             started: false,
+            restoring: false,
             ready: false,
             mounting: null,
             startPromise: null,
@@ -157,6 +158,7 @@ $configJson = json_encode(
                 if (this.startPromise) {
                     return this.startPromise;
                 }
+                this.restoring = !!this.sessionId;
                 this.startPromise = (async () => {
                     const hadStoredId = !!this.sessionId;
                     const response = await fetch(this.config.urls.start, {
@@ -184,6 +186,11 @@ $configJson = json_encode(
                     }
                     this.started = true;
                 })();
+                this.startPromise.then(() => {
+                    this.restoring = false;
+                }, () => {
+                    this.restoring = false;
+                });
                 return this.startPromise;
             },
             async restore() {
@@ -345,6 +352,11 @@ $configJson = json_encode(
             if (store.ready) {
                 return;
             }
+            if (store.sessionId) {
+                store.start().catch(() => {
+                    return;
+                });
+            }
             store.mount().then(() => {
                 window.dispatchEvent(new CustomEvent('ai-agent:open', {detail: event.detail}));
             }).catch(() => {
@@ -358,6 +370,11 @@ $configJson = json_encode(
             }
             if (!document.getElementById('ai-agent-drawer-shell')) {
                 return;
+            }
+            if (store.sessionId) {
+                store.start().catch(() => {
+                    return;
+                });
             }
             store.mount();
         });
