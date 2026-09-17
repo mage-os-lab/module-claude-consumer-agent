@@ -234,7 +234,7 @@ function initAiAgentDrawer() {
         },
         lastLine() {
             const transcript = Alpine.store('aiAgent').transcript;
-            const assistantMessages = transcript.filter((message) => message.role === 'assistant');
+            const assistantMessages = transcript.filter((message) => message.role === 'assistant' && !!message.text);
             const lastMessage = assistantMessages[assistantMessages.length - 1];
             return lastMessage ? lastMessage.text.slice(0, 80) : '';
         },
@@ -489,6 +489,13 @@ function initAiAgentTranscript() {
         },
         isStreaming() {
             return this.m.streaming === true;
+        },
+        isVisible() {
+            return this.m.role !== 'assistant'
+                || this.m.streaming === true
+                || !!this.m.text
+                || (Array.isArray(this.m.cards) && this.m.cards.length > 0)
+                || !!this.m.notice;
         },
         isSessionCap() {
             return this.m.sessionCap === true;
