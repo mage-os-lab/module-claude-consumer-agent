@@ -1,0 +1,33 @@
+<div class="ai-agent-products">
+    <p class="ai-agent-card__title" data-bind="text: title"></p>
+    <!-- ko if: layout === 'tiles' -->
+    <ul class="ai-agent-products__tiles" data-bind="css: 'ai-agent-products__tiles--' + tiles, foreach: items">
+        <li class="ai-agent-product">
+            <!-- ko if: showImage -->
+            <a class="ai-agent-product__image-link" data-bind="attr: {href: url}">
+                <img class="ai-agent-product__image" data-bind="attr: {src: imageUrl, alt: title}"/>
+            </a>
+            <!-- /ko -->
+            <!-- ko template: 'MageOS_ClaudeConsumerAgent/luma/cards/product-info' --><!-- /ko -->
+            <!-- ko template: 'MageOS_ClaudeConsumerAgent/luma/cards/product-action' --><!-- /ko -->
+        </li>
+    </ul>
+    <!-- /ko -->
+    <!-- ko if: layout === 'list' -->
+    <ul class="ai-agent-products__list" data-bind="foreach: items">
+        <li class="ai-agent-product ai-agent-product--row">
+            <!-- ko if: showImage -->
+            <a class="ai-agent-product__thumb-link" data-bind="attr: {href: url}">
+                <img class="ai-agent-product__thumb" data-bind="attr: {src: imageUrl, alt: title}"/>
+            </a>
+            <!-- /ko -->
+            <div class="ai-agent-product__body">
+                <!-- ko template: 'MageOS_ClaudeConsumerAgent/luma/cards/product-info' --><!-- /ko -->
+            </div>
+            <div class="ai-agent-product__action-wrap">
+                <!-- ko template: 'MageOS_ClaudeConsumerAgent/luma/cards/product-action' --><!-- /ko -->
+            </div>
+        </li>
+    </ul>
+    <!-- /ko -->
+</div>

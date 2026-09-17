@@ -10,7 +10,7 @@ class ProductAsk extends Template
     public function __construct(
         \Magento\Framework\View\Element\Template\Context $context,
         private readonly \MageOS\ClaudeConsumerAgent\Model\Config\StoreConfig $storeConfig,
-        private readonly \Hyva\Theme\ViewModel\CurrentProduct $currentProduct,
+        private readonly \Magento\Catalog\Helper\Data $catalogHelper,
         array $data = []
     ) {
         parent::__construct($context, $data);
@@ -19,7 +19,7 @@ class ProductAsk extends Template
     protected function _toHtml(): string
     {
         $storeId = (int)$this->_storeManager->getStore()->getId();
-        if (!$this->storeConfig->isEnabled($storeId) || !$this->currentProduct->exists()) {
+        if (!$this->storeConfig->isEnabled($storeId) || $this->catalogHelper->getProduct() === null) {
             return '';
         }
         return parent::_toHtml();
@@ -27,6 +27,7 @@ class ProductAsk extends Template
 
     public function getProductId(): string
     {
-        return (string)$this->currentProduct->get()->getId();
+        $product = $this->catalogHelper->getProduct();
+        return $product === null ? '' : (string)$product->getId();
     }
 }

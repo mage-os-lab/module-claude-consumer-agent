@@ -1,0 +1,45 @@
+<div class="ai-agent-comparison">
+    <p class="ai-agent-card__title" data-bind="text: title"></p>
+    <div class="ai-agent-comparison__scroll">
+        <table class="ai-agent-comparison__table">
+            <thead>
+            <tr data-bind="foreach: entries">
+                <th scope="col">
+                    <span data-bind="text: title"></span>
+                    <!-- ko if: optionValuesText -->
+                    <span class="ai-agent-product__meta" data-bind="text: optionValuesText"></span>
+                    <!-- /ko -->
+                    <!-- ko if: recommended -->
+                    <span class="ai-agent-badge ai-agent-badge--success" translate="'Recommended'"></span>
+                    <!-- /ko -->
+                </th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr data-bind="foreach: entries">
+                <td class="ai-agent-comparison__price" data-bind="text: priceText"></td>
+            </tr>
+            <tr data-bind="foreach: entries">
+                <td>
+                    <ul class="ai-agent-list" data-bind="foreach: pros">
+                        <li data-bind="text: $data"></li>
+                    </ul>
+                </td>
+            </tr>
+            <tr data-bind="foreach: entries">
+                <td>
+                    <ul class="ai-agent-list ai-agent-product__meta" data-bind="foreach: cons">
+                        <li data-bind="text: $data"></li>
+                    </ul>
+                </td>
+            </tr>
+            <tr data-bind="foreach: entries">
+                <td class="ai-agent-product__meta" data-bind="text: bestFor"></td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    <!-- ko if: priceDeltaLine -->
+    <p class="ai-agent-product__meta" data-bind="text: priceDeltaLine"></p>
+    <!-- /ko -->
+</div>

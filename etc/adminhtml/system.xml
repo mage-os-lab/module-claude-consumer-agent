@@ -23,8 +23,8 @@
                            showInWebsite="1" showInStore="1">
                         <label>Surface Mode</label>
                         <source_model>MageOS\ClaudeConsumerAgent\Model\Config\Source\SurfaceMode</source_model>
-                        <comment>Cart docks the assistant into the Hyvä cart drawer. Overlay opens a panel of its own on the
-                            right side of the page.
+                        <comment>Hyvä only. Cart docks the assistant into the Hyvä cart drawer. Overlay opens a panel of
+                            its own on the right side of the page. Luma based themes always use the panel.
                         </comment>
                     </field>
                     <field id="launcher_enabled" translate="label comment" type="select" sortOrder="30"
@@ -45,7 +45,7 @@
                            showInDefault="1" showInWebsite="1" showInStore="1">
                         <label>Header Icon View</label>
                         <source_model>MageOS\ClaudeConsumerAgent\Model\Config\Source\HeaderIconView</source_model>
-                        <comment>Cart mode only. What the drawer opens with when the customer clicks the header
+                        <comment>Hyvä Cart mode only. What the drawer opens with when the customer clicks the header
                             cart icon: the cart, the chat, or whichever of the two they used last.
                         </comment>
                         <depends>

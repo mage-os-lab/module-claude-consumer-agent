@@ -1,0 +1,11 @@
+<div class="ai-agent-start" data-bind="visible: showStart">
+    <p class="ai-agent-start__greeting" data-bind="text: settings.greeting"></p>
+    <div class="ai-agent-start__list" data-bind="foreach: settings.starters">
+        <button type="button" class="action ai-agent-start__button" data-bind="text: $data, click: $parent.pick"></button>
+    </div>
+    <!-- ko if: productChipsVisible -->
+    <div class="ai-agent-start__list" data-bind="foreach: settings.i18n.productChips">
+        <button type="button" class="action ai-agent-start__button" data-bind="text: $data, click: $parent.pick"></button>
+    </div>
+    <!-- /ko -->
+</div>

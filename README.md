@@ -1,10 +1,10 @@
 # MageOS_ClaudeConsumerAgent
 
-A shopping assistant for Hyvä storefronts on Magento 2 and Mage-OS. It ports
-Anthropic's open-source shopping agent to a Magento module. The assistant
-searches the catalog, explains products, adds them to the cart, checks orders
-and answers policy questions from the store's own data. Replies stream from
-the Claude Messages API into a side panel on every page.
+A shopping assistant for Hyvä and Luma storefronts on Magento 2 and Mage-OS.
+It ports Anthropic's open-source shopping agent to a Magento module. The
+assistant searches the catalog, explains products, adds them to the cart,
+checks orders and answers policy questions from the store's own data. Replies
+stream from the Claude Messages API into a side panel on every page.
 
 The module names no store. Every backend call goes through
 `Api\StorefrontBackendInterface`, so a store layer can replace or extend any
@@ -38,11 +38,16 @@ part without a change to the base module.
 |---|---|---|
 | ![Best sellers of the current category](docs/images/panel-category-best-sellers.png) | ![Gift wrapping answered from store facts](docs/images/panel-store-fact.png) | ![Bottom sheet on a phone](docs/images/mobile-products.png) |
 
+| Luma | Luma phone |
+|---|---|
+| ![Products card on a Luma store](docs/images/luma-panel-products.png) | ![Luma bottom sheet on a phone](docs/images/luma-mobile.png) |
+
 ## Requirements
 
 - PHP 8.1 to 8.5
 - Magento 2.4 or Mage-OS 3.x with a Hyvä theme on Tailwind 4 (Hyvä default
-  theme 1.5 or later). The module has no Luma templates.
+  theme 1.5 or later) or a theme based on Magento/blank or Magento/luma. Luma
+  based themes need no Hyvä package.
 - An Anthropic API key with access to the configured model
 
 ## Installation (development only)
@@ -54,6 +59,14 @@ cd <magento root>
 git clone git@github.com:mage-os-lab/module-claude-consumer-agent.git app/code/MageOS/ClaudeConsumerAgent
 bin/magento module:enable MageOS_ClaudeConsumerAgent
 bin/magento setup:upgrade
+```
+
+`setup:upgrade` creates the tables `aiagent_session`, `aiagent_message` and
+`aiagent_turn`.
+
+### Hyvä
+
+```bash
 bin/magento hyva:config:generate
 bin/magento setup:di:compile
 ```
@@ -71,8 +84,15 @@ npm run build
 Finish with `bin/magento cache:flush`. In production mode also run
 `bin/magento setup:static-content:deploy`.
 
-`setup:upgrade` creates the tables `aiagent_session`, `aiagent_message` and
-`aiagent_turn`.
+### Luma
+
+```bash
+bin/magento setup:di:compile
+bin/magento cache:flush
+```
+
+In production mode also run `bin/magento setup:static-content:deploy`. Luma
+needs no Tailwind build and no `hyva:config:generate`.
 
 ## Configuration
 
@@ -87,7 +107,8 @@ field has default, website and store view scope. Config paths start with
 - Enabled: turns the assistant on for the scope.
 - Surface Mode: Overlay opens a panel of its own. Cart docks the assistant
   into the Hyvä cart drawer. Header Icon View then decides what the drawer
-  opens with: cart, chat, or the last one used.
+  opens with: cart, chat, or the last one used. Luma based themes always open
+  the panel. Cart mode and Header Icon View apply to Hyvä only.
 - Launcher: the round button bottom right. With No, the assistant opens only
   from the product page button, the cart page box and, in Cart mode, the
   header cart icon.
@@ -299,12 +320,17 @@ reports, duration and stop reason. No dollar amounts are computed anywhere.
 
 ## Lazy loading
 
-Every page carries the config store (`js/store.phtml`), the launcher and,
-where enabled, the product and cart ask buttons. The panel, the drawer and
-every card sit inside `<template data-ai-agent-shell>` elements.
+On Hyvä every page carries the config store (`js/store.phtml`), the launcher
+and, where enabled, the product and cart ask buttons. The panel, the drawer
+and every card sit inside `<template data-ai-agent-shell>` elements.
 `Alpine.store('aiAgent').mount()` loads `view/frontend/web/js/aiagent.js`
 once and clones the shells into the document the first time the assistant
 opens.
+
+On Luma every page carries a small config init (`js/luma/init`), the launcher
+and an empty `scope: 'aiAgentPanel'` element. The first open loads
+`js/luma/view/panel.js`, registers it through `uiLayout` and fetches its
+Knockout templates.
 
 ## Extension points
 
@@ -342,7 +368,8 @@ preference on a base concrete class.
 3. Cards. `Api\Presentation\PresentationExtensionInterface` items pool on
    `Model\Agent\Presentation\Registry` under `<argument name="extensions">`.
    The extension registers its own Alpine component the same way `aiagent.js`
-   registers the built-in ones.
+   registers the built-in ones. Custom card components render on Hyvä only.
+   Luma skips unknown components.
 
 4. Core facts. `Api\Prompt\CoreFactProviderInterface` items pool on
    `Model\Agent\Prompt\CoreFacts` under `<argument name="providers">`.
@@ -368,7 +395,8 @@ preference on a base concrete class.
 
 7. Templates. Every surface and card template resolves through the theme
    fallback. Override by path in a child theme under
-   `MageOS_ClaudeConsumerAgent/templates/`.
+   `MageOS_ClaudeConsumerAgent/templates/`. Luma Knockout templates live under
+   `MageOS_ClaudeConsumerAgent/web/template/luma/`.
 
 8. Product image URLs. `Api\Backend\ProductImageUrlInterface::forProduct()`
    resolves the image URL for a product card or cart item. The default
@@ -389,6 +417,7 @@ preference on a base concrete class.
 
 - Unit: `vendor/bin/phpunit -c dev/tests/unit/phpunit.xml.dist app/code/MageOS/ClaudeConsumerAgent/Test/Unit`
   (no Magento bootstrap, no database)
+- JS (Luma models): `node --test app/code/MageOS/ClaudeConsumerAgent/Test/Js/*.test.cjs`
 - Integration: `Test/Integration` with the project's integration test
   configuration
 - Evals: `bin/magento aiagent:eval:run`
