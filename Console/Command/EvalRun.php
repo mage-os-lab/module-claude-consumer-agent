@@ -11,6 +11,7 @@ use MageOS\ClaudeConsumerAgent\Api\StorefrontBackendInterface;
 use MageOS\ClaudeConsumerAgent\Model\Agent\Event;
 use MageOS\ClaudeConsumerAgent\Model\Agent\Gate\CartWrite;
 use MageOS\ClaudeConsumerAgent\Model\Agent\Grounding\Rules;
+use MageOS\ClaudeConsumerAgent\Model\Agent\Presentation\Enrich\Products;
 use MageOS\ClaudeConsumerAgent\Model\Agent\Presentation\Runner as PresentationRunner;
 use MageOS\ClaudeConsumerAgent\Model\Agent\SessionContext;
 use MageOS\ClaudeConsumerAgent\Model\Agent\SessionState;
@@ -202,6 +203,7 @@ class EvalRun extends Command
 
         $toolCalls = [];
         $uiComponents = [];
+        $productsPayloads = [];
         $replyText = '';
         $turns = is_array($case['turns'] ?? null) ? array_values($case['turns']) : [];
         foreach ($turns as $index => $message) {
@@ -218,6 +220,9 @@ class EvalRun extends Command
                 }
                 if ($event->type === Event::TYPE_UI) {
                     $uiComponents[] = (string)$event->data['component'];
+                    if ($event->data['component'] === 'products') {
+                        $productsPayloads[] = is_array($event->data['payload'] ?? null) ? $event->data['payload'] : [];
+                    }
                 }
                 if ($event->type === Event::TYPE_TEXT_DELTA) {
                     $replyText .= (string)$event->data['text'];
@@ -227,7 +232,7 @@ class EvalRun extends Command
 
         $cart = $backend->getCart($context);
         $expected = is_array($case['expected'] ?? null) ? $case['expected'] : [];
-        $grading = $this->gradeCase($expected, $toolCalls, $uiComponents, $replyText, $cart);
+        $grading = $this->gradeCase($expected, $toolCalls, $uiComponents, $productsPayloads, $replyText, $cart);
 
         return [
             'id' => $id,
@@ -408,8 +413,14 @@ class EvalRun extends Command
         return $rounds;
     }
 
-    private function gradeCase(array $expected, array $toolCalls, array $uiComponents, string $replyText, CartInterface $cart): array
-    {
+    private function gradeCase(
+        array $expected,
+        array $toolCalls,
+        array $uiComponents,
+        array $productsPayloads,
+        string $replyText,
+        CartInterface $cart
+    ): array {
         $failed = [];
         $manual = [];
         foreach ($expected as $key => $value) {
@@ -417,15 +428,22 @@ class EvalRun extends Command
                 $manual[] = $key;
                 continue;
             }
-            if (!$this->gradeKey((string)$key, $value, $toolCalls, $uiComponents, $replyText, $cart)) {
+            if (!$this->gradeKey((string)$key, $value, $toolCalls, $uiComponents, $productsPayloads, $replyText, $cart)) {
                 $failed[] = (string)$key;
             }
         }
         return ['failed' => $failed, 'manual' => $manual, 'pass' => $failed === []];
     }
 
-    private function gradeKey(string $key, mixed $value, array $toolCalls, array $uiComponents, string $replyText, CartInterface $cart): bool
-    {
+    private function gradeKey(
+        string $key,
+        mixed $value,
+        array $toolCalls,
+        array $uiComponents,
+        array $productsPayloads,
+        string $replyText,
+        CartInterface $cart
+    ): bool {
         return match ($key) {
             'calls_tool' => $this->allPresent((array)$value, $toolCalls),
             'calls_one_of' => $this->anyPresent((array)$value, $toolCalls),
@@ -438,6 +456,7 @@ class EvalRun extends Command
             'reply_includes' => $this->allSubstrings((array)$value, $replyText),
             'reply_omits' => $this->noneSubstrings((array)$value, $replyText),
             'max_tool_calls' => count($toolCalls) <= (int)$value,
+            'products_option_values' => $this->productsMatchOptionValues((array)$value, $productsPayloads),
             default => true,
         };
     }
@@ -471,6 +490,24 @@ class EvalRun extends Command
             }
         }
         return false;
+    }
+
+    private function productsMatchOptionValues(array $wanted, array $productsPayloads): bool
+    {
+        if ($wanted === [] || $productsPayloads === []) {
+            return false;
+        }
+        $checked = 0;
+        foreach ($productsPayloads as $payload) {
+            foreach ((is_array($payload['items'] ?? null) ? $payload['items'] : []) as $item) {
+                $optionValues = is_array($item['option_values'] ?? null) ? $item['option_values'] : [];
+                if (!Products::matchesOptionValues($optionValues, $wanted)) {
+                    return false;
+                }
+                $checked++;
+            }
+        }
+        return $checked > 0;
     }
 
     private function nonePresent(array $forbidden, array $actual): bool

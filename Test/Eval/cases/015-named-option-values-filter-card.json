@@ -1,0 +1,63 @@
+{
+  "id": "015-named-option-values-filter-card",
+  "priority": "high",
+  "difficulty": "medium",
+  "tags": ["options", "presentation"],
+  "state": {
+    "seen_products": [],
+    "catalog": [
+      {
+        "product_id": "1556",
+        "title": "Radiant Tee",
+        "price": 22.0,
+        "currency": "USD",
+        "in_stock": true,
+        "short_description": "A soft scoop neck tee for women's yoga and training.",
+        "options": { "Size": ["XS", "S", "M", "L", "XL"], "Color": ["Blue", "Orange", "Purple"] }
+      },
+      { "product_id": "1541", "title": "Radiant Tee-XS-Blue", "price": 22.0, "currency": "USD", "in_stock": true, "variant_of": "1556", "option_values": { "Size": "XS", "Color": "Blue" } },
+      { "product_id": "1542", "title": "Radiant Tee-XS-Orange", "price": 22.0, "currency": "USD", "in_stock": true, "variant_of": "1556", "option_values": { "Size": "XS", "Color": "Orange" } },
+      { "product_id": "1543", "title": "Radiant Tee-XS-Purple", "price": 22.0, "currency": "USD", "in_stock": true, "variant_of": "1556", "option_values": { "Size": "XS", "Color": "Purple" } },
+      { "product_id": "1544", "title": "Radiant Tee-S-Blue", "price": 22.0, "currency": "USD", "in_stock": true, "variant_of": "1556", "option_values": { "Size": "S", "Color": "Blue" } },
+      { "product_id": "1545", "title": "Radiant Tee-S-Orange", "price": 22.0, "currency": "USD", "in_stock": true, "variant_of": "1556", "option_values": { "Size": "S", "Color": "Orange" } },
+      { "product_id": "1546", "title": "Radiant Tee-S-Purple", "price": 22.0, "currency": "USD", "in_stock": true, "variant_of": "1556", "option_values": { "Size": "S", "Color": "Purple" } },
+      { "product_id": "1547", "title": "Radiant Tee-M-Blue", "price": 22.0, "currency": "USD", "in_stock": true, "variant_of": "1556", "option_values": { "Size": "M", "Color": "Blue" } },
+      { "product_id": "1548", "title": "Radiant Tee-M-Orange", "price": 22.0, "currency": "USD", "in_stock": true, "variant_of": "1556", "option_values": { "Size": "M", "Color": "Orange" } },
+      { "product_id": "1549", "title": "Radiant Tee-M-Purple", "price": 22.0, "currency": "USD", "in_stock": true, "variant_of": "1556", "option_values": { "Size": "M", "Color": "Purple" } },
+      { "product_id": "1550", "title": "Radiant Tee-L-Blue", "price": 22.0, "currency": "USD", "in_stock": true, "variant_of": "1556", "option_values": { "Size": "L", "Color": "Blue" } },
+      { "product_id": "1551", "title": "Radiant Tee-L-Orange", "price": 22.0, "currency": "USD", "in_stock": true, "variant_of": "1556", "option_values": { "Size": "L", "Color": "Orange" } },
+      { "product_id": "1552", "title": "Radiant Tee-L-Purple", "price": 22.0, "currency": "USD", "in_stock": true, "variant_of": "1556", "option_values": { "Size": "L", "Color": "Purple" } },
+      { "product_id": "1553", "title": "Radiant Tee-XL-Blue", "price": 22.0, "currency": "USD", "in_stock": true, "variant_of": "1556", "option_values": { "Size": "XL", "Color": "Blue" } },
+      { "product_id": "1554", "title": "Radiant Tee-XL-Orange", "price": 22.0, "currency": "USD", "in_stock": true, "variant_of": "1556", "option_values": { "Size": "XL", "Color": "Orange" } },
+      { "product_id": "1555", "title": "Radiant Tee-XL-Purple", "price": 22.0, "currency": "USD", "in_stock": true, "variant_of": "1556", "option_values": { "Size": "XL", "Color": "Purple" } }
+    ]
+  },
+  "turns": [
+    "what is the cheapest yoga shirt for a women in blue?"
+  ],
+  "rounds": [
+    [
+      {
+        "tools": [
+          { "name": "search_products", "input": { "query": "yoga", "filters": { "sort": "price_asc" } } }
+        ]
+      },
+      {
+        "text": "The cheapest women's yoga shirt in blue is the Radiant Tee at $22.",
+        "tools": [
+          { "name": "present_products", "input": { "picks": [{ "product_id": "1556", "reason": "Cheapest women's yoga tee in blue", "option_values": { "Color": "Blue" } }] } },
+          { "name": "present_suggestions", "input": { "suggestions": ["Show other blue tops", "Compare with another tee"] } }
+        ]
+      },
+      {
+        "text": "Which size would you like?"
+      }
+    ]
+  ],
+  "expected": {
+    "calls_tool": ["search_products", "present_products"],
+    "ui_components": ["products", "suggestions"],
+    "products_option_values": { "Color": "Blue" }
+  },
+  "notes": "A customer who already named a colour sees only the variants in that colour on the products card, not every variant of the family."
+}

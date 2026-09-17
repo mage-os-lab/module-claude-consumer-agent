@@ -177,6 +177,12 @@ final class Registry
                                 'maxLength' => 140,
                                 'description' => 'One clause tying the pick to a stated need.',
                             ],
+                            'option_values' => [
+                                'type' => 'object',
+                                'description' => 'Option values the customer already named, as option label to '
+                                    . 'value, e.g. {"Color": "Blue"}; the card then shows only the matching variants.',
+                                'additionalProperties' => ['type' => 'string'],
+                            ],
                         ],
                         'required' => ['product_id'],
                         'additionalProperties' => false,
