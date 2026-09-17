@@ -227,6 +227,62 @@ test('start restores the transcript of a stored session', async () => {
     assert.deepEqual(state.suggestions(), ['Cheaper']);
 });
 
+test('restoring is true while the start of a stored session is pending', () => {
+    const {state} = loadState();
+    state.sessionId = SESSION;
+    state.start();
+    assert.equal(state.restoring(), true);
+});
+
+test('restoring stays false when no session id is stored', async () => {
+    const {state} = loadState();
+    const pending = state.start();
+    assert.equal(state.restoring(), false);
+    await pending;
+    assert.equal(state.restoring(), false);
+});
+
+test('restoring turns false when the server starts a fresh session for the stored id', async () => {
+    const {state} = loadState({'/aiagent/session/start': {session: SESSION, fresh: true}});
+    state.sessionId = 'b'.repeat(64);
+    await state.start();
+    assert.equal(state.restoring(), false);
+    assert.equal(state.transcript().length, 0);
+});
+
+test('restoring stays true until the stored transcript is restored', async () => {
+    const {state, transport} = loadState();
+    let releaseTranscript;
+    transport.postJson = (url) => {
+        if (url === '/aiagent/session/start') {
+            return Promise.resolve({json: () => Promise.resolve({session: SESSION, fresh: false})});
+        }
+        return new Promise((resolve) => {
+            releaseTranscript = () => resolve({json: () => Promise.resolve({messages: [
+                {role: 'user', text: 'show bags'},
+                {role: 'assistant', text: 'Here you go', cards: []}
+            ]})});
+        });
+    };
+    state.sessionId = SESSION;
+    const pending = state.start();
+    await flush();
+    assert.equal(state.restoring(), true);
+    releaseTranscript();
+    await pending;
+    assert.equal(state.restoring(), false);
+    assert.equal(state.transcript().length, 2);
+});
+
+test('restoring turns false when the start of a stored session fails', async () => {
+    const {state, transport} = loadState();
+    transport.postJson = () => Promise.reject(new Error('offline'));
+    state.sessionId = SESSION;
+    await assert.rejects(state.start());
+    assert.equal(state.restoring(), false);
+    assert.equal(state.started, false);
+});
+
 test('a message sent while the reset request is pending still ends its turn', async () => {
     const {state, calls} = loadState();
     global.window = {crypto: {randomUUID: () => 'fresh-id'}};

@@ -58,6 +58,7 @@ define([
         page: null,
         started: false,
         startPromise: null,
+        restoring: ko.observable(false),
         turnController: null,
         transcript: ko.observableArray([]),
         suggestions: ko.observableArray([]),
@@ -140,6 +141,7 @@ define([
             if (this.startPromise) {
                 return this.startPromise;
             }
+            this.restoring(hadStoredId);
             this.startPromise = transport.postJson(this.config.urls.start, {
                 session: this.sessionId,
                 page: this.pagePayload()
@@ -157,8 +159,10 @@ define([
                 return hadStoredId && !data.fresh ? self.restore() : null;
             }).then(function () {
                 self.started = true;
+                self.restoring(false);
             }, function (error) {
                 self.startPromise = null;
+                self.restoring(false);
                 throw error;
             });
             return this.startPromise;
