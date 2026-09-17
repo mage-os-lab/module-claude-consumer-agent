@@ -51,6 +51,7 @@ use MageOS\ClaudeConsumerAgent\Model\Agent\Turn\StreamedRoundFactory;
 use MageOS\ClaudeConsumerAgent\Model\Config\StoreConfig;
 use PHPUnit\Framework\TestCase;
 use Psr\Log\LoggerInterface;
+use ReflectionMethod;
 use Symfony\Component\Console\Tester\CommandTester;
 
 class EvalRunTest extends TestCase
@@ -106,6 +107,33 @@ class EvalRunTest extends TestCase
 
         $this->assertFalse($row['pass']);
         $this->assertSame(['products_option_values'], $row['failed']);
+    }
+
+    public function testProductsOptionValuesKeyFailsWhenTheExpectedMapIsEmpty(): void
+    {
+        $row = $this->runSingleCase(
+            [
+                ['name' => 'present_products', 'input' => ['picks' => [['product_id' => 'TS-1', 'option_values' => ['Color' => 'Blue']]]]],
+                ['name' => 'present_suggestions', 'input' => ['suggestions' => ['Pick a size']]],
+            ],
+            ['products_option_values' => new \stdClass()]
+        );
+
+        $this->assertFalse($row['pass']);
+        $this->assertSame(['products_option_values'], $row['failed']);
+    }
+
+    public function testProductsOptionValuesKeyFailsWhenNoItemWasChecked(): void
+    {
+        $method = new ReflectionMethod(EvalRun::class, 'productsMatchOptionValues');
+
+        $result = $method->invoke(
+            $this->buildCommand(),
+            ['Color' => 'Blue'],
+            [['layout' => 'grid'], ['layout' => 'list', 'items' => []]]
+        );
+
+        $this->assertFalse($result);
     }
 
     public function testAllShippedCasesPassInFixtureMode(): void

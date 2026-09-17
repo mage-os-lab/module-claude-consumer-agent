@@ -494,18 +494,20 @@ class EvalRun extends Command
 
     private function productsMatchOptionValues(array $wanted, array $productsPayloads): bool
     {
-        if ($productsPayloads === []) {
+        if ($wanted === [] || $productsPayloads === []) {
             return false;
         }
+        $checked = 0;
         foreach ($productsPayloads as $payload) {
             foreach ((is_array($payload['items'] ?? null) ? $payload['items'] : []) as $item) {
                 $optionValues = is_array($item['option_values'] ?? null) ? $item['option_values'] : [];
                 if (!Products::matchesOptionValues($optionValues, $wanted)) {
                     return false;
                 }
+                $checked++;
             }
         }
-        return true;
+        return $checked > 0;
     }
 
     private function nonePresent(array $forbidden, array $actual): bool
