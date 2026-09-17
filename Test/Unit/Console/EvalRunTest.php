@@ -55,6 +55,59 @@ use Symfony\Component\Console\Tester\CommandTester;
 
 class EvalRunTest extends TestCase
 {
+    private array $tempCaseDirs = [];
+
+    protected function tearDown(): void
+    {
+        foreach ($this->tempCaseDirs as $dir) {
+            foreach (glob($dir . '/*.json') ?: [] as $file) {
+                unlink($file);
+            }
+            rmdir($dir);
+        }
+        $this->tempCaseDirs = [];
+    }
+
+    public function testProductsOptionValuesKeyPassesWhenEveryShownItemMatches(): void
+    {
+        $row = $this->runSingleCase(
+            [
+                ['name' => 'present_products', 'input' => ['picks' => [['product_id' => 'TS-1', 'option_values' => ['Color' => 'Blue']]]]],
+                ['name' => 'present_suggestions', 'input' => ['suggestions' => ['Pick a size']]],
+            ],
+            ['products_option_values' => ['color' => ' blue ']]
+        );
+
+        $this->assertTrue($row['pass'], implode(', ', $row['failed']));
+    }
+
+    public function testProductsOptionValuesKeyFailsWhenAShownItemDoesNotMatch(): void
+    {
+        $row = $this->runSingleCase(
+            [
+                ['name' => 'present_products', 'input' => ['picks' => [['product_id' => 'TS-1']]]],
+                ['name' => 'present_suggestions', 'input' => ['suggestions' => ['Pick a size']]],
+            ],
+            ['products_option_values' => ['Color' => 'Blue']]
+        );
+
+        $this->assertFalse($row['pass']);
+        $this->assertSame(['products_option_values'], $row['failed']);
+    }
+
+    public function testProductsOptionValuesKeyFailsWhenNoProductsCardWasShown(): void
+    {
+        $row = $this->runSingleCase(
+            [
+                ['name' => 'present_suggestions', 'input' => ['suggestions' => ['Show blue tees']]],
+            ],
+            ['products_option_values' => ['Color' => 'Blue']]
+        );
+
+        $this->assertFalse($row['pass']);
+        $this->assertSame(['products_option_values'], $row['failed']);
+    }
+
     public function testAllShippedCasesPassInFixtureMode(): void
     {
         $tester = new CommandTester($this->buildCommand());
@@ -108,6 +161,53 @@ class EvalRunTest extends TestCase
     private function casesDir(): string
     {
         return dirname(__DIR__, 2) . '/Eval/cases';
+    }
+
+    private function runSingleCase(array $tools, array $expected): array
+    {
+        $variant = static fn (string $id, string $size, string $color): array => [
+            'product_id' => $id,
+            'title' => 'Tee - ' . $size . ' ' . $color,
+            'price' => 22.0,
+            'currency' => 'USD',
+            'in_stock' => true,
+            'variant_of' => 'TS-1',
+            'option_values' => ['Size' => $size, 'Color' => $color],
+        ];
+        $case = [
+            'id' => 'products-option-values',
+            'priority' => 'low',
+            'state' => [
+                'seen_products' => [
+                    [
+                        'product_id' => 'TS-1',
+                        'title' => 'Tee',
+                        'price' => 22.0,
+                        'currency' => 'USD',
+                        'in_stock' => true,
+                        'options' => ['Size' => ['S', 'M'], 'Color' => ['Blue', 'Orange']],
+                    ],
+                    $variant('TS-1-S-BLUE', 'S', 'Blue'),
+                    $variant('TS-1-S-ORANGE', 'S', 'Orange'),
+                    $variant('TS-1-M-BLUE', 'M', 'Blue'),
+                ],
+            ],
+            'turns' => ['Show me the tee in blue'],
+            'rounds' => [[['text' => 'Here is the tee.', 'tools' => $tools]]],
+            'expected' => $expected,
+        ];
+        $dir = sys_get_temp_dir() . '/aiagent-eval-' . bin2hex(random_bytes(6));
+        mkdir($dir);
+        $this->tempCaseDirs[] = $dir;
+        file_put_contents($dir . '/products-option-values.json', (string)json_encode($case));
+
+        $tester = new CommandTester($this->buildCommand());
+        $tester->execute(['--cases' => $dir, '--json' => true]);
+        $decoded = json_decode($tester->getDisplay(), true);
+
+        $this->assertIsArray($decoded, $tester->getDisplay());
+        $this->assertCount(1, $decoded);
+        return $decoded[0];
     }
 
     private function passthroughTitleResolver(): StoreFactTitleResolverInterface
