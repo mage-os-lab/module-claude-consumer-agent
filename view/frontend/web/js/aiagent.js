@@ -469,6 +469,13 @@ function initAiAgentTranscript() {
         isStreaming() {
             return this.m.streaming === true;
         },
+        isVisible() {
+            return this.m.role !== 'assistant'
+                || this.m.streaming === true
+                || !!this.m.text
+                || (Array.isArray(this.m.cards) && this.m.cards.length > 0)
+                || !!this.m.notice;
+        },
         isSessionCap() {
             return this.m.sessionCap === true;
         },
