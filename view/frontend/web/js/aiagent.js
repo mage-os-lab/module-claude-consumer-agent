@@ -117,6 +117,17 @@ function stripAiAgentTags(html) {
     return new DOMParser().parseFromString(html || '', 'text/html').body.textContent || '';
 }
 
+function releaseAiAgentFocusOnOpen(dialog) {
+    if (!dialog || dialog.open) {
+        return null;
+    }
+    const release = (event) => {
+        event.target.blur();
+    };
+    dialog.addEventListener('focusin', release, {once: true});
+    return release;
+}
+
 function initAiAgentCartLine() {
     return {
         label() {
@@ -249,17 +260,22 @@ function initAiAgentDrawer() {
 function initAiAgentOverlay() {
     return {
         open: false,
-        show() {
+        focusRelease: null,
+        show(focus) {
             const store = Alpine.store('aiAgent');
             const scrollY = window.scrollY;
+            if (!focus) {
+                this.focusRelease = releaseAiAgentFocusOnOpen(this.$root);
+            }
             this.open = true;
             store.surface.open = true;
+            store.rememberOpen();
             if (!store.started) {
                 store.start();
             }
             this.$nextTick(() => {
                 const textarea = this.$el.querySelector('textarea');
-                if (textarea) {
+                if (focus && textarea) {
                     textarea.focus({preventScroll: true});
                 }
                 window.requestAnimationFrame(() => {
@@ -271,7 +287,12 @@ function initAiAgentOverlay() {
         },
         close() {
             this.open = false;
+            if (this.focusRelease) {
+                this.$root.removeEventListener('focusin', this.focusRelease);
+                this.focusRelease = null;
+            }
             Alpine.store('aiAgent').surface.open = false;
+            Alpine.store('aiAgent').forgetOpen();
             const launcher = document.getElementById('ai-agent-launcher');
             if (launcher) {
                 window.setTimeout(() => launcher.focus(), 250);
@@ -295,7 +316,7 @@ function initAiAgentOverlay() {
                 if (event.detail.page) {
                     store.page = Object.assign({}, store.page, event.detail.page);
                 }
-                this.show();
+                this.show(event.detail.focus !== false);
             },
             ['@keydown.escape.window']() {
                 if (this.open) {

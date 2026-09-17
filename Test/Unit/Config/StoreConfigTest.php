@@ -56,6 +56,7 @@ final class StoreConfigTest extends TestCase
         $this->assertSame($defaults->retentionDays, $config->retentionDays);
         $this->assertSame($defaults->showAiLabel, $config->showAiLabel);
         $this->assertSame($defaults->enabled, $config->enabled);
+        $this->assertSame($defaults->keepOpen, $config->keepOpen);
         $this->assertSame($defaults->policyIntentTerms, $config->policyIntentTerms);
         $this->assertSame($defaults->orderIntentTerms, $config->orderIntentTerms);
         $this->assertSame($defaults->productCard, $config->productCard);
@@ -402,6 +403,18 @@ final class StoreConfigTest extends TestCase
         $storeConfig = $this->buildStoreConfig($scopeConfig);
 
         $this->assertFalse($storeConfig->agent(1)->includeCoreFacts);
+    }
+
+    public function testKeepOpenReadsTheConfiguredFlag(): void
+    {
+        $scopeConfig = $this->createMock(ScopeConfigInterface::class);
+        $scopeConfig->method('getValue')->willReturnCallback(
+            static fn (string $path) => $path === 'ai_integration/aiagent/general/keep_open' ? '0' : null
+        );
+        $scopeConfig->method('isSetFlag')->willReturn(false);
+        $storeConfig = $this->buildStoreConfig($scopeConfig);
+
+        $this->assertFalse($storeConfig->agent(1)->keepOpen);
     }
 
     public function testApiKeyReturnsEmptyStringWhenValueIsNullOrEmpty(): void

@@ -353,6 +353,42 @@ $configJson = json_encode(
                 } catch (e) {
                     return;
                 }
+            },
+            rememberOpen() {
+                if (!this.config.keepOpen) {
+                    return;
+                }
+                try {
+                    if (window.sessionStorage) {
+                        window.sessionStorage.setItem('aiagent_open', '1');
+                    }
+                } catch (e) {
+                    return;
+                }
+            },
+            forgetOpen() {
+                if (!this.config.keepOpen) {
+                    return;
+                }
+                try {
+                    if (window.sessionStorage) {
+                        window.sessionStorage.removeItem('aiagent_open');
+                    }
+                } catch (e) {
+                    return;
+                }
+            },
+            shouldReopen() {
+                if (!this.config.keepOpen || !document.getElementById('ai-agent-shell')) {
+                    return false;
+                }
+                let stored = null;
+                try {
+                    stored = window.sessionStorage ? window.sessionStorage.getItem('aiagent_open') : null;
+                } catch (e) {
+                    return false;
+                }
+                return stored !== null && window.matchMedia('(min-width: 768px)').matches;
             }
         });
 
@@ -393,6 +429,12 @@ $configJson = json_encode(
             }
             store.mount();
         });
+        window.addEventListener('alpine:initialized', () => {
+            if (!Alpine.store('aiAgent').shouldReopen()) {
+                return;
+            }
+            window.dispatchEvent(new CustomEvent('ai-agent:open', {detail: {view: 'chat', focus: false}}));
+        }, {once: true});
     }, {once: true});
 </script>
 <?php $hyvaCsp->registerInlineScript() ?>

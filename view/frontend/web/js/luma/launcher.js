@@ -5,6 +5,7 @@ define([
     'use strict';
 
     return function (config, element) {
+        element.hidden = state.isOpen();
         state.isOpen.subscribe(function (open) {
             element.hidden = open;
         });

@@ -18,11 +18,15 @@ use PHPUnit\Framework\TestCase;
 
 final class AssistantTest extends TestCase
 {
-    private function buildAssistant(string $fullActionName = 'cms_index_index'): Assistant
+    private function buildAssistant(string $fullActionName = 'cms_index_index', array $configValues = []): Assistant
     {
         $scopeConfig = $this->createMock(ScopeConfigInterface::class);
-        $scopeConfig->method('getValue')->willReturn(null);
-        $scopeConfig->method('isSetFlag')->willReturn(false);
+        $scopeConfig->method('getValue')->willReturnCallback(
+            static fn (string $path) => $configValues[$path] ?? null
+        );
+        $scopeConfig->method('isSetFlag')->willReturnCallback(
+            static fn (string $path): bool => (bool)($configValues[$path] ?? false)
+        );
         $store = $this->createMock(StoreInterface::class);
         $store->method('getId')->willReturn(1);
         $store->method('getName')->willReturn('');
@@ -55,6 +59,7 @@ final class AssistantTest extends TestCase
                 'surface',
                 'page',
                 'headerIconView',
+                'keepOpen',
                 'streaming',
                 'firstByteThreshold',
                 'assistantName',
@@ -68,6 +73,22 @@ final class AssistantTest extends TestCase
             ],
             array_keys($snapshot)
         );
+    }
+
+    public function testSnapshotKeepOpenIsTrueWhenTheConfigValueIsOne(): void
+    {
+        $snapshot = $this->buildAssistant('cms_index_index', ['ai_integration/aiagent/general/keep_open' => '1'])
+            ->snapshot();
+
+        $this->assertTrue($snapshot['keepOpen']);
+    }
+
+    public function testSnapshotKeepOpenIsFalseWhenTheConfigValueIsZero(): void
+    {
+        $snapshot = $this->buildAssistant('cms_index_index', ['ai_integration/aiagent/general/keep_open' => '0'])
+            ->snapshot();
+
+        $this->assertFalse($snapshot['keepOpen']);
     }
 
     public function testSnapshotCardsDefaultsAllShown(): void

@@ -29,6 +29,7 @@ final class Assistant implements ArgumentInterface
             'surface' => $this->surfaceResolver->resolve($this->storeId(), null),
             'page' => $this->pageDetector->detect(),
             'headerIconView' => $config->headerIconView,
+            'keepOpen' => $config->keepOpen,
             'streaming' => $config->streaming,
             'firstByteThreshold' => $config->firstByteThreshold,
             'assistantName' => $config->assistantName,

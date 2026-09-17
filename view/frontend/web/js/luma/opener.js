@@ -44,7 +44,7 @@ define([
                 });
                 return panel();
             }).then(function (view) {
-                view.openPanel(options.opener || null);
+                view.openPanel(options.opener || null, options.focus !== false);
                 return view;
             }).catch(function (error) {
                 console.error(error);

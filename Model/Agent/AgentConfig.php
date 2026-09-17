@@ -92,6 +92,7 @@ final class AgentConfig
         public readonly bool $enabled = false,
         public readonly string $surfaceMode = 'overlay',
         public readonly bool $launcherEnabled = true,
+        public readonly bool $keepOpen = true,
         public readonly bool $productBlockEnabled = true,
         public readonly string $headerIconView = 'cart',
         public readonly bool $enableCart = true,
