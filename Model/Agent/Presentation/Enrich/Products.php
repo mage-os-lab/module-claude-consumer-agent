@@ -14,16 +14,34 @@ final class Products
 
     private const MAX_EXPANDED_FAMILIES = 2;
 
+    private const NOTE_VALUES_MAX_CHARS = 120;
+
     public function __construct(
         private readonly \Psr\Log\LoggerInterface $logger,
         private readonly \MageOS\ClaudeConsumerAgent\Model\Agent\Fencing\Sanitizer $sanitizer
     ) {
     }
 
+    public static function matchesOptionValues(array $optionValues, array $wanted): bool
+    {
+        $normalized = [];
+        foreach ($optionValues as $label => $value) {
+            $normalized[self::normalizeOption((string)$label)] = self::normalizeOption((string)$value);
+        }
+        foreach ($wanted as $label => $value) {
+            $expected = self::normalizeOption((string)$value);
+            if (($normalized[self::normalizeOption((string)$label)] ?? null) !== $expected) {
+                return false;
+            }
+        }
+        return true;
+    }
+
     public function __invoke(array $input, EnrichmentContext $ctx): array
     {
         $items = [];
         $dropped = [];
+        $unmatched = [];
         $expandedFamilies = 0;
         foreach ((is_array($input['picks'] ?? null) ? $input['picks'] : []) as $pick) {
             $productId = (string)($pick['product_id'] ?? '');
@@ -33,20 +51,28 @@ final class Products
                 continue;
             }
             $reason = $pick['reason'] ?? null;
+            $wanted = is_array($pick['option_values'] ?? null) ? $pick['option_values'] : [];
             $options = is_array($product['options'] ?? null) ? $product['options'] : [];
             $variantOf = $product['variant_of'] ?? null;
             if ($options !== [] && ($variantOf === null || $variantOf === '')) {
                 $cachedVariants = $this->cachedVariants($productId, $ctx);
                 if ($cachedVariants !== null) {
-                    foreach ($this->buildVariantItems($cachedVariants, $product, $reason) as $variantItem) {
+                    $matchingVariants = $this->matchingVariants($cachedVariants, $wanted);
+                    if ($matchingVariants === []) {
+                        $unmatched[] = $this->noteUnmatched($product, $wanted, $ctx);
+                    }
+                    foreach ($this->buildVariantItems($matchingVariants, $product, $reason) as $variantItem) {
                         $items[] = $variantItem;
                     }
                     continue;
                 }
                 if ($expandedFamilies < self::MAX_EXPANDED_FAMILIES) {
-                    $variantItems = $this->expandFamily($productId, $product, $reason, $ctx);
+                    $variantItems = $this->expandFamily($productId, $product, $reason, $wanted, $ctx);
                     if ($variantItems !== null) {
                         $expandedFamilies++;
+                        if ($variantItems === []) {
+                            $unmatched[] = $this->noteUnmatched($product, $wanted, $ctx);
+                        }
                         foreach ($variantItems as $variantItem) {
                             $items[] = $variantItem;
                         }
@@ -66,6 +92,11 @@ final class Products
                 'option_values' => is_array($product['option_values'] ?? null) ? $product['option_values'] : [],
                 'variant_of' => $variantOf,
             ];
+        }
+        if ($items === [] && $unmatched !== []) {
+            throw new PresentationRefused(
+                'No variant matches the requested option_values: ' . implode('; ', $unmatched) . '.'
+            );
         }
         if ($items === []) {
             throw new PresentationRefused(
@@ -91,8 +122,13 @@ final class Products
         return $payload;
     }
 
-    private function expandFamily(string $productId, array $product, mixed $reason, EnrichmentContext $ctx): ?array
-    {
+    private function expandFamily(
+        string $productId,
+        array $product,
+        mixed $reason,
+        array $wanted,
+        EnrichmentContext $ctx
+    ): ?array {
         try {
             $details = $ctx->backend->getProductDetails($ctx->context, $productId);
         } catch (\Throwable $exception) {
@@ -114,7 +150,11 @@ final class Products
             $variantRecords[] = $variant->toArray();
         }
         $ctx->state->rememberProducts($variantRecords);
-        $items = $this->buildVariantItems($variantRecords, $product, $reason);
+        $matchingVariants = $this->matchingVariants($variantRecords, $wanted);
+        if ($matchingVariants === []) {
+            return [];
+        }
+        $items = $this->buildVariantItems($matchingVariants, $product, $reason);
         $title = $this->sanitizer->text((string)($product['title'] ?? ''), self::NOTE_TITLE_MAX_CHARS);
         $ctx->notes[] = 'Expanded ' . $title . ' into ' . count($items) . ' variants.';
         return $items;
@@ -129,6 +169,34 @@ final class Products
             }
         }
         return $variants !== [] ? $variants : null;
+    }
+
+    private function matchingVariants(array $variantRecords, array $wanted): array
+    {
+        return array_values(array_filter(
+            $variantRecords,
+            static fn (array $record): bool => self::matchesOptionValues(
+                is_array($record['option_values'] ?? null) ? $record['option_values'] : [],
+                $wanted
+            )
+        ));
+    }
+
+    private function noteUnmatched(array $product, array $wanted, EnrichmentContext $ctx): string
+    {
+        $pairs = [];
+        foreach ($wanted as $label => $value) {
+            $pairs[] = $label . ': ' . $value;
+        }
+        $title = $this->sanitizer->text((string)($product['title'] ?? ''), self::NOTE_TITLE_MAX_CHARS);
+        $values = $this->sanitizer->text(implode(', ', $pairs), self::NOTE_VALUES_MAX_CHARS);
+        $ctx->notes[] = 'No variant of ' . $title . ' matches ' . $values . ', so it is not on the card.';
+        return $title . ' (' . $values . ')';
+    }
+
+    private static function normalizeOption(string $text): string
+    {
+        return mb_strtolower(trim($text));
     }
 
     private function buildVariantItems(array $variantRecords, array $product, mixed $reason): array
