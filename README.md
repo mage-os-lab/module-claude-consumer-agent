@@ -50,16 +50,17 @@ part without a change to the base module.
   based themes need no Hyvä package.
 - An Anthropic API key with access to the configured model
 
-## Installation (development only)
-
-The package is not on Packagist yet. Clone it into `app/code`:
+## Installation
 
 ```bash
 cd <magento root>
-git clone git@github.com:mage-os-lab/module-claude-consumer-agent.git app/code/MageOS/ClaudeConsumerAgent
+composer require mage-os/module-claude-consumer-agent
 bin/magento module:enable MageOS_ClaudeConsumerAgent
 bin/magento setup:upgrade
 ```
+
+For development, clone the repository into
+`app/code/MageOS/ClaudeConsumerAgent` instead of the `composer require`.
 
 `setup:upgrade` creates the tables `aiagent_session`, `aiagent_message` and
 `aiagent_turn`.
