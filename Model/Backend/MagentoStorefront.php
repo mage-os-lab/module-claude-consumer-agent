@@ -179,7 +179,7 @@ final class MagentoStorefront implements StorefrontBackendInterface
             $variantData = $variantProduct->toArray();
             $variantData['option_values'] = $this->variantOptionValues($attributes, $child);
             $variantData['variant_of'] = $family->getProductId();
-            $variantData['url'] = $family->getUrl();
+            $variantData['url'] = $this->variantUrl($family->getUrl(), $attributes, $child);
             $variantData['options'] = [];
             $variant = Product::fromArray($variantData);
             $variants[] = $variant;
@@ -210,6 +210,32 @@ final class MagentoStorefront implements StorefrontBackendInterface
         }
 
         return $details;
+    }
+
+    private function variantUrl(?string $familyUrl, array $attributes, MagentoProductInterface $child): ?string
+    {
+        if ($familyUrl === null || $familyUrl === '') {
+            return $familyUrl;
+        }
+
+        $params = [];
+        foreach ($attributes as $attribute) {
+            $code = (string)($attribute['attribute_code'] ?? '');
+            if ($code === '') {
+                continue;
+            }
+            $value = $child->getData($code);
+            if ($value === null || $value === '') {
+                continue;
+            }
+            $params[$code] = (string)$value;
+        }
+        if ($params === []) {
+            return $familyUrl;
+        }
+
+        $separator = str_contains($familyUrl, '?') ? '&' : '?';
+        return $familyUrl . $separator . http_build_query($params);
     }
 
     private function variantOptionValues(array $attributes, MagentoProductInterface $child): array
