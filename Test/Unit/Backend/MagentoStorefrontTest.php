@@ -863,6 +863,42 @@ final class MagentoStorefrontTest extends TestCase
         $this->assertSame([5.0, 2.0], $quantities);
     }
 
+    public function testGetProductDetailsGivesEveryVariantTheFamilyUrl(): void
+    {
+        $child = $this->magentoProduct(1001, 'Variant Oak', 10.0);
+        $child->method('getProductUrl')->willReturn('https://example.com/catalog/product/view/id/1001/s/variant-oak/');
+
+        $typeInstance = $this->createMock(Configurable::class);
+        $typeInstance->method('getConfigurableAttributesAsArray')->willReturn([]);
+        $typeInstance->method('getUsedProducts')->willReturn([$child]);
+
+        $parent = $this->createMock(MagentoProduct::class);
+        $parent->method('getId')->willReturn(900);
+        $parent->method('getName')->willReturn('Configurable Parent');
+        $parent->method('getTypeId')->willReturn(Configurable::TYPE_CODE);
+        $parent->method('getPriceInfo')->willReturn($this->priceInfo(10.0));
+        $parent->method('getProductUrl')->willReturn('https://example.com/configurable-parent.html');
+        $parent->method('getOptions')->willReturn([]);
+        $parent->method('getAttributeText')->willReturn(false);
+        $parent->method('getTypeInstance')->willReturn($typeInstance);
+        $parent->method('getWebsiteIds')->willReturn([1]);
+        $parent->method('getStatus')->willReturn(Status::STATUS_ENABLED);
+        $parent->method('getVisibility')->willReturn(Visibility::VISIBILITY_BOTH);
+        $parent->method('getAttributes')->willReturn([]);
+
+        $productRepository = $this->createMock(ProductRepositoryInterface::class);
+        $productRepository->method('getById')->willReturn($parent);
+
+        $storefront = $this->buildStorefront(['productRepository' => $productRepository]);
+
+        $details = $storefront->getProductDetails($this->context(), '900');
+
+        $this->assertNotNull($details);
+        $variants = $details->getVariants();
+        $this->assertCount(1, $variants);
+        $this->assertSame('https://example.com/configurable-parent.html', $variants[0]->getUrl());
+    }
+
     public function testGetProductDetailsSetsNoteWhenVariantsAreCapped(): void
     {
         $children = [];

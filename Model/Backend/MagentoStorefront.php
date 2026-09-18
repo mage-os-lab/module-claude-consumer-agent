@@ -179,6 +179,7 @@ final class MagentoStorefront implements StorefrontBackendInterface
             $variantData = $variantProduct->toArray();
             $variantData['option_values'] = $this->variantOptionValues($attributes, $child);
             $variantData['variant_of'] = $family->getProductId();
+            $variantData['url'] = $family->getUrl();
             $variantData['options'] = [];
             $variant = Product::fromArray($variantData);
             $variants[] = $variant;
