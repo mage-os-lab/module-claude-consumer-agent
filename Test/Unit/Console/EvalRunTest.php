@@ -136,6 +136,75 @@ class EvalRunTest extends TestCase
         $this->assertFalse($result);
     }
 
+    public function testBrandSpreadKeysPassWhenPicksSpanDistinctBrandsWithinCap(): void
+    {
+        $row = $this->runBrandCase(
+            [
+                ['product_id' => 'BR-1', 'title' => 'Chair One', 'price' => 100.0, 'brand' => 'Steelform'],
+                ['product_id' => 'BR-2', 'title' => 'Chair Two', 'price' => 120.0, 'brand' => 'Aerodesk'],
+                ['product_id' => 'BR-3', 'title' => 'Chair Three', 'price' => 140.0, 'brand' => 'Kestrel'],
+            ],
+            ['BR-1', 'BR-2', 'BR-3'],
+            ['products_min_distinct_brands' => 3, 'products_max_brand_share' => 1]
+        );
+
+        $this->assertTrue($row['pass'], implode(', ', $row['failed']));
+    }
+
+    public function testBrandSpreadKeysFailWhenAllPicksShareOneBrand(): void
+    {
+        $row = $this->runBrandCase(
+            [
+                ['product_id' => 'BR-1', 'title' => 'Chair One', 'price' => 100.0, 'brand' => 'Steelform'],
+                ['product_id' => 'BR-2', 'title' => 'Chair Two', 'price' => 120.0, 'brand' => 'Steelform'],
+                ['product_id' => 'BR-3', 'title' => 'Chair Three', 'price' => 140.0, 'brand' => 'Steelform'],
+            ],
+            ['BR-1', 'BR-2', 'BR-3'],
+            ['products_min_distinct_brands' => 2, 'products_max_brand_share' => 1]
+        );
+
+        $this->assertFalse($row['pass']);
+        $this->assertSame(['products_min_distinct_brands', 'products_max_brand_share'], $row['failed']);
+    }
+
+    public function testBrandSpreadKeysIgnorePicksWithNoBrandRecord(): void
+    {
+        $row = $this->runBrandCase(
+            [
+                ['product_id' => 'BR-1', 'title' => 'Chair One', 'price' => 100.0, 'brand' => 'Steelform'],
+                ['product_id' => 'BR-2', 'title' => 'Chair Two', 'price' => 120.0, 'brand' => 'Aerodesk'],
+                ['product_id' => 'BR-3', 'title' => 'Chair Three', 'price' => 140.0],
+            ],
+            ['BR-1', 'BR-2', 'BR-3'],
+            ['products_min_distinct_brands' => 2, 'products_max_brand_share' => 1]
+        );
+
+        $this->assertTrue($row['pass'], implode(', ', $row['failed']));
+    }
+
+    public function testTableMarksARubricOnlyCaseAsPassManualNotAPlainPass(): void
+    {
+        $case = [
+            'id' => 'rubric-only',
+            'priority' => 'low',
+            'state' => [],
+            'turns' => ['Say hello'],
+            'rounds' => [[['text' => 'Hello there.']]],
+            'expected' => ['rubric' => 'A human judges the tone of the reply.'],
+        ];
+        $dir = sys_get_temp_dir() . '/aiagent-eval-' . bin2hex(random_bytes(6));
+        mkdir($dir);
+        $this->tempCaseDirs[] = $dir;
+        file_put_contents($dir . '/rubric-only.json', (string)json_encode($case));
+
+        $tester = new CommandTester($this->buildCommand());
+        $tester->execute(['--cases' => $dir]);
+        $display = $tester->getDisplay();
+
+        $this->assertStringContainsString('PASS (manual)', $display);
+        $this->assertDoesNotMatchRegularExpression('/\|\s*PASS\s*\|/', $display);
+    }
+
     public function testAllShippedCasesPassInFixtureMode(): void
     {
         $tester = new CommandTester($this->buildCommand());
@@ -228,6 +297,38 @@ class EvalRunTest extends TestCase
         mkdir($dir);
         $this->tempCaseDirs[] = $dir;
         file_put_contents($dir . '/products-option-values.json', (string)json_encode($case));
+
+        $tester = new CommandTester($this->buildCommand());
+        $tester->execute(['--cases' => $dir, '--json' => true]);
+        $decoded = json_decode($tester->getDisplay(), true);
+
+        $this->assertIsArray($decoded, $tester->getDisplay());
+        $this->assertCount(1, $decoded);
+        return $decoded[0];
+    }
+
+    private function runBrandCase(array $catalog, array $pickIds, array $expected): array
+    {
+        $picks = array_map(
+            static fn (string $productId): array => ['product_id' => $productId, 'reason' => 'A pick.'],
+            $pickIds
+        );
+        $tools = [
+            ['name' => 'present_products', 'input' => ['picks' => $picks]],
+            ['name' => 'present_suggestions', 'input' => ['suggestions' => ['Narrow it down']]],
+        ];
+        $case = [
+            'id' => 'brand-spread',
+            'priority' => 'low',
+            'state' => ['seen_products' => $catalog],
+            'turns' => ['Show me some chairs'],
+            'rounds' => [[['text' => 'Here are a few options.', 'tools' => $tools]]],
+            'expected' => $expected,
+        ];
+        $dir = sys_get_temp_dir() . '/aiagent-eval-' . bin2hex(random_bytes(6));
+        mkdir($dir);
+        $this->tempCaseDirs[] = $dir;
+        file_put_contents($dir . '/brand-spread.json', (string)json_encode($case));
 
         $tester = new CommandTester($this->buildCommand());
         $tester->execute(['--cases' => $dir, '--json' => true]);

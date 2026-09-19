@@ -457,6 +457,8 @@ class EvalRun extends Command
             'reply_omits' => $this->noneSubstrings((array)$value, $replyText),
             'max_tool_calls' => count($toolCalls) <= (int)$value,
             'products_option_values' => $this->productsMatchOptionValues((array)$value, $productsPayloads),
+            'products_min_distinct_brands' => $this->productsMinDistinctBrands((int)$value, $productsPayloads),
+            'products_max_brand_share' => $this->productsMaxBrandShare((int)$value, $productsPayloads),
             default => true,
         };
     }
@@ -510,6 +512,36 @@ class EvalRun extends Command
         return $checked > 0;
     }
 
+    private function productsMinDistinctBrands(int $minimum, array $productsPayloads): bool
+    {
+        return count(array_unique($this->pickedBrands($productsPayloads))) >= $minimum;
+    }
+
+    private function productsMaxBrandShare(int $maximum, array $productsPayloads): bool
+    {
+        foreach (array_count_values($this->pickedBrands($productsPayloads)) as $count) {
+            if ($count > $maximum) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    private function pickedBrands(array $productsPayloads): array
+    {
+        $brands = [];
+        foreach ($productsPayloads as $payload) {
+            foreach ((is_array($payload['items'] ?? null) ? $payload['items'] : []) as $item) {
+                $product = is_array($item['product'] ?? null) ? $item['product'] : [];
+                $brand = isset($product['brand']) ? trim((string)$product['brand']) : '';
+                if ($brand !== '') {
+                    $brands[] = $brand;
+                }
+            }
+        }
+        return $brands;
+    }
+
     private function nonePresent(array $forbidden, array $actual): bool
     {
         foreach ($forbidden as $item) {
@@ -551,10 +583,14 @@ class EvalRun extends Command
             if ($result['manual'] !== []) {
                 $notes[] = 'rubric: judge: manual';
             }
+            $status = 'FAIL';
+            if ($result['pass']) {
+                $status = $result['manual'] !== [] ? 'PASS (manual)' : 'PASS';
+            }
             $table->addRow([
                 $result['id'],
                 $result['priority'],
-                $result['pass'] ? 'PASS' : 'FAIL',
+                $status,
                 implode(', ', $notes),
             ]);
         }

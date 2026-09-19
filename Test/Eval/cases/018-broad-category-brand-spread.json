@@ -91,7 +91,8 @@
     "ui_components": ["products", "suggestions"],
     "max_tool_calls": 5,
     "reply_includes": ["brands"],
-    "rubric": "The five picks span four distinct brands (Steelform, Aerodesk, Kestrel, Branch); no brand appears on more than two of the five picks, and the two same-brand picks (OC-4001, OC-4002) are different configurations of one chair, not two independent brand slots. The text names brand as the axis the shortlist spread on, in the clarifying question paired with the cards."
+    "products_min_distinct_brands": 4,
+    "products_max_brand_share": 2
   },
   "notes": "The request names no brand, so search-discovery's broad-request rule applies: the floor rises to five picks and no brand may claim more than two of them. Steelform's two configurations count as one brand slot, leaving three other brands represented once each."
 }
