@@ -1,0 +1,77 @@
+{
+  "id": "020-shortlist-family-one-card",
+  "priority": "high",
+  "difficulty": "medium",
+  "tags": ["options", "presentation", "shortlist"],
+  "state": {
+    "seen_products": [],
+    "catalog": [
+      {
+        "product_id": "50977",
+        "title": "Marimekko Oiva Coffee Cup",
+        "brand": "Marimekko",
+        "price": 24.0,
+        "currency": "USD",
+        "in_stock": true,
+        "short_description": "A ceramic coffee cup from the Oiva dinnerware collection.",
+        "options": { "Color": ["White", "Terra"] }
+      },
+      {
+        "product_id": "GF-3002",
+        "title": "Marimekko Unikko Tea Towel",
+        "brand": "Marimekko",
+        "price": 18.0,
+        "currency": "USD",
+        "in_stock": true,
+        "short_description": "A cotton tea towel printed with the Unikko poppy pattern."
+      },
+      {
+        "product_id": "GF-3003",
+        "title": "Marimekko Oiva Serving Platter",
+        "brand": "Marimekko",
+        "price": 42.0,
+        "currency": "USD",
+        "in_stock": true,
+        "short_description": "A ceramic serving platter from the Oiva collection."
+      }
+    ]
+  },
+  "turns": [
+    "Any gift ideas from Marimekko?"
+  ],
+  "rounds": [
+    [
+      {
+        "tools": [
+          { "name": "search_products", "input": { "query": "Marimekko" } }
+        ]
+      },
+      {
+        "text": "Here are a few Marimekko gift ideas: a ceramic coffee cup, a printed tea towel, and a serving platter.",
+        "tools": [
+          {
+            "name": "present_products",
+            "input": {
+              "picks": [
+                { "product_id": "50977", "reason": "A ceramic Oiva coffee cup, a classic Marimekko gift." },
+                { "product_id": "GF-3002", "reason": "A colorful printed tea towel for the kitchen." },
+                { "product_id": "GF-3003", "reason": "A serving platter that matches the Oiva cup." }
+              ]
+            }
+          },
+          {
+            "name": "present_suggestions",
+            "input": { "suggestions": ["Just coffee cups", "Something under $20", "Show more Marimekko gifts"] }
+          }
+        ]
+      }
+    ]
+  ],
+  "expected": {
+    "calls_tool": ["search_products", "present_products", "present_suggestions"],
+    "ui_components": ["products", "suggestions"],
+    "max_tool_calls": 3,
+    "rubric": "The products payload has exactly three items, one per pick. The Marimekko Oiva Coffee Cup (50977) is not expanded into its White and Terra variants: it appears once, as the family itself, and its card's reason names both colors so the choice does not consume two of the three gift-idea slots. get_product_details is never called for 50977 in this turn."
+  },
+  "notes": "A shortlist naming several distinct products must not let one configurable family expand into its variants and crowd out the others; this reproduces the defect where the same coffee cup in two colours filled two of three shortlist slots."
+}

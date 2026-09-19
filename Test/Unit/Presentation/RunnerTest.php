@@ -441,7 +441,7 @@ final class RunnerTest extends TestCase
         $this->assertSame('Fits a family of four', $items[0]['reason']);
     }
 
-    public function testFamilyExpansionIsCappedAtTwoFamiliesPerPresentation(): void
+    public function testShortlistOfFamiliesEachCollapseToOneCardWithAnOptionsSummary(): void
     {
         $family = static fn (string $id, string $title): array => [
             'product_id' => $id,
@@ -450,25 +450,8 @@ final class RunnerTest extends TestCase
             'currency' => 'USD',
             'options' => ['Size' => ['Small', 'Large']],
         ];
-        $variantFor = static fn (string $parentId, string $suffix): Product => new Product(
-            productId: $parentId . '-' . $suffix,
-            title: 'Variant',
-            price: 199.0,
-            currency: 'USD',
-            optionValues: ['Size' => $suffix],
-            variantOf: $parentId
-        );
         $backend = $this->createMock(StorefrontBackendInterface::class);
-        $backend->expects($this->exactly(2))->method('getProductDetails')->willReturnCallback(
-            static function (SessionContext $ctx, string $productId) use ($family, $variantFor): ProductDetails {
-                return ProductDetails::fromProduct(
-                    Product::fromArray($family($productId, 'Family ' . $productId)),
-                    null,
-                    [],
-                    [$variantFor($productId, 'a'), $variantFor($productId, 'b')]
-                );
-            }
-        );
+        $backend->expects($this->never())->method('getProductDetails');
         $runner = $this->buildRunner($backend);
         $state = $this->stateWithSeenProducts([
             $family('p-500', 'Trail Tent'),
@@ -480,7 +463,7 @@ final class RunnerTest extends TestCase
             'present_products',
             [
                 'picks' => [
-                    ['product_id' => 'p-500'],
+                    ['product_id' => 'p-500', 'reason' => 'Roomy for four'],
                     ['product_id' => 'p-600'],
                     ['product_id' => 'p-700'],
                 ],
@@ -492,11 +475,44 @@ final class RunnerTest extends TestCase
         $this->assertFalse($outcome->isError);
         $items = $outcome->events[0]->data['payload']['items'];
         $this->assertSame(
-            ['p-500-a', 'p-500-b', 'p-600-a', 'p-600-b', 'p-700'],
+            ['p-500', 'p-600', 'p-700'],
             array_column(array_column($items, 'product'), 'product_id')
         );
-        $this->assertStringContainsString('capped at 2 families', $outcome->resultText);
-        $this->assertStringContainsString('Trail Pack', $outcome->resultText);
+        $this->assertSame('Roomy for four Available in Small, Large.', $items[0]['reason']);
+        $this->assertSame('Available in Small, Large.', $items[1]['reason']);
+        $this->assertNull($items[0]['variant_of']);
+    }
+
+    public function testShortlistOfSimpleProductsWithNoOptionsIsUnchanged(): void
+    {
+        $backend = $this->createMock(StorefrontBackendInterface::class);
+        $backend->expects($this->never())->method('getProductDetails');
+        $runner = $this->buildRunner($backend);
+        $state = $this->stateWithSeenProducts([
+            ['product_id' => 'p-100', 'title' => 'Tent', 'price' => 149.0, 'currency' => 'USD'],
+            ['product_id' => 'p-200', 'title' => 'Stove', 'price' => 89.0, 'currency' => 'USD'],
+        ]);
+
+        $outcome = $runner->run(
+            'present_products',
+            [
+                'picks' => [
+                    ['product_id' => 'p-100', 'reason' => 'Fits a family of four'],
+                    ['product_id' => 'p-200', 'reason' => 'Boils water fast'],
+                ],
+            ],
+            $this->context(),
+            $state
+        );
+
+        $this->assertFalse($outcome->isError);
+        $items = $outcome->events[0]->data['payload']['items'];
+        $this->assertSame(
+            ['p-100', 'p-200'],
+            array_column(array_column($items, 'product'), 'product_id')
+        );
+        $this->assertSame('Fits a family of four', $items[0]['reason']);
+        $this->assertSame('Boils water fast', $items[1]['reason']);
     }
 
     private function colorFamilySeenProduct(): array

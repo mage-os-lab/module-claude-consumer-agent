@@ -200,9 +200,21 @@ final class StaticSystemTest extends TestCase
     {
         $text = $this->assemble($this->buildConfig(), $this->realSkillRegistry()->indexBlock());
         $this->assertStringContainsString(
-            'Presenting the family is enough: the card expands it into its variants. When the customer '
-                . "already named option values, pass them in the pick's option_values so the card shows "
+            "already named option values, pass them in the pick's option_values so the card shows "
                 . 'only the matching variants.',
+            $text
+        );
+    }
+
+    public function testShortlistFamilyDoesNotExpandRuleIsPresent(): void
+    {
+        $text = $this->assemble($this->buildConfig(), $this->realSkillRegistry()->indexBlock());
+        $this->assertStringContainsString(
+            'Presenting the family is enough when it is the only pick in the call: the card expands it '
+                . 'into its variants. When the call presents it alongside other products, keep it to one '
+                . 'card there too: name its available options in the reason instead of expanding into '
+                . 'variants, so it does not crowd out the other products; the customer can ask about that '
+                . 'one product afterward to see them.',
             $text
         );
     }

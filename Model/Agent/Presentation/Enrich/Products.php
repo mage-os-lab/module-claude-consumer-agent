@@ -12,8 +12,6 @@ final class Products
 
     private const NOTE_TITLE_MAX_CHARS = 80;
 
-    private const MAX_EXPANDED_FAMILIES = 2;
-
     private const NOTE_VALUES_MAX_CHARS = 120;
 
     public function __construct(
@@ -42,8 +40,9 @@ final class Products
         $items = [];
         $dropped = [];
         $unmatched = [];
-        $expandedFamilies = 0;
-        foreach ((is_array($input['picks'] ?? null) ? $input['picks'] : []) as $pick) {
+        $picks = is_array($input['picks'] ?? null) ? $input['picks'] : [];
+        $isShortlist = count($picks) > 1;
+        foreach ($picks as $pick) {
             $productId = (string)($pick['product_id'] ?? '');
             $product = $ctx->state->seen($productId);
             if ($product === null) {
@@ -54,7 +53,12 @@ final class Products
             $wanted = is_array($pick['option_values'] ?? null) ? $pick['option_values'] : [];
             $options = is_array($product['options'] ?? null) ? $product['options'] : [];
             $variantOf = $product['variant_of'] ?? null;
-            if ($options !== [] && ($variantOf === null || $variantOf === '')) {
+            $isFamily = $options !== [] && ($variantOf === null || $variantOf === '');
+            if ($isFamily && $isShortlist && $wanted === []) {
+                $items[] = $this->collapsedFamilyItem($product, $reason, $options);
+                continue;
+            }
+            if ($isFamily) {
                 $cachedVariants = $this->cachedVariants($productId, $ctx);
                 if ($cachedVariants !== null) {
                     $matchingVariants = $this->matchingVariants($cachedVariants, $wanted);
@@ -66,24 +70,15 @@ final class Products
                     }
                     continue;
                 }
-                if ($expandedFamilies < self::MAX_EXPANDED_FAMILIES) {
-                    $variantItems = $this->expandFamily($productId, $product, $reason, $wanted, $ctx);
-                    if ($variantItems !== null) {
-                        $expandedFamilies++;
-                        if ($variantItems === []) {
-                            $unmatched[] = $this->noteUnmatched($productId, $product, $wanted, $ctx);
-                        }
-                        foreach ($variantItems as $variantItem) {
-                            $items[] = $variantItem;
-                        }
-                        continue;
+                $variantItems = $this->expandFamily($productId, $product, $reason, $wanted, $ctx);
+                if ($variantItems !== null) {
+                    if ($variantItems === []) {
+                        $unmatched[] = $this->noteUnmatched($productId, $product, $wanted, $ctx);
                     }
-                } else {
-                    $ctx->notes[] = 'Variant expansion is capped at ' . self::MAX_EXPANDED_FAMILIES
-                        . ' families per set; ' . $this->sanitizer->text(
-                            (string)($product['title'] ?? ''),
-                            self::NOTE_TITLE_MAX_CHARS
-                        ) . ' is shown without its variants.';
+                    foreach ($variantItems as $variantItem) {
+                        $items[] = $variantItem;
+                    }
+                    continue;
                 }
             }
             $items[] = [
@@ -121,6 +116,43 @@ final class Products
             $payload = ['title' => $input['title']] + $payload;
         }
         return $payload;
+    }
+
+    private function collapsedFamilyItem(array $product, mixed $reason, array $options): array
+    {
+        $summary = $this->optionsSummary($options);
+        $note = $summary !== '' ? 'Available in ' . $summary . '.' : '';
+        $hasReason = is_string($reason) && $reason !== '';
+        $combinedReason = match (true) {
+            $hasReason && $note !== '' => $reason . ' ' . $note,
+            $note !== '' => $note,
+            default => $reason,
+        };
+        return [
+            'product' => $product,
+            'reason' => $combinedReason,
+            'option_values' => is_array($product['option_values'] ?? null) ? $product['option_values'] : [],
+            'variant_of' => null,
+        ];
+    }
+
+    private function optionsSummary(array $options): string
+    {
+        $multiLabel = count($options) > 1;
+        $phrases = [];
+        foreach ($options as $label => $values) {
+            if (!is_array($values) || $values === []) {
+                continue;
+            }
+            $joined = $this->sanitizer->text(
+                implode(', ', array_map('strval', $values)),
+                self::NOTE_VALUES_MAX_CHARS
+            );
+            $phrases[] = $multiLabel
+                ? $this->sanitizer->text((string)$label, self::NOTE_TITLE_MAX_CHARS) . ' (' . $joined . ')'
+                : $joined;
+        }
+        return implode(', ', $phrases);
     }
 
     private function expandFamily(
