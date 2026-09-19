@@ -1,0 +1,82 @@
+{
+  "id": "019-open-gift-category-spread",
+  "priority": "high",
+  "difficulty": "medium",
+  "tags": ["gift", "category-spread", "broad-request"],
+  "state": {
+    "seen_products": [],
+    "catalog": [
+      {
+        "product_id": "GF-2001",
+        "title": "Amber Glass Candle Holder",
+        "brand": "Kestrel",
+        "price": 28.0,
+        "currency": "USD",
+        "in_stock": true,
+        "short_description": "A hand-blown amber glass candle holder.",
+        "category_ids": ["2100"]
+      },
+      {
+        "product_id": "GF-2002",
+        "title": "Marble Ceramic Mug Set",
+        "brand": "Ashcroft",
+        "price": 34.0,
+        "currency": "USD",
+        "in_stock": true,
+        "short_description": "A two-piece marbled ceramic mug set.",
+        "category_ids": ["2200"]
+      },
+      {
+        "product_id": "GF-2003",
+        "title": "Wool Throw Blanket",
+        "brand": "Fernwood",
+        "price": 89.0,
+        "currency": "USD",
+        "in_stock": true,
+        "short_description": "A woven wool throw blanket for the sofa.",
+        "category_ids": ["2300"]
+      }
+    ]
+  },
+  "turns": [
+    "I need a gift for a friend, nothing over $150"
+  ],
+  "rounds": [
+    [
+      {
+        "tools": [
+          { "name": "search_products", "input": { "filters": { "category_id": 2100 } } },
+          { "name": "search_products", "input": { "filters": { "category_id": 2200 } } },
+          { "name": "search_products", "input": { "filters": { "category_id": 2300 } } }
+        ]
+      },
+      {
+        "text": "With no other detail on your friend, here's a spread under $150: a candle holder, a mug set, and a throw blanket, one that costs less, one for daily use, and one that feels like a treat. Want me to lean toward one of these kinds instead?",
+        "tools": [
+          {
+            "name": "present_products",
+            "input": {
+              "picks": [
+                { "product_id": "GF-2003", "reason": "A cozy throw blanket, the more indulgent pick." },
+                { "product_id": "GF-2002", "reason": "A dependable everyday mug set." },
+                { "product_id": "GF-2001", "reason": "The lowest price of the three." }
+              ]
+            }
+          },
+          {
+            "name": "present_suggestions",
+            "input": { "suggestions": ["Just candle holders", "Just mugs", "Just blankets", "Something under $50"] }
+          }
+        ]
+      }
+    ]
+  ],
+  "expected": {
+    "calls_tool": ["search_products", "present_products", "present_suggestions"],
+    "ui_components": ["products", "suggestions"],
+    "max_tool_calls": 6,
+    "reply_includes": ["150"],
+    "rubric": "The three search_products calls run in the same round, each scoped to a different category (candle holders, mugs, throw blankets) rather than one broad search, and present_products shows one pick per category instead of three picks from a single category. The text names the category spread as the axis, paired with the clarifying question."
+  },
+  "notes": "The recipient's age, interests and budget beyond the $150 ceiling are all unknown, so the gift rule's category-first spread applies: two or three searches across different categories from the catalog map in the same round, one pick from each, with price varied second (costs less, dependable, delight) rather than three picks from one category such as candle holders alone."
+}

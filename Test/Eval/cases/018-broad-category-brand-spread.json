@@ -1,0 +1,97 @@
+{
+  "id": "018-broad-category-brand-spread",
+  "priority": "high",
+  "difficulty": "medium",
+  "tags": ["shortlist", "brand-spread", "broad-request"],
+  "state": {
+    "seen_products": [],
+    "catalog": [
+      {
+        "product_id": "OC-4001",
+        "title": "SteelForm Mesh Office Chair",
+        "brand": "Steelform",
+        "price": 189.0,
+        "currency": "USD",
+        "in_stock": true,
+        "short_description": "A breathable mesh office chair with lumbar support."
+      },
+      {
+        "product_id": "OC-4002",
+        "title": "SteelForm Mesh Office Chair XL",
+        "brand": "Steelform",
+        "price": 219.0,
+        "currency": "USD",
+        "in_stock": true,
+        "short_description": "The wide-seat version of the mesh office chair."
+      },
+      {
+        "product_id": "OC-4003",
+        "title": "AeroDesk Executive Office Chair",
+        "brand": "Aerodesk",
+        "price": 540.0,
+        "currency": "USD",
+        "in_stock": true,
+        "short_description": "A leather executive office chair with adjustable arms."
+      },
+      {
+        "product_id": "OC-4004",
+        "title": "Kestrel Classic Office Chair",
+        "brand": "Kestrel",
+        "price": 610.0,
+        "currency": "USD",
+        "in_stock": true,
+        "short_description": "A classic leather office chair for a home study."
+      },
+      {
+        "product_id": "OC-4005",
+        "title": "Branch Value Office Chair",
+        "brand": "Branch",
+        "price": 140.0,
+        "currency": "USD",
+        "in_stock": true,
+        "short_description": "A budget office chair with a mesh back."
+      }
+    ]
+  },
+  "turns": [
+    "Recommend an office chair for my home office"
+  ],
+  "rounds": [
+    [
+      {
+        "tools": [
+          { "name": "search_products", "input": { "query": "office chair" } }
+        ]
+      },
+      {
+        "text": "Here are five office chairs across four brands, from a budget mesh chair to a leather executive model. Want to stick with one of these brands, or should I filter by price instead?",
+        "tools": [
+          {
+            "name": "present_products",
+            "input": {
+              "picks": [
+                { "product_id": "OC-4003", "reason": "A leather executive chair for daily long sits." },
+                { "product_id": "OC-4004", "reason": "A classic leather chair with a lower price than the executive model." },
+                { "product_id": "OC-4001", "reason": "A mesh chair with lumbar support at a mid price." },
+                { "product_id": "OC-4002", "reason": "The wide-seat version of the mesh chair." },
+                { "product_id": "OC-4005", "reason": "The lowest price of the five." }
+              ]
+            }
+          },
+          {
+            "name": "present_suggestions",
+            "input": { "suggestions": ["Just Steelform", "Filter by price instead", "Compare the top two", "Something under $150"] }
+          }
+        ]
+      }
+    ]
+  ],
+  "expected": {
+    "calls_tool": ["search_products", "present_products", "present_suggestions"],
+    "ui_components": ["products", "suggestions"],
+    "max_tool_calls": 5,
+    "reply_includes": ["brands"],
+    "rubric": "The five picks span four distinct brands (Steelform, Aerodesk, Kestrel, Branch); no brand appears on more than two of the five picks, and the two same-brand picks (OC-4001, OC-4002) are different configurations of one chair, not two independent brand slots. The text names brand as the axis the shortlist spread on, in the clarifying question paired with the cards."
+  },
+  "notes": "The request names no brand, so search-discovery's broad-request rule applies: the floor rises to five picks and no brand may claim more than two of them. Steelform's two configurations count as one brand slot, leaving three other brands represented once each."
+}
