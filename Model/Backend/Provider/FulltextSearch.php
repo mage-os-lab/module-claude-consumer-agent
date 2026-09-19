@@ -69,6 +69,26 @@ final class FulltextSearch implements SearchProviderInterface
         array $categoryIds,
         int $limit
     ): array {
+        $ids = $this->runTermSearch($ctx, $query, $filters, $categoryIds, $limit);
+        if ($ids !== []) {
+            return $ids;
+        }
+
+        $retryTerm = $this->longestWord($query);
+        if ($retryTerm === null) {
+            return $ids;
+        }
+
+        return $this->runTermSearch($ctx, $retryTerm, $filters, $categoryIds, $limit);
+    }
+
+    private function runTermSearch(
+        SessionContext $ctx,
+        string $query,
+        ?SearchFiltersInterface $filters,
+        array $categoryIds,
+        int $limit
+    ): array {
         $criteria = $this->searchCriteriaBuilderFactory->create();
         $criteria->addFilter($this->filterBuilder->setField('search_term')->setValue($query)->create());
         $criteria->addFilter(
@@ -93,6 +113,22 @@ final class FulltextSearch implements SearchProviderInterface
         $searchCriteria->setRequestName('quick_search_container');
 
         return $this->runSearch($ctx, $searchCriteria);
+    }
+
+    private function longestWord(string $query): ?string
+    {
+        $words = preg_split('/\s+/', trim($query), -1, PREG_SPLIT_NO_EMPTY);
+        if (count($words) <= 1) {
+            return null;
+        }
+
+        $longest = $words[0];
+        foreach ($words as $word) {
+            if (mb_strlen($word) > mb_strlen($longest)) {
+                $longest = $word;
+            }
+        }
+        return $longest;
     }
 
     private function listCategory(

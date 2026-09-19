@@ -754,4 +754,48 @@ final class FulltextSearchTest extends TestCase
 
         $provider->search($this->context(), 'office chair', null, 5);
     }
+
+    public function testAnEmptyFirstResultRetriesOnceWithTheLongestWord(): void
+    {
+        $search = $this->createMock(SearchInterface::class);
+        $search->expects($this->exactly(2))
+            ->method('search')
+            ->willReturnOnConsecutiveCalls($this->searchResult([]), $this->searchResult([99]));
+
+        [$provider] = $this->build(['search' => $search]);
+
+        $ids = $provider->search($this->context(), 'hanna morrison chair', null, 10);
+
+        $this->assertSame([99], $ids);
+        $this->assertContains(['field' => 'search_term', 'value' => 'hanna morrison chair'], $this->filterCalls);
+        $this->assertContains(['field' => 'search_term', 'value' => 'morrison'], $this->filterCalls);
+    }
+
+    public function testANonEmptyFirstResultDoesNotRetry(): void
+    {
+        $search = $this->createMock(SearchInterface::class);
+        $search->expects($this->once())
+            ->method('search')
+            ->willReturn($this->searchResult([1, 2]));
+
+        [$provider] = $this->build(['search' => $search]);
+
+        $ids = $provider->search($this->context(), 'hanna morrison chair', null, 10);
+
+        $this->assertSame([1, 2], $ids);
+    }
+
+    public function testASingleWordQueryDoesNotRetry(): void
+    {
+        $search = $this->createMock(SearchInterface::class);
+        $search->expects($this->once())
+            ->method('search')
+            ->willReturn($this->searchResult([]));
+
+        [$provider] = $this->build(['search' => $search]);
+
+        $ids = $provider->search($this->context(), 'widget', null, 10);
+
+        $this->assertSame([], $ids);
+    }
 }
