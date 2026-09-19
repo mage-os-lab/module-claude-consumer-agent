@@ -242,7 +242,8 @@ final class StaticSystemTest extends TestCase
             'When something is unavailable or unknown, say what the record does say, then say '
                 . "plainly it does not carry the rest. Do not name a manufacturer, a brand's own "
                 . 'site, a marketplace, a competitor, or any other retailer as the place to find '
-                . 'it; point the customer to Talk to a design consultant (/contact/) instead.',
+                . 'it. When the record leaves nothing else to offer, point the customer to Talk '
+                . 'to a design consultant (/contact/) instead.',
             $text
         );
     }
