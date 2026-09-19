@@ -1,0 +1,46 @@
+{
+  "id": "016-unavailable-spec-routes-to-contact",
+  "priority": "high",
+  "difficulty": "medium",
+  "tags": ["grounding", "unavailable-spec", "contact"],
+  "state": {
+    "seen_products": [],
+    "page": { "page_type": "product", "product_id": "GH-5010" },
+    "catalog": [
+      {
+        "product_id": "GH-5010",
+        "title": "Harbor Mesh Task Chair",
+        "brand": "Harbor Office",
+        "price": 349.0,
+        "currency": "USD",
+        "in_stock": true,
+        "short_description": "An adjustable mesh task chair with lumbar support and a 5-year frame warranty."
+      }
+    ]
+  },
+  "turns": [
+    "Is this chair waterproof?"
+  ],
+  "rounds": [
+    [
+      {
+        "tools": [
+          { "name": "get_product_details", "input": { "product_id": "GH-5010" } }
+        ]
+      },
+      {
+        "text": "The record for this chair lists adjustable lumbar support and a 5-year frame warranty. It does not say whether the chair is waterproof. Contact us can confirm that for you.",
+        "tools": [
+          { "name": "present_suggestions", "input": { "suggestions": ["Show other task chairs", "Compare with another chair"] } }
+        ]
+      }
+    ]
+  ],
+  "expected": {
+    "calls_tool": ["get_product_details"],
+    "ui_components": ["suggestions"],
+    "reply_includes": ["lumbar support", "does not say", "Contact us"],
+    "reply_omits": ["manufacturer", "their website", "check with them directly", "Harbor Office directly"]
+  },
+  "notes": "The record has no waterproof spec. The reply must state what the record does list, say plainly it does not cover waterproofing, name no manufacturer or outside site, and point the customer to the store's own contact instead."
+}

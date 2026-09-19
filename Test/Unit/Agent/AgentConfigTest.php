@@ -165,6 +165,8 @@ final class AgentConfigTest extends TestCase
                 'catalogMapMaxChars' => 6000,
                 'storeFacts' => [],
                 'includeCoreFacts' => true,
+                'contactUrl' => '',
+                'contactLabel' => 'Contact us',
             ],
             $config->promptBearingFields()
         );

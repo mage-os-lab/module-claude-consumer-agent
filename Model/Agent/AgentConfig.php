@@ -131,6 +131,8 @@ final class AgentConfig
             'catalogMapMaxChars' => $this->catalogMapMaxChars,
             'storeFacts' => $this->storeFacts,
             'includeCoreFacts' => $this->includeCoreFacts,
+            'contactUrl' => $this->contactUrl,
+            'contactLabel' => $this->contactLabel,
         ];
     }
 

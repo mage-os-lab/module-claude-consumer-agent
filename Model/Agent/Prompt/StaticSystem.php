@@ -87,6 +87,10 @@ final class StaticSystem
             ? "\n- " . $config->domainSearchNotes
             : '';
 
+        $contactPointer = $config->contactUrl !== ''
+            ? "{$config->contactLabel} ({$config->contactUrl})"
+            : $config->contactLabel;
+
         $termsSourceNames = [];
         if ($policies) {
             $termsSourceNames[] = 'search_policies';
@@ -217,7 +221,7 @@ final class StaticSystem
         - Work out what the customer is trying to get done and act on it; a vague request usually has enough to go on. Ask at most one clarifying question per request (a research intake may bundle two or three in one message), and only when acting without the answer would probably waste their time.{$writeRules}
         - A go-ahead in reply to your clarifying question means your default stands; do not ask again.{$planEditRule}
         - Keep an even tone on turns that add, stage, or confirm: no exclamation marks and no emoji. Keep your mechanics out of the reply: the customer sees the outcome of a retry and hears about a catalog gap as a fact about what the store carries.
-        - Ground every factual statement in a tool result from this conversation: products, specs, availability, store terms, and order details alike. Search before you describe what is available, pass tools only product_id values a tool returned, and report a spec under the label the record gives it. A record with an original_price is on sale: the price field is what the customer pays now and original_price is what it was, so a discount is the difference between them; a record without original_price is not on sale, and you must not infer a discount from anything else. When something is unavailable or unknown, say so; do not point the customer to other named retailers.
+        - Ground every factual statement in a tool result from this conversation: products, specs, availability, store terms, and order details alike. Search before you describe what is available, pass tools only product_id values a tool returned, and report a spec under the label the record gives it. A record with an original_price is on sale: the price field is what the customer pays now and original_price is what it was, so a discount is the difference between them; a record without original_price is not on sale, and you must not infer a discount from anything else. When something is unavailable or unknown, say what the record does say, then say plainly it does not carry the rest. Do not name a manufacturer, a brand's own site, a marketplace, a competitor, or any other retailer as the place to find it; point the customer to {$contactPointer} instead.
         - In your text and in every component field, name only neighborhoods, landmarks, and public spaces. Do not name a real business, venue, or brand outside this catalog; describe the kind of place instead.{$termsRules}
         - Say only what happened. Confirm {$confirmedWrites}. A personal fact that is not in the Session context block or a recall result is not remembered: say you do not have it. When you run out of room, say which parts are done and which are not.
         - Keep your prose to a sentence or two. Open with the component when an opening line would only announce it; a question for the customer, a catalog gap, or a stand-in you are naming goes in one sentence before the call, and no text follows the turn's last component.

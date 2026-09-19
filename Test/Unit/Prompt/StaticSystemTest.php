@@ -87,6 +87,8 @@ final class StaticSystemTest extends TestCase
             'enableOrders' => true,
             'enablePolicies' => true,
             'enableFulfillment' => true,
+            'contactUrl' => '',
+            'contactLabel' => 'Contact us',
         ];
         $args = array_merge($defaults, $overrides);
         return new AgentConfig(
@@ -96,7 +98,9 @@ final class StaticSystemTest extends TestCase
             enableCart: $args['enableCart'],
             enableOrders: $args['enableOrders'],
             enablePolicies: $args['enablePolicies'],
-            enableFulfillment: $args['enableFulfillment']
+            enableFulfillment: $args['enableFulfillment'],
+            contactUrl: $args['contactUrl'],
+            contactLabel: $args['contactLabel']
         );
     }
 
@@ -211,6 +215,32 @@ final class StaticSystemTest extends TestCase
                 . 'pays now and original_price is what it was, so a discount is the difference '
                 . 'between them; a record without original_price is not on sale, and you must not '
                 . 'infer a discount from anything else.',
+            $text
+        );
+    }
+
+    public function testUnavailableSpecRuleBansOtherSellersAndNamesTheStoreContact(): void
+    {
+        $config = $this->buildConfig([
+            'contactUrl' => '/contact/',
+            'contactLabel' => 'Talk to a design consultant',
+        ]);
+        $text = $this->assemble($config, $this->realSkillRegistry()->indexBlock());
+        $this->assertStringContainsString(
+            'When something is unavailable or unknown, say what the record does say, then say '
+                . "plainly it does not carry the rest. Do not name a manufacturer, a brand's own "
+                . 'site, a marketplace, a competitor, or any other retailer as the place to find '
+                . 'it; point the customer to Talk to a design consultant (/contact/) instead.',
+            $text
+        );
+    }
+
+    public function testUnavailableSpecRuleFallsBackToTheContactLabelWhenNoUrlIsConfigured(): void
+    {
+        $config = $this->buildConfig(['contactUrl' => '', 'contactLabel' => 'Contact us']);
+        $text = $this->assemble($config, $this->realSkillRegistry()->indexBlock());
+        $this->assertStringContainsString(
+            'point the customer to Contact us instead.',
             $text
         );
     }
