@@ -76,7 +76,11 @@ final class CoreToolProvider implements ToolProviderInterface
                         'query' => [
                             'type' => 'string',
                             'description' => "What to look for, in the catalog's vocabulary. Omit it to "
-                                . 'list a category\'s products; then filters.category_id is required.',
+                                . 'list a category\'s products; then filters.category_id is required. '
+                                . 'When the customer names a specific product or brand, that name alone '
+                                . 'is the query; put a feature, a use, or any other word from the '
+                                . 'request in filters or a second search instead, since the extra words '
+                                . 'can bury the name match.',
                         ],
                         'filters' => $this->filtersSchema(),
                         'limit' => [

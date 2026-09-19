@@ -1,0 +1,56 @@
+{
+  "id": "021-specific-product-name-search",
+  "priority": "high",
+  "difficulty": "medium",
+  "tags": ["search_products", "query-composition", "named-product"],
+  "state": {
+    "seen_products": [],
+    "catalog": [
+      {
+        "product_id": "302",
+        "title": "Kenobi Trail Jacket",
+        "price": 47.0,
+        "currency": "USD",
+        "in_stock": true,
+        "short_description": "A black 1/4 zip fleece pullover jacket with sealed seams, an adjustable hood, and a media-control pocket for a phone or music player."
+      }
+    ]
+  },
+  "turns": [
+    "I want to buy the Kenobie jacket. I need a full zip, hooded, insulated fleece that's also waterproof, doubles as a sweatshirt or performance hoodie at the gym, and stays light but warm on a cold day."
+  ],
+  "rounds": [
+    [
+      {
+        "tools": [
+          { "name": "search_products", "input": { "query": "Kenobie jacket" } }
+        ]
+      },
+      {
+        "text": "The Kenobi Trail Jacket is a hooded, insulated fleece pullover with sealed seams, though the record shows a quarter zip, not a full zip.",
+        "tools": [
+          {
+            "name": "present_products",
+            "input": {
+              "picks": [
+                { "product_id": "302", "reason": "Closest match to the Kenobie jacket; note it is a quarter zip, not full zip." }
+              ]
+            }
+          },
+          {
+            "name": "present_suggestions",
+            "input": { "suggestions": ["Add it to my cart", "Show similar jackets"] }
+          }
+        ]
+      }
+    ]
+  ],
+  "expected": {
+    "first_tool": "search_products",
+    "calls_tool": ["search_products"],
+    "calls_one_of": ["present_products", "present_comparison"],
+    "ui_components": ["suggestions"],
+    "reply_includes": ["Kenobi"]
+  },
+  "notes": "Targets a real product in this store's live catalog (Kenobi Trail Jacket, entity_id 302 / SKU MJ04) because a live search_products call against a synthetic catalog never reaches the live search engine and cannot exercise this behavior. Direct probing of the live search provider confirmed the mechanism: searching the customer's misspelled name alone ('Kenobie jacket', or even bare 'kenobie') returns the jacket, its fuzzy match resolving the typo the same way the engine resolves any misspelled name on its own. Folding the customer's stated features into the same query ('kenobie jacket full zip hooded fleece insulated waterproof sweatshirt performance light hoodie gym cold') pulls in enough exact name-field matches on other jackets (Full-Zip Sweatshirt, Hooded Fleece, Performance Fleece-lined Jacket, Full-Zip Hoodie, Zip Light Jacket, and more) to push the named jacket off the default 8-result page entirely, even though the store carries it. The fixture catalog holds only the target product because the offline run scripts its own tool calls and never touches ranking; the live run is what exercises the dilution. Live runs always searched the name alone first and always named the real jacket in text, but the second half of the reply varied with how many features the customer stated: sometimes it presented the jacket directly (present_products, noting the quarter-zip mismatch), and once it searched again by feature words, decided two other jackets fit the stated features better, and used present_comparison to lay the jacket and both alternatives out with the trade-offs named, per the search-discovery skill's own rule to compare finalists instead of another row of cards. Both are grounded, correct answers, so calls_one_of accepts either presentation tool; max_tool_calls and ui_components:['products'] were dropped because a comparison-shaped answer legitimately takes more calls and a different component name. reply_omits was dropped too: the model sometimes phrases the quarter-zip/full-zip gap as 'doesn't carry a Kenobie jacket' and sometimes without that wording, so the phrase does not separate the defect (never finding or naming the product) from an honest hedge about the one product it always finds and names; first_tool, calls_tool, and reply_includes carry that assertion instead."
+}
