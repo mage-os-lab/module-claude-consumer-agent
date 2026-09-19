@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
     <preference for="MageOS\ClaudeConsumerAgent\Api\StorefrontBackendInterface" type="MageOS\ClaudeConsumerAgent\Model\Backend\MagentoStorefront"/>
-    <preference for="MageOS\ClaudeConsumerAgent\Api\Backend\SearchProviderInterface" type="MageOS\ClaudeConsumerAgent\Model\Backend\Provider\FulltextSearch"/>
+    <preference for="MageOS\ClaudeConsumerAgent\Api\Backend\SearchProviderInterface" type="MageOS\ClaudeConsumerAgent\Model\Backend\Provider\BrandCapSearchDecorator"/>
     <preference for="MageOS\ClaudeConsumerAgent\Api\Backend\BestsellerRankInterface" type="MageOS\ClaudeConsumerAgent\Model\Backend\Provider\AggregatedBestsellerRank"/>
     <preference for="MageOS\ClaudeConsumerAgent\Api\Backend\CatalogMapProviderInterface" type="MageOS\ClaudeConsumerAgent\Model\Backend\Provider\CategoryTree"/>
     <preference for="MageOS\ClaudeConsumerAgent\Api\Backend\CategorySearchProviderInterface" type="MageOS\ClaudeConsumerAgent\Model\Backend\Provider\CategoryNameSearch"/>
@@ -30,6 +30,12 @@
     <preference for="MageOS\ClaudeConsumerAgent\Api\Data\FulfillmentOptionInterface" type="MageOS\ClaudeConsumerAgent\Model\Data\FulfillmentOption"/>
     <preference for="MageOS\ClaudeConsumerAgent\Api\Data\PageContextInterface" type="MageOS\ClaudeConsumerAgent\Model\Data\PageContext"/>
     <preference for="MageOS\ClaudeConsumerAgent\Api\Data\CheckoutHandoffInterface" type="MageOS\ClaudeConsumerAgent\Model\Data\CheckoutHandoff"/>
+
+    <type name="MageOS\ClaudeConsumerAgent\Model\Backend\Provider\BrandCapSearchDecorator">
+        <arguments>
+            <argument name="provider" xsi:type="object">MageOS\ClaudeConsumerAgent\Model\Backend\Provider\FulltextSearch</argument>
+        </arguments>
+    </type>
 
     <type name="MageOS\ClaudeConsumerAgent\Model\Agent\Tool\Registry">
         <arguments>

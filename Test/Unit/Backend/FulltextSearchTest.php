@@ -7,12 +7,9 @@ use Magento\Catalog\Api\CategoryListInterface;
 use Magento\Catalog\Api\Data\CategoryInterface;
 use Magento\Catalog\Api\Data\CategorySearchResultsInterface;
 use Magento\Catalog\Model\Category;
-use Magento\Catalog\Model\Product as MagentoProduct;
 use Magento\Catalog\Model\Product\Visibility;
 use Magento\Catalog\Model\ResourceModel\Category\Collection as CategoryCollection;
 use Magento\Catalog\Model\ResourceModel\Category\CollectionFactory as CategoryCollectionFactory;
-use Magento\Catalog\Model\ResourceModel\Product\Collection as ProductCollection;
-use Magento\Catalog\Model\ResourceModel\Product\CollectionFactory as ProductCollectionFactory;
 use Magento\Framework\Api\Filter;
 use Magento\Framework\Api\FilterBuilder;
 use Magento\Framework\Api\Search\DocumentInterface;
@@ -191,27 +188,6 @@ final class FulltextSearchTest extends TestCase
         return $bestsellerRank;
     }
 
-    private function productCollectionFactory(array $brandsById = []): ProductCollectionFactory&MockObject
-    {
-        $products = [];
-        foreach ($brandsById as $id => $brand) {
-            $product = $this->createMock(MagentoProduct::class);
-            $product->method('getId')->willReturn($id);
-            $product->method('getAttributeText')->willReturn($brand);
-            $products[] = $product;
-        }
-
-        $collection = $this->createMock(ProductCollection::class);
-        $collection->method('setStoreId')->willReturnSelf();
-        $collection->method('addAttributeToSelect')->willReturnSelf();
-        $collection->method('addIdFilter')->willReturnSelf();
-        $collection->method('getIterator')->willReturn(new \ArrayIterator($products));
-
-        $factory = $this->createMock(ProductCollectionFactory::class);
-        $factory->method('create')->willReturn($collection);
-        return $factory;
-    }
-
     private function build(array $overrides = []): array
     {
         $filterBuilder = $overrides['filterBuilder'] ?? $this->filterBuilder();
@@ -223,7 +199,6 @@ final class FulltextSearchTest extends TestCase
         $bestsellerRank = $overrides['bestsellerRank'] ?? $this->passthroughBestsellerRank();
         $categoryList = $overrides['categoryList'] ?? $this->createMock(CategoryListInterface::class);
         $allowedCategories = $overrides['allowedCategories'] ?? $this->allowedCategories();
-        $productCollectionFactory = $overrides['productCollectionFactory'] ?? $this->productCollectionFactory();
 
         $provider = new FulltextSearch(
             $searchCriteriaBuilderFactory,
@@ -233,8 +208,7 @@ final class FulltextSearchTest extends TestCase
             $this->categorySearchCriteriaBuilder(),
             $storeManager,
             $allowedCategories,
-            $bestsellerRank,
-            $productCollectionFactory
+            $bestsellerRank
         );
 
         return [$provider, $search, $storeManager, $bestsellerRank];
@@ -502,8 +476,7 @@ final class FulltextSearchTest extends TestCase
             $this->categorySearchCriteriaBuilder(),
             $this->defaultStoreManager(),
             $this->allowedCategories(),
-            $this->passthroughBestsellerRank(),
-            $this->productCollectionFactory()
+            $this->passthroughBestsellerRank()
         );
 
         $filters = SearchFilters::fromArray(['category_id' => 175, 'category' => 'Seating']);
@@ -674,85 +647,6 @@ final class FulltextSearchTest extends TestCase
         [$provider] = $this->build(['search' => $search, 'bestsellerRank' => $bestsellerRank]);
 
         $provider->search($this->context(), 'widget', null, 10);
-    }
-
-    public function testADominantBrandIsTrimmedAndBackfilledFromTheRemainingRankedIds(): void
-    {
-        $search = $this->createMock(SearchInterface::class);
-        $search->method('search')->willReturn($this->searchResult([1, 2, 3, 4, 5, 6]));
-
-        $productCollectionFactory = $this->productCollectionFactory([
-            1 => 'BrandA',
-            2 => 'BrandA',
-            3 => 'BrandA',
-            4 => 'BrandA',
-            5 => 'BrandB',
-            6 => 'BrandC',
-        ]);
-
-        [$provider] = $this->build(['search' => $search, 'productCollectionFactory' => $productCollectionFactory]);
-
-        $ids = $provider->search($this->context(), 'office chair', null, 4);
-
-        $this->assertSame([1, 5, 6, 2], $ids);
-    }
-
-    public function testRelevanceOrderHoldsWhenNoBrandExceedsTheCap(): void
-    {
-        $search = $this->createMock(SearchInterface::class);
-        $search->method('search')->willReturn($this->searchResult([10, 20, 30, 40, 50]));
-
-        $productCollectionFactory = $this->productCollectionFactory([
-            10 => 'BrandA',
-            20 => 'BrandB',
-            30 => 'BrandC',
-            40 => 'BrandD',
-            50 => 'BrandE',
-        ]);
-
-        [$provider] = $this->build(['search' => $search, 'productCollectionFactory' => $productCollectionFactory]);
-
-        $ids = $provider->search($this->context(), 'widget', null, 5);
-
-        $this->assertSame([10, 20, 30, 40, 50], $ids);
-    }
-
-    public function testABrandNamedQueryIsNotCapped(): void
-    {
-        $search = $this->createMock(SearchInterface::class);
-        $search->method('search')->willReturn($this->searchResult([1, 2, 3, 4]));
-
-        $productCollectionFactory = $this->productCollectionFactory([
-            1 => 'Acme',
-            2 => 'Acme',
-            3 => 'Acme',
-            4 => 'Acme',
-        ]);
-
-        [$provider] = $this->build(['search' => $search, 'productCollectionFactory' => $productCollectionFactory]);
-
-        $ids = $provider->search($this->context(), 'Acme desk lamp', null, 4);
-
-        $this->assertSame([1, 2, 3, 4], $ids);
-    }
-
-    public function testBrandsAreResolvedWithASingleCollectionQueryForTheWholeCandidateList(): void
-    {
-        $search = $this->createMock(SearchInterface::class);
-        $search->method('search')->willReturn($this->searchResult([1, 2, 3, 4, 5]));
-
-        $productCollectionFactory = $this->productCollectionFactory([
-            1 => 'BrandA',
-            2 => 'BrandB',
-            3 => 'BrandC',
-            4 => 'BrandD',
-            5 => 'BrandE',
-        ]);
-        $productCollectionFactory->expects($this->once())->method('create');
-
-        [$provider] = $this->build(['search' => $search, 'productCollectionFactory' => $productCollectionFactory]);
-
-        $provider->search($this->context(), 'office chair', null, 5);
     }
 
     public function testAnEmptyFirstResultRetriesOnceWithTheLongestWord(): void
