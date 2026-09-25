@@ -1,9 +1,9 @@
 <?php
 declare(strict_types=1);
 
-namespace MageOS\ClaudeConsumerAgent\Model\Data;
+namespace MageOS\AiShoppingAssistant\Model\Data;
 
-use MageOS\ClaudeConsumerAgent\Api\Data\CategoryMatchInterface;
+use MageOS\AiShoppingAssistant\Api\Data\CategoryMatchInterface;
 
 final class CategoryMatch implements CategoryMatchInterface
 {

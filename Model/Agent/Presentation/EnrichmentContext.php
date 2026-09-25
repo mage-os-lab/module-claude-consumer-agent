@@ -1,15 +1,15 @@
 <?php
 declare(strict_types=1);
 
-namespace MageOS\ClaudeConsumerAgent\Model\Agent\Presentation;
+namespace MageOS\AiShoppingAssistant\Model\Agent\Presentation;
 
 final class EnrichmentContext
 {
     public function __construct(
-        public readonly \MageOS\ClaudeConsumerAgent\Api\StorefrontBackendInterface $backend,
-        public readonly \MageOS\ClaudeConsumerAgent\Model\Agent\AgentConfig $config,
-        public readonly \MageOS\ClaudeConsumerAgent\Model\Agent\SessionContext $context,
-        public readonly \MageOS\ClaudeConsumerAgent\Model\Agent\SessionState $state,
+        public readonly \MageOS\AiShoppingAssistant\Api\StorefrontBackendInterface $backend,
+        public readonly \MageOS\AiShoppingAssistant\Model\Agent\AgentConfig $config,
+        public readonly \MageOS\AiShoppingAssistant\Model\Agent\SessionContext $context,
+        public readonly \MageOS\AiShoppingAssistant\Model\Agent\SessionState $state,
         public array $notes = []
     ) {
     }

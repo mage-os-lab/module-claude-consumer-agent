@@ -1,9 +1,9 @@
 <?php
 declare(strict_types=1);
 
-namespace MageOS\ClaudeConsumerAgent\Model\Client;
+namespace MageOS\AiShoppingAssistant\Model\Client;
 
-use MageOS\ClaudeConsumerAgent\Api\Client\MessagesClientInterface;
+use MageOS\AiShoppingAssistant\Api\Client\MessagesClientInterface;
 
 final class FakeClient implements MessagesClientInterface
 {

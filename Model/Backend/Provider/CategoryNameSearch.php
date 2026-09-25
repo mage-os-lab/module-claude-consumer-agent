@@ -1,13 +1,13 @@
 <?php
 declare(strict_types=1);
 
-namespace MageOS\ClaudeConsumerAgent\Model\Backend\Provider;
+namespace MageOS\AiShoppingAssistant\Model\Backend\Provider;
 
 use Magento\Catalog\Model\Category;
-use MageOS\ClaudeConsumerAgent\Api\Backend\CategorySearchProviderInterface;
-use MageOS\ClaudeConsumerAgent\Api\Data\CategoryMatchInterface;
-use MageOS\ClaudeConsumerAgent\Model\Agent\SessionContext;
-use MageOS\ClaudeConsumerAgent\Model\Data\CategoryMatch;
+use MageOS\AiShoppingAssistant\Api\Backend\CategorySearchProviderInterface;
+use MageOS\AiShoppingAssistant\Api\Data\CategoryMatchInterface;
+use MageOS\AiShoppingAssistant\Model\Agent\SessionContext;
+use MageOS\AiShoppingAssistant\Model\Data\CategoryMatch;
 
 final class CategoryNameSearch implements CategorySearchProviderInterface
 {

@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-namespace MageOS\ClaudeConsumerAgent\Model\Agent\Presentation;
+namespace MageOS\AiShoppingAssistant\Model\Agent\Presentation;
 
 final class Component
 {

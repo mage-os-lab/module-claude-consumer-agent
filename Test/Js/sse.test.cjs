@@ -6,7 +6,7 @@ const {load} = require('./support.cjs');
 
 function collect() {
     const events = [];
-    const parser = load('MageOS_ClaudeConsumerAgent/js/luma/model/sse').create((type, data) => events.push([type, data]));
+    const parser = load('MageOS_AiShoppingAssistant/js/luma/model/sse').create((type, data) => events.push([type, data]));
     return {events, parser};
 }
 

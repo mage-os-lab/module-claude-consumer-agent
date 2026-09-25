@@ -1,12 +1,12 @@
 <?php
 declare(strict_types=1);
 
-namespace MageOS\ClaudeConsumerAgent\Test\Unit\Backend;
+namespace MageOS\AiShoppingAssistant\Test\Unit\Backend;
 
 use Magento\Framework\App\ResourceConnection;
 use Magento\Framework\DB\Adapter\AdapterInterface;
 use Magento\Framework\DB\Select;
-use MageOS\ClaudeConsumerAgent\Model\Backend\Provider\AggregatedBestsellerRank;
+use MageOS\AiShoppingAssistant\Model\Backend\Provider\AggregatedBestsellerRank;
 use PHPUnit\Framework\TestCase;
 
 final class AggregatedBestsellerRankTest extends TestCase

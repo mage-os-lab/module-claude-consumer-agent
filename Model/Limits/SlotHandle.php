@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-namespace MageOS\ClaudeConsumerAgent\Model\Limits;
+namespace MageOS\AiShoppingAssistant\Model\Limits;
 
 final class SlotHandle
 {

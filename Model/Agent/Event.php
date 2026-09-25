@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-namespace MageOS\ClaudeConsumerAgent\Model\Agent;
+namespace MageOS\AiShoppingAssistant\Model\Agent;
 
 final class Event
 {

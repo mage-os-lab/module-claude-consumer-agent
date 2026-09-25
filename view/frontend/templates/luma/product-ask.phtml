@@ -2,12 +2,12 @@
 declare(strict_types=1);
 
 use Magento\Framework\Escaper;
-use MageOS\ClaudeConsumerAgent\Block\ProductAsk;
+use MageOS\AiShoppingAssistant\Block\ProductAsk;
 
 /** @var Escaper $escaper */
 /** @var ProductAsk $block */
 $widgetConfig = (string)json_encode(
-    ['MageOS_ClaudeConsumerAgent/js/luma/ask-product' => ['productId' => $block->getProductId()]],
+    ['MageOS_AiShoppingAssistant/js/luma/ask-product' => ['productId' => $block->getProductId()]],
     JSON_UNESCAPED_SLASHES
 );
 ?>

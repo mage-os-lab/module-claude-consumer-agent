@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-namespace MageOS\ClaudeConsumerAgent\Model\Session\ResourceModel;
+namespace MageOS\AiShoppingAssistant\Model\Session\ResourceModel;
 
 /**
  * Stays non-final because PHPUnit 9.6 mocks it.

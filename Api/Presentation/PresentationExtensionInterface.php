@@ -1,9 +1,9 @@
 <?php
 declare(strict_types=1);
 
-namespace MageOS\ClaudeConsumerAgent\Api\Presentation;
+namespace MageOS\AiShoppingAssistant\Api\Presentation;
 
-use MageOS\ClaudeConsumerAgent\Model\Agent\Presentation\EnrichmentContext;
+use MageOS\AiShoppingAssistant\Model\Agent\Presentation\EnrichmentContext;
 
 interface PresentationExtensionInterface
 {

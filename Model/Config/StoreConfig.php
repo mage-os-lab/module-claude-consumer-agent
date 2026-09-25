@@ -1,11 +1,11 @@
 <?php
 declare(strict_types=1);
 
-namespace MageOS\ClaudeConsumerAgent\Model\Config;
+namespace MageOS\AiShoppingAssistant\Model\Config;
 
 use Magento\Framework\Exception\NoSuchEntityException;
 use Magento\Store\Model\ScopeInterface;
-use MageOS\ClaudeConsumerAgent\Model\Agent\AgentConfig;
+use MageOS\AiShoppingAssistant\Model\Agent\AgentConfig;
 
 /**
  * The API key path carries the Encrypted backend model in config.xml, so scope config already returns it decrypted.

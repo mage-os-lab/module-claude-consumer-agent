@@ -1,13 +1,13 @@
 <?php
 declare(strict_types=1);
 
-namespace MageOS\ClaudeConsumerAgent\Test\Unit\Skill;
+namespace MageOS\AiShoppingAssistant\Test\Unit\Skill;
 
 use Magento\Framework\Component\ComponentRegistrar;
 use Magento\Framework\Filesystem\Driver\File;
-use MageOS\ClaudeConsumerAgent\Model\Agent\Skill\FrontMatter;
-use MageOS\ClaudeConsumerAgent\Model\Agent\Skill\Loader;
-use MageOS\ClaudeConsumerAgent\Model\Agent\Skill\Registry;
+use MageOS\AiShoppingAssistant\Model\Agent\Skill\FrontMatter;
+use MageOS\AiShoppingAssistant\Model\Agent\Skill\Loader;
+use MageOS\AiShoppingAssistant\Model\Agent\Skill\Registry;
 use PHPUnit\Framework\TestCase;
 
 final class RegistryTest extends TestCase
@@ -15,7 +15,7 @@ final class RegistryTest extends TestCase
     private function realRegistry(): Registry
     {
         $loader = new Loader(
-            [['module' => 'MageOS_ClaudeConsumerAgent', 'path' => 'skills', 'sortOrder' => 0]],
+            [['module' => 'MageOS_AiShoppingAssistant', 'path' => 'skills', 'sortOrder' => 0]],
             new ComponentRegistrar(),
             new File(),
             new FrontMatter()

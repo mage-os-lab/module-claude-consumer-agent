@@ -1,11 +1,11 @@
 <?php
 declare(strict_types=1);
 
-namespace MageOS\ClaudeConsumerAgent\Test\Unit\Backend\CoreFact;
+namespace MageOS\AiShoppingAssistant\Test\Unit\Backend\CoreFact;
 
 use Magento\Payment\Api\Data\PaymentMethodInterface;
 use Magento\Payment\Api\PaymentMethodListInterface;
-use MageOS\ClaudeConsumerAgent\Model\Backend\Provider\CoreFact\PaymentMethods;
+use MageOS\AiShoppingAssistant\Model\Backend\Provider\CoreFact\PaymentMethods;
 use PHPUnit\Framework\TestCase;
 
 final class PaymentMethodsTest extends TestCase

@@ -1,18 +1,18 @@
 <?php
 declare(strict_types=1);
 
-namespace MageOS\ClaudeConsumerAgent\Test\Unit\Tool\Handler;
+namespace MageOS\AiShoppingAssistant\Test\Unit\Tool\Handler;
 
 use Magento\Framework\Component\ComponentRegistrarInterface;
 use Magento\Framework\Filesystem\Driver\File;
-use MageOS\ClaudeConsumerAgent\Api\Data\PageContextInterface;
-use MageOS\ClaudeConsumerAgent\Model\Agent\AgentConfig;
-use MageOS\ClaudeConsumerAgent\Model\Agent\Skill\FrontMatter;
-use MageOS\ClaudeConsumerAgent\Model\Agent\Skill\Loader;
-use MageOS\ClaudeConsumerAgent\Model\Agent\Skill\Registry;
-use MageOS\ClaudeConsumerAgent\Model\Agent\SessionContext;
-use MageOS\ClaudeConsumerAgent\Model\Agent\SessionState;
-use MageOS\ClaudeConsumerAgent\Model\Agent\Tool\Handler\LoadSkill;
+use MageOS\AiShoppingAssistant\Api\Data\PageContextInterface;
+use MageOS\AiShoppingAssistant\Model\Agent\AgentConfig;
+use MageOS\AiShoppingAssistant\Model\Agent\Skill\FrontMatter;
+use MageOS\AiShoppingAssistant\Model\Agent\Skill\Loader;
+use MageOS\AiShoppingAssistant\Model\Agent\Skill\Registry;
+use MageOS\AiShoppingAssistant\Model\Agent\SessionContext;
+use MageOS\AiShoppingAssistant\Model\Agent\SessionState;
+use MageOS\AiShoppingAssistant\Model\Agent\Tool\Handler\LoadSkill;
 use PHPUnit\Framework\TestCase;
 
 final class LoadSkillTest extends TestCase
@@ -45,7 +45,7 @@ final class LoadSkillTest extends TestCase
         $componentRegistrar = $this->createMock(ComponentRegistrarInterface::class);
         $componentRegistrar->method('getPath')->willReturn($this->modulePath);
         $loader = new Loader(
-            [['module' => 'MageOS_ClaudeConsumerAgent', 'path' => 'skills', 'sortOrder' => 0]],
+            [['module' => 'MageOS_AiShoppingAssistant', 'path' => 'skills', 'sortOrder' => 0]],
             $componentRegistrar,
             new File(),
             new FrontMatter()

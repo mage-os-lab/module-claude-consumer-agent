@@ -1,10 +1,10 @@
 <?php
 declare(strict_types=1);
 
-namespace MageOS\ClaudeConsumerAgent\Test\Unit\Data;
+namespace MageOS\AiShoppingAssistant\Test\Unit\Data;
 
-use MageOS\ClaudeConsumerAgent\Model\Data\Cart;
-use MageOS\ClaudeConsumerAgent\Model\Data\CartItem;
+use MageOS\AiShoppingAssistant\Model\Data\Cart;
+use MageOS\AiShoppingAssistant\Model\Data\CartItem;
 use PHPUnit\Framework\TestCase;
 
 class CartTest extends TestCase

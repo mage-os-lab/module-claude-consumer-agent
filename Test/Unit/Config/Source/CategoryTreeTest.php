@@ -1,12 +1,12 @@
 <?php
 declare(strict_types=1);
 
-namespace MageOS\ClaudeConsumerAgent\Test\Unit\Config\Source;
+namespace MageOS\AiShoppingAssistant\Test\Unit\Config\Source;
 
 use Magento\Catalog\Model\Category;
 use Magento\Catalog\Model\ResourceModel\Category\Collection;
 use Magento\Catalog\Model\ResourceModel\Category\CollectionFactory;
-use MageOS\ClaudeConsumerAgent\Model\Config\Source\CategoryTree;
+use MageOS\AiShoppingAssistant\Model\Config\Source\CategoryTree;
 use PHPUnit\Framework\TestCase;
 
 final class CategoryTreeTest extends TestCase

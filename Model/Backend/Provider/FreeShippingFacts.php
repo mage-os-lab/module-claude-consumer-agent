@@ -1,13 +1,13 @@
 <?php
 declare(strict_types=1);
 
-namespace MageOS\ClaudeConsumerAgent\Model\Backend\Provider;
+namespace MageOS\AiShoppingAssistant\Model\Backend\Provider;
 
 use Magento\Store\Model\ScopeInterface;
-use MageOS\ClaudeConsumerAgent\Api\Backend\FulfillmentProviderInterface;
-use MageOS\ClaudeConsumerAgent\Api\Data\FulfillmentOptionInterface;
-use MageOS\ClaudeConsumerAgent\Model\Agent\SessionContext;
-use MageOS\ClaudeConsumerAgent\Model\Data\FulfillmentOption;
+use MageOS\AiShoppingAssistant\Api\Backend\FulfillmentProviderInterface;
+use MageOS\AiShoppingAssistant\Api\Data\FulfillmentOptionInterface;
+use MageOS\AiShoppingAssistant\Model\Agent\SessionContext;
+use MageOS\AiShoppingAssistant\Model\Data\FulfillmentOption;
 
 final class FreeShippingFacts implements FulfillmentProviderInterface
 {

@@ -1,11 +1,11 @@
 <?php
 declare(strict_types=1);
 
-namespace MageOS\ClaudeConsumerAgent\Model\Backend;
+namespace MageOS\AiShoppingAssistant\Model\Backend;
 
 use Magento\Catalog\Api\Data\ProductInterface;
 use Magento\Framework\DataObject;
-use MageOS\ClaudeConsumerAgent\Api\Cart\BuyRequestBuilderInterface;
+use MageOS\AiShoppingAssistant\Api\Cart\BuyRequestBuilderInterface;
 
 final class BuyRequestBuilder implements BuyRequestBuilderInterface
 {

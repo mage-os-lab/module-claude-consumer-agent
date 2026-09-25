@@ -1,12 +1,12 @@
 <?php
 declare(strict_types=1);
 
-namespace MageOS\ClaudeConsumerAgent\Model\Data;
+namespace MageOS\AiShoppingAssistant\Model\Data;
 
 use DateTimeImmutable;
 use DateTimeInterface;
-use MageOS\ClaudeConsumerAgent\Api\Data\OrderInterface;
-use MageOS\ClaudeConsumerAgent\Api\Data\OrderItemInterface;
+use MageOS\AiShoppingAssistant\Api\Data\OrderInterface;
+use MageOS\AiShoppingAssistant\Api\Data\OrderItemInterface;
 
 final class Order implements OrderInterface
 {

@@ -1,14 +1,14 @@
 <?php
 declare(strict_types=1);
 
-namespace MageOS\ClaudeConsumerAgent\Test\Unit\Session;
+namespace MageOS\AiShoppingAssistant\Test\Unit\Session;
 
-use MageOS\ClaudeConsumerAgent\Api\Data\PageContextInterface;
-use MageOS\ClaudeConsumerAgent\Model\Agent\SessionContext;
-use MageOS\ClaudeConsumerAgent\Model\Agent\SessionState;
-use MageOS\ClaudeConsumerAgent\Model\Session\IdGenerator;
-use MageOS\ClaudeConsumerAgent\Model\Session\Repository;
-use MageOS\ClaudeConsumerAgent\Model\Session\ResourceModel\Session;
+use MageOS\AiShoppingAssistant\Api\Data\PageContextInterface;
+use MageOS\AiShoppingAssistant\Model\Agent\SessionContext;
+use MageOS\AiShoppingAssistant\Model\Agent\SessionState;
+use MageOS\AiShoppingAssistant\Model\Session\IdGenerator;
+use MageOS\AiShoppingAssistant\Model\Session\Repository;
+use MageOS\AiShoppingAssistant\Model\Session\ResourceModel\Session;
 use PHPUnit\Framework\MockObject\MockObject;
 use Psr\Log\LoggerInterface;
 use PHPUnit\Framework\TestCase;
@@ -273,7 +273,7 @@ final class RepositoryTest extends TestCase
         $repository = $this->buildRepository($resource, $logger);
 
         $ctx = $this->buildContext(42, 5, 1);
-        $binding = new \MageOS\ClaudeConsumerAgent\Model\Session\Binding(
+        $binding = new \MageOS\AiShoppingAssistant\Model\Session\Binding(
             $sessionId,
             ['turns' => 4],
             new SessionState(),
@@ -303,7 +303,7 @@ final class RepositoryTest extends TestCase
         $repository = $this->buildRepository($resource, $logger);
 
         $ctx = $this->buildContext(42, 5, 1);
-        $binding = new \MageOS\ClaudeConsumerAgent\Model\Session\Binding(
+        $binding = new \MageOS\AiShoppingAssistant\Model\Session\Binding(
             $sessionId,
             ['turns' => 0, 'version' => 0],
             new SessionState(),

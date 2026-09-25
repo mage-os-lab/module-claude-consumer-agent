@@ -1,12 +1,12 @@
 <?php
 declare(strict_types=1);
 
-namespace MageOS\ClaudeConsumerAgent\Api\Data;
+namespace MageOS\AiShoppingAssistant\Api\Data;
 
 interface CartInterface
 {
     /**
-     * @return \MageOS\ClaudeConsumerAgent\Api\Data\CartItemInterface[]
+     * @return \MageOS\AiShoppingAssistant\Api\Data\CartItemInterface[]
      */
     public function getItems(): array;
 

@@ -1,10 +1,10 @@
 <?php
 declare(strict_types=1);
 
-namespace MageOS\ClaudeConsumerAgent\Model\Agent\Prompt;
+namespace MageOS\AiShoppingAssistant\Model\Agent\Prompt;
 
 use Magento\Framework\App\Config;
-use MageOS\ClaudeConsumerAgent\Model\Agent\AgentConfig;
+use MageOS\AiShoppingAssistant\Model\Agent\AgentConfig;
 
 /**
  * Ports shopping_agent.prompt.build_static_system for v1: memory is always off (no
@@ -18,16 +18,16 @@ final class StaticSystem
     private const STORE_FACTS_MAX_CHARS = 6000;
 
     public function __construct(
-        private readonly \MageOS\ClaudeConsumerAgent\Model\Config\StoreConfig $storeConfig,
-        private readonly \MageOS\ClaudeConsumerAgent\Model\Agent\Skill\Registry $skills,
+        private readonly \MageOS\AiShoppingAssistant\Model\Config\StoreConfig $storeConfig,
+        private readonly \MageOS\AiShoppingAssistant\Model\Agent\Skill\Registry $skills,
         private readonly \Magento\Framework\App\CacheInterface $cache,
         private readonly \Magento\Framework\Serialize\Serializer\Json $json,
-        private readonly \MageOS\ClaudeConsumerAgent\Model\Agent\Fencing\Fence $fence,
-        private readonly \MageOS\ClaudeConsumerAgent\Api\Backend\CatalogMapProviderInterface $catalogMapProvider,
-        private readonly \MageOS\ClaudeConsumerAgent\Model\Agent\Prompt\CatalogMap $catalogMap,
-        private readonly \MageOS\ClaudeConsumerAgent\Model\Agent\Prompt\CoreFacts $coreFacts,
-        private readonly \MageOS\ClaudeConsumerAgent\Model\Agent\Prompt\StoreFactsBlock $storeFactsBlock,
-        private readonly \MageOS\ClaudeConsumerAgent\Api\Backend\StoreFactTitleResolverInterface $storeFactTitleResolver
+        private readonly \MageOS\AiShoppingAssistant\Model\Agent\Fencing\Fence $fence,
+        private readonly \MageOS\AiShoppingAssistant\Api\Backend\CatalogMapProviderInterface $catalogMapProvider,
+        private readonly \MageOS\AiShoppingAssistant\Model\Agent\Prompt\CatalogMap $catalogMap,
+        private readonly \MageOS\AiShoppingAssistant\Model\Agent\Prompt\CoreFacts $coreFacts,
+        private readonly \MageOS\AiShoppingAssistant\Model\Agent\Prompt\StoreFactsBlock $storeFactsBlock,
+        private readonly \MageOS\AiShoppingAssistant\Api\Backend\StoreFactTitleResolverInterface $storeFactTitleResolver
     ) {
     }
 

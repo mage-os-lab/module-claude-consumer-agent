@@ -1,15 +1,15 @@
 <?php
 declare(strict_types=1);
 
-namespace MageOS\ClaudeConsumerAgent\Model\Agent;
+namespace MageOS\AiShoppingAssistant\Model\Agent;
 
-use MageOS\ClaudeConsumerAgent\Api\Data\CartInterface;
-use MageOS\ClaudeConsumerAgent\Api\Data\CartItemInterface;
-use MageOS\ClaudeConsumerAgent\Api\Data\FulfillmentOptionInterface;
-use MageOS\ClaudeConsumerAgent\Api\Data\OrderInterface;
-use MageOS\ClaudeConsumerAgent\Api\Data\OrderItemInterface;
-use MageOS\ClaudeConsumerAgent\Api\Data\PolicyInterface;
-use MageOS\ClaudeConsumerAgent\Api\Data\ProductDetailsInterface;
+use MageOS\AiShoppingAssistant\Api\Data\CartInterface;
+use MageOS\AiShoppingAssistant\Api\Data\CartItemInterface;
+use MageOS\AiShoppingAssistant\Api\Data\FulfillmentOptionInterface;
+use MageOS\AiShoppingAssistant\Api\Data\OrderInterface;
+use MageOS\AiShoppingAssistant\Api\Data\OrderItemInterface;
+use MageOS\AiShoppingAssistant\Api\Data\PolicyInterface;
+use MageOS\AiShoppingAssistant\Api\Data\ProductDetailsInterface;
 
 final class Serializer
 {
@@ -23,7 +23,7 @@ final class Serializer
     private const UNSETTABLE_CUSTOM_OPTION_TYPES = ['file', 'date', 'date_time', 'time'];
 
     public function __construct(
-        private readonly \MageOS\ClaudeConsumerAgent\Model\Agent\Fencing\Fence $fence
+        private readonly \MageOS\AiShoppingAssistant\Model\Agent\Fencing\Fence $fence
     ) {
     }
 

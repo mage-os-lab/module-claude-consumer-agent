@@ -1,9 +1,9 @@
 <?php
 declare(strict_types=1);
 
-namespace MageOS\ClaudeConsumerAgent\Model\Eval;
+namespace MageOS\AiShoppingAssistant\Model\Eval;
 
-use MageOS\ClaudeConsumerAgent\Model\Session\ResourceModel\Message;
+use MageOS\AiShoppingAssistant\Model\Session\ResourceModel\Message;
 
 /**
  * A drop-in replacement for the message resource model, keyed by session id, so a

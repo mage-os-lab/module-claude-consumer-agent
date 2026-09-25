@@ -1,18 +1,18 @@
 <?php
 declare(strict_types=1);
 
-namespace MageOS\ClaudeConsumerAgent\Model\Agent\Grounding;
+namespace MageOS\AiShoppingAssistant\Model\Agent\Grounding;
 
-use MageOS\ClaudeConsumerAgent\Api\Data\PageContextInterface;
-use MageOS\ClaudeConsumerAgent\Model\Agent\AgentConfig;
-use MageOS\ClaudeConsumerAgent\Model\Agent\SessionState;
+use MageOS\AiShoppingAssistant\Api\Data\PageContextInterface;
+use MageOS\AiShoppingAssistant\Model\Agent\AgentConfig;
+use MageOS\AiShoppingAssistant\Model\Agent\SessionState;
 
 final class Rules
 {
     public function __construct(
-        private readonly \MageOS\ClaudeConsumerAgent\Model\Agent\Lexicon $lexicon,
-        private readonly \MageOS\ClaudeConsumerAgent\Model\Agent\Grounding\SkuCandidates $skuCandidates,
-        private readonly \MageOS\ClaudeConsumerAgent\Api\Backend\SkuMatcherInterface $skuMatcher
+        private readonly \MageOS\AiShoppingAssistant\Model\Agent\Lexicon $lexicon,
+        private readonly \MageOS\AiShoppingAssistant\Model\Agent\Grounding\SkuCandidates $skuCandidates,
+        private readonly \MageOS\AiShoppingAssistant\Api\Backend\SkuMatcherInterface $skuMatcher
     ) {
     }
 

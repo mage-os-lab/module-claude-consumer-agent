@@ -1,12 +1,12 @@
 define([
     'uiLayout',
     'uiRegistry',
-    'MageOS_ClaudeConsumerAgent/js/luma/model/state'
+    'MageOS_AiShoppingAssistant/js/luma/model/state'
 ], function (layout, registry, state) {
     'use strict';
 
     var PANEL_NAME = 'aiAgentPanel',
-        PANEL_COMPONENT = 'MageOS_ClaudeConsumerAgent/js/luma/view/panel',
+        PANEL_COMPONENT = 'MageOS_AiShoppingAssistant/js/luma/view/panel',
         loading = null;
 
     function panel() {

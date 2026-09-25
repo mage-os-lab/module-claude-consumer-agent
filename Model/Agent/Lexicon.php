@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-namespace MageOS\ClaudeConsumerAgent\Model\Agent;
+namespace MageOS\AiShoppingAssistant\Model\Agent;
 
 final class Lexicon
 {
@@ -41,7 +41,7 @@ final class Lexicon
     ];
 
     public function __construct(
-        private readonly \MageOS\ClaudeConsumerAgent\Model\Config\StoreConfig $storeConfig,
+        private readonly \MageOS\AiShoppingAssistant\Model\Config\StoreConfig $storeConfig,
         private readonly array $additionalPolicyTerms = [],
         private readonly array $additionalOrderTerms = []
     ) {

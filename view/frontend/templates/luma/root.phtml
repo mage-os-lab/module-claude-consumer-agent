@@ -2,7 +2,7 @@
 declare(strict_types=1);
 
 use Magento\Framework\View\Element\Template;
-use MageOS\ClaudeConsumerAgent\ViewModel\LumaConfig;
+use MageOS\AiShoppingAssistant\ViewModel\LumaConfig;
 
 /** @var Template $block */
 /** @var LumaConfig $lumaConfig */
@@ -12,5 +12,5 @@ $lumaConfig = $block->getViewModel();
     <!-- ko template: getTemplate() --><!-- /ko -->
 </div>
 <script type="text/x-magento-init">
-    {"*": {"MageOS_ClaudeConsumerAgent/js/luma/init": <?= /* @noEscape */ $lumaConfig->json() ?>}}
+    {"*": {"MageOS_AiShoppingAssistant/js/luma/init": <?= /* @noEscape */ $lumaConfig->json() ?>}}
 </script>

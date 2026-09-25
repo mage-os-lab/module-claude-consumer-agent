@@ -3,7 +3,7 @@
 const fs = require('node:fs');
 const path = require('node:path');
 
-const MODULE_PREFIX = 'MageOS_ClaudeConsumerAgent/';
+const MODULE_PREFIX = 'MageOS_AiShoppingAssistant/';
 const WEB_ROOT = path.resolve(__dirname, '../../view/frontend/web');
 
 function load(moduleId, stubs, cache) {

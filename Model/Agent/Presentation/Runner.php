@@ -1,13 +1,13 @@
 <?php
 declare(strict_types=1);
 
-namespace MageOS\ClaudeConsumerAgent\Model\Agent\Presentation;
+namespace MageOS\AiShoppingAssistant\Model\Agent\Presentation;
 
-use MageOS\ClaudeConsumerAgent\Model\Agent\Event;
-use MageOS\ClaudeConsumerAgent\Model\Agent\Exception\PresentationRefused;
-use MageOS\ClaudeConsumerAgent\Model\Agent\SessionContext;
-use MageOS\ClaudeConsumerAgent\Model\Agent\SessionState;
-use MageOS\ClaudeConsumerAgent\Model\Agent\ToolOutcome;
+use MageOS\AiShoppingAssistant\Model\Agent\Event;
+use MageOS\AiShoppingAssistant\Model\Agent\Exception\PresentationRefused;
+use MageOS\AiShoppingAssistant\Model\Agent\SessionContext;
+use MageOS\AiShoppingAssistant\Model\Agent\SessionState;
+use MageOS\AiShoppingAssistant\Model\Agent\ToolOutcome;
 
 /**
  * run() takes a fourth optional $streamId, falling back to the component name when null,
@@ -16,10 +16,10 @@ use MageOS\ClaudeConsumerAgent\Model\Agent\ToolOutcome;
 final class Runner
 {
     public function __construct(
-        private readonly \MageOS\ClaudeConsumerAgent\Model\Agent\Presentation\Registry $registry,
-        private readonly \MageOS\ClaudeConsumerAgent\Model\Agent\Schema\Validator $validator,
-        private readonly \MageOS\ClaudeConsumerAgent\Api\StorefrontBackendInterface $backend,
-        private readonly \MageOS\ClaudeConsumerAgent\Model\Config\StoreConfig $storeConfig
+        private readonly \MageOS\AiShoppingAssistant\Model\Agent\Presentation\Registry $registry,
+        private readonly \MageOS\AiShoppingAssistant\Model\Agent\Schema\Validator $validator,
+        private readonly \MageOS\AiShoppingAssistant\Api\StorefrontBackendInterface $backend,
+        private readonly \MageOS\AiShoppingAssistant\Model\Config\StoreConfig $storeConfig
     ) {
     }
 

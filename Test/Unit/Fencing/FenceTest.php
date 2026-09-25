@@ -1,10 +1,10 @@
 <?php
 declare(strict_types=1);
 
-namespace MageOS\ClaudeConsumerAgent\Test\Unit\Fencing;
+namespace MageOS\AiShoppingAssistant\Test\Unit\Fencing;
 
-use MageOS\ClaudeConsumerAgent\Model\Agent\Fencing\Fence;
-use MageOS\ClaudeConsumerAgent\Model\Agent\Fencing\Sanitizer;
+use MageOS\AiShoppingAssistant\Model\Agent\Fencing\Fence;
+use MageOS\AiShoppingAssistant\Model\Agent\Fencing\Sanitizer;
 use PHPUnit\Framework\TestCase;
 
 final class FenceTest extends TestCase

@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-namespace MageOS\ClaudeConsumerAgent\Test\Unit\Prompt;
+namespace MageOS\AiShoppingAssistant\Test\Unit\Prompt;
 
 use Magento\Framework\App\CacheInterface;
 use Magento\Framework\App\Config;
@@ -10,19 +10,19 @@ use Magento\Framework\Exception\NoSuchEntityException;
 use Magento\Framework\Filesystem\Driver\File;
 use Magento\Framework\Serialize\Serializer\Json;
 use Magento\Store\Model\StoreManagerInterface;
-use MageOS\ClaudeConsumerAgent\Api\Backend\CatalogMapProviderInterface;
-use MageOS\ClaudeConsumerAgent\Api\Backend\StoreFactTitleResolverInterface;
-use MageOS\ClaudeConsumerAgent\Model\Agent\AgentConfig;
-use MageOS\ClaudeConsumerAgent\Model\Agent\Fencing\Fence;
-use MageOS\ClaudeConsumerAgent\Model\Agent\Fencing\Sanitizer;
-use MageOS\ClaudeConsumerAgent\Model\Agent\Prompt\CatalogMap;
-use MageOS\ClaudeConsumerAgent\Model\Agent\Prompt\CoreFacts;
-use MageOS\ClaudeConsumerAgent\Model\Agent\Prompt\StaticSystem;
-use MageOS\ClaudeConsumerAgent\Model\Agent\Prompt\StoreFactsBlock;
-use MageOS\ClaudeConsumerAgent\Model\Agent\Skill\FrontMatter;
-use MageOS\ClaudeConsumerAgent\Model\Agent\Skill\Loader;
-use MageOS\ClaudeConsumerAgent\Model\Agent\Skill\Registry as SkillRegistry;
-use MageOS\ClaudeConsumerAgent\Model\Config\StoreConfig;
+use MageOS\AiShoppingAssistant\Api\Backend\CatalogMapProviderInterface;
+use MageOS\AiShoppingAssistant\Api\Backend\StoreFactTitleResolverInterface;
+use MageOS\AiShoppingAssistant\Model\Agent\AgentConfig;
+use MageOS\AiShoppingAssistant\Model\Agent\Fencing\Fence;
+use MageOS\AiShoppingAssistant\Model\Agent\Fencing\Sanitizer;
+use MageOS\AiShoppingAssistant\Model\Agent\Prompt\CatalogMap;
+use MageOS\AiShoppingAssistant\Model\Agent\Prompt\CoreFacts;
+use MageOS\AiShoppingAssistant\Model\Agent\Prompt\StaticSystem;
+use MageOS\AiShoppingAssistant\Model\Agent\Prompt\StoreFactsBlock;
+use MageOS\AiShoppingAssistant\Model\Agent\Skill\FrontMatter;
+use MageOS\AiShoppingAssistant\Model\Agent\Skill\Loader;
+use MageOS\AiShoppingAssistant\Model\Agent\Skill\Registry as SkillRegistry;
+use MageOS\AiShoppingAssistant\Model\Config\StoreConfig;
 use Magento\Framework\App\Config\ScopeConfigInterface;
 use PHPUnit\Framework\TestCase;
 
@@ -38,7 +38,7 @@ final class StaticSystemTest extends TestCase
     private function realSkillRegistry(): SkillRegistry
     {
         $loader = new Loader(
-            [['module' => 'MageOS_ClaudeConsumerAgent', 'path' => 'skills', 'sortOrder' => 0]],
+            [['module' => 'MageOS_AiShoppingAssistant', 'path' => 'skills', 'sortOrder' => 0]],
             new ComponentRegistrar(),
             new File(),
             new FrontMatter()

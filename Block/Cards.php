@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-namespace MageOS\ClaudeConsumerAgent\Block;
+namespace MageOS\AiShoppingAssistant\Block;
 
 use Magento\Framework\View\Element\Template;
 
@@ -9,7 +9,7 @@ class Cards extends Template
 {
     public function __construct(
         \Magento\Framework\View\Element\Template\Context $context,
-        private readonly \MageOS\ClaudeConsumerAgent\Model\Config\StoreConfig $storeConfig,
+        private readonly \MageOS\AiShoppingAssistant\Model\Config\StoreConfig $storeConfig,
         array $data = []
     ) {
         parent::__construct($context, $data);

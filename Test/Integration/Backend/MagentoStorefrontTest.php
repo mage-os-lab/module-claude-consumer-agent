@@ -1,19 +1,19 @@
 <?php
 declare(strict_types=1);
 
-namespace MageOS\ClaudeConsumerAgent\Test\Integration\Backend;
+namespace MageOS\AiShoppingAssistant\Test\Integration\Backend;
 
 use Magento\Catalog\Api\ProductRepositoryInterface;
 use Magento\Framework\Indexer\IndexerRegistry;
 use Magento\Quote\Model\ResourceModel\Quote\CollectionFactory as QuoteCollectionFactory;
 use Magento\Store\Model\StoreManagerInterface;
 use Magento\TestFramework\Helper\Bootstrap;
-use MageOS\ClaudeConsumerAgent\Api\Data\PageContextInterface;
-use MageOS\ClaudeConsumerAgent\Api\StorefrontBackendInterface;
-use MageOS\ClaudeConsumerAgent\Model\Agent\Exception\SignInRequired;
-use MageOS\ClaudeConsumerAgent\Model\Agent\Exception\Unavailable;
-use MageOS\ClaudeConsumerAgent\Model\Agent\SessionContext;
-use MageOS\ClaudeConsumerAgent\Model\Data\PageContext;
+use MageOS\AiShoppingAssistant\Api\Data\PageContextInterface;
+use MageOS\AiShoppingAssistant\Api\StorefrontBackendInterface;
+use MageOS\AiShoppingAssistant\Model\Agent\Exception\SignInRequired;
+use MageOS\AiShoppingAssistant\Model\Agent\Exception\Unavailable;
+use MageOS\AiShoppingAssistant\Model\Agent\SessionContext;
+use MageOS\AiShoppingAssistant\Model\Data\PageContext;
 use PHPUnit\Framework\TestCase;
 
 final class MagentoStorefrontTest extends TestCase

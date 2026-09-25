@@ -1,15 +1,15 @@
 <?php
 declare(strict_types=1);
 
-namespace MageOS\ClaudeConsumerAgent\Test\Unit\Surface;
+namespace MageOS\AiShoppingAssistant\Test\Unit\Surface;
 
 use Magento\Framework\App\Config\ScopeConfigInterface;
 use Magento\Framework\View\Element\BlockInterface;
 use Magento\Framework\View\LayoutInterface;
 use Magento\Store\Api\Data\StoreInterface;
 use Magento\Store\Model\StoreManagerInterface;
-use MageOS\ClaudeConsumerAgent\Model\Config\StoreConfig;
-use MageOS\ClaudeConsumerAgent\Model\Surface\Resolver;
+use MageOS\AiShoppingAssistant\Model\Config\StoreConfig;
+use MageOS\AiShoppingAssistant\Model\Surface\Resolver;
 use PHPUnit\Framework\TestCase;
 
 final class ResolverTest extends TestCase

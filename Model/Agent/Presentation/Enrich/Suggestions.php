@@ -1,15 +1,15 @@
 <?php
 declare(strict_types=1);
 
-namespace MageOS\ClaudeConsumerAgent\Model\Agent\Presentation\Enrich;
+namespace MageOS\AiShoppingAssistant\Model\Agent\Presentation\Enrich;
 
-use MageOS\ClaudeConsumerAgent\Model\Agent\Exception\PresentationRefused;
-use MageOS\ClaudeConsumerAgent\Model\Agent\Presentation\EnrichmentContext;
+use MageOS\AiShoppingAssistant\Model\Agent\Exception\PresentationRefused;
+use MageOS\AiShoppingAssistant\Model\Agent\Presentation\EnrichmentContext;
 
 final class Suggestions
 {
     public function __construct(
-        private readonly \MageOS\ClaudeConsumerAgent\Model\Agent\Fencing\Sanitizer $sanitizer
+        private readonly \MageOS\AiShoppingAssistant\Model\Agent\Fencing\Sanitizer $sanitizer
     ) {
     }
 

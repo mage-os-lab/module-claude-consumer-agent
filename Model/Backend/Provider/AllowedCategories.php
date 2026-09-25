@@ -1,13 +1,13 @@
 <?php
 declare(strict_types=1);
 
-namespace MageOS\ClaudeConsumerAgent\Model\Backend\Provider;
+namespace MageOS\AiShoppingAssistant\Model\Backend\Provider;
 
 final class AllowedCategories
 {
     public function __construct(
         private readonly \Magento\Catalog\Model\ResourceModel\Category\CollectionFactory $collectionFactory,
-        private readonly \MageOS\ClaudeConsumerAgent\Model\Config\StoreConfig $storeConfig
+        private readonly \MageOS\AiShoppingAssistant\Model\Config\StoreConfig $storeConfig
     ) {
     }
 

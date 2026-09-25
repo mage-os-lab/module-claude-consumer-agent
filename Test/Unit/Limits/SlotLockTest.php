@@ -1,15 +1,15 @@
 <?php
 declare(strict_types=1);
 
-namespace MageOS\ClaudeConsumerAgent\Test\Unit\Limits;
+namespace MageOS\AiShoppingAssistant\Test\Unit\Limits;
 
 use Magento\Framework\App\Config\ScopeConfigInterface;
 use Magento\Framework\Lock\LockManagerInterface;
 use Magento\Store\Api\Data\StoreInterface;
 use Magento\Store\Model\StoreManagerInterface;
-use MageOS\ClaudeConsumerAgent\Model\Config\StoreConfig;
-use MageOS\ClaudeConsumerAgent\Model\Limits\SlotHandle;
-use MageOS\ClaudeConsumerAgent\Model\Limits\SlotLock;
+use MageOS\AiShoppingAssistant\Model\Config\StoreConfig;
+use MageOS\AiShoppingAssistant\Model\Limits\SlotHandle;
+use MageOS\AiShoppingAssistant\Model\Limits\SlotLock;
 use Psr\Log\LoggerInterface;
 use PHPUnit\Framework\TestCase;
 

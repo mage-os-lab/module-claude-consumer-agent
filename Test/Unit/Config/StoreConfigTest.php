@@ -1,14 +1,14 @@
 <?php
 declare(strict_types=1);
 
-namespace MageOS\ClaudeConsumerAgent\Test\Unit\Config;
+namespace MageOS\AiShoppingAssistant\Test\Unit\Config;
 
 use Magento\Framework\App\Config\ScopeConfigInterface;
 use Magento\Store\Api\Data\StoreInterface;
 use Magento\Store\Api\Data\WebsiteInterface;
 use Magento\Store\Model\StoreManagerInterface;
-use MageOS\ClaudeConsumerAgent\Model\Agent\AgentConfig;
-use MageOS\ClaudeConsumerAgent\Model\Config\StoreConfig;
+use MageOS\AiShoppingAssistant\Model\Agent\AgentConfig;
+use MageOS\AiShoppingAssistant\Model\Config\StoreConfig;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 

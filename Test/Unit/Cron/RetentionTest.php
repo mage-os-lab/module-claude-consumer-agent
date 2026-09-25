@@ -1,14 +1,14 @@
 <?php
 declare(strict_types=1);
 
-namespace MageOS\ClaudeConsumerAgent\Test\Unit\Cron;
+namespace MageOS\AiShoppingAssistant\Test\Unit\Cron;
 
 use Magento\Framework\App\Config\ScopeConfigInterface;
 use Magento\Store\Api\Data\StoreInterface;
 use Magento\Store\Model\StoreManagerInterface;
-use MageOS\ClaudeConsumerAgent\Cron\Retention;
-use MageOS\ClaudeConsumerAgent\Model\Config\StoreConfig;
-use MageOS\ClaudeConsumerAgent\Model\Session\ResourceModel\Session;
+use MageOS\AiShoppingAssistant\Cron\Retention;
+use MageOS\AiShoppingAssistant\Model\Config\StoreConfig;
+use MageOS\AiShoppingAssistant\Model\Session\ResourceModel\Session;
 use Psr\Log\LoggerInterface;
 use PHPUnit\Framework\TestCase;
 

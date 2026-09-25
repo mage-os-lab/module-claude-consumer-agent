@@ -1,5 +1,5 @@
 define([
-    'MageOS_ClaudeConsumerAgent/js/luma/opener'
+    'MageOS_AiShoppingAssistant/js/luma/opener'
 ], function (opener) {
     'use strict';
 

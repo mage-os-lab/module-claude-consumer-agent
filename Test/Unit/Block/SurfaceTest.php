@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-namespace MageOS\ClaudeConsumerAgent\Test\Unit\Block;
+namespace MageOS\AiShoppingAssistant\Test\Unit\Block;
 
 use Magento\Catalog\Api\CategoryRepositoryInterface;
 use Magento\Catalog\Api\ProductRepositoryInterface;
@@ -12,11 +12,11 @@ use Magento\Framework\View\Element\Template\Context;
 use Magento\Framework\View\LayoutInterface;
 use Magento\Store\Api\Data\StoreInterface;
 use Magento\Store\Model\StoreManagerInterface;
-use MageOS\ClaudeConsumerAgent\Block\Surface;
-use MageOS\ClaudeConsumerAgent\Model\Config\StoreConfig;
-use MageOS\ClaudeConsumerAgent\Model\Surface\PageDetector;
-use MageOS\ClaudeConsumerAgent\Model\Surface\Resolver;
-use MageOS\ClaudeConsumerAgent\ViewModel\Assistant;
+use MageOS\AiShoppingAssistant\Block\Surface;
+use MageOS\AiShoppingAssistant\Model\Config\StoreConfig;
+use MageOS\AiShoppingAssistant\Model\Surface\PageDetector;
+use MageOS\AiShoppingAssistant\Model\Surface\Resolver;
+use MageOS\AiShoppingAssistant\ViewModel\Assistant;
 use PHPUnit\Framework\TestCase;
 use ReflectionMethod;
 

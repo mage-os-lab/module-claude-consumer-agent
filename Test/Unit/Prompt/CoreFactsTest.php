@@ -1,10 +1,10 @@
 <?php
 declare(strict_types=1);
 
-namespace MageOS\ClaudeConsumerAgent\Test\Unit\Prompt;
+namespace MageOS\AiShoppingAssistant\Test\Unit\Prompt;
 
-use MageOS\ClaudeConsumerAgent\Api\Prompt\CoreFactProviderInterface;
-use MageOS\ClaudeConsumerAgent\Model\Agent\Prompt\CoreFacts;
+use MageOS\AiShoppingAssistant\Api\Prompt\CoreFactProviderInterface;
+use MageOS\AiShoppingAssistant\Model\Agent\Prompt\CoreFacts;
 use PHPUnit\Framework\TestCase;
 
 final class CoreFactsTest extends TestCase

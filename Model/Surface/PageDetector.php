@@ -1,11 +1,11 @@
 <?php
 declare(strict_types=1);
 
-namespace MageOS\ClaudeConsumerAgent\Model\Surface;
+namespace MageOS\AiShoppingAssistant\Model\Surface;
 
 use Magento\Framework\Exception\NoSuchEntityException;
-use MageOS\ClaudeConsumerAgent\Api\Data\PageContextInterface;
-use MageOS\ClaudeConsumerAgent\Model\Data\PageContext;
+use MageOS\AiShoppingAssistant\Api\Data\PageContextInterface;
+use MageOS\AiShoppingAssistant\Model\Data\PageContext;
 
 final class PageDetector
 {

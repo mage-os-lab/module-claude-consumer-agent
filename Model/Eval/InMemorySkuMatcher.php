@@ -1,9 +1,9 @@
 <?php
 declare(strict_types=1);
 
-namespace MageOS\ClaudeConsumerAgent\Model\Eval;
+namespace MageOS\AiShoppingAssistant\Model\Eval;
 
-use MageOS\ClaudeConsumerAgent\Api\Backend\SkuMatcherInterface;
+use MageOS\AiShoppingAssistant\Api\Backend\SkuMatcherInterface;
 
 /**
  * SKU lookup for the eval runner: the case's catalog ids stand in for the product table,

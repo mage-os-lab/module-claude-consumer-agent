@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-namespace MageOS\ClaudeConsumerAgent\Model\Config\Source;
+namespace MageOS\AiShoppingAssistant\Model\Config\Source;
 
 use Magento\Catalog\Model\Category;
 use Magento\Framework\Data\OptionSourceInterface;

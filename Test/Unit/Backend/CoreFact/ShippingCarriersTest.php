@@ -1,12 +1,12 @@
 <?php
 declare(strict_types=1);
 
-namespace MageOS\ClaudeConsumerAgent\Test\Unit\Backend\CoreFact;
+namespace MageOS\AiShoppingAssistant\Test\Unit\Backend\CoreFact;
 
 use Magento\Framework\App\Config\ScopeConfigInterface;
 use Magento\Shipping\Model\Carrier\AbstractCarrierInterface;
 use Magento\Shipping\Model\Config;
-use MageOS\ClaudeConsumerAgent\Model\Backend\Provider\CoreFact\ShippingCarriers;
+use MageOS\AiShoppingAssistant\Model\Backend\Provider\CoreFact\ShippingCarriers;
 use PHPUnit\Framework\TestCase;
 
 final class ShippingCarriersTest extends TestCase

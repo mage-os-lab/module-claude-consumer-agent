@@ -1,10 +1,10 @@
 <?php
 declare(strict_types=1);
 
-namespace MageOS\ClaudeConsumerAgent\Test\Unit\Agent;
+namespace MageOS\AiShoppingAssistant\Test\Unit\Agent;
 
-use MageOS\ClaudeConsumerAgent\Model\Agent\Event;
-use MageOS\ClaudeConsumerAgent\Model\Agent\ToolOutcome;
+use MageOS\AiShoppingAssistant\Model\Agent\Event;
+use MageOS\AiShoppingAssistant\Model\Agent\ToolOutcome;
 use PHPUnit\Framework\TestCase;
 
 final class ToolOutcomeTest extends TestCase

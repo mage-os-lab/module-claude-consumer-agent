@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-namespace MageOS\ClaudeConsumerAgent\Console\Command;
+namespace MageOS\AiShoppingAssistant\Console\Command;
 
 use Magento\Framework\Console\Cli;
 use Symfony\Component\Console\Command\Command;
@@ -21,7 +21,7 @@ class SessionPurge extends Command
     private const OPTION_FORCE = 'force';
 
     public function __construct(
-        private readonly \MageOS\ClaudeConsumerAgent\Model\Session\ResourceModel\Session $sessionResource,
+        private readonly \MageOS\AiShoppingAssistant\Model\Session\ResourceModel\Session $sessionResource,
         ?string $name = null
     ) {
         parent::__construct($name);

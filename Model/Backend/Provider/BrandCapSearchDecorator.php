@@ -1,12 +1,12 @@
 <?php
 declare(strict_types=1);
 
-namespace MageOS\ClaudeConsumerAgent\Model\Backend\Provider;
+namespace MageOS\AiShoppingAssistant\Model\Backend\Provider;
 
 use Magento\Catalog\Api\Data\ProductInterface as MagentoProductInterface;
-use MageOS\ClaudeConsumerAgent\Api\Backend\SearchProviderInterface;
-use MageOS\ClaudeConsumerAgent\Api\Data\SearchFiltersInterface;
-use MageOS\ClaudeConsumerAgent\Model\Agent\SessionContext;
+use MageOS\AiShoppingAssistant\Api\Backend\SearchProviderInterface;
+use MageOS\AiShoppingAssistant\Api\Data\SearchFiltersInterface;
+use MageOS\AiShoppingAssistant\Model\Agent\SessionContext;
 
 final class BrandCapSearchDecorator implements SearchProviderInterface
 {
@@ -16,7 +16,7 @@ final class BrandCapSearchDecorator implements SearchProviderInterface
     private const BRAND_SHARE_DIVISOR = 3;
 
     public function __construct(
-        private readonly \MageOS\ClaudeConsumerAgent\Api\Backend\SearchProviderInterface $provider,
+        private readonly \MageOS\AiShoppingAssistant\Api\Backend\SearchProviderInterface $provider,
         private readonly \Magento\Catalog\Model\ResourceModel\Product\CollectionFactory $productCollectionFactory
     ) {
     }

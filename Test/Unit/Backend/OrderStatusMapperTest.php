@@ -1,11 +1,11 @@
 <?php
 declare(strict_types=1);
 
-namespace MageOS\ClaudeConsumerAgent\Test\Unit\Backend;
+namespace MageOS\AiShoppingAssistant\Test\Unit\Backend;
 
 use Magento\Sales\Model\Order;
-use MageOS\ClaudeConsumerAgent\Api\Data\OrderInterface;
-use MageOS\ClaudeConsumerAgent\Model\Backend\Provider\OrderStatusMapper;
+use MageOS\AiShoppingAssistant\Api\Data\OrderInterface;
+use MageOS\AiShoppingAssistant\Model\Backend\Provider\OrderStatusMapper;
 use PHPUnit\Framework\TestCase;
 
 final class OrderStatusMapperTest extends TestCase

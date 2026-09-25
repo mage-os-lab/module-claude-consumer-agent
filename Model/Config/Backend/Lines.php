@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-namespace MageOS\ClaudeConsumerAgent\Model\Config\Backend;
+namespace MageOS\AiShoppingAssistant\Model\Config\Backend;
 
 use Magento\Framework\App\Config\Value;
 

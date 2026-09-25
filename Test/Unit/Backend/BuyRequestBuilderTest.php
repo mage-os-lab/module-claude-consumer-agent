@@ -1,10 +1,10 @@
 <?php
 declare(strict_types=1);
 
-namespace MageOS\ClaudeConsumerAgent\Test\Unit\Backend;
+namespace MageOS\AiShoppingAssistant\Test\Unit\Backend;
 
 use Magento\Catalog\Model\Product as MagentoProduct;
-use MageOS\ClaudeConsumerAgent\Model\Backend\BuyRequestBuilder;
+use MageOS\AiShoppingAssistant\Model\Backend\BuyRequestBuilder;
 use PHPUnit\Framework\TestCase;
 
 final class BuyRequestBuilderTest extends TestCase

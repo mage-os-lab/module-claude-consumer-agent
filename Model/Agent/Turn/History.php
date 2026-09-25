@@ -1,10 +1,10 @@
 <?php
 declare(strict_types=1);
 
-namespace MageOS\ClaudeConsumerAgent\Model\Agent\Turn;
+namespace MageOS\AiShoppingAssistant\Model\Agent\Turn;
 
-use MageOS\ClaudeConsumerAgent\Model\Agent\Executor;
-use MageOS\ClaudeConsumerAgent\Model\Agent\ToolOutcome;
+use MageOS\AiShoppingAssistant\Model\Agent\Executor;
+use MageOS\AiShoppingAssistant\Model\Agent\ToolOutcome;
 
 final class History
 {

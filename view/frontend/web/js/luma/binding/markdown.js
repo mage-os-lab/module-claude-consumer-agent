@@ -1,6 +1,6 @@
 define([
     'ko',
-    'MageOS_ClaudeConsumerAgent/js/luma/model/markdown'
+    'MageOS_AiShoppingAssistant/js/luma/model/markdown'
 ], function (ko, markdown) {
     'use strict';
 

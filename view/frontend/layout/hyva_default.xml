@@ -5,51 +5,51 @@
         <referenceBlock name="aiagent.luma.launcher" remove="true"/>
         <referenceContainer name="cart-drawer.top">
             <block name="aiagent.drawer"
-                   class="MageOS\ClaudeConsumerAgent\Block\Surface"
-                   template="MageOS_ClaudeConsumerAgent::surface/drawer.phtml"
+                   class="MageOS\AiShoppingAssistant\Block\Surface"
+                   template="MageOS_AiShoppingAssistant::surface/drawer.phtml"
                    ifconfig="ai_integration/aiagent/general/enabled">
                 <arguments>
                     <argument name="surface" xsi:type="string">side_cart</argument>
                 </arguments>
-                <block name="aiagent.drawer.cartstrip" as="cart_strip" template="MageOS_ClaudeConsumerAgent::surface/cart-strip.phtml"/>
-                <block name="aiagent.drawer.start" as="start" template="MageOS_ClaudeConsumerAgent::surface/start.phtml"/>
-                <block name="aiagent.drawer.transcript" as="transcript" template="MageOS_ClaudeConsumerAgent::surface/transcript.phtml"/>
-                <block name="aiagent.drawer.composer" as="composer" template="MageOS_ClaudeConsumerAgent::surface/composer.phtml"/>
+                <block name="aiagent.drawer.cartstrip" as="cart_strip" template="MageOS_AiShoppingAssistant::surface/cart-strip.phtml"/>
+                <block name="aiagent.drawer.start" as="start" template="MageOS_AiShoppingAssistant::surface/start.phtml"/>
+                <block name="aiagent.drawer.transcript" as="transcript" template="MageOS_AiShoppingAssistant::surface/transcript.phtml"/>
+                <block name="aiagent.drawer.composer" as="composer" template="MageOS_AiShoppingAssistant::surface/composer.phtml"/>
             </block>
         </referenceContainer>
         <referenceContainer name="before.body.end">
             <block name="aiagent.store"
                    class="Magento\Framework\View\Element\Template"
-                   template="MageOS_ClaudeConsumerAgent::js/store.phtml"
+                   template="MageOS_AiShoppingAssistant::js/store.phtml"
                    ifconfig="ai_integration/aiagent/general/enabled">
                 <arguments>
-                    <argument name="view_model" xsi:type="object">MageOS\ClaudeConsumerAgent\ViewModel\Assistant</argument>
+                    <argument name="view_model" xsi:type="object">MageOS\AiShoppingAssistant\ViewModel\Assistant</argument>
                 </arguments>
             </block>
             <block name="aiagent.overlay"
-                   class="MageOS\ClaudeConsumerAgent\Block\Surface"
-                   template="MageOS_ClaudeConsumerAgent::surface/overlay.phtml"
+                   class="MageOS\AiShoppingAssistant\Block\Surface"
+                   template="MageOS_AiShoppingAssistant::surface/overlay.phtml"
                    ifconfig="ai_integration/aiagent/general/enabled">
                 <arguments>
                     <argument name="surface" xsi:type="string">overlay</argument>
                 </arguments>
-                <block name="aiagent.overlay.cartline" as="cart_line" template="MageOS_ClaudeConsumerAgent::surface/cart-line.phtml"/>
-                <block name="aiagent.overlay.start" as="start" template="MageOS_ClaudeConsumerAgent::surface/start.phtml"/>
-                <block name="aiagent.overlay.transcript" as="transcript" template="MageOS_ClaudeConsumerAgent::surface/transcript.phtml"/>
-                <block name="aiagent.overlay.composer" as="composer" template="MageOS_ClaudeConsumerAgent::surface/composer.phtml"/>
+                <block name="aiagent.overlay.cartline" as="cart_line" template="MageOS_AiShoppingAssistant::surface/cart-line.phtml"/>
+                <block name="aiagent.overlay.start" as="start" template="MageOS_AiShoppingAssistant::surface/start.phtml"/>
+                <block name="aiagent.overlay.transcript" as="transcript" template="MageOS_AiShoppingAssistant::surface/transcript.phtml"/>
+                <block name="aiagent.overlay.composer" as="composer" template="MageOS_AiShoppingAssistant::surface/composer.phtml"/>
             </block>
             <block name="aiagent.launcher"
-                   class="MageOS\ClaudeConsumerAgent\Block\Launcher"
-                   template="MageOS_ClaudeConsumerAgent::surface/launcher.phtml"
+                   class="MageOS\AiShoppingAssistant\Block\Launcher"
+                   template="MageOS_AiShoppingAssistant::surface/launcher.phtml"
                    ifconfig="ai_integration/aiagent/general/launcher_enabled"/>
             <block name="aiagent.cards"
-                   class="MageOS\ClaudeConsumerAgent\Block\Cards"
-                   template="MageOS_ClaudeConsumerAgent::cards/container.phtml"
+                   class="MageOS\AiShoppingAssistant\Block\Cards"
+                   template="MageOS_AiShoppingAssistant::cards/container.phtml"
                    ifconfig="ai_integration/aiagent/general/enabled">
-                <block name="aiagent.card.products" template="MageOS_ClaudeConsumerAgent::cards/products.phtml"/>
-                <block name="aiagent.card.comparison" template="MageOS_ClaudeConsumerAgent::cards/comparison.phtml"/>
-                <block name="aiagent.card.order_status" template="MageOS_ClaudeConsumerAgent::cards/order-status.phtml"/>
-                <block name="aiagent.card.checkout" template="MageOS_ClaudeConsumerAgent::cards/checkout.phtml"/>
+                <block name="aiagent.card.products" template="MageOS_AiShoppingAssistant::cards/products.phtml"/>
+                <block name="aiagent.card.comparison" template="MageOS_AiShoppingAssistant::cards/comparison.phtml"/>
+                <block name="aiagent.card.order_status" template="MageOS_AiShoppingAssistant::cards/order-status.phtml"/>
+                <block name="aiagent.card.checkout" template="MageOS_AiShoppingAssistant::cards/checkout.phtml"/>
             </block>
         </referenceContainer>
     </body>

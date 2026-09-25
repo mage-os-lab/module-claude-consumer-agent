@@ -1,11 +1,11 @@
 <?php
 declare(strict_types=1);
 
-namespace MageOS\ClaudeConsumerAgent\Test\Unit\Backend;
+namespace MageOS\AiShoppingAssistant\Test\Unit\Backend;
 
 use Magento\Catalog\Helper\Image as ImageHelper;
 use Magento\Catalog\Model\Product as MagentoProduct;
-use MageOS\ClaudeConsumerAgent\Model\Backend\Provider\HelperImageUrl;
+use MageOS\AiShoppingAssistant\Model\Backend\Provider\HelperImageUrl;
 use PHPUnit\Framework\TestCase;
 
 final class HelperImageUrlTest extends TestCase

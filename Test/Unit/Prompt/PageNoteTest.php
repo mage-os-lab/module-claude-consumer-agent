@@ -1,11 +1,11 @@
 <?php
 declare(strict_types=1);
 
-namespace MageOS\ClaudeConsumerAgent\Test\Unit\Prompt;
+namespace MageOS\AiShoppingAssistant\Test\Unit\Prompt;
 
-use MageOS\ClaudeConsumerAgent\Model\Agent\Fencing\Sanitizer;
-use MageOS\ClaudeConsumerAgent\Model\Agent\Prompt\PageNote;
-use MageOS\ClaudeConsumerAgent\Model\Data\PageContext;
+use MageOS\AiShoppingAssistant\Model\Agent\Fencing\Sanitizer;
+use MageOS\AiShoppingAssistant\Model\Agent\Prompt\PageNote;
+use MageOS\AiShoppingAssistant\Model\Data\PageContext;
 use PHPUnit\Framework\TestCase;
 
 final class PageNoteTest extends TestCase

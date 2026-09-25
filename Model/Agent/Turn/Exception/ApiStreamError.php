@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-namespace MageOS\ClaudeConsumerAgent\Model\Agent\Turn\Exception;
+namespace MageOS\AiShoppingAssistant\Model\Agent\Turn\Exception;
 
 /**
  * Raised when the Messages API sends an 'error' event inside an otherwise open stream.

@@ -1,41 +1,41 @@
 <?php
 declare(strict_types=1);
 
-namespace MageOS\ClaudeConsumerAgent\Controller\Turn;
+namespace MageOS\AiShoppingAssistant\Controller\Turn;
 
 use Magento\Framework\App\Action\HttpPostActionInterface;
 use Magento\Framework\App\CsrfAwareActionInterface;
 use Magento\Framework\App\Request\InvalidRequestException;
 use Magento\Framework\App\RequestInterface;
 use Magento\Framework\Controller\ResultInterface;
-use MageOS\ClaudeConsumerAgent\Controller\Request\TurnRequest;
-use MageOS\ClaudeConsumerAgent\Model\Agent\AgentConfig;
-use MageOS\ClaudeConsumerAgent\Model\Agent\Event;
-use MageOS\ClaudeConsumerAgent\Model\Agent\SessionContext;
-use MageOS\ClaudeConsumerAgent\Model\Config\Source\Streaming;
-use MageOS\ClaudeConsumerAgent\Model\Data\PageContext;
-use MageOS\ClaudeConsumerAgent\Model\Limits\Exception\LimitExceeded;
-use MageOS\ClaudeConsumerAgent\Model\Session\Binding;
+use MageOS\AiShoppingAssistant\Controller\Request\TurnRequest;
+use MageOS\AiShoppingAssistant\Model\Agent\AgentConfig;
+use MageOS\AiShoppingAssistant\Model\Agent\Event;
+use MageOS\AiShoppingAssistant\Model\Agent\SessionContext;
+use MageOS\AiShoppingAssistant\Model\Config\Source\Streaming;
+use MageOS\AiShoppingAssistant\Model\Data\PageContext;
+use MageOS\AiShoppingAssistant\Model\Limits\Exception\LimitExceeded;
+use MageOS\AiShoppingAssistant\Model\Session\Binding;
 
 class Index implements HttpPostActionInterface, CsrfAwareActionInterface
 {
     private const SLOT_RETRY_AFTER = 5;
 
     public function __construct(
-        private readonly \MageOS\ClaudeConsumerAgent\Controller\Request\BodyReader $bodyReader,
-        private readonly \MageOS\ClaudeConsumerAgent\Controller\Request\FormKeyGuard $formKeyGuard,
+        private readonly \MageOS\AiShoppingAssistant\Controller\Request\BodyReader $bodyReader,
+        private readonly \MageOS\AiShoppingAssistant\Controller\Request\FormKeyGuard $formKeyGuard,
         private readonly \Magento\Customer\Model\Session $customerSession,
         private readonly \Magento\Checkout\Model\Session $checkoutSession,
         private readonly \Magento\Quote\Api\CartRepositoryInterface $cartRepository,
         private readonly \Magento\Store\Model\StoreManagerInterface $storeManager,
-        private readonly \MageOS\ClaudeConsumerAgent\Model\Session\Repository $sessionRepository,
-        private readonly \MageOS\ClaudeConsumerAgent\Model\Limits\SlotLock $slotLock,
-        private readonly \MageOS\ClaudeConsumerAgent\Model\Limits\Counters $counters,
+        private readonly \MageOS\AiShoppingAssistant\Model\Session\Repository $sessionRepository,
+        private readonly \MageOS\AiShoppingAssistant\Model\Limits\SlotLock $slotLock,
+        private readonly \MageOS\AiShoppingAssistant\Model\Limits\Counters $counters,
         private readonly \Magento\Framework\Session\SessionManagerInterface $sessionManager,
-        private readonly \MageOS\ClaudeConsumerAgent\Model\Config\StoreConfig $storeConfig,
-        private readonly \MageOS\ClaudeConsumerAgent\Controller\Result\EventStreamFactory $eventStreamFactory,
-        private readonly \MageOS\ClaudeConsumerAgent\Controller\Result\JsonTurnFactory $jsonTurnFactory,
-        private readonly \MageOS\ClaudeConsumerAgent\Model\Limits\BusyEvent $busyEvent,
+        private readonly \MageOS\AiShoppingAssistant\Model\Config\StoreConfig $storeConfig,
+        private readonly \MageOS\AiShoppingAssistant\Controller\Result\EventStreamFactory $eventStreamFactory,
+        private readonly \MageOS\AiShoppingAssistant\Controller\Result\JsonTurnFactory $jsonTurnFactory,
+        private readonly \MageOS\AiShoppingAssistant\Model\Limits\BusyEvent $busyEvent,
         private readonly \Magento\Framework\HTTP\PhpEnvironment\RemoteAddress $remoteAddress,
         private readonly \Magento\Framework\App\RequestInterface $request,
         private readonly \Magento\Framework\App\Response\Http $response,

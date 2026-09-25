@@ -1,27 +1,27 @@
 <?xml version="1.0"?>
 <config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Event/etc/events.xsd">
     <event name="hyva_config_generate_before">
-        <observer name="aiagent_hyva_config" instance="MageOS\ClaudeConsumerAgent\Observer\HyvaConfigGenerateBefore"/>
+        <observer name="aiagent_hyva_config" instance="MageOS\AiShoppingAssistant\Observer\HyvaConfigGenerateBefore"/>
     </event>
     <event name="catalog_category_save_after">
-        <observer name="aiagent_category_changed_save" instance="MageOS\ClaudeConsumerAgent\Observer\CategoryChanged"/>
+        <observer name="aiagent_category_changed_save" instance="MageOS\AiShoppingAssistant\Observer\CategoryChanged"/>
     </event>
     <event name="catalog_category_delete_after">
-        <observer name="aiagent_category_changed_delete" instance="MageOS\ClaudeConsumerAgent\Observer\CategoryChanged"/>
+        <observer name="aiagent_category_changed_delete" instance="MageOS\AiShoppingAssistant\Observer\CategoryChanged"/>
     </event>
     <event name="catalog_category_move_after">
-        <observer name="aiagent_category_changed_move" instance="MageOS\ClaudeConsumerAgent\Observer\CategoryChanged"/>
+        <observer name="aiagent_category_changed_move" instance="MageOS\AiShoppingAssistant\Observer\CategoryChanged"/>
     </event>
     <event name="cms_page_save_after">
-        <observer name="aiagent_cms_content_changed_page_save" instance="MageOS\ClaudeConsumerAgent\Observer\CmsContentChanged"/>
+        <observer name="aiagent_cms_content_changed_page_save" instance="MageOS\AiShoppingAssistant\Observer\CmsContentChanged"/>
     </event>
     <event name="cms_page_delete_after">
-        <observer name="aiagent_cms_content_changed_page_delete" instance="MageOS\ClaudeConsumerAgent\Observer\CmsContentChanged"/>
+        <observer name="aiagent_cms_content_changed_page_delete" instance="MageOS\AiShoppingAssistant\Observer\CmsContentChanged"/>
     </event>
     <event name="cms_block_save_after">
-        <observer name="aiagent_cms_content_changed_block_save" instance="MageOS\ClaudeConsumerAgent\Observer\CmsContentChanged"/>
+        <observer name="aiagent_cms_content_changed_block_save" instance="MageOS\AiShoppingAssistant\Observer\CmsContentChanged"/>
     </event>
     <event name="cms_block_delete_after">
-        <observer name="aiagent_cms_content_changed_block_delete" instance="MageOS\ClaudeConsumerAgent\Observer\CmsContentChanged"/>
+        <observer name="aiagent_cms_content_changed_block_delete" instance="MageOS\AiShoppingAssistant\Observer\CmsContentChanged"/>
     </event>
 </config>

@@ -1,10 +1,10 @@
 <?php
 declare(strict_types=1);
 
-namespace MageOS\ClaudeConsumerAgent\Model\Backend\Provider;
+namespace MageOS\AiShoppingAssistant\Model\Backend\Provider;
 
-use MageOS\ClaudeConsumerAgent\Api\Backend\FulfillmentProviderInterface;
-use MageOS\ClaudeConsumerAgent\Model\Agent\SessionContext;
+use MageOS\AiShoppingAssistant\Api\Backend\FulfillmentProviderInterface;
+use MageOS\AiShoppingAssistant\Model\Agent\SessionContext;
 
 final class FulfillmentAggregator implements FulfillmentProviderInterface
 {

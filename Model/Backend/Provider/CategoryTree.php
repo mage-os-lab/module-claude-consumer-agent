@@ -1,10 +1,10 @@
 <?php
 declare(strict_types=1);
 
-namespace MageOS\ClaudeConsumerAgent\Model\Backend\Provider;
+namespace MageOS\AiShoppingAssistant\Model\Backend\Provider;
 
 use Magento\Catalog\Model\Category;
-use MageOS\ClaudeConsumerAgent\Api\Backend\CatalogMapProviderInterface;
+use MageOS\AiShoppingAssistant\Api\Backend\CatalogMapProviderInterface;
 
 final class CategoryTree implements CatalogMapProviderInterface
 {

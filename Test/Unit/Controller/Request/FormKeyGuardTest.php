@@ -1,12 +1,12 @@
 <?php
 declare(strict_types=1);
 
-namespace MageOS\ClaudeConsumerAgent\Test\Unit\Controller\Request;
+namespace MageOS\AiShoppingAssistant\Test\Unit\Controller\Request;
 
 use Magento\Framework\App\Request\Http;
 use Magento\Framework\Data\Form\FormKey;
 use Magento\Framework\Data\Form\FormKey\Validator;
-use MageOS\ClaudeConsumerAgent\Controller\Request\FormKeyGuard;
+use MageOS\AiShoppingAssistant\Controller\Request\FormKeyGuard;
 use PHPUnit\Framework\TestCase;
 
 final class FormKeyGuardTest extends TestCase

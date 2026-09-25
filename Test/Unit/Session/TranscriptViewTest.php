@@ -1,20 +1,20 @@
 <?php
 declare(strict_types=1);
 
-namespace MageOS\ClaudeConsumerAgent\Test\Unit\Session;
+namespace MageOS\AiShoppingAssistant\Test\Unit\Session;
 
-use MageOS\ClaudeConsumerAgent\Model\Agent\Fencing\Fence;
-use MageOS\ClaudeConsumerAgent\Model\Agent\Fencing\Sanitizer;
-use MageOS\ClaudeConsumerAgent\Model\Agent\Presentation\Enrich\Checkout;
-use MageOS\ClaudeConsumerAgent\Model\Agent\Presentation\Enrich\Comparison;
-use MageOS\ClaudeConsumerAgent\Model\Agent\Presentation\Enrich\OrderStatus;
-use MageOS\ClaudeConsumerAgent\Model\Agent\Presentation\Enrich\Products;
-use MageOS\ClaudeConsumerAgent\Model\Agent\Presentation\Enrich\Suggestions;
-use MageOS\ClaudeConsumerAgent\Model\Agent\Presentation\Registry;
-use MageOS\ClaudeConsumerAgent\Model\Agent\Prompt\PageNote;
-use MageOS\ClaudeConsumerAgent\Model\Agent\Serializer;
-use MageOS\ClaudeConsumerAgent\Model\Agent\SessionState;
-use MageOS\ClaudeConsumerAgent\Model\Session\TranscriptView;
+use MageOS\AiShoppingAssistant\Model\Agent\Fencing\Fence;
+use MageOS\AiShoppingAssistant\Model\Agent\Fencing\Sanitizer;
+use MageOS\AiShoppingAssistant\Model\Agent\Presentation\Enrich\Checkout;
+use MageOS\AiShoppingAssistant\Model\Agent\Presentation\Enrich\Comparison;
+use MageOS\AiShoppingAssistant\Model\Agent\Presentation\Enrich\OrderStatus;
+use MageOS\AiShoppingAssistant\Model\Agent\Presentation\Enrich\Products;
+use MageOS\AiShoppingAssistant\Model\Agent\Presentation\Enrich\Suggestions;
+use MageOS\AiShoppingAssistant\Model\Agent\Presentation\Registry;
+use MageOS\AiShoppingAssistant\Model\Agent\Prompt\PageNote;
+use MageOS\AiShoppingAssistant\Model\Agent\Serializer;
+use MageOS\AiShoppingAssistant\Model\Agent\SessionState;
+use MageOS\AiShoppingAssistant\Model\Session\TranscriptView;
 use Psr\Log\LoggerInterface;
 use PHPUnit\Framework\TestCase;
 

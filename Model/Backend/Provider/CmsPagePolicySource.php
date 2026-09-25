@@ -1,12 +1,12 @@
 <?php
 declare(strict_types=1);
 
-namespace MageOS\ClaudeConsumerAgent\Model\Backend\Provider;
+namespace MageOS\AiShoppingAssistant\Model\Backend\Provider;
 
 use Magento\Framework\App\Config as AppConfig;
-use MageOS\ClaudeConsumerAgent\Api\Backend\PolicySourceInterface;
-use MageOS\ClaudeConsumerAgent\Model\Agent\SessionContext;
-use MageOS\ClaudeConsumerAgent\Model\Data\Policy;
+use MageOS\AiShoppingAssistant\Api\Backend\PolicySourceInterface;
+use MageOS\AiShoppingAssistant\Model\Agent\SessionContext;
+use MageOS\AiShoppingAssistant\Model\Data\Policy;
 
 final class CmsPagePolicySource implements PolicySourceInterface
 {
@@ -21,7 +21,7 @@ final class CmsPagePolicySource implements PolicySourceInterface
         private readonly \Magento\Framework\Api\SearchCriteriaBuilder $searchCriteriaBuilder,
         private readonly \Magento\Framework\App\CacheInterface $cache,
         private readonly \Magento\Framework\Serialize\Serializer\Json $json,
-        private readonly \MageOS\ClaudeConsumerAgent\Model\Config\StoreConfig $storeConfig,
+        private readonly \MageOS\AiShoppingAssistant\Model\Config\StoreConfig $storeConfig,
         private readonly \Magento\Cms\Api\BlockRepositoryInterface $blockRepository
     ) {
     }

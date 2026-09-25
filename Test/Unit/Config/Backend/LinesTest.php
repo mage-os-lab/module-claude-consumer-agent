@@ -1,14 +1,14 @@
 <?php
 declare(strict_types=1);
 
-namespace MageOS\ClaudeConsumerAgent\Test\Unit\Config\Backend;
+namespace MageOS\AiShoppingAssistant\Test\Unit\Config\Backend;
 
 use Magento\Framework\App\Cache\TypeListInterface;
 use Magento\Framework\App\Config\ScopeConfigInterface;
 use Magento\Framework\Event\ManagerInterface;
 use Magento\Framework\Model\Context;
 use Magento\Framework\Registry;
-use MageOS\ClaudeConsumerAgent\Model\Config\Backend\Lines;
+use MageOS\AiShoppingAssistant\Model\Config\Backend\Lines;
 use PHPUnit\Framework\TestCase;
 
 final class LinesTest extends TestCase

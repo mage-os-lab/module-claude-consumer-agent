@@ -1,9 +1,9 @@
 <?php
 declare(strict_types=1);
 
-namespace MageOS\ClaudeConsumerAgent\Test\Unit\Data;
+namespace MageOS\AiShoppingAssistant\Test\Unit\Data;
 
-use MageOS\ClaudeConsumerAgent\Model\Data\Product;
+use MageOS\AiShoppingAssistant\Model\Data\Product;
 use PHPUnit\Framework\TestCase;
 
 class ProductTest extends TestCase

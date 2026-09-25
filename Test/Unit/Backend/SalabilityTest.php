@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-namespace MageOS\ClaudeConsumerAgent\Test\Unit\Backend;
+namespace MageOS\AiShoppingAssistant\Test\Unit\Backend;
 
 use Magento\Catalog\Api\Data\ProductInterface;
 use Magento\Catalog\Model\Product as MagentoProduct;
@@ -14,9 +14,9 @@ use Magento\CatalogInventory\Api\StockRegistryInterface;
 use Magento\Framework\ObjectManagerInterface;
 use Magento\Store\Model\Store;
 use Magento\Store\Model\StoreManagerInterface;
-use MageOS\ClaudeConsumerAgent\Model\Agent\SessionContext;
-use MageOS\ClaudeConsumerAgent\Model\Backend\Salability;
-use MageOS\ClaudeConsumerAgent\Model\Data\PageContext;
+use MageOS\AiShoppingAssistant\Model\Agent\SessionContext;
+use MageOS\AiShoppingAssistant\Model\Backend\Salability;
+use MageOS\AiShoppingAssistant\Model\Data\PageContext;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 

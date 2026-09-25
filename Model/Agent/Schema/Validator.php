@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-namespace MageOS\ClaudeConsumerAgent\Model\Agent\Schema;
+namespace MageOS\AiShoppingAssistant\Model\Agent\Schema;
 
 final class Validator
 {

@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-namespace MageOS\ClaudeConsumerAgent\Test\Unit\Backend;
+namespace MageOS\AiShoppingAssistant\Test\Unit\Backend;
 
 use Magento\Catalog\Api\Data\ProductCustomOptionInterface;
 use Magento\Catalog\Api\Data\ProductCustomOptionValuesInterface;
@@ -55,25 +55,25 @@ use Magento\Store\Model\StoreManagerInterface;
 use Magento\Store\Model\Website;
 use Magento\UrlRewrite\Model\UrlFinderInterface;
 use Magento\UrlRewrite\Service\V1\Data\UrlRewrite;
-use MageOS\ClaudeConsumerAgent\Api\Backend\CategorySearchProviderInterface;
-use MageOS\ClaudeConsumerAgent\Api\Backend\FulfillmentProviderInterface;
-use MageOS\ClaudeConsumerAgent\Api\Backend\OrderStatusMapperInterface;
-use MageOS\ClaudeConsumerAgent\Api\Backend\PolicySourceInterface;
-use MageOS\ClaudeConsumerAgent\Api\Backend\ProductImageUrlInterface;
-use MageOS\ClaudeConsumerAgent\Api\Backend\SearchProviderInterface;
-use MageOS\ClaudeConsumerAgent\Model\Agent\Exception\NotOffered;
-use MageOS\ClaudeConsumerAgent\Model\Agent\Exception\SignInRequired;
-use MageOS\ClaudeConsumerAgent\Model\Agent\Exception\Unavailable;
-use MageOS\ClaudeConsumerAgent\Model\Agent\SessionContext;
-use MageOS\ClaudeConsumerAgent\Model\Backend\BuyRequestBuilder;
-use MageOS\ClaudeConsumerAgent\Model\Backend\MagentoStorefront;
-use MageOS\ClaudeConsumerAgent\Model\Backend\Provider\AllowedCategories;
-use MageOS\ClaudeConsumerAgent\Model\Backend\Provider\CoreOptions;
-use MageOS\ClaudeConsumerAgent\Model\Backend\Provider\HelperImageUrl;
-use MageOS\ClaudeConsumerAgent\Model\Backend\ProductMapper;
-use MageOS\ClaudeConsumerAgent\Model\Backend\Salability;
-use MageOS\ClaudeConsumerAgent\Model\Config\StoreConfig;
-use MageOS\ClaudeConsumerAgent\Model\Data\PageContext;
+use MageOS\AiShoppingAssistant\Api\Backend\CategorySearchProviderInterface;
+use MageOS\AiShoppingAssistant\Api\Backend\FulfillmentProviderInterface;
+use MageOS\AiShoppingAssistant\Api\Backend\OrderStatusMapperInterface;
+use MageOS\AiShoppingAssistant\Api\Backend\PolicySourceInterface;
+use MageOS\AiShoppingAssistant\Api\Backend\ProductImageUrlInterface;
+use MageOS\AiShoppingAssistant\Api\Backend\SearchProviderInterface;
+use MageOS\AiShoppingAssistant\Model\Agent\Exception\NotOffered;
+use MageOS\AiShoppingAssistant\Model\Agent\Exception\SignInRequired;
+use MageOS\AiShoppingAssistant\Model\Agent\Exception\Unavailable;
+use MageOS\AiShoppingAssistant\Model\Agent\SessionContext;
+use MageOS\AiShoppingAssistant\Model\Backend\BuyRequestBuilder;
+use MageOS\AiShoppingAssistant\Model\Backend\MagentoStorefront;
+use MageOS\AiShoppingAssistant\Model\Backend\Provider\AllowedCategories;
+use MageOS\AiShoppingAssistant\Model\Backend\Provider\CoreOptions;
+use MageOS\AiShoppingAssistant\Model\Backend\Provider\HelperImageUrl;
+use MageOS\AiShoppingAssistant\Model\Backend\ProductMapper;
+use MageOS\AiShoppingAssistant\Model\Backend\Salability;
+use MageOS\AiShoppingAssistant\Model\Config\StoreConfig;
+use MageOS\AiShoppingAssistant\Model\Data\PageContext;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 

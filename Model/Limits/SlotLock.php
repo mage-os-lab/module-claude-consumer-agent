@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-namespace MageOS\ClaudeConsumerAgent\Model\Limits;
+namespace MageOS\AiShoppingAssistant\Model\Limits;
 
 final class SlotLock
 {
@@ -9,7 +9,7 @@ final class SlotLock
 
     public function __construct(
         private readonly \Magento\Framework\Lock\LockManagerInterface $lockManager,
-        private readonly \MageOS\ClaudeConsumerAgent\Model\Config\StoreConfig $storeConfig,
+        private readonly \MageOS\AiShoppingAssistant\Model\Config\StoreConfig $storeConfig,
         private readonly \Psr\Log\LoggerInterface $logger
     ) {
     }

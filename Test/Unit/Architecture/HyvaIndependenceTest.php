@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-namespace MageOS\ClaudeConsumerAgent\Test\Unit\Architecture;
+namespace MageOS\AiShoppingAssistant\Test\Unit\Architecture;
 
 use FilesystemIterator;
 use PHPUnit\Framework\TestCase;

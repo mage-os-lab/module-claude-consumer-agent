@@ -7,7 +7,7 @@ const {load} = require('./support.cjs');
 const I18N = {stillWorking: 'Still working', reloadPage: 'Reload', interrupted: 'Interrupted', timedOut: 'Timed out'};
 
 function loadTransport() {
-    return load('MageOS_ClaudeConsumerAgent/js/luma/model/transport', {
+    return load('MageOS_AiShoppingAssistant/js/luma/model/transport', {
         jquery: {mage: {cookies: {get: () => 'form-key-1'}}},
         'mage/cookies': {}
     });

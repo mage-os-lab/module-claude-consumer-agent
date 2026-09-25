@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-namespace MageOS\ClaudeConsumerAgent\Api\Data;
+namespace MageOS\AiShoppingAssistant\Api\Data;
 
 interface ProductDetailsInterface extends ProductInterface
 {
@@ -10,7 +10,7 @@ interface ProductDetailsInterface extends ProductInterface
     public function getSpecs(): array;
 
     /**
-     * @return \MageOS\ClaudeConsumerAgent\Api\Data\ProductInterface[]
+     * @return \MageOS\AiShoppingAssistant\Api\Data\ProductInterface[]
      */
     public function getVariants(): array;
 

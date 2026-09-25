@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-namespace MageOS\ClaudeConsumerAgent\Test\Unit\Controller\Session;
+namespace MageOS\AiShoppingAssistant\Test\Unit\Controller\Session;
 
 use Magento\Checkout\Model\Session as CheckoutSession;
 use Magento\Customer\Model\Session as CustomerSession;
@@ -18,14 +18,14 @@ use Magento\Quote\Api\CartRepositoryInterface;
 use Magento\Quote\Model\Quote;
 use Magento\Store\Api\Data\StoreInterface;
 use Magento\Store\Model\StoreManagerInterface;
-use MageOS\ClaudeConsumerAgent\Controller\Request\BodyReader;
-use MageOS\ClaudeConsumerAgent\Controller\Request\FormKeyGuard;
-use MageOS\ClaudeConsumerAgent\Controller\Session\Start;
-use MageOS\ClaudeConsumerAgent\Model\Config\StoreConfig;
-use MageOS\ClaudeConsumerAgent\Model\Session\IdGenerator;
-use MageOS\ClaudeConsumerAgent\Model\Session\Repository;
-use MageOS\ClaudeConsumerAgent\Model\Session\ResourceModel\Session as SessionResource;
-use MageOS\ClaudeConsumerAgent\Model\Surface\Resolver;
+use MageOS\AiShoppingAssistant\Controller\Request\BodyReader;
+use MageOS\AiShoppingAssistant\Controller\Request\FormKeyGuard;
+use MageOS\AiShoppingAssistant\Controller\Session\Start;
+use MageOS\AiShoppingAssistant\Model\Config\StoreConfig;
+use MageOS\AiShoppingAssistant\Model\Session\IdGenerator;
+use MageOS\AiShoppingAssistant\Model\Session\Repository;
+use MageOS\AiShoppingAssistant\Model\Session\ResourceModel\Session as SessionResource;
+use MageOS\AiShoppingAssistant\Model\Surface\Resolver;
 use PHPUnit\Framework\TestCase;
 use Psr\Log\LoggerInterface;
 

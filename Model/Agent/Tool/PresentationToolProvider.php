@@ -1,10 +1,10 @@
 <?php
 declare(strict_types=1);
 
-namespace MageOS\ClaudeConsumerAgent\Model\Agent\Tool;
+namespace MageOS\AiShoppingAssistant\Model\Agent\Tool;
 
-use MageOS\ClaudeConsumerAgent\Api\Tool\ToolProviderInterface;
-use MageOS\ClaudeConsumerAgent\Model\Agent\AgentConfig;
+use MageOS\AiShoppingAssistant\Api\Tool\ToolProviderInterface;
+use MageOS\AiShoppingAssistant\Model\Agent\AgentConfig;
 
 /**
  * Turns every presentation extension registered on the presentation registry into a tool
@@ -22,12 +22,12 @@ final class PresentationToolProvider implements ToolProviderInterface
     ];
 
     public function __construct(
-        private readonly \MageOS\ClaudeConsumerAgent\Model\Agent\Presentation\Registry $presentation
+        private readonly \MageOS\AiShoppingAssistant\Model\Agent\Presentation\Registry $presentation
     ) {
     }
 
     /**
-     * @return \MageOS\ClaudeConsumerAgent\Model\Agent\Tool\Definition[]
+     * @return \MageOS\AiShoppingAssistant\Model\Agent\Tool\Definition[]
      */
     public function getTools(AgentConfig $config): array
     {

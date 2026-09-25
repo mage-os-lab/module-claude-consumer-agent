@@ -1,14 +1,14 @@
 <?php
 declare(strict_types=1);
 
-namespace MageOS\ClaudeConsumerAgent\Api\Backend;
+namespace MageOS\AiShoppingAssistant\Api\Backend;
 
-use MageOS\ClaudeConsumerAgent\Model\Agent\SessionContext;
+use MageOS\AiShoppingAssistant\Model\Agent\SessionContext;
 
 interface FulfillmentProviderInterface
 {
     /**
-     * @return \MageOS\ClaudeConsumerAgent\Api\Data\FulfillmentOptionInterface[]
+     * @return \MageOS\AiShoppingAssistant\Api\Data\FulfillmentOptionInterface[]
      */
     public function options(SessionContext $ctx, array $productIds): array;
 }

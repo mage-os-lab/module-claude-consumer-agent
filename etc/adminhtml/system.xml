@@ -22,7 +22,7 @@
                     <field id="surface_mode" translate="label comment" type="select" sortOrder="20" showInDefault="1"
                            showInWebsite="1" showInStore="1">
                         <label>Surface Mode</label>
-                        <source_model>MageOS\ClaudeConsumerAgent\Model\Config\Source\SurfaceMode</source_model>
+                        <source_model>MageOS\AiShoppingAssistant\Model\Config\Source\SurfaceMode</source_model>
                         <comment>Hyvä only. Cart docks the assistant into the Hyvä cart drawer. Overlay opens a panel of
                             its own on the right side of the page. Luma based themes always use the panel.
                         </comment>
@@ -52,7 +52,7 @@
                     <field id="header_icon_view" translate="label comment" type="select" sortOrder="50"
                            showInDefault="1" showInWebsite="1" showInStore="1">
                         <label>Header Icon View</label>
-                        <source_model>MageOS\ClaudeConsumerAgent\Model\Config\Source\HeaderIconView</source_model>
+                        <source_model>MageOS\AiShoppingAssistant\Model\Config\Source\HeaderIconView</source_model>
                         <comment>Hyvä Cart mode only. What the drawer opens with when the customer clicks the header
                             cart icon: the cart, the chat, or whichever of the two they used last.
                         </comment>
@@ -63,7 +63,7 @@
                     <field id="streaming" translate="label comment" type="select" sortOrder="60" showInDefault="1"
                            showInWebsite="1" showInStore="1">
                         <label>Streaming Replies</label>
-                        <source_model>MageOS\ClaudeConsumerAgent\Model\Config\Source\Streaming</source_model>
+                        <source_model>MageOS\AiShoppingAssistant\Model\Config\Source\Streaming</source_model>
                         <comment>Auto shows each reply word by word while the model writes it. Set Off when a proxy,
                             CDN or firewall in front of the store holds responses back until they are complete:
                             the customer then sees the whole reply at once instead of a blank panel.
@@ -93,7 +93,7 @@
                     <field id="thinking_effort" translate="label comment" type="select" sortOrder="40"
                            showInDefault="1" showInWebsite="1" showInStore="1">
                         <label>Thinking Effort</label>
-                        <source_model>MageOS\ClaudeConsumerAgent\Model\Config\Source\ThinkingEffort</source_model>
+                        <source_model>MageOS\AiShoppingAssistant\Model\Config\Source\ThinkingEffort</source_model>
                         <comment>Adaptive thinking effort; Off sends thinking disabled.</comment>
                     </field>
                     <field id="request_timeout" translate="label comment" type="text" sortOrder="50" showInDefault="1"
@@ -138,7 +138,7 @@
                     <field id="starters" translate="label comment" type="textarea" sortOrder="50" showInDefault="1"
                            showInWebsite="1" showInStore="1">
                         <label>Starter Prompts</label>
-                        <backend_model>MageOS\ClaudeConsumerAgent\Model\Config\Backend\Lines</backend_model>
+                        <backend_model>MageOS\AiShoppingAssistant\Model\Config\Backend\Lines</backend_model>
                         <comment>One starter prompt per line; the first five are shown.</comment>
                     </field>
                     <field id="domain_search_notes" translate="label comment" type="textarea" sortOrder="60"
@@ -156,7 +156,7 @@
                     <field id="policy_pages" translate="label comment" type="multiselect" sortOrder="10"
                            showInDefault="1" showInWebsite="1" showInStore="1">
                         <label>Policy Pages</label>
-                        <source_model>MageOS\ClaudeConsumerAgent\Model\Config\Source\CmsPages</source_model>
+                        <source_model>MageOS\AiShoppingAssistant\Model\Config\Source\CmsPages</source_model>
                         <can_be_empty>1</can_be_empty>
                         <comment>CMS pages the assistant may quote for terms and policies. Empty turns the policy
                             tool off.
@@ -165,13 +165,13 @@
                     <field id="allowed_categories" translate="label comment" type="multiselect" sortOrder="20"
                            showInDefault="1" showInWebsite="1" showInStore="1">
                         <label>Allowed Categories</label>
-                        <source_model>MageOS\ClaudeConsumerAgent\Model\Config\Source\CategoryTree</source_model>
+                        <source_model>MageOS\AiShoppingAssistant\Model\Config\Source\CategoryTree</source_model>
                         <comment>When set, search and product details are limited to these categories.</comment>
                     </field>
                     <field id="catalog_map_depth" translate="label comment" type="select" sortOrder="21"
                            showInDefault="1" showInWebsite="1" showInStore="1">
                         <label>Catalog Map Depth</label>
-                        <source_model>MageOS\ClaudeConsumerAgent\Model\Config\Source\CatalogMapDepth</source_model>
+                        <source_model>MageOS\AiShoppingAssistant\Model\Config\Source\CatalogMapDepth</source_model>
                         <comment>The catalog map is the store's category tree printed into the system prompt, so
                             the assistant knows which departments exist and can list any of them by id. Depth is
                             how many levels below each root are printed. Off removes the map.
@@ -180,7 +180,7 @@
                     <field id="catalog_map_roots" translate="label comment" type="multiselect" sortOrder="22"
                            showInDefault="1" showInWebsite="1" showInStore="1">
                         <label>Catalog Map Roots</label>
-                        <source_model>MageOS\ClaudeConsumerAgent\Model\Config\Source\CategoryTree</source_model>
+                        <source_model>MageOS\AiShoppingAssistant\Model\Config\Source\CategoryTree</source_model>
                         <can_be_empty>1</can_be_empty>
                         <comment>Top categories the map starts from. Empty means every active category in the
                             main menu.
@@ -197,7 +197,7 @@
                     <field id="store_facts" translate="label comment" type="text" sortOrder="24"
                            showInDefault="1" showInWebsite="1" showInStore="1">
                         <label>Store Facts</label>
-                        <frontend_model>MageOS\ClaudeConsumerAgent\Block\Adminhtml\Form\Field\StoreFacts</frontend_model>
+                        <frontend_model>MageOS\AiShoppingAssistant\Block\Adminhtml\Form\Field\StoreFacts</frontend_model>
                         <backend_model>Magento\Config\Model\Config\Backend\Serialized\ArraySerialized</backend_model>
                         <comment>Each row is a service or term the assistant may answer about. Topic names it.
                             Keywords are the customer words that trigger it, comma separated; leave them empty to

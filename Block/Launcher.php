@@ -1,17 +1,17 @@
 <?php
 declare(strict_types=1);
 
-namespace MageOS\ClaudeConsumerAgent\Block;
+namespace MageOS\AiShoppingAssistant\Block;
 
 use Magento\Framework\View\Element\Template;
-use MageOS\ClaudeConsumerAgent\ViewModel\Assistant;
+use MageOS\AiShoppingAssistant\ViewModel\Assistant;
 
 class Launcher extends Template
 {
     public function __construct(
         \Magento\Framework\View\Element\Template\Context $context,
-        private readonly \MageOS\ClaudeConsumerAgent\Model\Config\StoreConfig $storeConfig,
-        private readonly \MageOS\ClaudeConsumerAgent\ViewModel\Assistant $assistant,
+        private readonly \MageOS\AiShoppingAssistant\Model\Config\StoreConfig $storeConfig,
+        private readonly \MageOS\AiShoppingAssistant\ViewModel\Assistant $assistant,
         array $data = []
     ) {
         parent::__construct($context, $data);

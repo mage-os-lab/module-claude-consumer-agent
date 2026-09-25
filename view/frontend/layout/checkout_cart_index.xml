@@ -3,8 +3,8 @@
     <body>
         <referenceContainer name="checkout.cart.widget">
             <block name="aiagent.luma.cart.ask"
-                   class="MageOS\ClaudeConsumerAgent\Block\CartAsk"
-                   template="MageOS_ClaudeConsumerAgent::luma/cart-ask.phtml"
+                   class="MageOS\AiShoppingAssistant\Block\CartAsk"
+                   template="MageOS_AiShoppingAssistant::luma/cart-ask.phtml"
                    ifconfig="ai_integration/aiagent/general/enabled"/>
         </referenceContainer>
     </body>

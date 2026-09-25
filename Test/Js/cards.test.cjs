@@ -4,7 +4,7 @@ const test = require('node:test');
 const assert = require('node:assert/strict');
 const {load} = require('./support.cjs');
 
-const cards = load('MageOS_ClaudeConsumerAgent/js/luma/model/cards');
+const cards = load('MageOS_AiShoppingAssistant/js/luma/model/cards');
 
 test('option values join with a slash', () => {
     assert.equal(cards.optionValuesText({option_values: {Size: 'M', Color: 'Black'}}), 'M / Black');

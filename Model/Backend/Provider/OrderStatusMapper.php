@@ -1,11 +1,11 @@
 <?php
 declare(strict_types=1);
 
-namespace MageOS\ClaudeConsumerAgent\Model\Backend\Provider;
+namespace MageOS\AiShoppingAssistant\Model\Backend\Provider;
 
 use Magento\Sales\Model\Order;
-use MageOS\ClaudeConsumerAgent\Api\Backend\OrderStatusMapperInterface;
-use MageOS\ClaudeConsumerAgent\Api\Data\OrderInterface;
+use MageOS\AiShoppingAssistant\Api\Backend\OrderStatusMapperInterface;
+use MageOS\AiShoppingAssistant\Api\Data\OrderInterface;
 
 final class OrderStatusMapper implements OrderStatusMapperInterface
 {

@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-namespace MageOS\ClaudeConsumerAgent\Model\Agent\Fencing;
+namespace MageOS\AiShoppingAssistant\Model\Agent\Fencing;
 
 final class Sanitizer
 {

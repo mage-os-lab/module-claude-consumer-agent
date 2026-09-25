@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-namespace MageOS\ClaudeConsumerAgent\Api\Turn;
+namespace MageOS\AiShoppingAssistant\Api\Turn;
 
 interface TurnLogInterface
 {

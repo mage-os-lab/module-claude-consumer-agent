@@ -2,9 +2,9 @@ define([
     'uiComponent',
     'ko',
     'jquery',
-    'MageOS_ClaudeConsumerAgent/js/luma/model/state',
-    'MageOS_ClaudeConsumerAgent/js/luma/model/format',
-    'MageOS_ClaudeConsumerAgent/js/luma/binding/markdown'
+    'MageOS_AiShoppingAssistant/js/luma/model/state',
+    'MageOS_AiShoppingAssistant/js/luma/model/format',
+    'MageOS_AiShoppingAssistant/js/luma/binding/markdown'
 ], function (Component, ko, $, state, format) {
     'use strict';
 
@@ -13,7 +13,7 @@ define([
 
     return Component.extend({
         defaults: {
-            template: 'MageOS_ClaudeConsumerAgent/luma/panel'
+            template: 'MageOS_AiShoppingAssistant/luma/panel'
         },
 
         initialize: function () {

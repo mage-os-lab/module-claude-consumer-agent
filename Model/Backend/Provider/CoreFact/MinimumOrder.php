@@ -1,11 +1,11 @@
 <?php
 declare(strict_types=1);
 
-namespace MageOS\ClaudeConsumerAgent\Model\Backend\Provider\CoreFact;
+namespace MageOS\AiShoppingAssistant\Model\Backend\Provider\CoreFact;
 
 use Magento\Framework\Exception\NoSuchEntityException;
 use Magento\Store\Model\ScopeInterface;
-use MageOS\ClaudeConsumerAgent\Api\Prompt\CoreFactProviderInterface;
+use MageOS\AiShoppingAssistant\Api\Prompt\CoreFactProviderInterface;
 
 final class MinimumOrder implements CoreFactProviderInterface
 {

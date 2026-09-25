@@ -1,9 +1,9 @@
 <?php
 declare(strict_types=1);
 
-namespace MageOS\ClaudeConsumerAgent\Test\Unit\Prompt;
+namespace MageOS\AiShoppingAssistant\Test\Unit\Prompt;
 
-use MageOS\ClaudeConsumerAgent\Model\Agent\Prompt\StoreFactsBlock;
+use MageOS\AiShoppingAssistant\Model\Agent\Prompt\StoreFactsBlock;
 use PHPUnit\Framework\TestCase;
 
 final class StoreFactsBlockTest extends TestCase

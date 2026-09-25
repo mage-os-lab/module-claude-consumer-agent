@@ -1,13 +1,13 @@
 <?php
 declare(strict_types=1);
 
-namespace MageOS\ClaudeConsumerAgent\Test\Unit\Backend;
+namespace MageOS\AiShoppingAssistant\Test\Unit\Backend;
 
 use Magento\Framework\App\Config\ScopeConfigInterface;
-use MageOS\ClaudeConsumerAgent\Api\Data\FulfillmentOptionInterface;
-use MageOS\ClaudeConsumerAgent\Model\Agent\SessionContext;
-use MageOS\ClaudeConsumerAgent\Model\Backend\Provider\FreeShippingFacts;
-use MageOS\ClaudeConsumerAgent\Model\Data\PageContext;
+use MageOS\AiShoppingAssistant\Api\Data\FulfillmentOptionInterface;
+use MageOS\AiShoppingAssistant\Model\Agent\SessionContext;
+use MageOS\AiShoppingAssistant\Model\Backend\Provider\FreeShippingFacts;
+use MageOS\AiShoppingAssistant\Model\Data\PageContext;
 use PHPUnit\Framework\TestCase;
 
 final class FreeShippingFactsTest extends TestCase

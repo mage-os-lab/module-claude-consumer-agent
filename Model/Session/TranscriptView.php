@@ -1,11 +1,11 @@
 <?php
 declare(strict_types=1);
 
-namespace MageOS\ClaudeConsumerAgent\Model\Session;
+namespace MageOS\AiShoppingAssistant\Model\Session;
 
-use MageOS\ClaudeConsumerAgent\Model\Agent\Presentation\Registry;
-use MageOS\ClaudeConsumerAgent\Model\Agent\Prompt\PageNote;
-use MageOS\ClaudeConsumerAgent\Model\Agent\SessionState;
+use MageOS\AiShoppingAssistant\Model\Agent\Presentation\Registry;
+use MageOS\AiShoppingAssistant\Model\Agent\Prompt\PageNote;
+use MageOS\AiShoppingAssistant\Model\Agent\SessionState;
 
 final class TranscriptView
 {

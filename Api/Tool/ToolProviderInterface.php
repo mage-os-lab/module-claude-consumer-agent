@@ -1,14 +1,14 @@
 <?php
 declare(strict_types=1);
 
-namespace MageOS\ClaudeConsumerAgent\Api\Tool;
+namespace MageOS\AiShoppingAssistant\Api\Tool;
 
-use MageOS\ClaudeConsumerAgent\Model\Agent\AgentConfig;
+use MageOS\AiShoppingAssistant\Model\Agent\AgentConfig;
 
 interface ToolProviderInterface
 {
     /**
-     * @return \MageOS\ClaudeConsumerAgent\Model\Agent\Tool\Definition[]
+     * @return \MageOS\AiShoppingAssistant\Model\Agent\Tool\Definition[]
      */
     public function getTools(AgentConfig $config): array;
 }

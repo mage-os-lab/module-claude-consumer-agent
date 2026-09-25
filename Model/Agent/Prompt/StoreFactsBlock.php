@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-namespace MageOS\ClaudeConsumerAgent\Model\Agent\Prompt;
+namespace MageOS\AiShoppingAssistant\Model\Agent\Prompt;
 
 /**
  * Pure formatter: turns the resolved fact list from StoreConfig plus the CoreFacts pool's

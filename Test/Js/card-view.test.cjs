@@ -16,8 +16,8 @@ const CONFIG = {
 };
 
 function loadCardView() {
-    return load('MageOS_ClaudeConsumerAgent/js/luma/model/card-view', {
-        'MageOS_ClaudeConsumerAgent/js/luma/model/format': {
+    return load('MageOS_AiShoppingAssistant/js/luma/model/card-view', {
+        'MageOS_AiShoppingAssistant/js/luma/model/format': {
             price: (amount) => '$' + Number(amount).toFixed(2),
             str: (template, value) => template.replace('%1', value)
         }
@@ -30,7 +30,7 @@ test('a products card lists items and its add action sends a message', () => {
         {product: {product_id: '7', title: 'Bag', url: '/bag.html', image_url: '/bag.jpg', price: 34, in_stock: true}, reason: 'Roomy'}
     ]}}, CONFIG, (text) => sent.push(text));
 
-    assert.equal(view.template, 'MageOS_ClaudeConsumerAgent/luma/cards/products');
+    assert.equal(view.template, 'MageOS_AiShoppingAssistant/luma/cards/products');
     assert.equal(view.title, 'Products');
     assert.equal(view.layout, 'tiles');
     assert.equal(view.tiles, 'single');
@@ -56,7 +56,7 @@ test('the products card hides the parts switched off in the admin', () => {
 test('an unknown order status falls back to unknown', () => {
     const view = loadCardView().create({component: 'order_status', payload: {summary: 'On its way', order: {status: 'lost', items: []}}}, CONFIG, () => undefined);
 
-    assert.equal(view.template, 'MageOS_ClaudeConsumerAgent/luma/cards/order-status');
+    assert.equal(view.template, 'MageOS_AiShoppingAssistant/luma/cards/order-status');
     assert.equal(view.status, 'unknown');
     assert.equal(view.statusLabel, 'Unknown');
 

@@ -1,21 +1,21 @@
 <?php
 declare(strict_types=1);
 
-namespace MageOS\ClaudeConsumerAgent\Test\Unit\Tool;
+namespace MageOS\AiShoppingAssistant\Test\Unit\Tool;
 
-use MageOS\ClaudeConsumerAgent\Api\Presentation\PresentationExtensionInterface;
-use MageOS\ClaudeConsumerAgent\Model\Agent\AgentConfig;
-use MageOS\ClaudeConsumerAgent\Model\Agent\Fencing\Fence;
-use MageOS\ClaudeConsumerAgent\Model\Agent\Fencing\Sanitizer;
-use MageOS\ClaudeConsumerAgent\Model\Agent\Presentation\Enrich\Checkout;
-use MageOS\ClaudeConsumerAgent\Model\Agent\Presentation\Enrich\Comparison;
-use MageOS\ClaudeConsumerAgent\Model\Agent\Presentation\Enrich\OrderStatus;
-use MageOS\ClaudeConsumerAgent\Model\Agent\Presentation\Enrich\Products;
-use MageOS\ClaudeConsumerAgent\Model\Agent\Presentation\Enrich\Suggestions;
-use MageOS\ClaudeConsumerAgent\Model\Agent\Presentation\Registry as PresentationRegistry;
-use MageOS\ClaudeConsumerAgent\Model\Agent\Serializer;
-use MageOS\ClaudeConsumerAgent\Model\Agent\Tool\Definition;
-use MageOS\ClaudeConsumerAgent\Model\Agent\Tool\PresentationToolProvider;
+use MageOS\AiShoppingAssistant\Api\Presentation\PresentationExtensionInterface;
+use MageOS\AiShoppingAssistant\Model\Agent\AgentConfig;
+use MageOS\AiShoppingAssistant\Model\Agent\Fencing\Fence;
+use MageOS\AiShoppingAssistant\Model\Agent\Fencing\Sanitizer;
+use MageOS\AiShoppingAssistant\Model\Agent\Presentation\Enrich\Checkout;
+use MageOS\AiShoppingAssistant\Model\Agent\Presentation\Enrich\Comparison;
+use MageOS\AiShoppingAssistant\Model\Agent\Presentation\Enrich\OrderStatus;
+use MageOS\AiShoppingAssistant\Model\Agent\Presentation\Enrich\Products;
+use MageOS\AiShoppingAssistant\Model\Agent\Presentation\Enrich\Suggestions;
+use MageOS\AiShoppingAssistant\Model\Agent\Presentation\Registry as PresentationRegistry;
+use MageOS\AiShoppingAssistant\Model\Agent\Serializer;
+use MageOS\AiShoppingAssistant\Model\Agent\Tool\Definition;
+use MageOS\AiShoppingAssistant\Model\Agent\Tool\PresentationToolProvider;
 use PHPUnit\Framework\TestCase;
 use Psr\Log\LoggerInterface;
 

@@ -1,28 +1,28 @@
 <?php
 declare(strict_types=1);
 
-namespace MageOS\ClaudeConsumerAgent\Model\Agent;
+namespace MageOS\AiShoppingAssistant\Model\Agent;
 
-use MageOS\ClaudeConsumerAgent\Model\Agent\Exception\InvalidArguments;
-use MageOS\ClaudeConsumerAgent\Model\Agent\Exception\NotOffered;
-use MageOS\ClaudeConsumerAgent\Model\Agent\Exception\SignInRequired;
-use MageOS\ClaudeConsumerAgent\Model\Agent\Exception\Unavailable;
-use MageOS\ClaudeConsumerAgent\Model\Agent\Tool\Definition;
+use MageOS\AiShoppingAssistant\Model\Agent\Exception\InvalidArguments;
+use MageOS\AiShoppingAssistant\Model\Agent\Exception\NotOffered;
+use MageOS\AiShoppingAssistant\Model\Agent\Exception\SignInRequired;
+use MageOS\AiShoppingAssistant\Model\Agent\Exception\Unavailable;
+use MageOS\AiShoppingAssistant\Model\Agent\Tool\Definition;
 
 final class Executor
 {
     private const DISPLAYED_TEXT = 'Displayed to the customer.';
 
     public function __construct(
-        private readonly \MageOS\ClaudeConsumerAgent\Model\Agent\Tool\Registry $registry,
-        private readonly \MageOS\ClaudeConsumerAgent\Model\Agent\Presentation\Runner $presentation,
-        private readonly \MageOS\ClaudeConsumerAgent\Model\Agent\Schema\Validator $validator,
-        private readonly \MageOS\ClaudeConsumerAgent\Model\Agent\Gate\Provenance $provenance,
-        private readonly \MageOS\ClaudeConsumerAgent\Model\Agent\Fencing\Sanitizer $sanitizer,
+        private readonly \MageOS\AiShoppingAssistant\Model\Agent\Tool\Registry $registry,
+        private readonly \MageOS\AiShoppingAssistant\Model\Agent\Presentation\Runner $presentation,
+        private readonly \MageOS\AiShoppingAssistant\Model\Agent\Schema\Validator $validator,
+        private readonly \MageOS\AiShoppingAssistant\Model\Agent\Gate\Provenance $provenance,
+        private readonly \MageOS\AiShoppingAssistant\Model\Agent\Fencing\Sanitizer $sanitizer,
         private readonly \Psr\Log\LoggerInterface $logger,
-        private readonly \MageOS\ClaudeConsumerAgent\Model\Agent\SessionContext $context,
-        private readonly \MageOS\ClaudeConsumerAgent\Model\Agent\SessionState $state,
-        private readonly \MageOS\ClaudeConsumerAgent\Model\Agent\AgentConfig $config
+        private readonly \MageOS\AiShoppingAssistant\Model\Agent\SessionContext $context,
+        private readonly \MageOS\AiShoppingAssistant\Model\Agent\SessionState $state,
+        private readonly \MageOS\AiShoppingAssistant\Model\Agent\AgentConfig $config
     ) {
     }
 

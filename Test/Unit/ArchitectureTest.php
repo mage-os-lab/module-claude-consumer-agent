@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-namespace MageOS\ClaudeConsumerAgent\Test\Unit;
+namespace MageOS\AiShoppingAssistant\Test\Unit;
 
 use PHPUnit\Framework\TestCase;
 
@@ -53,7 +53,7 @@ class ArchitectureTest extends TestCase
         foreach ($this->phpFilesUnder($moduleRoot . '/' . $relativeDir) as $file) {
             $relative = substr($file, strlen($moduleRoot) + 1);
             $relative = substr($relative, 0, -4);
-            $className = 'MageOS\\ClaudeConsumerAgent\\' . str_replace('/', '\\', $relative);
+            $className = 'MageOS\\AiShoppingAssistant\\' . str_replace('/', '\\', $relative);
             if (class_exists($className) || interface_exists($className)) {
                 $classes[] = $className;
             }

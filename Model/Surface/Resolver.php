@@ -1,11 +1,11 @@
 <?php
 declare(strict_types=1);
 
-namespace MageOS\ClaudeConsumerAgent\Model\Surface;
+namespace MageOS\AiShoppingAssistant\Model\Surface;
 
 use Magento\Framework\View\LayoutInterface;
 use Magento\Store\Model\ScopeInterface;
-use MageOS\ClaudeConsumerAgent\Model\Config\Source\SurfaceMode;
+use MageOS\AiShoppingAssistant\Model\Config\Source\SurfaceMode;
 
 final class Resolver
 {
@@ -13,7 +13,7 @@ final class Resolver
     private const CART_DRAWER_BLOCK = 'cart-drawer';
 
     public function __construct(
-        private readonly \MageOS\ClaudeConsumerAgent\Model\Config\StoreConfig $storeConfig,
+        private readonly \MageOS\AiShoppingAssistant\Model\Config\StoreConfig $storeConfig,
         private readonly \Magento\Framework\App\Config\ScopeConfigInterface $scopeConfig
     ) {
     }

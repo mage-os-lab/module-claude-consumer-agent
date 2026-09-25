@@ -1,42 +1,42 @@
 <?php
 declare(strict_types=1);
 
-namespace MageOS\ClaudeConsumerAgent\Model\Eval;
+namespace MageOS\AiShoppingAssistant\Model\Eval;
 
-use MageOS\ClaudeConsumerAgent\Model\Agent\Fencing\Fence;
-use MageOS\ClaudeConsumerAgent\Model\Agent\Fencing\Sanitizer;
-use MageOS\ClaudeConsumerAgent\Model\Agent\Gate\Options;
-use MageOS\ClaudeConsumerAgent\Model\Agent\Gate\Provenance;
-use MageOS\ClaudeConsumerAgent\Model\Agent\Grounding\SkuCandidates;
-use MageOS\ClaudeConsumerAgent\Model\Agent\Lexicon;
-use MageOS\ClaudeConsumerAgent\Model\Agent\Presentation\Registry as PresentationRegistry;
-use MageOS\ClaudeConsumerAgent\Model\Agent\Prompt\Assembly;
-use MageOS\ClaudeConsumerAgent\Model\Agent\Prompt\DynamicContext;
-use MageOS\ClaudeConsumerAgent\Model\Agent\Prompt\StaticSystem;
-use MageOS\ClaudeConsumerAgent\Model\Agent\Schema\Validator;
-use MageOS\ClaudeConsumerAgent\Model\Agent\Serializer;
-use MageOS\ClaudeConsumerAgent\Model\Agent\Skill\Registry as SkillRegistry;
-use MageOS\ClaudeConsumerAgent\Model\Agent\Turn\StreamedRoundFactory;
-use MageOS\ClaudeConsumerAgent\Model\Config\StoreConfig;
+use MageOS\AiShoppingAssistant\Model\Agent\Fencing\Fence;
+use MageOS\AiShoppingAssistant\Model\Agent\Fencing\Sanitizer;
+use MageOS\AiShoppingAssistant\Model\Agent\Gate\Options;
+use MageOS\AiShoppingAssistant\Model\Agent\Gate\Provenance;
+use MageOS\AiShoppingAssistant\Model\Agent\Grounding\SkuCandidates;
+use MageOS\AiShoppingAssistant\Model\Agent\Lexicon;
+use MageOS\AiShoppingAssistant\Model\Agent\Presentation\Registry as PresentationRegistry;
+use MageOS\AiShoppingAssistant\Model\Agent\Prompt\Assembly;
+use MageOS\AiShoppingAssistant\Model\Agent\Prompt\DynamicContext;
+use MageOS\AiShoppingAssistant\Model\Agent\Prompt\StaticSystem;
+use MageOS\AiShoppingAssistant\Model\Agent\Schema\Validator;
+use MageOS\AiShoppingAssistant\Model\Agent\Serializer;
+use MageOS\AiShoppingAssistant\Model\Agent\Skill\Registry as SkillRegistry;
+use MageOS\AiShoppingAssistant\Model\Agent\Turn\StreamedRoundFactory;
+use MageOS\AiShoppingAssistant\Model\Config\StoreConfig;
 
 class Toolkit
 {
     public function __construct(
-        private readonly \MageOS\ClaudeConsumerAgent\Model\Config\StoreConfig $storeConfig,
-        private readonly \MageOS\ClaudeConsumerAgent\Model\Agent\Prompt\StaticSystem $staticSystem,
-        private readonly \MageOS\ClaudeConsumerAgent\Model\Agent\Prompt\DynamicContext $dynamicContext,
-        private readonly \MageOS\ClaudeConsumerAgent\Model\Agent\Prompt\Assembly $assembly,
-        private readonly \MageOS\ClaudeConsumerAgent\Model\Agent\Lexicon $lexicon,
-        private readonly \MageOS\ClaudeConsumerAgent\Model\Agent\Grounding\SkuCandidates $skuCandidates,
-        private readonly \MageOS\ClaudeConsumerAgent\Model\Agent\Turn\StreamedRoundFactory $streamedRoundFactory,
-        private readonly \MageOS\ClaudeConsumerAgent\Model\Agent\Schema\Validator $validator,
-        private readonly \MageOS\ClaudeConsumerAgent\Model\Agent\Gate\Provenance $provenance,
-        private readonly \MageOS\ClaudeConsumerAgent\Model\Agent\Gate\Options $options,
-        private readonly \MageOS\ClaudeConsumerAgent\Model\Agent\Fencing\Sanitizer $sanitizer,
-        private readonly \MageOS\ClaudeConsumerAgent\Model\Agent\Fencing\Fence $fence,
-        private readonly \MageOS\ClaudeConsumerAgent\Model\Agent\Serializer $serializer,
-        private readonly \MageOS\ClaudeConsumerAgent\Model\Agent\Skill\Registry $skillRegistry,
-        private readonly \MageOS\ClaudeConsumerAgent\Model\Agent\Presentation\Registry $presentationRegistry
+        private readonly \MageOS\AiShoppingAssistant\Model\Config\StoreConfig $storeConfig,
+        private readonly \MageOS\AiShoppingAssistant\Model\Agent\Prompt\StaticSystem $staticSystem,
+        private readonly \MageOS\AiShoppingAssistant\Model\Agent\Prompt\DynamicContext $dynamicContext,
+        private readonly \MageOS\AiShoppingAssistant\Model\Agent\Prompt\Assembly $assembly,
+        private readonly \MageOS\AiShoppingAssistant\Model\Agent\Lexicon $lexicon,
+        private readonly \MageOS\AiShoppingAssistant\Model\Agent\Grounding\SkuCandidates $skuCandidates,
+        private readonly \MageOS\AiShoppingAssistant\Model\Agent\Turn\StreamedRoundFactory $streamedRoundFactory,
+        private readonly \MageOS\AiShoppingAssistant\Model\Agent\Schema\Validator $validator,
+        private readonly \MageOS\AiShoppingAssistant\Model\Agent\Gate\Provenance $provenance,
+        private readonly \MageOS\AiShoppingAssistant\Model\Agent\Gate\Options $options,
+        private readonly \MageOS\AiShoppingAssistant\Model\Agent\Fencing\Sanitizer $sanitizer,
+        private readonly \MageOS\AiShoppingAssistant\Model\Agent\Fencing\Fence $fence,
+        private readonly \MageOS\AiShoppingAssistant\Model\Agent\Serializer $serializer,
+        private readonly \MageOS\AiShoppingAssistant\Model\Agent\Skill\Registry $skillRegistry,
+        private readonly \MageOS\AiShoppingAssistant\Model\Agent\Presentation\Registry $presentationRegistry
     ) {
     }
 

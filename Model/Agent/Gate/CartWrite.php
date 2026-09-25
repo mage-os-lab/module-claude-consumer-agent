@@ -1,24 +1,24 @@
 <?php
 declare(strict_types=1);
 
-namespace MageOS\ClaudeConsumerAgent\Model\Agent\Gate;
+namespace MageOS\AiShoppingAssistant\Model\Agent\Gate;
 
-use MageOS\ClaudeConsumerAgent\Model\Agent\AgentConfig;
-use MageOS\ClaudeConsumerAgent\Model\Agent\Event;
-use MageOS\ClaudeConsumerAgent\Model\Agent\SessionContext;
-use MageOS\ClaudeConsumerAgent\Model\Agent\SessionState;
-use MageOS\ClaudeConsumerAgent\Model\Agent\ToolOutcome;
+use MageOS\AiShoppingAssistant\Model\Agent\AgentConfig;
+use MageOS\AiShoppingAssistant\Model\Agent\Event;
+use MageOS\AiShoppingAssistant\Model\Agent\SessionContext;
+use MageOS\AiShoppingAssistant\Model\Agent\SessionState;
+use MageOS\AiShoppingAssistant\Model\Agent\ToolOutcome;
 
 final class CartWrite
 {
     private const LOCK_TIMEOUT = 5;
 
     public function __construct(
-        private readonly \MageOS\ClaudeConsumerAgent\Api\StorefrontBackendInterface $backend,
+        private readonly \MageOS\AiShoppingAssistant\Api\StorefrontBackendInterface $backend,
         private readonly \Magento\Framework\Lock\LockManagerInterface $lockManager,
-        private readonly \MageOS\ClaudeConsumerAgent\Model\Agent\Gate\Options $options,
-        private readonly \MageOS\ClaudeConsumerAgent\Model\Agent\Gate\Provenance $provenance,
-        private readonly \MageOS\ClaudeConsumerAgent\Model\Agent\Serializer $serializer,
+        private readonly \MageOS\AiShoppingAssistant\Model\Agent\Gate\Options $options,
+        private readonly \MageOS\AiShoppingAssistant\Model\Agent\Gate\Provenance $provenance,
+        private readonly \MageOS\AiShoppingAssistant\Model\Agent\Serializer $serializer,
         private readonly \Psr\Log\LoggerInterface $logger
     ) {
     }

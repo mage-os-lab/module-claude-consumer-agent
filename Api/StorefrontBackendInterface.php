@@ -1,22 +1,22 @@
 <?php
 declare(strict_types=1);
 
-namespace MageOS\ClaudeConsumerAgent\Api;
+namespace MageOS\AiShoppingAssistant\Api;
 
-use MageOS\ClaudeConsumerAgent\Api\Data\CartInterface;
-use MageOS\ClaudeConsumerAgent\Api\Data\FulfillmentOptionInterface;
-use MageOS\ClaudeConsumerAgent\Api\Data\OrderInterface;
-use MageOS\ClaudeConsumerAgent\Api\Data\PolicyInterface;
-use MageOS\ClaudeConsumerAgent\Api\Data\ProductDetailsInterface;
-use MageOS\ClaudeConsumerAgent\Api\Data\ProductInterface;
-use MageOS\ClaudeConsumerAgent\Api\Data\SearchFiltersInterface;
-use MageOS\ClaudeConsumerAgent\Api\Data\UserPreferencesInterface;
-use MageOS\ClaudeConsumerAgent\Model\Agent\SessionContext;
+use MageOS\AiShoppingAssistant\Api\Data\CartInterface;
+use MageOS\AiShoppingAssistant\Api\Data\FulfillmentOptionInterface;
+use MageOS\AiShoppingAssistant\Api\Data\OrderInterface;
+use MageOS\AiShoppingAssistant\Api\Data\PolicyInterface;
+use MageOS\AiShoppingAssistant\Api\Data\ProductDetailsInterface;
+use MageOS\AiShoppingAssistant\Api\Data\ProductInterface;
+use MageOS\AiShoppingAssistant\Api\Data\SearchFiltersInterface;
+use MageOS\AiShoppingAssistant\Api\Data\UserPreferencesInterface;
+use MageOS\AiShoppingAssistant\Model\Agent\SessionContext;
 
 interface StorefrontBackendInterface
 {
     /**
-     * @return \MageOS\ClaudeConsumerAgent\Api\Data\ProductInterface[]
+     * @return \MageOS\AiShoppingAssistant\Api\Data\ProductInterface[]
      */
     public function searchProducts(
         SessionContext $ctx,
@@ -28,7 +28,7 @@ interface StorefrontBackendInterface
     public function getProductDetails(SessionContext $ctx, string $productId): ?ProductDetailsInterface;
 
     /**
-     * @return \MageOS\ClaudeConsumerAgent\Api\Data\CategoryMatchInterface[]
+     * @return \MageOS\AiShoppingAssistant\Api\Data\CategoryMatchInterface[]
      */
     public function searchCategories(SessionContext $ctx, string $keywords, int $limit): array;
 
@@ -43,19 +43,19 @@ interface StorefrontBackendInterface
     public function getPreferences(SessionContext $ctx): UserPreferencesInterface;
 
     /**
-     * @return \MageOS\ClaudeConsumerAgent\Api\Data\OrderInterface[]
+     * @return \MageOS\AiShoppingAssistant\Api\Data\OrderInterface[]
      */
     public function getOrders(SessionContext $ctx, int $limit): array;
 
     public function getOrder(SessionContext $ctx, string $orderId): ?OrderInterface;
 
     /**
-     * @return \MageOS\ClaudeConsumerAgent\Api\Data\PolicyInterface[]
+     * @return \MageOS\AiShoppingAssistant\Api\Data\PolicyInterface[]
      */
     public function searchPolicies(SessionContext $ctx, string $query): array;
 
     /**
-     * @return \MageOS\ClaudeConsumerAgent\Api\Data\FulfillmentOptionInterface[]
+     * @return \MageOS\AiShoppingAssistant\Api\Data\FulfillmentOptionInterface[]
      */
     public function getFulfillmentOptions(SessionContext $ctx, array $productIds): array;
 }

@@ -1,11 +1,11 @@
 <?php
 declare(strict_types=1);
 
-namespace MageOS\ClaudeConsumerAgent\Test\Unit\Console;
+namespace MageOS\AiShoppingAssistant\Test\Unit\Console;
 
 use Magento\Framework\Console\Cli;
-use MageOS\ClaudeConsumerAgent\Console\Command\SessionPurge;
-use MageOS\ClaudeConsumerAgent\Model\Session\ResourceModel\Session;
+use MageOS\AiShoppingAssistant\Console\Command\SessionPurge;
+use MageOS\AiShoppingAssistant\Model\Session\ResourceModel\Session;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\Console\Tester\CommandTester;

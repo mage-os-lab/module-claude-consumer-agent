@@ -5,7 +5,7 @@ use Hyva\Theme\Model\ViewModelRegistry;
 use Hyva\Theme\ViewModel\HyvaCsp;
 use Magento\Framework\Escaper;
 use Magento\Framework\View\Element\Template;
-use MageOS\ClaudeConsumerAgent\ViewModel\Assistant;
+use MageOS\AiShoppingAssistant\ViewModel\Assistant;
 
 /** @var Escaper $escaper */
 /** @var Template $block */
@@ -16,7 +16,7 @@ $hyvaCsp = $viewModels->require(HyvaCsp::class);
 /** @var Assistant $assistantViewModel */
 $assistantViewModel = $block->getViewModel();
 $config = $assistantViewModel->snapshot();
-$config['urls']['script'] = $block->getViewFileUrl('MageOS_ClaudeConsumerAgent::js/aiagent.js');
+$config['urls']['script'] = $block->getViewFileUrl('MageOS_AiShoppingAssistant::js/aiagent.js');
 $configJson = json_encode(
     $config,
     JSON_HEX_TAG | JSON_HEX_AMP | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_UNESCAPED_SLASHES

@@ -1,28 +1,28 @@
 <?php
 declare(strict_types=1);
 
-namespace MageOS\ClaudeConsumerAgent\Model\Eval;
+namespace MageOS\AiShoppingAssistant\Model\Eval;
 
-use MageOS\ClaudeConsumerAgent\Api\Data\CartInterface;
-use MageOS\ClaudeConsumerAgent\Api\Data\CategoryMatchInterface;
-use MageOS\ClaudeConsumerAgent\Api\Data\FulfillmentOptionInterface;
-use MageOS\ClaudeConsumerAgent\Api\Data\OrderInterface;
-use MageOS\ClaudeConsumerAgent\Api\Data\PolicyInterface;
-use MageOS\ClaudeConsumerAgent\Api\Data\ProductDetailsInterface;
-use MageOS\ClaudeConsumerAgent\Api\Data\SearchFiltersInterface;
-use MageOS\ClaudeConsumerAgent\Api\Data\UserPreferencesInterface;
-use MageOS\ClaudeConsumerAgent\Api\StorefrontBackendInterface;
-use MageOS\ClaudeConsumerAgent\Model\Agent\Exception\SignInRequired;
-use MageOS\ClaudeConsumerAgent\Model\Agent\Exception\Unavailable;
-use MageOS\ClaudeConsumerAgent\Model\Agent\SessionContext;
-use MageOS\ClaudeConsumerAgent\Model\Data\Cart;
-use MageOS\ClaudeConsumerAgent\Model\Data\CategoryMatch;
-use MageOS\ClaudeConsumerAgent\Model\Data\FulfillmentOption;
-use MageOS\ClaudeConsumerAgent\Model\Data\Order;
-use MageOS\ClaudeConsumerAgent\Model\Data\Policy;
-use MageOS\ClaudeConsumerAgent\Model\Data\Product;
-use MageOS\ClaudeConsumerAgent\Model\Data\ProductDetails;
-use MageOS\ClaudeConsumerAgent\Model\Data\UserPreferences;
+use MageOS\AiShoppingAssistant\Api\Data\CartInterface;
+use MageOS\AiShoppingAssistant\Api\Data\CategoryMatchInterface;
+use MageOS\AiShoppingAssistant\Api\Data\FulfillmentOptionInterface;
+use MageOS\AiShoppingAssistant\Api\Data\OrderInterface;
+use MageOS\AiShoppingAssistant\Api\Data\PolicyInterface;
+use MageOS\AiShoppingAssistant\Api\Data\ProductDetailsInterface;
+use MageOS\AiShoppingAssistant\Api\Data\SearchFiltersInterface;
+use MageOS\AiShoppingAssistant\Api\Data\UserPreferencesInterface;
+use MageOS\AiShoppingAssistant\Api\StorefrontBackendInterface;
+use MageOS\AiShoppingAssistant\Model\Agent\Exception\SignInRequired;
+use MageOS\AiShoppingAssistant\Model\Agent\Exception\Unavailable;
+use MageOS\AiShoppingAssistant\Model\Agent\SessionContext;
+use MageOS\AiShoppingAssistant\Model\Data\Cart;
+use MageOS\AiShoppingAssistant\Model\Data\CategoryMatch;
+use MageOS\AiShoppingAssistant\Model\Data\FulfillmentOption;
+use MageOS\AiShoppingAssistant\Model\Data\Order;
+use MageOS\AiShoppingAssistant\Model\Data\Policy;
+use MageOS\AiShoppingAssistant\Model\Data\Product;
+use MageOS\AiShoppingAssistant\Model\Data\ProductDetails;
+use MageOS\AiShoppingAssistant\Model\Data\UserPreferences;
 
 /**
  * Backs the eval runner's fixture mode: a product catalog, order history and policy set

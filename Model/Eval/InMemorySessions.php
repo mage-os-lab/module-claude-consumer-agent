@@ -1,12 +1,12 @@
 <?php
 declare(strict_types=1);
 
-namespace MageOS\ClaudeConsumerAgent\Model\Eval;
+namespace MageOS\AiShoppingAssistant\Model\Eval;
 
-use MageOS\ClaudeConsumerAgent\Api\Session\SessionRepositoryInterface;
-use MageOS\ClaudeConsumerAgent\Model\Agent\SessionContext;
-use MageOS\ClaudeConsumerAgent\Model\Agent\SessionState;
-use MageOS\ClaudeConsumerAgent\Model\Session\Binding;
+use MageOS\AiShoppingAssistant\Api\Session\SessionRepositoryInterface;
+use MageOS\AiShoppingAssistant\Model\Agent\SessionContext;
+use MageOS\AiShoppingAssistant\Model\Agent\SessionState;
+use MageOS\AiShoppingAssistant\Model\Session\Binding;
 
 /**
  * Session persistence for the eval runner: every save lands in an in-memory map instead

@@ -1,13 +1,13 @@
 <?php
 declare(strict_types=1);
 
-namespace MageOS\ClaudeConsumerAgent\Test\Unit\Skill;
+namespace MageOS\AiShoppingAssistant\Test\Unit\Skill;
 
 use Magento\Framework\Component\ComponentRegistrar;
 use Magento\Framework\Component\ComponentRegistrarInterface;
 use Magento\Framework\Filesystem\Driver\File;
-use MageOS\ClaudeConsumerAgent\Model\Agent\Skill\FrontMatter;
-use MageOS\ClaudeConsumerAgent\Model\Agent\Skill\Loader;
+use MageOS\AiShoppingAssistant\Model\Agent\Skill\FrontMatter;
+use MageOS\AiShoppingAssistant\Model\Agent\Skill\Loader;
 use PHPUnit\Framework\TestCase;
 
 final class LoaderTest extends TestCase

@@ -1,10 +1,10 @@
 <?php
 declare(strict_types=1);
 
-namespace MageOS\ClaudeConsumerAgent\Model\Agent\Prompt;
+namespace MageOS\AiShoppingAssistant\Model\Agent\Prompt;
 
-use MageOS\ClaudeConsumerAgent\Api\Data\PageContextInterface;
-use MageOS\ClaudeConsumerAgent\Model\Data\PageContext;
+use MageOS\AiShoppingAssistant\Api\Data\PageContextInterface;
+use MageOS\AiShoppingAssistant\Model\Data\PageContext;
 
 final class PageNote
 {
@@ -17,7 +17,7 @@ final class PageNote
     private const QUERY_MAX_LENGTH = 200;
 
     public function __construct(
-        private readonly \MageOS\ClaudeConsumerAgent\Model\Agent\Fencing\Sanitizer $sanitizer
+        private readonly \MageOS\AiShoppingAssistant\Model\Agent\Fencing\Sanitizer $sanitizer
     ) {
     }
 

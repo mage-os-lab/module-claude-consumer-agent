@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-namespace MageOS\ClaudeConsumerAgent\Observer;
+namespace MageOS\AiShoppingAssistant\Observer;
 
 use Magento\Framework\Component\ComponentRegistrar;
 use Magento\Framework\Event\Observer;
@@ -12,7 +12,7 @@ use Magento\Framework\Event\ObserverInterface;
  */
 class HyvaConfigGenerateBefore implements ObserverInterface
 {
-    private const MODULE_NAME = 'MageOS_ClaudeConsumerAgent';
+    private const MODULE_NAME = 'MageOS_AiShoppingAssistant';
 
     public function __construct(
         private readonly \Magento\Framework\Component\ComponentRegistrarInterface $registrar

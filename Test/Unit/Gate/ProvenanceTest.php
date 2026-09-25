@@ -1,10 +1,10 @@
 <?php
 declare(strict_types=1);
 
-namespace MageOS\ClaudeConsumerAgent\Test\Unit\Gate;
+namespace MageOS\AiShoppingAssistant\Test\Unit\Gate;
 
-use MageOS\ClaudeConsumerAgent\Model\Agent\Gate\Provenance;
-use MageOS\ClaudeConsumerAgent\Model\Agent\SessionState;
+use MageOS\AiShoppingAssistant\Model\Agent\Gate\Provenance;
+use MageOS\AiShoppingAssistant\Model\Agent\SessionState;
 use PHPUnit\Framework\TestCase;
 
 final class ProvenanceTest extends TestCase

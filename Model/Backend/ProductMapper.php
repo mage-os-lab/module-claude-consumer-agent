@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-namespace MageOS\ClaudeConsumerAgent\Model\Backend;
+namespace MageOS\AiShoppingAssistant\Model\Backend;
 
 use Magento\Catalog\Api\Data\ProductInterface as MagentoProductInterface;
 use Magento\Catalog\Pricing\Price\FinalPrice;
@@ -9,17 +9,17 @@ use Magento\Catalog\Pricing\Price\RegularPrice;
 use Magento\CatalogUrlRewrite\Model\ProductUrlRewriteGenerator;
 use Magento\ConfigurableProduct\Model\Product\Type\Configurable;
 use Magento\UrlRewrite\Service\V1\Data\UrlRewrite;
-use MageOS\ClaudeConsumerAgent\Model\Agent\SessionContext;
-use MageOS\ClaudeConsumerAgent\Model\Data\Product;
+use MageOS\AiShoppingAssistant\Model\Agent\SessionContext;
+use MageOS\AiShoppingAssistant\Model\Data\Product;
 
 final class ProductMapper
 {
     public function __construct(
         private readonly \Magento\Store\Model\StoreManagerInterface $storeManager,
-        private readonly \MageOS\ClaudeConsumerAgent\Api\Backend\ProductImageUrlInterface $productImageUrl,
-        private readonly \MageOS\ClaudeConsumerAgent\Model\Backend\Provider\HelperImageUrl $helperImageUrl,
-        private readonly \MageOS\ClaudeConsumerAgent\Model\Backend\Salability $salability,
-        private readonly \MageOS\ClaudeConsumerAgent\Api\Backend\ProductOptionsProviderInterface $optionsProvider,
+        private readonly \MageOS\AiShoppingAssistant\Api\Backend\ProductImageUrlInterface $productImageUrl,
+        private readonly \MageOS\AiShoppingAssistant\Model\Backend\Provider\HelperImageUrl $helperImageUrl,
+        private readonly \MageOS\AiShoppingAssistant\Model\Backend\Salability $salability,
+        private readonly \MageOS\AiShoppingAssistant\Api\Backend\ProductOptionsProviderInterface $optionsProvider,
         private readonly \Magento\UrlRewrite\Model\UrlFinderInterface $urlFinder
     ) {
     }

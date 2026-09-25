@@ -1,22 +1,22 @@
 <?php
 declare(strict_types=1);
 
-namespace MageOS\ClaudeConsumerAgent\Model\Agent\Turn;
+namespace MageOS\AiShoppingAssistant\Model\Agent\Turn;
 
 use Generator;
-use MageOS\ClaudeConsumerAgent\Model\Agent\Event;
-use MageOS\ClaudeConsumerAgent\Model\Agent\SessionContext;
-use MageOS\ClaudeConsumerAgent\Model\Agent\ToolOutcome;
-use MageOS\ClaudeConsumerAgent\Model\Agent\Turn\Exception\ApiStreamError;
-use MageOS\ClaudeConsumerAgent\Model\Agent\Turn\Item\TextDelta;
-use MageOS\ClaudeConsumerAgent\Model\Agent\Turn\Item\ToolUseClosed;
-use MageOS\ClaudeConsumerAgent\Model\Agent\Turn\Item\UnreadableToolInput;
-use MageOS\ClaudeConsumerAgent\Model\Client\Exception\BadRequest;
-use MageOS\ClaudeConsumerAgent\Model\Client\Exception\RateLimited;
-use MageOS\ClaudeConsumerAgent\Model\Client\Exception\ServerError;
-use MageOS\ClaudeConsumerAgent\Model\Client\Exception\Transport;
-use MageOS\ClaudeConsumerAgent\Model\Client\Exception\Unauthorized;
-use MageOS\ClaudeConsumerAgent\Model\Session\Binding;
+use MageOS\AiShoppingAssistant\Model\Agent\Event;
+use MageOS\AiShoppingAssistant\Model\Agent\SessionContext;
+use MageOS\AiShoppingAssistant\Model\Agent\ToolOutcome;
+use MageOS\AiShoppingAssistant\Model\Agent\Turn\Exception\ApiStreamError;
+use MageOS\AiShoppingAssistant\Model\Agent\Turn\Item\TextDelta;
+use MageOS\AiShoppingAssistant\Model\Agent\Turn\Item\ToolUseClosed;
+use MageOS\AiShoppingAssistant\Model\Agent\Turn\Item\UnreadableToolInput;
+use MageOS\AiShoppingAssistant\Model\Client\Exception\BadRequest;
+use MageOS\AiShoppingAssistant\Model\Client\Exception\RateLimited;
+use MageOS\AiShoppingAssistant\Model\Client\Exception\ServerError;
+use MageOS\AiShoppingAssistant\Model\Client\Exception\Transport;
+use MageOS\AiShoppingAssistant\Model\Client\Exception\Unauthorized;
+use MageOS\AiShoppingAssistant\Model\Session\Binding;
 
 /**
  * Not final so PHPUnit 9.6 can mock it.
@@ -41,22 +41,22 @@ class Orchestrator
     private const RETRYABLE_STREAM_ERROR_TYPES = ['overloaded_error', 'api_error'];
 
     public function __construct(
-        private readonly \MageOS\ClaudeConsumerAgent\Api\Client\MessagesClientInterface $client,
-        private readonly \MageOS\ClaudeConsumerAgent\Api\StorefrontBackendInterface $backend,
-        private readonly \MageOS\ClaudeConsumerAgent\Model\Agent\Prompt\StaticSystem $staticSystem,
-        private readonly \MageOS\ClaudeConsumerAgent\Model\Agent\Prompt\DynamicContext $dynamicContext,
-        private readonly \MageOS\ClaudeConsumerAgent\Model\Agent\Prompt\Assembly $assembly,
-        private readonly \MageOS\ClaudeConsumerAgent\Model\Agent\Prompt\PageNote $pageNote,
-        private readonly \MageOS\ClaudeConsumerAgent\Model\Agent\Tool\Registry $toolRegistry,
-        private readonly \MageOS\ClaudeConsumerAgent\Model\Agent\ExecutorFactory $executorFactory,
-        private readonly \MageOS\ClaudeConsumerAgent\Model\Agent\Grounding\Rules $rules,
-        private readonly \MageOS\ClaudeConsumerAgent\Model\Session\TranscriptRepository $transcripts,
-        private readonly \MageOS\ClaudeConsumerAgent\Api\Session\SessionRepositoryInterface $sessions,
-        private readonly \MageOS\ClaudeConsumerAgent\Model\Config\StoreConfig $storeConfig,
+        private readonly \MageOS\AiShoppingAssistant\Api\Client\MessagesClientInterface $client,
+        private readonly \MageOS\AiShoppingAssistant\Api\StorefrontBackendInterface $backend,
+        private readonly \MageOS\AiShoppingAssistant\Model\Agent\Prompt\StaticSystem $staticSystem,
+        private readonly \MageOS\AiShoppingAssistant\Model\Agent\Prompt\DynamicContext $dynamicContext,
+        private readonly \MageOS\AiShoppingAssistant\Model\Agent\Prompt\Assembly $assembly,
+        private readonly \MageOS\AiShoppingAssistant\Model\Agent\Prompt\PageNote $pageNote,
+        private readonly \MageOS\AiShoppingAssistant\Model\Agent\Tool\Registry $toolRegistry,
+        private readonly \MageOS\AiShoppingAssistant\Model\Agent\ExecutorFactory $executorFactory,
+        private readonly \MageOS\AiShoppingAssistant\Model\Agent\Grounding\Rules $rules,
+        private readonly \MageOS\AiShoppingAssistant\Model\Session\TranscriptRepository $transcripts,
+        private readonly \MageOS\AiShoppingAssistant\Api\Session\SessionRepositoryInterface $sessions,
+        private readonly \MageOS\AiShoppingAssistant\Model\Config\StoreConfig $storeConfig,
         private readonly \Psr\Log\LoggerInterface $logger,
-        private readonly \MageOS\ClaudeConsumerAgent\Model\Agent\Turn\StreamedRoundFactory $streamedRoundFactory,
-        private readonly \MageOS\ClaudeConsumerAgent\Api\Turn\TurnLogInterface $turnLog,
-        private readonly \MageOS\ClaudeConsumerAgent\Model\Client\Sleeper $sleeper
+        private readonly \MageOS\AiShoppingAssistant\Model\Agent\Turn\StreamedRoundFactory $streamedRoundFactory,
+        private readonly \MageOS\AiShoppingAssistant\Api\Turn\TurnLogInterface $turnLog,
+        private readonly \MageOS\AiShoppingAssistant\Model\Client\Sleeper $sleeper
     ) {
     }
 

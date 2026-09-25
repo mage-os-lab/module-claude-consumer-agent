@@ -1,14 +1,14 @@
 <?php
 declare(strict_types=1);
 
-namespace MageOS\ClaudeConsumerAgent\Model\Agent\Skill;
+namespace MageOS\AiShoppingAssistant\Model\Agent\Skill;
 
 final class Registry
 {
     private ?array $cachedSkills = null;
 
     public function __construct(
-        private readonly \MageOS\ClaudeConsumerAgent\Model\Agent\Skill\Loader $loader
+        private readonly \MageOS\AiShoppingAssistant\Model\Agent\Skill\Loader $loader
     ) {
     }
 

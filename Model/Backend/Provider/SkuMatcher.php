@@ -1,9 +1,9 @@
 <?php
 declare(strict_types=1);
 
-namespace MageOS\ClaudeConsumerAgent\Model\Backend\Provider;
+namespace MageOS\AiShoppingAssistant\Model\Backend\Provider;
 
-use MageOS\ClaudeConsumerAgent\Api\Backend\SkuMatcherInterface;
+use MageOS\AiShoppingAssistant\Api\Backend\SkuMatcherInterface;
 
 final class SkuMatcher implements SkuMatcherInterface
 {

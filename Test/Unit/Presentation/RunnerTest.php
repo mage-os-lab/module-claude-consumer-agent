@@ -1,36 +1,36 @@
 <?php
 declare(strict_types=1);
 
-namespace MageOS\ClaudeConsumerAgent\Test\Unit\Presentation;
+namespace MageOS\AiShoppingAssistant\Test\Unit\Presentation;
 
 use Magento\Framework\App\Config\ScopeConfigInterface;
 use Magento\Framework\UrlInterface;
 use Magento\Store\Api\Data\StoreInterface;
 use Magento\Store\Model\StoreManagerInterface;
-use MageOS\ClaudeConsumerAgent\Api\Data\PageContextInterface;
-use MageOS\ClaudeConsumerAgent\Api\StorefrontBackendInterface;
-use MageOS\ClaudeConsumerAgent\Model\Agent\Presentation\Enrich\Checkout;
-use MageOS\ClaudeConsumerAgent\Model\Agent\Presentation\Enrich\Comparison;
-use MageOS\ClaudeConsumerAgent\Model\Agent\Presentation\Enrich\OrderStatus;
-use MageOS\ClaudeConsumerAgent\Model\Agent\Presentation\Enrich\Products;
-use MageOS\ClaudeConsumerAgent\Model\Agent\Presentation\Enrich\Suggestions;
-use MageOS\ClaudeConsumerAgent\Model\Agent\Presentation\Registry;
-use MageOS\ClaudeConsumerAgent\Model\Agent\Presentation\Runner;
-use MageOS\ClaudeConsumerAgent\Model\Agent\SessionContext;
-use MageOS\ClaudeConsumerAgent\Model\Agent\SessionState;
-use MageOS\ClaudeConsumerAgent\Model\Config\StoreConfig;
-use MageOS\ClaudeConsumerAgent\Model\Data\Cart;
-use MageOS\ClaudeConsumerAgent\Model\Data\Product;
-use MageOS\ClaudeConsumerAgent\Model\Data\ProductDetails;
+use MageOS\AiShoppingAssistant\Api\Data\PageContextInterface;
+use MageOS\AiShoppingAssistant\Api\StorefrontBackendInterface;
+use MageOS\AiShoppingAssistant\Model\Agent\Presentation\Enrich\Checkout;
+use MageOS\AiShoppingAssistant\Model\Agent\Presentation\Enrich\Comparison;
+use MageOS\AiShoppingAssistant\Model\Agent\Presentation\Enrich\OrderStatus;
+use MageOS\AiShoppingAssistant\Model\Agent\Presentation\Enrich\Products;
+use MageOS\AiShoppingAssistant\Model\Agent\Presentation\Enrich\Suggestions;
+use MageOS\AiShoppingAssistant\Model\Agent\Presentation\Registry;
+use MageOS\AiShoppingAssistant\Model\Agent\Presentation\Runner;
+use MageOS\AiShoppingAssistant\Model\Agent\SessionContext;
+use MageOS\AiShoppingAssistant\Model\Agent\SessionState;
+use MageOS\AiShoppingAssistant\Model\Config\StoreConfig;
+use MageOS\AiShoppingAssistant\Model\Data\Cart;
+use MageOS\AiShoppingAssistant\Model\Data\Product;
+use MageOS\AiShoppingAssistant\Model\Data\ProductDetails;
 use PHPUnit\Framework\TestCase;
 use Psr\Log\LoggerInterface;
 
 final class RunnerTest extends TestCase
 {
-    private const SERIALIZER_CLASS = \MageOS\ClaudeConsumerAgent\Model\Agent\Serializer::class;
-    private const FENCE_CLASS = \MageOS\ClaudeConsumerAgent\Model\Agent\Fencing\Fence::class;
-    private const SANITIZER_CLASS = \MageOS\ClaudeConsumerAgent\Model\Agent\Fencing\Sanitizer::class;
-    private const VALIDATOR_CLASS = \MageOS\ClaudeConsumerAgent\Model\Agent\Schema\Validator::class;
+    private const SERIALIZER_CLASS = \MageOS\AiShoppingAssistant\Model\Agent\Serializer::class;
+    private const FENCE_CLASS = \MageOS\AiShoppingAssistant\Model\Agent\Fencing\Fence::class;
+    private const SANITIZER_CLASS = \MageOS\AiShoppingAssistant\Model\Agent\Fencing\Sanitizer::class;
+    private const VALIDATOR_CLASS = \MageOS\AiShoppingAssistant\Model\Agent\Schema\Validator::class;
 
     protected function setUp(): void
     {
