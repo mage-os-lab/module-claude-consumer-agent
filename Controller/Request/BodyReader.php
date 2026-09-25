@@ -1,9 +1,9 @@
 <?php
 declare(strict_types=1);
 
-namespace MageOS\ClaudeConsumerAgent\Controller\Request;
+namespace MageOS\AiShoppingAssistant\Controller\Request;
 
-use MageOS\ClaudeConsumerAgent\Model\Agent\AgentConfig;
+use MageOS\AiShoppingAssistant\Model\Agent\AgentConfig;
 
 final class BodyReader
 {

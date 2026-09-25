@@ -1,17 +1,17 @@
 <?php
 declare(strict_types=1);
 
-namespace MageOS\ClaudeConsumerAgent\Test\Unit\Backend;
+namespace MageOS\AiShoppingAssistant\Test\Unit\Backend;
 
 use Magento\Catalog\Model\Product as MagentoProduct;
 use Magento\Catalog\Model\ResourceModel\Product\Collection as ProductCollection;
 use Magento\Catalog\Model\ResourceModel\Product\CollectionFactory as ProductCollectionFactory;
-use MageOS\ClaudeConsumerAgent\Api\Backend\SearchProviderInterface;
-use MageOS\ClaudeConsumerAgent\Api\Data\SearchFiltersInterface;
-use MageOS\ClaudeConsumerAgent\Model\Agent\SessionContext;
-use MageOS\ClaudeConsumerAgent\Model\Backend\Provider\BrandCapSearchDecorator;
-use MageOS\ClaudeConsumerAgent\Model\Data\PageContext;
-use MageOS\ClaudeConsumerAgent\Model\Data\SearchFilters;
+use MageOS\AiShoppingAssistant\Api\Backend\SearchProviderInterface;
+use MageOS\AiShoppingAssistant\Api\Data\SearchFiltersInterface;
+use MageOS\AiShoppingAssistant\Model\Agent\SessionContext;
+use MageOS\AiShoppingAssistant\Model\Backend\Provider\BrandCapSearchDecorator;
+use MageOS\AiShoppingAssistant\Model\Data\PageContext;
+use MageOS\AiShoppingAssistant\Model\Data\SearchFilters;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 

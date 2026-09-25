@@ -1,9 +1,9 @@
 <?php
 declare(strict_types=1);
 
-namespace MageOS\ClaudeConsumerAgent\Model\Agent\Tool;
+namespace MageOS\AiShoppingAssistant\Model\Agent\Tool;
 
-use MageOS\ClaudeConsumerAgent\Api\Tool\HandlerInterface;
+use MageOS\AiShoppingAssistant\Api\Tool\HandlerInterface;
 
 final class Definition
 {
@@ -15,7 +15,7 @@ final class Definition
         private readonly string $description,
         private readonly array $inputSchema,
         private readonly string $kind,
-        private readonly ?\MageOS\ClaudeConsumerAgent\Api\Tool\HandlerInterface $handler,
+        private readonly ?\MageOS\AiShoppingAssistant\Api\Tool\HandlerInterface $handler,
         private readonly array $productIdArguments,
         private readonly bool $remembersProducts,
         private readonly bool $takesStatus,

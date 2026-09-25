@@ -1,4 +1,4 @@
-# MageOS_ClaudeConsumerAgent
+# MageOS_AiShoppingAssistant
 
 A shopping assistant for Hyvä and Luma storefronts on Magento 2 and Mage-OS.
 It ports Anthropic's open-source shopping agent to a Magento module. The
@@ -54,16 +54,36 @@ part without a change to the base module.
 
 ```bash
 cd <magento root>
-composer require mage-os/module-claude-consumer-agent
-bin/magento module:enable MageOS_ClaudeConsumerAgent
+composer require mage-os/module-ai-shopping-assistant
+bin/magento module:enable MageOS_AiShoppingAssistant
 bin/magento setup:upgrade
 ```
 
 For development, clone the repository into
-`app/code/MageOS/ClaudeConsumerAgent` instead of the `composer require`.
+`app/code/MageOS/AiShoppingAssistant` instead of the `composer require`.
 
 `setup:upgrade` creates the tables `aiagent_session`, `aiagent_message` and
 `aiagent_turn`.
+
+### Upgrading from mage-os/module-claude-consumer-agent
+
+The module was renamed from `MageOS_ClaudeConsumerAgent` to
+`MageOS_AiShoppingAssistant`. Tables, configuration paths, the frontend route
+and stored sessions keep their names, so data and settings carry over.
+
+```bash
+composer remove mage-os/module-claude-consumer-agent
+composer require mage-os/module-ai-shopping-assistant
+rm -rf generated/code/* generated/metadata/*
+bin/magento module:enable MageOS_AiShoppingAssistant
+bin/magento setup:upgrade
+```
+
+Clear `generated/` before the first `bin/magento` call: code generated for the
+old namespace stops `bin/magento` from starting. `setup:upgrade` drops the old
+module from `app/etc/config.php`. On Hyvä, run `bin/magento hyva:config:generate`
+again so the theme build finds the new module path. In production mode, finish
+with `setup:di:compile` and `setup:static-content:deploy` as usual.
 
 ### Hyvä
 
@@ -346,7 +366,7 @@ preference on a base concrete class.
    preference:
 
    ```xml
-   <preference for="MageOS\ClaudeConsumerAgent\Api\Backend\SearchProviderInterface"
+   <preference for="MageOS\AiShoppingAssistant\Api\Backend\SearchProviderInterface"
                type="Vendor\Store\Model\Backend\Provider\CatalogSearch"/>
    ```
 
@@ -360,7 +380,7 @@ preference on a base concrete class.
    `Model\Agent\Tool\Registry`:
 
    ```xml
-   <type name="MageOS\ClaudeConsumerAgent\Model\Agent\Tool\Registry">
+   <type name="MageOS\AiShoppingAssistant\Model\Agent\Tool\Registry">
        <arguments>
            <argument name="providers" xsi:type="array">
                <item name="store" xsi:type="object">Vendor\Store\Model\Tool\StoreToolProvider</item>
@@ -384,7 +404,7 @@ preference on a base concrete class.
    folders.
 
    ```xml
-   <type name="MageOS\ClaudeConsumerAgent\Model\Agent\Lexicon">
+   <type name="MageOS\AiShoppingAssistant\Model\Agent\Lexicon">
        <arguments>
            <argument name="additionalPolicyTerms" xsi:type="array">
                <item name="0" xsi:type="string">warranty claim</item>
@@ -399,8 +419,8 @@ preference on a base concrete class.
 
 7. Templates. Every surface and card template resolves through the theme
    fallback. Override by path in a child theme under
-   `MageOS_ClaudeConsumerAgent/templates/`. Luma Knockout templates live under
-   `MageOS_ClaudeConsumerAgent/web/template/luma/`.
+   `MageOS_AiShoppingAssistant/templates/`. Luma Knockout templates live under
+   `MageOS_AiShoppingAssistant/web/template/luma/`.
 
 8. Product image URLs. `Api\Backend\ProductImageUrlInterface::forProduct()`
    resolves the image URL for a product card or cart item. The default
@@ -409,7 +429,7 @@ preference on a base concrete class.
    partial media mirror). Returning null falls back to the helper result:
 
    ```xml
-   <preference for="MageOS\ClaudeConsumerAgent\Api\Backend\ProductImageUrlInterface"
+   <preference for="MageOS\AiShoppingAssistant\Api\Backend\ProductImageUrlInterface"
                type="Vendor\Store\Model\Backend\Provider\StoreImageUrl"/>
    ```
 
@@ -419,9 +439,9 @@ preference on a base concrete class.
 
 ## Tests
 
-- Unit: `vendor/bin/phpunit -c dev/tests/unit/phpunit.xml.dist app/code/MageOS/ClaudeConsumerAgent/Test/Unit`
+- Unit: `vendor/bin/phpunit -c dev/tests/unit/phpunit.xml.dist app/code/MageOS/AiShoppingAssistant/Test/Unit`
   (no Magento bootstrap, no database)
-- JS (Luma models, Hyvä store and transcript): `node --test app/code/MageOS/ClaudeConsumerAgent/Test/Js/*.test.cjs`
+- JS (Luma models, Hyvä store and transcript): `node --test app/code/MageOS/AiShoppingAssistant/Test/Js/*.test.cjs`
 - Integration: `Test/Integration` with the project's integration test
   configuration
 - Evals: `bin/magento aiagent:eval:run`

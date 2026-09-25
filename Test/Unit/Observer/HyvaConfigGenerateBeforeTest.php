@@ -1,14 +1,14 @@
 <?php
 declare(strict_types=1);
 
-namespace MageOS\ClaudeConsumerAgent\Test\Unit\Observer;
+namespace MageOS\AiShoppingAssistant\Test\Unit\Observer;
 
 use Magento\Framework\Component\ComponentRegistrar;
 use Magento\Framework\Component\ComponentRegistrarInterface;
 use Magento\Framework\DataObject;
 use Magento\Framework\Event;
 use Magento\Framework\Event\Observer;
-use MageOS\ClaudeConsumerAgent\Observer\HyvaConfigGenerateBefore;
+use MageOS\AiShoppingAssistant\Observer\HyvaConfigGenerateBefore;
 use PHPUnit\Framework\TestCase;
 
 final class HyvaConfigGenerateBeforeTest extends TestCase
@@ -23,11 +23,11 @@ final class HyvaConfigGenerateBeforeTest extends TestCase
 
     public function testExecuteAddsExtensionEntryForAPathInsideBp(): void
     {
-        $modulePath = BP . '/app/code/MageOS/ClaudeConsumerAgent';
+        $modulePath = BP . '/app/code/MageOS/AiShoppingAssistant';
         $registrar = $this->createMock(ComponentRegistrarInterface::class);
         $registrar->expects($this->once())
             ->method('getPath')
-            ->with(ComponentRegistrar::MODULE, 'MageOS_ClaudeConsumerAgent')
+            ->with(ComponentRegistrar::MODULE, 'MageOS_AiShoppingAssistant')
             ->willReturn($modulePath);
         $config = new DataObject();
 
@@ -35,14 +35,14 @@ final class HyvaConfigGenerateBeforeTest extends TestCase
         $observerClass->execute($this->buildObserver($config));
 
         $this->assertSame(
-            [['src' => 'app/code/MageOS/ClaudeConsumerAgent']],
+            [['src' => 'app/code/MageOS/AiShoppingAssistant']],
             $config->getData('extensions')
         );
     }
 
     public function testExecuteAppendsToExistingExtensions(): void
     {
-        $modulePath = BP . '/app/code/MageOS/ClaudeConsumerAgent';
+        $modulePath = BP . '/app/code/MageOS/AiShoppingAssistant';
         $registrar = $this->createMock(ComponentRegistrarInterface::class);
         $registrar->method('getPath')->willReturn($modulePath);
         $config = new DataObject(['extensions' => [['src' => 'app/code/Other/Module']]]);
@@ -53,7 +53,7 @@ final class HyvaConfigGenerateBeforeTest extends TestCase
         $this->assertSame(
             [
                 ['src' => 'app/code/Other/Module'],
-                ['src' => 'app/code/MageOS/ClaudeConsumerAgent'],
+                ['src' => 'app/code/MageOS/AiShoppingAssistant'],
             ],
             $config->getData('extensions')
         );

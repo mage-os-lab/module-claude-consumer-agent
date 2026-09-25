@@ -1,12 +1,12 @@
 <?php
 declare(strict_types=1);
 
-namespace MageOS\ClaudeConsumerAgent\Api\Client;
+namespace MageOS\AiShoppingAssistant\Api\Client;
 
 use Generator;
 
 /**
- * stream() yields one MageOS\ClaudeConsumerAgent\Model\Client\RawEvent per SSE event of the response, in order.
+ * stream() yields one MageOS\AiShoppingAssistant\Model\Client\RawEvent per SSE event of the response, in order.
  */
 interface MessagesClientInterface
 {

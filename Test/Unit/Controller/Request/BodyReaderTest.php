@@ -1,11 +1,11 @@
 <?php
 declare(strict_types=1);
 
-namespace MageOS\ClaudeConsumerAgent\Test\Unit\Controller\Request;
+namespace MageOS\AiShoppingAssistant\Test\Unit\Controller\Request;
 
 use Magento\Framework\App\Request\Http;
-use MageOS\ClaudeConsumerAgent\Controller\Request\BodyReader;
-use MageOS\ClaudeConsumerAgent\Model\Agent\AgentConfig;
+use MageOS\AiShoppingAssistant\Controller\Request\BodyReader;
+use MageOS\AiShoppingAssistant\Model\Agent\AgentConfig;
 use PHPUnit\Framework\TestCase;
 
 final class BodyReaderTest extends TestCase

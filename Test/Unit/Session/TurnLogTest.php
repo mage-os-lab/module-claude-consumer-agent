@@ -1,10 +1,10 @@
 <?php
 declare(strict_types=1);
 
-namespace MageOS\ClaudeConsumerAgent\Test\Unit\Session;
+namespace MageOS\AiShoppingAssistant\Test\Unit\Session;
 
-use MageOS\ClaudeConsumerAgent\Model\Session\ResourceModel\Turn;
-use MageOS\ClaudeConsumerAgent\Model\Session\TurnLog;
+use MageOS\AiShoppingAssistant\Model\Session\ResourceModel\Turn;
+use MageOS\AiShoppingAssistant\Model\Session\TurnLog;
 use Psr\Log\LoggerInterface;
 use PHPUnit\Framework\TestCase;
 

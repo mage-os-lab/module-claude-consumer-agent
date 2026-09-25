@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-namespace MageOS\ClaudeConsumerAgent\Test\Unit\Block;
+namespace MageOS\AiShoppingAssistant\Test\Unit\Block;
 
 use Magento\Catalog\Helper\Data as CatalogHelper;
 use Magento\Catalog\Model\Product;
@@ -9,8 +9,8 @@ use Magento\Framework\App\Config\ScopeConfigInterface;
 use Magento\Framework\View\Element\Template\Context;
 use Magento\Store\Api\Data\StoreInterface;
 use Magento\Store\Model\StoreManagerInterface;
-use MageOS\ClaudeConsumerAgent\Block\ProductAsk;
-use MageOS\ClaudeConsumerAgent\Model\Config\StoreConfig;
+use MageOS\AiShoppingAssistant\Block\ProductAsk;
+use MageOS\AiShoppingAssistant\Model\Config\StoreConfig;
 use PHPUnit\Framework\TestCase;
 use ReflectionMethod;
 
@@ -33,7 +33,7 @@ final class ProductAskTest extends TestCase
                 $context,
                 new StoreConfig($scopeConfig, $storeManager),
                 $catalogHelper,
-                ['template' => 'MageOS_ClaudeConsumerAgent::product/ask.phtml'],
+                ['template' => 'MageOS_AiShoppingAssistant::product/ask.phtml'],
             ])
             ->onlyMethods(['fetchView', 'getTemplateFile'])
             ->getMock();

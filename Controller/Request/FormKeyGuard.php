@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-namespace MageOS\ClaudeConsumerAgent\Controller\Request;
+namespace MageOS\AiShoppingAssistant\Controller\Request;
 
 final class FormKeyGuard
 {

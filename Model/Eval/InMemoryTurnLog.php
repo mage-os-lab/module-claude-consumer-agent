@@ -1,9 +1,9 @@
 <?php
 declare(strict_types=1);
 
-namespace MageOS\ClaudeConsumerAgent\Model\Eval;
+namespace MageOS\AiShoppingAssistant\Model\Eval;
 
-use MageOS\ClaudeConsumerAgent\Api\Turn\TurnLogInterface;
+use MageOS\AiShoppingAssistant\Api\Turn\TurnLogInterface;
 
 /**
  * Turn recording for the eval runner: every record() lands in memory instead of the

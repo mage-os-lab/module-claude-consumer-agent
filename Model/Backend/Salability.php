@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-namespace MageOS\ClaudeConsumerAgent\Model\Backend;
+namespace MageOS\AiShoppingAssistant\Model\Backend;
 
 use Magento\Catalog\Api\Data\ProductInterface;
 use Magento\Framework\DataObject;
@@ -10,7 +10,7 @@ use Magento\InventorySalesApi\Api\AreProductsSalableInterface;
 use Magento\InventorySalesApi\Api\Data\SalesChannelInterface;
 use Magento\InventorySalesApi\Api\IsProductSalableInterface;
 use Magento\InventorySalesApi\Api\StockResolverInterface;
-use MageOS\ClaudeConsumerAgent\Model\Agent\SessionContext;
+use MageOS\AiShoppingAssistant\Model\Agent\SessionContext;
 
 /**
  * Reads Magento\Framework\ObjectManagerInterface directly to resolve the two optional

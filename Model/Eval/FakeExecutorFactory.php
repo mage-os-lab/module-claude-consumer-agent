@@ -1,10 +1,10 @@
 <?php
 declare(strict_types=1);
 
-namespace MageOS\ClaudeConsumerAgent\Model\Eval;
+namespace MageOS\AiShoppingAssistant\Model\Eval;
 
-use MageOS\ClaudeConsumerAgent\Model\Agent\Executor;
-use MageOS\ClaudeConsumerAgent\Model\Agent\ExecutorFactory;
+use MageOS\AiShoppingAssistant\Model\Agent\Executor;
+use MageOS\AiShoppingAssistant\Model\Agent\ExecutorFactory;
 
 /**
  * Executor's own dependencies that are not part of the per-call data (registry,
@@ -17,11 +17,11 @@ use MageOS\ClaudeConsumerAgent\Model\Agent\ExecutorFactory;
 final class FakeExecutorFactory extends ExecutorFactory
 {
     public function __construct(
-        private readonly \MageOS\ClaudeConsumerAgent\Model\Agent\Tool\Registry $registry,
-        private readonly \MageOS\ClaudeConsumerAgent\Model\Agent\Presentation\Runner $presentation,
-        private readonly \MageOS\ClaudeConsumerAgent\Model\Agent\Schema\Validator $validator,
-        private readonly \MageOS\ClaudeConsumerAgent\Model\Agent\Gate\Provenance $provenance,
-        private readonly \MageOS\ClaudeConsumerAgent\Model\Agent\Fencing\Sanitizer $sanitizer,
+        private readonly \MageOS\AiShoppingAssistant\Model\Agent\Tool\Registry $registry,
+        private readonly \MageOS\AiShoppingAssistant\Model\Agent\Presentation\Runner $presentation,
+        private readonly \MageOS\AiShoppingAssistant\Model\Agent\Schema\Validator $validator,
+        private readonly \MageOS\AiShoppingAssistant\Model\Agent\Gate\Provenance $provenance,
+        private readonly \MageOS\AiShoppingAssistant\Model\Agent\Fencing\Sanitizer $sanitizer,
         private readonly \Psr\Log\LoggerInterface $logger
     ) {
     }

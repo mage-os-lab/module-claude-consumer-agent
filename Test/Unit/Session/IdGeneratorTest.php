@@ -1,9 +1,9 @@
 <?php
 declare(strict_types=1);
 
-namespace MageOS\ClaudeConsumerAgent\Test\Unit\Session;
+namespace MageOS\AiShoppingAssistant\Test\Unit\Session;
 
-use MageOS\ClaudeConsumerAgent\Model\Session\IdGenerator;
+use MageOS\AiShoppingAssistant\Model\Session\IdGenerator;
 use PHPUnit\Framework\TestCase;
 
 final class IdGeneratorTest extends TestCase

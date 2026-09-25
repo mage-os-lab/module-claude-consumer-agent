@@ -1,18 +1,18 @@
 <?php
 declare(strict_types=1);
 
-namespace MageOS\ClaudeConsumerAgent\ViewModel;
+namespace MageOS\AiShoppingAssistant\ViewModel;
 
 use Magento\Framework\View\Element\Block\ArgumentInterface;
 
 final class Assistant implements ArgumentInterface
 {
     public function __construct(
-        private readonly \MageOS\ClaudeConsumerAgent\Model\Config\StoreConfig $storeConfig,
-        private readonly \MageOS\ClaudeConsumerAgent\Model\Surface\Resolver $surfaceResolver,
+        private readonly \MageOS\AiShoppingAssistant\Model\Config\StoreConfig $storeConfig,
+        private readonly \MageOS\AiShoppingAssistant\Model\Surface\Resolver $surfaceResolver,
         private readonly \Magento\Framework\UrlInterface $url,
         private readonly \Magento\Store\Model\StoreManagerInterface $storeManager,
-        private readonly \MageOS\ClaudeConsumerAgent\Model\Surface\PageDetector $pageDetector
+        private readonly \MageOS\AiShoppingAssistant\Model\Surface\PageDetector $pageDetector
     ) {
     }
 

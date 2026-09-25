@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-namespace MageOS\ClaudeConsumerAgent\Model\Agent\Grounding;
+namespace MageOS\AiShoppingAssistant\Model\Agent\Grounding;
 
 /**
  * Pulls the tokens of a customer message that could be a SKU: whitespace-separated, edge

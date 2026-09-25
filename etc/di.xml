@@ -1,67 +1,67 @@
 <?xml version="1.0"?>
 <config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
-    <preference for="MageOS\ClaudeConsumerAgent\Api\StorefrontBackendInterface" type="MageOS\ClaudeConsumerAgent\Model\Backend\MagentoStorefront"/>
-    <preference for="MageOS\ClaudeConsumerAgent\Api\Backend\SearchProviderInterface" type="MageOS\ClaudeConsumerAgent\Model\Backend\Provider\BrandCapSearchDecorator"/>
-    <preference for="MageOS\ClaudeConsumerAgent\Api\Backend\BestsellerRankInterface" type="MageOS\ClaudeConsumerAgent\Model\Backend\Provider\AggregatedBestsellerRank"/>
-    <preference for="MageOS\ClaudeConsumerAgent\Api\Backend\CatalogMapProviderInterface" type="MageOS\ClaudeConsumerAgent\Model\Backend\Provider\CategoryTree"/>
-    <preference for="MageOS\ClaudeConsumerAgent\Api\Backend\CategorySearchProviderInterface" type="MageOS\ClaudeConsumerAgent\Model\Backend\Provider\CategoryNameSearch"/>
-    <preference for="MageOS\ClaudeConsumerAgent\Api\Backend\ProductOptionsProviderInterface" type="MageOS\ClaudeConsumerAgent\Model\Backend\Provider\CoreOptions"/>
-    <preference for="MageOS\ClaudeConsumerAgent\Api\Backend\ProductImageUrlInterface" type="MageOS\ClaudeConsumerAgent\Model\Backend\Provider\HelperImageUrl"/>
-    <preference for="MageOS\ClaudeConsumerAgent\Api\Backend\FulfillmentProviderInterface" type="MageOS\ClaudeConsumerAgent\Model\Backend\Provider\FulfillmentAggregator"/>
-    <preference for="MageOS\ClaudeConsumerAgent\Api\Backend\PolicySourceInterface" type="MageOS\ClaudeConsumerAgent\Model\Backend\Provider\CmsPagePolicySource"/>
-    <preference for="MageOS\ClaudeConsumerAgent\Api\Backend\StoreFactTitleResolverInterface" type="MageOS\ClaudeConsumerAgent\Model\Backend\Provider\StoreFactTitleResolver"/>
-    <preference for="MageOS\ClaudeConsumerAgent\Api\Backend\OrderStatusMapperInterface" type="MageOS\ClaudeConsumerAgent\Model\Backend\Provider\OrderStatusMapper"/>
-    <preference for="MageOS\ClaudeConsumerAgent\Api\Backend\SkuMatcherInterface" type="MageOS\ClaudeConsumerAgent\Model\Backend\Provider\SkuMatcher"/>
-    <preference for="MageOS\ClaudeConsumerAgent\Api\Cart\BuyRequestBuilderInterface" type="MageOS\ClaudeConsumerAgent\Model\Backend\BuyRequestBuilder"/>
-    <preference for="MageOS\ClaudeConsumerAgent\Api\Client\MessagesClientInterface" type="MageOS\ClaudeConsumerAgent\Model\Client\GuzzleMessagesClient"/>
-    <preference for="MageOS\ClaudeConsumerAgent\Api\Session\SessionRepositoryInterface" type="MageOS\ClaudeConsumerAgent\Model\Session\Repository"/>
-    <preference for="MageOS\ClaudeConsumerAgent\Api\Turn\TurnLogInterface" type="MageOS\ClaudeConsumerAgent\Model\Session\TurnLog"/>
+    <preference for="MageOS\AiShoppingAssistant\Api\StorefrontBackendInterface" type="MageOS\AiShoppingAssistant\Model\Backend\MagentoStorefront"/>
+    <preference for="MageOS\AiShoppingAssistant\Api\Backend\SearchProviderInterface" type="MageOS\AiShoppingAssistant\Model\Backend\Provider\BrandCapSearchDecorator"/>
+    <preference for="MageOS\AiShoppingAssistant\Api\Backend\BestsellerRankInterface" type="MageOS\AiShoppingAssistant\Model\Backend\Provider\AggregatedBestsellerRank"/>
+    <preference for="MageOS\AiShoppingAssistant\Api\Backend\CatalogMapProviderInterface" type="MageOS\AiShoppingAssistant\Model\Backend\Provider\CategoryTree"/>
+    <preference for="MageOS\AiShoppingAssistant\Api\Backend\CategorySearchProviderInterface" type="MageOS\AiShoppingAssistant\Model\Backend\Provider\CategoryNameSearch"/>
+    <preference for="MageOS\AiShoppingAssistant\Api\Backend\ProductOptionsProviderInterface" type="MageOS\AiShoppingAssistant\Model\Backend\Provider\CoreOptions"/>
+    <preference for="MageOS\AiShoppingAssistant\Api\Backend\ProductImageUrlInterface" type="MageOS\AiShoppingAssistant\Model\Backend\Provider\HelperImageUrl"/>
+    <preference for="MageOS\AiShoppingAssistant\Api\Backend\FulfillmentProviderInterface" type="MageOS\AiShoppingAssistant\Model\Backend\Provider\FulfillmentAggregator"/>
+    <preference for="MageOS\AiShoppingAssistant\Api\Backend\PolicySourceInterface" type="MageOS\AiShoppingAssistant\Model\Backend\Provider\CmsPagePolicySource"/>
+    <preference for="MageOS\AiShoppingAssistant\Api\Backend\StoreFactTitleResolverInterface" type="MageOS\AiShoppingAssistant\Model\Backend\Provider\StoreFactTitleResolver"/>
+    <preference for="MageOS\AiShoppingAssistant\Api\Backend\OrderStatusMapperInterface" type="MageOS\AiShoppingAssistant\Model\Backend\Provider\OrderStatusMapper"/>
+    <preference for="MageOS\AiShoppingAssistant\Api\Backend\SkuMatcherInterface" type="MageOS\AiShoppingAssistant\Model\Backend\Provider\SkuMatcher"/>
+    <preference for="MageOS\AiShoppingAssistant\Api\Cart\BuyRequestBuilderInterface" type="MageOS\AiShoppingAssistant\Model\Backend\BuyRequestBuilder"/>
+    <preference for="MageOS\AiShoppingAssistant\Api\Client\MessagesClientInterface" type="MageOS\AiShoppingAssistant\Model\Client\GuzzleMessagesClient"/>
+    <preference for="MageOS\AiShoppingAssistant\Api\Session\SessionRepositoryInterface" type="MageOS\AiShoppingAssistant\Model\Session\Repository"/>
+    <preference for="MageOS\AiShoppingAssistant\Api\Turn\TurnLogInterface" type="MageOS\AiShoppingAssistant\Model\Session\TurnLog"/>
 
-    <preference for="MageOS\ClaudeConsumerAgent\Api\Data\ProductInterface" type="MageOS\ClaudeConsumerAgent\Model\Data\Product"/>
-    <preference for="MageOS\ClaudeConsumerAgent\Api\Data\ProductDetailsInterface" type="MageOS\ClaudeConsumerAgent\Model\Data\ProductDetails"/>
-    <preference for="MageOS\ClaudeConsumerAgent\Api\Data\SearchFiltersInterface" type="MageOS\ClaudeConsumerAgent\Model\Data\SearchFilters"/>
-    <preference for="MageOS\ClaudeConsumerAgent\Api\Data\CategoryMatchInterface" type="MageOS\ClaudeConsumerAgent\Model\Data\CategoryMatch"/>
-    <preference for="MageOS\ClaudeConsumerAgent\Api\Data\CartInterface" type="MageOS\ClaudeConsumerAgent\Model\Data\Cart"/>
-    <preference for="MageOS\ClaudeConsumerAgent\Api\Data\CartItemInterface" type="MageOS\ClaudeConsumerAgent\Model\Data\CartItem"/>
-    <preference for="MageOS\ClaudeConsumerAgent\Api\Data\UserPreferencesInterface" type="MageOS\ClaudeConsumerAgent\Model\Data\UserPreferences"/>
-    <preference for="MageOS\ClaudeConsumerAgent\Api\Data\OrderInterface" type="MageOS\ClaudeConsumerAgent\Model\Data\Order"/>
-    <preference for="MageOS\ClaudeConsumerAgent\Api\Data\OrderItemInterface" type="MageOS\ClaudeConsumerAgent\Model\Data\OrderItem"/>
-    <preference for="MageOS\ClaudeConsumerAgent\Api\Data\PolicyInterface" type="MageOS\ClaudeConsumerAgent\Model\Data\Policy"/>
-    <preference for="MageOS\ClaudeConsumerAgent\Api\Data\FulfillmentOptionInterface" type="MageOS\ClaudeConsumerAgent\Model\Data\FulfillmentOption"/>
-    <preference for="MageOS\ClaudeConsumerAgent\Api\Data\PageContextInterface" type="MageOS\ClaudeConsumerAgent\Model\Data\PageContext"/>
-    <preference for="MageOS\ClaudeConsumerAgent\Api\Data\CheckoutHandoffInterface" type="MageOS\ClaudeConsumerAgent\Model\Data\CheckoutHandoff"/>
+    <preference for="MageOS\AiShoppingAssistant\Api\Data\ProductInterface" type="MageOS\AiShoppingAssistant\Model\Data\Product"/>
+    <preference for="MageOS\AiShoppingAssistant\Api\Data\ProductDetailsInterface" type="MageOS\AiShoppingAssistant\Model\Data\ProductDetails"/>
+    <preference for="MageOS\AiShoppingAssistant\Api\Data\SearchFiltersInterface" type="MageOS\AiShoppingAssistant\Model\Data\SearchFilters"/>
+    <preference for="MageOS\AiShoppingAssistant\Api\Data\CategoryMatchInterface" type="MageOS\AiShoppingAssistant\Model\Data\CategoryMatch"/>
+    <preference for="MageOS\AiShoppingAssistant\Api\Data\CartInterface" type="MageOS\AiShoppingAssistant\Model\Data\Cart"/>
+    <preference for="MageOS\AiShoppingAssistant\Api\Data\CartItemInterface" type="MageOS\AiShoppingAssistant\Model\Data\CartItem"/>
+    <preference for="MageOS\AiShoppingAssistant\Api\Data\UserPreferencesInterface" type="MageOS\AiShoppingAssistant\Model\Data\UserPreferences"/>
+    <preference for="MageOS\AiShoppingAssistant\Api\Data\OrderInterface" type="MageOS\AiShoppingAssistant\Model\Data\Order"/>
+    <preference for="MageOS\AiShoppingAssistant\Api\Data\OrderItemInterface" type="MageOS\AiShoppingAssistant\Model\Data\OrderItem"/>
+    <preference for="MageOS\AiShoppingAssistant\Api\Data\PolicyInterface" type="MageOS\AiShoppingAssistant\Model\Data\Policy"/>
+    <preference for="MageOS\AiShoppingAssistant\Api\Data\FulfillmentOptionInterface" type="MageOS\AiShoppingAssistant\Model\Data\FulfillmentOption"/>
+    <preference for="MageOS\AiShoppingAssistant\Api\Data\PageContextInterface" type="MageOS\AiShoppingAssistant\Model\Data\PageContext"/>
+    <preference for="MageOS\AiShoppingAssistant\Api\Data\CheckoutHandoffInterface" type="MageOS\AiShoppingAssistant\Model\Data\CheckoutHandoff"/>
 
-    <type name="MageOS\ClaudeConsumerAgent\Model\Backend\Provider\BrandCapSearchDecorator">
+    <type name="MageOS\AiShoppingAssistant\Model\Backend\Provider\BrandCapSearchDecorator">
         <arguments>
-            <argument name="provider" xsi:type="object">MageOS\ClaudeConsumerAgent\Model\Backend\Provider\FulltextSearch</argument>
+            <argument name="provider" xsi:type="object">MageOS\AiShoppingAssistant\Model\Backend\Provider\FulltextSearch</argument>
         </arguments>
     </type>
 
-    <type name="MageOS\ClaudeConsumerAgent\Model\Agent\Tool\Registry">
+    <type name="MageOS\AiShoppingAssistant\Model\Agent\Tool\Registry">
         <arguments>
             <argument name="providers" xsi:type="array">
-                <item name="core" xsi:type="object">MageOS\ClaudeConsumerAgent\Model\Agent\Tool\CoreToolProvider</item>
-                <item name="presentation" xsi:type="object">MageOS\ClaudeConsumerAgent\Model\Agent\Tool\PresentationToolProvider</item>
+                <item name="core" xsi:type="object">MageOS\AiShoppingAssistant\Model\Agent\Tool\CoreToolProvider</item>
+                <item name="presentation" xsi:type="object">MageOS\AiShoppingAssistant\Model\Agent\Tool\PresentationToolProvider</item>
             </argument>
         </arguments>
     </type>
 
-    <type name="MageOS\ClaudeConsumerAgent\Model\Agent\Presentation\Registry">
+    <type name="MageOS\AiShoppingAssistant\Model\Agent\Presentation\Registry">
         <arguments>
             <argument name="extensions" xsi:type="array"/>
         </arguments>
     </type>
 
-    <type name="MageOS\ClaudeConsumerAgent\Model\Backend\Provider\FulfillmentAggregator">
+    <type name="MageOS\AiShoppingAssistant\Model\Backend\Provider\FulfillmentAggregator">
         <arguments>
             <argument name="providers" xsi:type="array">
-                <item name="free_shipping" xsi:type="object">MageOS\ClaudeConsumerAgent\Model\Backend\Provider\FreeShippingFacts</item>
-                <item name="address_estimate" xsi:type="object">MageOS\ClaudeConsumerAgent\Model\Backend\Provider\AddressEstimate</item>
+                <item name="free_shipping" xsi:type="object">MageOS\AiShoppingAssistant\Model\Backend\Provider\FreeShippingFacts</item>
+                <item name="address_estimate" xsi:type="object">MageOS\AiShoppingAssistant\Model\Backend\Provider\AddressEstimate</item>
             </argument>
         </arguments>
     </type>
 
-    <type name="MageOS\ClaudeConsumerAgent\Model\Backend\Provider\CoreFact\PaymentMethods">
+    <type name="MageOS\AiShoppingAssistant\Model\Backend\Provider\CoreFact\PaymentMethods">
         <arguments>
             <argument name="excludedCodes" xsi:type="array">
                 <item name="free" xsi:type="string">free</item>
@@ -71,24 +71,24 @@
         </arguments>
     </type>
 
-    <type name="MageOS\ClaudeConsumerAgent\Model\Agent\Prompt\CoreFacts">
+    <type name="MageOS\AiShoppingAssistant\Model\Agent\Prompt\CoreFacts">
         <arguments>
             <argument name="providers" xsi:type="array">
-                <item name="10_payment_methods" xsi:type="object">MageOS\ClaudeConsumerAgent\Model\Backend\Provider\CoreFact\PaymentMethods</item>
-                <item name="20_shipping_carriers" xsi:type="object">MageOS\ClaudeConsumerAgent\Model\Backend\Provider\CoreFact\ShippingCarriers</item>
-                <item name="30_gift_messages" xsi:type="object">MageOS\ClaudeConsumerAgent\Model\Backend\Provider\CoreFact\GiftMessages</item>
-                <item name="40_guest_checkout" xsi:type="object">MageOS\ClaudeConsumerAgent\Model\Backend\Provider\CoreFact\GuestCheckout</item>
-                <item name="50_minimum_order" xsi:type="object">MageOS\ClaudeConsumerAgent\Model\Backend\Provider\CoreFact\MinimumOrder</item>
-                <item name="60_store_contact" xsi:type="object">MageOS\ClaudeConsumerAgent\Model\Backend\Provider\CoreFact\StoreContact</item>
+                <item name="10_payment_methods" xsi:type="object">MageOS\AiShoppingAssistant\Model\Backend\Provider\CoreFact\PaymentMethods</item>
+                <item name="20_shipping_carriers" xsi:type="object">MageOS\AiShoppingAssistant\Model\Backend\Provider\CoreFact\ShippingCarriers</item>
+                <item name="30_gift_messages" xsi:type="object">MageOS\AiShoppingAssistant\Model\Backend\Provider\CoreFact\GiftMessages</item>
+                <item name="40_guest_checkout" xsi:type="object">MageOS\AiShoppingAssistant\Model\Backend\Provider\CoreFact\GuestCheckout</item>
+                <item name="50_minimum_order" xsi:type="object">MageOS\AiShoppingAssistant\Model\Backend\Provider\CoreFact\MinimumOrder</item>
+                <item name="60_store_contact" xsi:type="object">MageOS\AiShoppingAssistant\Model\Backend\Provider\CoreFact\StoreContact</item>
             </argument>
         </arguments>
     </type>
 
-    <type name="MageOS\ClaudeConsumerAgent\Model\Agent\Skill\Loader">
+    <type name="MageOS\AiShoppingAssistant\Model\Agent\Skill\Loader">
         <arguments>
             <argument name="directories" xsi:type="array">
                 <item name="core" xsi:type="array">
-                    <item name="module" xsi:type="string">MageOS_ClaudeConsumerAgent</item>
+                    <item name="module" xsi:type="string">MageOS_AiShoppingAssistant</item>
                     <item name="path" xsi:type="string">skills</item>
                     <item name="sortOrder" xsi:type="number">0</item>
                 </item>
@@ -96,7 +96,7 @@
         </arguments>
     </type>
 
-    <type name="MageOS\ClaudeConsumerAgent\Model\Agent\Lexicon">
+    <type name="MageOS\AiShoppingAssistant\Model\Agent\Lexicon">
         <arguments>
             <argument name="additionalPolicyTerms" xsi:type="array"/>
             <argument name="additionalOrderTerms" xsi:type="array"/>
@@ -106,36 +106,36 @@
     <type name="Magento\Framework\Console\CommandListInterface">
         <arguments>
             <argument name="commands" xsi:type="array">
-                <item name="aiagent_spike_stream" xsi:type="object">MageOS\ClaudeConsumerAgent\Console\Command\SpikeStream</item>
-                <item name="aiagent_eval_run" xsi:type="object">MageOS\ClaudeConsumerAgent\Console\Command\EvalRun</item>
-                <item name="aiagent_session_purge" xsi:type="object">MageOS\ClaudeConsumerAgent\Console\Command\SessionPurge</item>
-                <item name="aiagent_usage_report" xsi:type="object">MageOS\ClaudeConsumerAgent\Console\Command\UsageReport</item>
+                <item name="aiagent_spike_stream" xsi:type="object">MageOS\AiShoppingAssistant\Console\Command\SpikeStream</item>
+                <item name="aiagent_eval_run" xsi:type="object">MageOS\AiShoppingAssistant\Console\Command\EvalRun</item>
+                <item name="aiagent_session_purge" xsi:type="object">MageOS\AiShoppingAssistant\Console\Command\SessionPurge</item>
+                <item name="aiagent_usage_report" xsi:type="object">MageOS\AiShoppingAssistant\Console\Command\UsageReport</item>
             </argument>
         </arguments>
     </type>
 
-    <virtualType name="MageOS\ClaudeConsumerAgent\Logger\Handler" type="Magento\Framework\Logger\Handler\Base">
+    <virtualType name="MageOS\AiShoppingAssistant\Logger\Handler" type="Magento\Framework\Logger\Handler\Base">
         <arguments>
             <argument name="fileName" xsi:type="string">/var/log/aiagent.log</argument>
         </arguments>
     </virtualType>
 
-    <virtualType name="MageOS\ClaudeConsumerAgent\Logger\VirtualLogger" type="Magento\Framework\Logger\Monolog">
+    <virtualType name="MageOS\AiShoppingAssistant\Logger\VirtualLogger" type="Magento\Framework\Logger\Monolog">
         <arguments>
             <argument name="name" xsi:type="string">aiagent</argument>
             <argument name="handlers" xsi:type="array">
-                <item name="system" xsi:type="object">MageOS\ClaudeConsumerAgent\Logger\Handler</item>
+                <item name="system" xsi:type="object">MageOS\AiShoppingAssistant\Logger\Handler</item>
             </argument>
         </arguments>
     </virtualType>
 
-    <type name="MageOS\ClaudeConsumerAgent\Model\Agent\Turn\Orchestrator">
+    <type name="MageOS\AiShoppingAssistant\Model\Agent\Turn\Orchestrator">
         <arguments>
-            <argument name="logger" xsi:type="object">MageOS\ClaudeConsumerAgent\Logger\VirtualLogger</argument>
+            <argument name="logger" xsi:type="object">MageOS\AiShoppingAssistant\Logger\VirtualLogger</argument>
         </arguments>
     </type>
 
-    <virtualType name="MageOS\ClaudeConsumerAgent\Model\Client\GuzzleHttpClient" type="GuzzleHttp\Client">
+    <virtualType name="MageOS\AiShoppingAssistant\Model\Client\GuzzleHttpClient" type="GuzzleHttp\Client">
         <arguments>
             <argument name="config" xsi:type="array">
                 <item name="handler" xsi:type="object">GuzzleHttp\Handler\StreamHandler</item>
@@ -143,88 +143,88 @@
         </arguments>
     </virtualType>
 
-    <type name="MageOS\ClaudeConsumerAgent\Model\Client\GuzzleMessagesClient">
+    <type name="MageOS\AiShoppingAssistant\Model\Client\GuzzleMessagesClient">
         <arguments>
-            <argument name="http" xsi:type="object">MageOS\ClaudeConsumerAgent\Model\Client\GuzzleHttpClient</argument>
-            <argument name="logger" xsi:type="object">MageOS\ClaudeConsumerAgent\Logger\VirtualLogger</argument>
+            <argument name="http" xsi:type="object">MageOS\AiShoppingAssistant\Model\Client\GuzzleHttpClient</argument>
+            <argument name="logger" xsi:type="object">MageOS\AiShoppingAssistant\Logger\VirtualLogger</argument>
         </arguments>
     </type>
 
-    <type name="MageOS\ClaudeConsumerAgent\Controller\Result\EventStream">
+    <type name="MageOS\AiShoppingAssistant\Controller\Result\EventStream">
         <arguments>
-            <argument name="logger" xsi:type="object">MageOS\ClaudeConsumerAgent\Logger\VirtualLogger</argument>
+            <argument name="logger" xsi:type="object">MageOS\AiShoppingAssistant\Logger\VirtualLogger</argument>
         </arguments>
     </type>
 
-    <type name="MageOS\ClaudeConsumerAgent\Model\Agent\Executor">
+    <type name="MageOS\AiShoppingAssistant\Model\Agent\Executor">
         <arguments>
-            <argument name="logger" xsi:type="object">MageOS\ClaudeConsumerAgent\Logger\VirtualLogger</argument>
+            <argument name="logger" xsi:type="object">MageOS\AiShoppingAssistant\Logger\VirtualLogger</argument>
         </arguments>
     </type>
 
-    <type name="MageOS\ClaudeConsumerAgent\Cron\Retention">
+    <type name="MageOS\AiShoppingAssistant\Cron\Retention">
         <arguments>
-            <argument name="logger" xsi:type="object">MageOS\ClaudeConsumerAgent\Logger\VirtualLogger</argument>
+            <argument name="logger" xsi:type="object">MageOS\AiShoppingAssistant\Logger\VirtualLogger</argument>
         </arguments>
     </type>
 
-    <type name="MageOS\ClaudeConsumerAgent\Model\Session\Repository">
+    <type name="MageOS\AiShoppingAssistant\Model\Session\Repository">
         <arguments>
-            <argument name="logger" xsi:type="object">MageOS\ClaudeConsumerAgent\Logger\VirtualLogger</argument>
+            <argument name="logger" xsi:type="object">MageOS\AiShoppingAssistant\Logger\VirtualLogger</argument>
         </arguments>
     </type>
 
-    <type name="MageOS\ClaudeConsumerAgent\Model\Session\TurnLog">
+    <type name="MageOS\AiShoppingAssistant\Model\Session\TurnLog">
         <arguments>
-            <argument name="logger" xsi:type="object">MageOS\ClaudeConsumerAgent\Logger\VirtualLogger</argument>
+            <argument name="logger" xsi:type="object">MageOS\AiShoppingAssistant\Logger\VirtualLogger</argument>
         </arguments>
     </type>
 
-    <type name="MageOS\ClaudeConsumerAgent\Model\Limits\SlotLock">
+    <type name="MageOS\AiShoppingAssistant\Model\Limits\SlotLock">
         <arguments>
-            <argument name="logger" xsi:type="object">MageOS\ClaudeConsumerAgent\Logger\VirtualLogger</argument>
+            <argument name="logger" xsi:type="object">MageOS\AiShoppingAssistant\Logger\VirtualLogger</argument>
         </arguments>
     </type>
 
-    <type name="MageOS\ClaudeConsumerAgent\Model\Limits\Counters">
+    <type name="MageOS\AiShoppingAssistant\Model\Limits\Counters">
         <arguments>
-            <argument name="logger" xsi:type="object">MageOS\ClaudeConsumerAgent\Logger\VirtualLogger</argument>
+            <argument name="logger" xsi:type="object">MageOS\AiShoppingAssistant\Logger\VirtualLogger</argument>
         </arguments>
     </type>
 
-    <type name="MageOS\ClaudeConsumerAgent\Controller\Result\JsonTurn">
+    <type name="MageOS\AiShoppingAssistant\Controller\Result\JsonTurn">
         <arguments>
-            <argument name="logger" xsi:type="object">MageOS\ClaudeConsumerAgent\Logger\VirtualLogger</argument>
+            <argument name="logger" xsi:type="object">MageOS\AiShoppingAssistant\Logger\VirtualLogger</argument>
         </arguments>
     </type>
 
-    <type name="MageOS\ClaudeConsumerAgent\Model\Backend\Provider\AddressEstimate">
+    <type name="MageOS\AiShoppingAssistant\Model\Backend\Provider\AddressEstimate">
         <arguments>
-            <argument name="logger" xsi:type="object">MageOS\ClaudeConsumerAgent\Logger\VirtualLogger</argument>
+            <argument name="logger" xsi:type="object">MageOS\AiShoppingAssistant\Logger\VirtualLogger</argument>
         </arguments>
     </type>
 
-    <type name="MageOS\ClaudeConsumerAgent\Model\Agent\Presentation\Enrich\Products">
+    <type name="MageOS\AiShoppingAssistant\Model\Agent\Presentation\Enrich\Products">
         <arguments>
-            <argument name="logger" xsi:type="object">MageOS\ClaudeConsumerAgent\Logger\VirtualLogger</argument>
+            <argument name="logger" xsi:type="object">MageOS\AiShoppingAssistant\Logger\VirtualLogger</argument>
         </arguments>
     </type>
 
-    <type name="MageOS\ClaudeConsumerAgent\Model\Agent\Gate\CartWrite">
+    <type name="MageOS\AiShoppingAssistant\Model\Agent\Gate\CartWrite">
         <arguments>
-            <argument name="logger" xsi:type="object">MageOS\ClaudeConsumerAgent\Logger\VirtualLogger</argument>
+            <argument name="logger" xsi:type="object">MageOS\AiShoppingAssistant\Logger\VirtualLogger</argument>
         </arguments>
     </type>
 
-    <type name="MageOS\ClaudeConsumerAgent\Console\Command\EvalRun">
+    <type name="MageOS\AiShoppingAssistant\Console\Command\EvalRun">
         <arguments>
-            <argument name="logger" xsi:type="object">MageOS\ClaudeConsumerAgent\Logger\VirtualLogger</argument>
-            <argument name="toolkit" xsi:type="object">MageOS\ClaudeConsumerAgent\Model\Eval\Toolkit\Proxy</argument>
-            <argument name="skuMatcher" xsi:type="object">MageOS\ClaudeConsumerAgent\Api\Backend\SkuMatcherInterface\Proxy</argument>
+            <argument name="logger" xsi:type="object">MageOS\AiShoppingAssistant\Logger\VirtualLogger</argument>
+            <argument name="toolkit" xsi:type="object">MageOS\AiShoppingAssistant\Model\Eval\Toolkit\Proxy</argument>
+            <argument name="skuMatcher" xsi:type="object">MageOS\AiShoppingAssistant\Api\Backend\SkuMatcherInterface\Proxy</argument>
             <argument name="lockManager" xsi:type="object">Magento\Framework\Lock\LockManagerInterface\Proxy</argument>
             <argument name="resourceConnection" xsi:type="object">Magento\Framework\App\ResourceConnection\Proxy</argument>
-            <argument name="liveClient" xsi:type="object">MageOS\ClaudeConsumerAgent\Api\Client\MessagesClientInterface\Proxy</argument>
-            <argument name="liveBackend" xsi:type="object">MageOS\ClaudeConsumerAgent\Api\StorefrontBackendInterface\Proxy</argument>
+            <argument name="liveClient" xsi:type="object">MageOS\AiShoppingAssistant\Api\Client\MessagesClientInterface\Proxy</argument>
+            <argument name="liveBackend" xsi:type="object">MageOS\AiShoppingAssistant\Api\StorefrontBackendInterface\Proxy</argument>
             <argument name="cartManagement" xsi:type="object">Magento\Quote\Api\CartManagementInterface\Proxy</argument>
         </arguments>
     </type>

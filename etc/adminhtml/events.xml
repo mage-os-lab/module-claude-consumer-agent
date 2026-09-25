@@ -1,24 +1,24 @@
 <?xml version="1.0"?>
 <config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Event/etc/events.xsd">
     <event name="admin_system_config_changed_section_aiagent">
-        <observer name="aiagent_config_changed" instance="MageOS\ClaudeConsumerAgent\Observer\ConfigChanged"/>
+        <observer name="aiagent_config_changed" instance="MageOS\AiShoppingAssistant\Observer\ConfigChanged"/>
     </event>
     <event name="admin_system_config_changed_section_payment">
-        <observer name="aiagent_config_changed_payment" instance="MageOS\ClaudeConsumerAgent\Observer\ConfigChanged"/>
+        <observer name="aiagent_config_changed_payment" instance="MageOS\AiShoppingAssistant\Observer\ConfigChanged"/>
     </event>
     <event name="admin_system_config_changed_section_carriers">
-        <observer name="aiagent_config_changed_carriers" instance="MageOS\ClaudeConsumerAgent\Observer\ConfigChanged"/>
+        <observer name="aiagent_config_changed_carriers" instance="MageOS\AiShoppingAssistant\Observer\ConfigChanged"/>
     </event>
     <event name="admin_system_config_changed_section_sales">
-        <observer name="aiagent_config_changed_sales" instance="MageOS\ClaudeConsumerAgent\Observer\ConfigChanged"/>
+        <observer name="aiagent_config_changed_sales" instance="MageOS\AiShoppingAssistant\Observer\ConfigChanged"/>
     </event>
     <event name="admin_system_config_changed_section_checkout">
-        <observer name="aiagent_config_changed_checkout" instance="MageOS\ClaudeConsumerAgent\Observer\ConfigChanged"/>
+        <observer name="aiagent_config_changed_checkout" instance="MageOS\AiShoppingAssistant\Observer\ConfigChanged"/>
     </event>
     <event name="admin_system_config_changed_section_general">
-        <observer name="aiagent_config_changed_general" instance="MageOS\ClaudeConsumerAgent\Observer\ConfigChanged"/>
+        <observer name="aiagent_config_changed_general" instance="MageOS\AiShoppingAssistant\Observer\ConfigChanged"/>
     </event>
     <event name="admin_system_config_changed_section_trans_email">
-        <observer name="aiagent_config_changed_trans_email" instance="MageOS\ClaudeConsumerAgent\Observer\ConfigChanged"/>
+        <observer name="aiagent_config_changed_trans_email" instance="MageOS\AiShoppingAssistant\Observer\ConfigChanged"/>
     </event>
 </config>

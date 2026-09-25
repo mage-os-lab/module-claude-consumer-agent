@@ -1,10 +1,10 @@
 define([
-    'MageOS_ClaudeConsumerAgent/js/luma/model/cards',
-    'MageOS_ClaudeConsumerAgent/js/luma/model/format'
+    'MageOS_AiShoppingAssistant/js/luma/model/cards',
+    'MageOS_AiShoppingAssistant/js/luma/model/format'
 ], function (cards, format) {
     'use strict';
 
-    var TEMPLATE_PREFIX = 'MageOS_ClaudeConsumerAgent/luma/cards/',
+    var TEMPLATE_PREFIX = 'MageOS_AiShoppingAssistant/luma/cards/',
         builders;
 
     function productItem(item, productsConfig, send) {

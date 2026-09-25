@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-namespace MageOS\ClaudeConsumerAgent\Test\Unit\Controller\Turn;
+namespace MageOS\AiShoppingAssistant\Test\Unit\Controller\Turn;
 
 use Magento\Customer\Model\Session as CustomerSession;
 use Magento\Checkout\Model\Session as CheckoutSession;
@@ -20,21 +20,21 @@ use Magento\Quote\Api\CartRepositoryInterface;
 use Magento\Quote\Model\Quote;
 use Magento\Store\Api\Data\StoreInterface;
 use Magento\Store\Model\StoreManagerInterface;
-use MageOS\ClaudeConsumerAgent\Controller\Request\BodyReader;
-use MageOS\ClaudeConsumerAgent\Controller\Request\FormKeyGuard;
-use MageOS\ClaudeConsumerAgent\Controller\Result\EventStream;
-use MageOS\ClaudeConsumerAgent\Controller\Result\EventStreamFactory;
-use MageOS\ClaudeConsumerAgent\Controller\Result\JsonTurn;
-use MageOS\ClaudeConsumerAgent\Controller\Result\JsonTurnFactory;
-use MageOS\ClaudeConsumerAgent\Controller\Turn\Index;
-use MageOS\ClaudeConsumerAgent\Model\Agent\Event;
-use MageOS\ClaudeConsumerAgent\Model\Config\StoreConfig;
-use MageOS\ClaudeConsumerAgent\Model\Limits\BusyEvent;
-use MageOS\ClaudeConsumerAgent\Model\Limits\Counters;
-use MageOS\ClaudeConsumerAgent\Model\Limits\SlotLock;
-use MageOS\ClaudeConsumerAgent\Model\Session\IdGenerator;
-use MageOS\ClaudeConsumerAgent\Model\Session\Repository;
-use MageOS\ClaudeConsumerAgent\Model\Session\ResourceModel\Session as SessionResource;
+use MageOS\AiShoppingAssistant\Controller\Request\BodyReader;
+use MageOS\AiShoppingAssistant\Controller\Request\FormKeyGuard;
+use MageOS\AiShoppingAssistant\Controller\Result\EventStream;
+use MageOS\AiShoppingAssistant\Controller\Result\EventStreamFactory;
+use MageOS\AiShoppingAssistant\Controller\Result\JsonTurn;
+use MageOS\AiShoppingAssistant\Controller\Result\JsonTurnFactory;
+use MageOS\AiShoppingAssistant\Controller\Turn\Index;
+use MageOS\AiShoppingAssistant\Model\Agent\Event;
+use MageOS\AiShoppingAssistant\Model\Config\StoreConfig;
+use MageOS\AiShoppingAssistant\Model\Limits\BusyEvent;
+use MageOS\AiShoppingAssistant\Model\Limits\Counters;
+use MageOS\AiShoppingAssistant\Model\Limits\SlotLock;
+use MageOS\AiShoppingAssistant\Model\Session\IdGenerator;
+use MageOS\AiShoppingAssistant\Model\Session\Repository;
+use MageOS\AiShoppingAssistant\Model\Session\ResourceModel\Session as SessionResource;
 use PHPUnit\Framework\TestCase;
 use Psr\Log\LoggerInterface;
 

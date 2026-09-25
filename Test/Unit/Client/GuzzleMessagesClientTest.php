@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-namespace MageOS\ClaudeConsumerAgent\Test\Unit\Client;
+namespace MageOS\AiShoppingAssistant\Test\Unit\Client;
 
 use GuzzleHttp\Client;
 use GuzzleHttp\Exception\ConnectException;
@@ -13,14 +13,14 @@ use GuzzleHttp\Psr7\Response;
 use Magento\Framework\App\Config\ScopeConfigInterface;
 use Magento\Store\Api\Data\StoreInterface;
 use Magento\Store\Model\StoreManagerInterface;
-use MageOS\ClaudeConsumerAgent\Model\Client\ApiKey;
-use MageOS\ClaudeConsumerAgent\Model\Client\Exception\BadRequest;
-use MageOS\ClaudeConsumerAgent\Model\Client\Exception\ServerError;
-use MageOS\ClaudeConsumerAgent\Model\Client\Exception\Transport;
-use MageOS\ClaudeConsumerAgent\Model\Client\Exception\Unauthorized;
-use MageOS\ClaudeConsumerAgent\Model\Client\GuzzleMessagesClient;
-use MageOS\ClaudeConsumerAgent\Model\Client\Sleeper;
-use MageOS\ClaudeConsumerAgent\Model\Config\StoreConfig;
+use MageOS\AiShoppingAssistant\Model\Client\ApiKey;
+use MageOS\AiShoppingAssistant\Model\Client\Exception\BadRequest;
+use MageOS\AiShoppingAssistant\Model\Client\Exception\ServerError;
+use MageOS\AiShoppingAssistant\Model\Client\Exception\Transport;
+use MageOS\AiShoppingAssistant\Model\Client\Exception\Unauthorized;
+use MageOS\AiShoppingAssistant\Model\Client\GuzzleMessagesClient;
+use MageOS\AiShoppingAssistant\Model\Client\Sleeper;
+use MageOS\AiShoppingAssistant\Model\Config\StoreConfig;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\StreamInterface;
 use Psr\Log\LoggerInterface;

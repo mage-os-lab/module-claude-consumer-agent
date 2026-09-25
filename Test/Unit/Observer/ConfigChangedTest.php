@@ -1,11 +1,11 @@
 <?php
 declare(strict_types=1);
 
-namespace MageOS\ClaudeConsumerAgent\Test\Unit\Observer;
+namespace MageOS\AiShoppingAssistant\Test\Unit\Observer;
 
 use Magento\Framework\App\CacheInterface;
 use Magento\Framework\Event\Observer;
-use MageOS\ClaudeConsumerAgent\Observer\ConfigChanged;
+use MageOS\AiShoppingAssistant\Observer\ConfigChanged;
 use PHPUnit\Framework\TestCase;
 
 final class ConfigChangedTest extends TestCase

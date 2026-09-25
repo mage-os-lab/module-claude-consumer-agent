@@ -1,9 +1,9 @@
 <?php
 declare(strict_types=1);
 
-namespace MageOS\ClaudeConsumerAgent\Model\Limits;
+namespace MageOS\AiShoppingAssistant\Model\Limits;
 
-use MageOS\ClaudeConsumerAgent\Model\Agent\Event;
+use MageOS\AiShoppingAssistant\Model\Agent\Event;
 
 final class BusyEvent
 {

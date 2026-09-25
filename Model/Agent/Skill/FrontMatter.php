@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-namespace MageOS\ClaudeConsumerAgent\Model\Agent\Skill;
+namespace MageOS\AiShoppingAssistant\Model\Agent\Skill;
 
 /**
  * Reads the SKILL.md frontmatter dialect: a "---" fenced block of "key: value" lines,

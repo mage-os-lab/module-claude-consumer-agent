@@ -1,18 +1,18 @@
 <?php
 declare(strict_types=1);
 
-namespace MageOS\ClaudeConsumerAgent\Test\Unit\Controller\Result;
+namespace MageOS\AiShoppingAssistant\Test\Unit\Controller\Result;
 
 use Magento\Framework\App\Response\Http as HttpResponse;
 use Magento\Framework\Lock\LockManagerInterface;
-use MageOS\ClaudeConsumerAgent\Api\Data\PageContextInterface;
-use MageOS\ClaudeConsumerAgent\Controller\Result\JsonTurn;
-use MageOS\ClaudeConsumerAgent\Model\Agent\Event;
-use MageOS\ClaudeConsumerAgent\Model\Agent\SessionContext;
-use MageOS\ClaudeConsumerAgent\Model\Agent\SessionState;
-use MageOS\ClaudeConsumerAgent\Model\Agent\Turn\Orchestrator;
-use MageOS\ClaudeConsumerAgent\Model\Limits\SlotHandle;
-use MageOS\ClaudeConsumerAgent\Model\Session\Binding;
+use MageOS\AiShoppingAssistant\Api\Data\PageContextInterface;
+use MageOS\AiShoppingAssistant\Controller\Result\JsonTurn;
+use MageOS\AiShoppingAssistant\Model\Agent\Event;
+use MageOS\AiShoppingAssistant\Model\Agent\SessionContext;
+use MageOS\AiShoppingAssistant\Model\Agent\SessionState;
+use MageOS\AiShoppingAssistant\Model\Agent\Turn\Orchestrator;
+use MageOS\AiShoppingAssistant\Model\Limits\SlotHandle;
+use MageOS\AiShoppingAssistant\Model\Session\Binding;
 use PHPUnit\Framework\TestCase;
 use Psr\Log\LoggerInterface;
 

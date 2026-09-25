@@ -1,9 +1,9 @@
 <?php
 declare(strict_types=1);
 
-namespace MageOS\ClaudeConsumerAgent\Test\Unit\Agent;
+namespace MageOS\AiShoppingAssistant\Test\Unit\Agent;
 
-use MageOS\ClaudeConsumerAgent\Model\Agent\SessionState;
+use MageOS\AiShoppingAssistant\Model\Agent\SessionState;
 use PHPUnit\Framework\TestCase;
 
 final class SessionStateTest extends TestCase

@@ -1,10 +1,10 @@
 <?php
 declare(strict_types=1);
 
-namespace MageOS\ClaudeConsumerAgent\Model\Agent\Gate;
+namespace MageOS\AiShoppingAssistant\Model\Agent\Gate;
 
-use MageOS\ClaudeConsumerAgent\Model\Agent\SessionState;
-use MageOS\ClaudeConsumerAgent\Model\Agent\ToolOutcome;
+use MageOS\AiShoppingAssistant\Model\Agent\SessionState;
+use MageOS\AiShoppingAssistant\Model\Agent\ToolOutcome;
 
 final class Options
 {
@@ -15,7 +15,7 @@ final class Options
     private const STANDALONE_VALUE_MIN_LENGTH = 2;
 
     public function __construct(
-        private readonly \MageOS\ClaudeConsumerAgent\Model\Agent\Fencing\Sanitizer $sanitizer
+        private readonly \MageOS\AiShoppingAssistant\Model\Agent\Fencing\Sanitizer $sanitizer
     ) {
     }
 

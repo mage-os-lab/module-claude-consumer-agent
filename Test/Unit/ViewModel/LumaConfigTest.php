@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-namespace MageOS\ClaudeConsumerAgent\Test\Unit\ViewModel;
+namespace MageOS\AiShoppingAssistant\Test\Unit\ViewModel;
 
 use Magento\Catalog\Api\CategoryRepositoryInterface;
 use Magento\Catalog\Api\ProductRepositoryInterface;
@@ -11,12 +11,12 @@ use Magento\Framework\Locale\FormatInterface;
 use Magento\Framework\UrlInterface;
 use Magento\Store\Api\Data\StoreInterface;
 use Magento\Store\Model\StoreManagerInterface;
-use MageOS\ClaudeConsumerAgent\Model\Config\StoreConfig;
-use MageOS\ClaudeConsumerAgent\Model\Surface\PageDetector;
-use MageOS\ClaudeConsumerAgent\Model\Surface\Resolver;
-use MageOS\ClaudeConsumerAgent\ViewModel\Assistant;
-use MageOS\ClaudeConsumerAgent\ViewModel\CartSection;
-use MageOS\ClaudeConsumerAgent\ViewModel\LumaConfig;
+use MageOS\AiShoppingAssistant\Model\Config\StoreConfig;
+use MageOS\AiShoppingAssistant\Model\Surface\PageDetector;
+use MageOS\AiShoppingAssistant\Model\Surface\Resolver;
+use MageOS\AiShoppingAssistant\ViewModel\Assistant;
+use MageOS\AiShoppingAssistant\ViewModel\CartSection;
+use MageOS\AiShoppingAssistant\ViewModel\LumaConfig;
 use PHPUnit\Framework\TestCase;
 
 final class LumaConfigTest extends TestCase

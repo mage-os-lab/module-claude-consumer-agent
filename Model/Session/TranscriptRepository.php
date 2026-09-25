@@ -1,12 +1,12 @@
 <?php
 declare(strict_types=1);
 
-namespace MageOS\ClaudeConsumerAgent\Model\Session;
+namespace MageOS\AiShoppingAssistant\Model\Session;
 
 final class TranscriptRepository
 {
     public function __construct(
-        private readonly \MageOS\ClaudeConsumerAgent\Model\Session\ResourceModel\Message $resource,
+        private readonly \MageOS\AiShoppingAssistant\Model\Session\ResourceModel\Message $resource,
         private readonly \Magento\Framework\App\ResourceConnection $resourceConnection
     ) {
     }

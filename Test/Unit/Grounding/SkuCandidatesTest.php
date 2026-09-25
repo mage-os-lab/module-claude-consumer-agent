@@ -1,9 +1,9 @@
 <?php
 declare(strict_types=1);
 
-namespace MageOS\ClaudeConsumerAgent\Test\Unit\Grounding;
+namespace MageOS\AiShoppingAssistant\Test\Unit\Grounding;
 
-use MageOS\ClaudeConsumerAgent\Model\Agent\Grounding\SkuCandidates;
+use MageOS\AiShoppingAssistant\Model\Agent\Grounding\SkuCandidates;
 use PHPUnit\Framework\TestCase;
 
 final class SkuCandidatesTest extends TestCase

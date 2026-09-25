@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-namespace MageOS\ClaudeConsumerAgent\Model\Agent\Skill;
+namespace MageOS\AiShoppingAssistant\Model\Agent\Skill;
 
 use Magento\Framework\Component\ComponentRegistrar;
 
@@ -11,7 +11,7 @@ final class Loader
         private readonly array $directories,
         private readonly \Magento\Framework\Component\ComponentRegistrarInterface $componentRegistrar,
         private readonly \Magento\Framework\Filesystem\Driver\File $fileDriver,
-        private readonly \MageOS\ClaudeConsumerAgent\Model\Agent\Skill\FrontMatter $frontMatter
+        private readonly \MageOS\AiShoppingAssistant\Model\Agent\Skill\FrontMatter $frontMatter
     ) {
     }
 

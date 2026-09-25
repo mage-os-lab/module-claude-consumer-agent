@@ -1,10 +1,10 @@
 define([
     'ko',
     'Magento_Customer/js/customer-data',
-    'MageOS_ClaudeConsumerAgent/js/luma/model/transport',
-    'MageOS_ClaudeConsumerAgent/js/luma/model/card-view',
-    'MageOS_ClaudeConsumerAgent/js/luma/model/page',
-    'MageOS_ClaudeConsumerAgent/js/luma/model/format'
+    'MageOS_AiShoppingAssistant/js/luma/model/transport',
+    'MageOS_AiShoppingAssistant/js/luma/model/card-view',
+    'MageOS_AiShoppingAssistant/js/luma/model/page',
+    'MageOS_AiShoppingAssistant/js/luma/model/format'
 ], function (ko, customerData, transport, cardView, pageModel, format) {
     'use strict';
 

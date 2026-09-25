@@ -1,52 +1,52 @@
 <?php
 declare(strict_types=1);
 
-namespace MageOS\ClaudeConsumerAgent\Console\Command;
+namespace MageOS\AiShoppingAssistant\Console\Command;
 
 use Magento\Framework\Console\Cli;
-use MageOS\ClaudeConsumerAgent\Api\Backend\SkuMatcherInterface;
-use MageOS\ClaudeConsumerAgent\Api\Client\MessagesClientInterface;
-use MageOS\ClaudeConsumerAgent\Api\Data\CartInterface;
-use MageOS\ClaudeConsumerAgent\Api\StorefrontBackendInterface;
-use MageOS\ClaudeConsumerAgent\Model\Agent\Event;
-use MageOS\ClaudeConsumerAgent\Model\Agent\Gate\CartWrite;
-use MageOS\ClaudeConsumerAgent\Model\Agent\Grounding\Rules;
-use MageOS\ClaudeConsumerAgent\Model\Agent\Presentation\Enrich\Products;
-use MageOS\ClaudeConsumerAgent\Model\Agent\Presentation\Runner as PresentationRunner;
-use MageOS\ClaudeConsumerAgent\Model\Agent\SessionContext;
-use MageOS\ClaudeConsumerAgent\Model\Agent\SessionState;
-use MageOS\ClaudeConsumerAgent\Model\Agent\Tool\CoreToolProvider;
-use MageOS\ClaudeConsumerAgent\Model\Agent\Tool\Handler\AddToCart;
-use MageOS\ClaudeConsumerAgent\Model\Agent\Tool\Handler\GetCart;
-use MageOS\ClaudeConsumerAgent\Model\Agent\Tool\Handler\GetFulfillmentOptions;
-use MageOS\ClaudeConsumerAgent\Model\Agent\Tool\Handler\GetOrders;
-use MageOS\ClaudeConsumerAgent\Model\Agent\Tool\Handler\GetOrderStatus;
-use MageOS\ClaudeConsumerAgent\Model\Agent\Tool\Handler\GetPreferences;
-use MageOS\ClaudeConsumerAgent\Model\Agent\Tool\Handler\GetProductDetails;
-use MageOS\ClaudeConsumerAgent\Model\Agent\Tool\Handler\LoadSkill;
-use MageOS\ClaudeConsumerAgent\Model\Agent\Tool\Handler\MemoryOff;
-use MageOS\ClaudeConsumerAgent\Model\Agent\Tool\Handler\RemoveFromCart;
-use MageOS\ClaudeConsumerAgent\Model\Agent\Tool\Handler\SearchCategories;
-use MageOS\ClaudeConsumerAgent\Model\Agent\Tool\Handler\SearchPolicies;
-use MageOS\ClaudeConsumerAgent\Model\Agent\Tool\Handler\SearchProducts;
-use MageOS\ClaudeConsumerAgent\Model\Agent\Tool\Handler\UpdateCartItem;
-use MageOS\ClaudeConsumerAgent\Model\Agent\Prompt\PageNote;
-use MageOS\ClaudeConsumerAgent\Model\Agent\Tool\Registry as ToolRegistry;
-use MageOS\ClaudeConsumerAgent\Model\Agent\Turn\Orchestrator;
-use MageOS\ClaudeConsumerAgent\Model\Client\FakeClient;
-use MageOS\ClaudeConsumerAgent\Model\Client\RawEvent;
-use MageOS\ClaudeConsumerAgent\Model\Client\Sleeper;
-use MageOS\ClaudeConsumerAgent\Model\Client\SseLineReader;
-use MageOS\ClaudeConsumerAgent\Model\Data\PageContext;
-use MageOS\ClaudeConsumerAgent\Model\Session\Binding;
-use MageOS\ClaudeConsumerAgent\Model\Session\TranscriptRepository;
-use MageOS\ClaudeConsumerAgent\Model\Eval\FakeBackend;
-use MageOS\ClaudeConsumerAgent\Model\Eval\FakeExecutorFactory;
-use MageOS\ClaudeConsumerAgent\Model\Eval\FakeScopeConfig;
-use MageOS\ClaudeConsumerAgent\Model\Eval\InMemorySessions;
-use MageOS\ClaudeConsumerAgent\Model\Eval\InMemorySkuMatcher;
-use MageOS\ClaudeConsumerAgent\Model\Eval\InMemoryTranscripts;
-use MageOS\ClaudeConsumerAgent\Model\Eval\InMemoryTurnLog;
+use MageOS\AiShoppingAssistant\Api\Backend\SkuMatcherInterface;
+use MageOS\AiShoppingAssistant\Api\Client\MessagesClientInterface;
+use MageOS\AiShoppingAssistant\Api\Data\CartInterface;
+use MageOS\AiShoppingAssistant\Api\StorefrontBackendInterface;
+use MageOS\AiShoppingAssistant\Model\Agent\Event;
+use MageOS\AiShoppingAssistant\Model\Agent\Gate\CartWrite;
+use MageOS\AiShoppingAssistant\Model\Agent\Grounding\Rules;
+use MageOS\AiShoppingAssistant\Model\Agent\Presentation\Enrich\Products;
+use MageOS\AiShoppingAssistant\Model\Agent\Presentation\Runner as PresentationRunner;
+use MageOS\AiShoppingAssistant\Model\Agent\SessionContext;
+use MageOS\AiShoppingAssistant\Model\Agent\SessionState;
+use MageOS\AiShoppingAssistant\Model\Agent\Tool\CoreToolProvider;
+use MageOS\AiShoppingAssistant\Model\Agent\Tool\Handler\AddToCart;
+use MageOS\AiShoppingAssistant\Model\Agent\Tool\Handler\GetCart;
+use MageOS\AiShoppingAssistant\Model\Agent\Tool\Handler\GetFulfillmentOptions;
+use MageOS\AiShoppingAssistant\Model\Agent\Tool\Handler\GetOrders;
+use MageOS\AiShoppingAssistant\Model\Agent\Tool\Handler\GetOrderStatus;
+use MageOS\AiShoppingAssistant\Model\Agent\Tool\Handler\GetPreferences;
+use MageOS\AiShoppingAssistant\Model\Agent\Tool\Handler\GetProductDetails;
+use MageOS\AiShoppingAssistant\Model\Agent\Tool\Handler\LoadSkill;
+use MageOS\AiShoppingAssistant\Model\Agent\Tool\Handler\MemoryOff;
+use MageOS\AiShoppingAssistant\Model\Agent\Tool\Handler\RemoveFromCart;
+use MageOS\AiShoppingAssistant\Model\Agent\Tool\Handler\SearchCategories;
+use MageOS\AiShoppingAssistant\Model\Agent\Tool\Handler\SearchPolicies;
+use MageOS\AiShoppingAssistant\Model\Agent\Tool\Handler\SearchProducts;
+use MageOS\AiShoppingAssistant\Model\Agent\Tool\Handler\UpdateCartItem;
+use MageOS\AiShoppingAssistant\Model\Agent\Prompt\PageNote;
+use MageOS\AiShoppingAssistant\Model\Agent\Tool\Registry as ToolRegistry;
+use MageOS\AiShoppingAssistant\Model\Agent\Turn\Orchestrator;
+use MageOS\AiShoppingAssistant\Model\Client\FakeClient;
+use MageOS\AiShoppingAssistant\Model\Client\RawEvent;
+use MageOS\AiShoppingAssistant\Model\Client\Sleeper;
+use MageOS\AiShoppingAssistant\Model\Client\SseLineReader;
+use MageOS\AiShoppingAssistant\Model\Data\PageContext;
+use MageOS\AiShoppingAssistant\Model\Session\Binding;
+use MageOS\AiShoppingAssistant\Model\Session\TranscriptRepository;
+use MageOS\AiShoppingAssistant\Model\Eval\FakeBackend;
+use MageOS\AiShoppingAssistant\Model\Eval\FakeExecutorFactory;
+use MageOS\AiShoppingAssistant\Model\Eval\FakeScopeConfig;
+use MageOS\AiShoppingAssistant\Model\Eval\InMemorySessions;
+use MageOS\AiShoppingAssistant\Model\Eval\InMemorySkuMatcher;
+use MageOS\AiShoppingAssistant\Model\Eval\InMemoryTranscripts;
+use MageOS\AiShoppingAssistant\Model\Eval\InMemoryTurnLog;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Helper\Table;
 use Symfony\Component\Console\Input\InputInterface;
@@ -76,13 +76,13 @@ class EvalRun extends Command
     public function __construct(
         private readonly \Magento\Framework\ObjectManagerInterface $objectManager,
         private readonly \Magento\Store\Model\StoreManagerInterface $storeManager,
-        private readonly \MageOS\ClaudeConsumerAgent\Model\Eval\Toolkit $toolkit,
-        private readonly \MageOS\ClaudeConsumerAgent\Api\Backend\SkuMatcherInterface $skuMatcher,
+        private readonly \MageOS\AiShoppingAssistant\Model\Eval\Toolkit $toolkit,
+        private readonly \MageOS\AiShoppingAssistant\Api\Backend\SkuMatcherInterface $skuMatcher,
         private readonly \Magento\Framework\Lock\LockManagerInterface $lockManager,
         private readonly \Magento\Framework\App\ResourceConnection $resourceConnection,
         private readonly \Psr\Log\LoggerInterface $logger,
-        private readonly \MageOS\ClaudeConsumerAgent\Api\Client\MessagesClientInterface $liveClient,
-        private readonly \MageOS\ClaudeConsumerAgent\Api\StorefrontBackendInterface $liveBackend,
+        private readonly \MageOS\AiShoppingAssistant\Api\Client\MessagesClientInterface $liveClient,
+        private readonly \MageOS\AiShoppingAssistant\Api\StorefrontBackendInterface $liveBackend,
         private readonly \Magento\Quote\Api\CartManagementInterface $cartManagement,
         private readonly \Magento\Framework\App\State $appState,
         private readonly \Magento\Store\Model\App\Emulation $appEmulation,
@@ -244,7 +244,7 @@ class EvalRun extends Command
         ];
     }
 
-    private function storeConfigForCase(array $case): \MageOS\ClaudeConsumerAgent\Model\Config\StoreConfig
+    private function storeConfigForCase(array $case): \MageOS\AiShoppingAssistant\Model\Config\StoreConfig
     {
         $overrides = is_array($case['config'] ?? null) ? $case['config'] : [];
         if ($overrides === []) {
@@ -259,7 +259,7 @@ class EvalRun extends Command
             $values['ai_integration/aiagent/content/include_core_facts'] = $overrides['include_core_facts'] ? '1' : '0';
         }
 
-        return new \MageOS\ClaudeConsumerAgent\Model\Config\StoreConfig(
+        return new \MageOS\AiShoppingAssistant\Model\Config\StoreConfig(
             new FakeScopeConfig($values),
             $this->storeManager
         );
@@ -268,7 +268,7 @@ class EvalRun extends Command
     private function buildOrchestrator(
         StorefrontBackendInterface $backend,
         MessagesClientInterface $client,
-        \MageOS\ClaudeConsumerAgent\Model\Config\StoreConfig $storeConfig,
+        \MageOS\AiShoppingAssistant\Model\Config\StoreConfig $storeConfig,
         SkuMatcherInterface $skuMatcher
     ): Orchestrator {
         $cartWrite = new CartWrite(

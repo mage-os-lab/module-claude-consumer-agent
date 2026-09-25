@@ -1,10 +1,10 @@
 <?php
 declare(strict_types=1);
 
-namespace MageOS\ClaudeConsumerAgent\Test\Unit\Backend\CoreFact;
+namespace MageOS\AiShoppingAssistant\Test\Unit\Backend\CoreFact;
 
 use Magento\Framework\App\Config\ScopeConfigInterface;
-use MageOS\ClaudeConsumerAgent\Model\Backend\Provider\CoreFact\StoreContact;
+use MageOS\AiShoppingAssistant\Model\Backend\Provider\CoreFact\StoreContact;
 use PHPUnit\Framework\TestCase;
 
 final class StoreContactTest extends TestCase

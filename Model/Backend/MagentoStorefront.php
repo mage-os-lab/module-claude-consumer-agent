@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-namespace MageOS\ClaudeConsumerAgent\Model\Backend;
+namespace MageOS\AiShoppingAssistant\Model\Backend;
 
 use Magento\Catalog\Api\Data\ProductCustomOptionInterface;
 use Magento\Catalog\Api\Data\ProductCustomOptionValuesInterface;
@@ -18,24 +18,24 @@ use Magento\Quote\Model\Quote;
 use Magento\Quote\Model\Quote\Item as QuoteItem;
 use Magento\Sales\Model\Order as SalesOrder;
 use Magento\Sales\Model\Order\Item as SalesOrderItem;
-use MageOS\ClaudeConsumerAgent\Api\Data\CartInterface;
-use MageOS\ClaudeConsumerAgent\Api\Data\OrderInterface as DataOrderInterface;
-use MageOS\ClaudeConsumerAgent\Api\Data\ProductDetailsInterface;
-use MageOS\ClaudeConsumerAgent\Api\Data\ProductInterface as DataProductInterface;
-use MageOS\ClaudeConsumerAgent\Api\Data\SearchFiltersInterface;
-use MageOS\ClaudeConsumerAgent\Api\Data\UserPreferencesInterface;
-use MageOS\ClaudeConsumerAgent\Api\StorefrontBackendInterface;
-use MageOS\ClaudeConsumerAgent\Model\Agent\Exception\NotOffered;
-use MageOS\ClaudeConsumerAgent\Model\Agent\Exception\SignInRequired;
-use MageOS\ClaudeConsumerAgent\Model\Agent\Exception\Unavailable;
-use MageOS\ClaudeConsumerAgent\Model\Agent\SessionContext;
-use MageOS\ClaudeConsumerAgent\Model\Data\Cart;
-use MageOS\ClaudeConsumerAgent\Model\Data\CartItem;
-use MageOS\ClaudeConsumerAgent\Model\Data\Order;
-use MageOS\ClaudeConsumerAgent\Model\Data\OrderItem;
-use MageOS\ClaudeConsumerAgent\Model\Data\Product;
-use MageOS\ClaudeConsumerAgent\Model\Data\ProductDetails;
-use MageOS\ClaudeConsumerAgent\Model\Data\UserPreferences;
+use MageOS\AiShoppingAssistant\Api\Data\CartInterface;
+use MageOS\AiShoppingAssistant\Api\Data\OrderInterface as DataOrderInterface;
+use MageOS\AiShoppingAssistant\Api\Data\ProductDetailsInterface;
+use MageOS\AiShoppingAssistant\Api\Data\ProductInterface as DataProductInterface;
+use MageOS\AiShoppingAssistant\Api\Data\SearchFiltersInterface;
+use MageOS\AiShoppingAssistant\Api\Data\UserPreferencesInterface;
+use MageOS\AiShoppingAssistant\Api\StorefrontBackendInterface;
+use MageOS\AiShoppingAssistant\Model\Agent\Exception\NotOffered;
+use MageOS\AiShoppingAssistant\Model\Agent\Exception\SignInRequired;
+use MageOS\AiShoppingAssistant\Model\Agent\Exception\Unavailable;
+use MageOS\AiShoppingAssistant\Model\Agent\SessionContext;
+use MageOS\AiShoppingAssistant\Model\Data\Cart;
+use MageOS\AiShoppingAssistant\Model\Data\CartItem;
+use MageOS\AiShoppingAssistant\Model\Data\Order;
+use MageOS\AiShoppingAssistant\Model\Data\OrderItem;
+use MageOS\AiShoppingAssistant\Model\Data\Product;
+use MageOS\AiShoppingAssistant\Model\Data\ProductDetails;
+use MageOS\AiShoppingAssistant\Model\Data\UserPreferences;
 
 final class MagentoStorefront implements StorefrontBackendInterface
 {
@@ -47,27 +47,27 @@ final class MagentoStorefront implements StorefrontBackendInterface
         private readonly \Magento\Framework\Api\SearchCriteriaBuilder $searchCriteriaBuilder,
         private readonly \Magento\Framework\Api\SortOrderBuilder $sortOrderBuilder,
         private readonly \Magento\Store\Model\StoreManagerInterface $storeManager,
-        private readonly \MageOS\ClaudeConsumerAgent\Api\Backend\ProductImageUrlInterface $productImageUrl,
-        private readonly \MageOS\ClaudeConsumerAgent\Model\Backend\Provider\HelperImageUrl $helperImageUrl,
+        private readonly \MageOS\AiShoppingAssistant\Api\Backend\ProductImageUrlInterface $productImageUrl,
+        private readonly \MageOS\AiShoppingAssistant\Model\Backend\Provider\HelperImageUrl $helperImageUrl,
         private readonly \Magento\Catalog\Helper\Product\Configuration $productConfiguration,
-        private readonly \MageOS\ClaudeConsumerAgent\Api\Backend\SearchProviderInterface $searchProvider,
-        private readonly \MageOS\ClaudeConsumerAgent\Model\Backend\ProductMapper $productMapper,
-        private readonly \MageOS\ClaudeConsumerAgent\Model\Backend\Salability $salability,
-        private readonly \MageOS\ClaudeConsumerAgent\Api\Cart\BuyRequestBuilderInterface $buyRequestBuilder,
+        private readonly \MageOS\AiShoppingAssistant\Api\Backend\SearchProviderInterface $searchProvider,
+        private readonly \MageOS\AiShoppingAssistant\Model\Backend\ProductMapper $productMapper,
+        private readonly \MageOS\AiShoppingAssistant\Model\Backend\Salability $salability,
+        private readonly \MageOS\AiShoppingAssistant\Api\Cart\BuyRequestBuilderInterface $buyRequestBuilder,
         private readonly \Magento\ConfigurableProduct\Model\ResourceModel\Product\Type\Configurable $configurableResource,
         private readonly \Magento\Quote\Api\CartRepositoryInterface $cartRepository,
         private readonly \Magento\Customer\Api\CustomerRepositoryInterface $customerRepository,
         private readonly \Magento\Customer\Api\GroupRepositoryInterface $groupRepository,
         private readonly \Magento\Customer\Api\AddressRepositoryInterface $addressRepository,
         private readonly \Magento\Sales\Api\OrderRepositoryInterface $orderRepository,
-        private readonly \MageOS\ClaudeConsumerAgent\Api\Backend\OrderStatusMapperInterface $orderStatusMapper,
+        private readonly \MageOS\AiShoppingAssistant\Api\Backend\OrderStatusMapperInterface $orderStatusMapper,
         private readonly \Magento\Shipping\Helper\Data $shippingHelper,
-        private readonly \MageOS\ClaudeConsumerAgent\Api\Backend\PolicySourceInterface $policySource,
-        private readonly \MageOS\ClaudeConsumerAgent\Api\Backend\FulfillmentProviderInterface $fulfillmentProvider,
-        private readonly \MageOS\ClaudeConsumerAgent\Model\Backend\Provider\AllowedCategories $allowedCategories,
+        private readonly \MageOS\AiShoppingAssistant\Api\Backend\PolicySourceInterface $policySource,
+        private readonly \MageOS\AiShoppingAssistant\Api\Backend\FulfillmentProviderInterface $fulfillmentProvider,
+        private readonly \MageOS\AiShoppingAssistant\Model\Backend\Provider\AllowedCategories $allowedCategories,
         private readonly \Magento\Sales\Api\ShipmentTrackRepositoryInterface $shipmentTrackRepository,
         private readonly \Magento\Sales\Api\ShipmentRepositoryInterface $shipmentRepository,
-        private readonly \MageOS\ClaudeConsumerAgent\Api\Backend\CategorySearchProviderInterface $categorySearchProvider
+        private readonly \MageOS\AiShoppingAssistant\Api\Backend\CategorySearchProviderInterface $categorySearchProvider
     ) {
     }
 

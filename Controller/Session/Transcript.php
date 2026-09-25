@@ -1,29 +1,29 @@
 <?php
 declare(strict_types=1);
 
-namespace MageOS\ClaudeConsumerAgent\Controller\Session;
+namespace MageOS\AiShoppingAssistant\Controller\Session;
 
 use Magento\Framework\App\Action\HttpPostActionInterface;
 use Magento\Framework\App\CsrfAwareActionInterface;
 use Magento\Framework\App\Request\InvalidRequestException;
 use Magento\Framework\App\RequestInterface;
 use Magento\Framework\Controller\ResultInterface;
-use MageOS\ClaudeConsumerAgent\Model\Agent\SessionContext;
-use MageOS\ClaudeConsumerAgent\Model\Data\PageContext;
+use MageOS\AiShoppingAssistant\Model\Agent\SessionContext;
+use MageOS\AiShoppingAssistant\Model\Data\PageContext;
 
 class Transcript implements HttpPostActionInterface, CsrfAwareActionInterface
 {
     public function __construct(
-        private readonly \MageOS\ClaudeConsumerAgent\Controller\Request\FormKeyGuard $formKeyGuard,
-        private readonly \MageOS\ClaudeConsumerAgent\Controller\Request\BodyReader $bodyReader,
+        private readonly \MageOS\AiShoppingAssistant\Controller\Request\FormKeyGuard $formKeyGuard,
+        private readonly \MageOS\AiShoppingAssistant\Controller\Request\BodyReader $bodyReader,
         private readonly \Magento\Customer\Model\Session $customerSession,
         private readonly \Magento\Checkout\Model\Session $checkoutSession,
         private readonly \Magento\Store\Model\StoreManagerInterface $storeManager,
-        private readonly \MageOS\ClaudeConsumerAgent\Model\Session\Repository $sessionRepository,
-        private readonly \MageOS\ClaudeConsumerAgent\Model\Session\TranscriptRepository $transcriptRepository,
-        private readonly \MageOS\ClaudeConsumerAgent\Model\Session\TranscriptView $transcriptView,
-        private readonly \MageOS\ClaudeConsumerAgent\Model\Agent\Presentation\Registry $presentationRegistry,
-        private readonly \MageOS\ClaudeConsumerAgent\Model\Config\StoreConfig $storeConfig,
+        private readonly \MageOS\AiShoppingAssistant\Model\Session\Repository $sessionRepository,
+        private readonly \MageOS\AiShoppingAssistant\Model\Session\TranscriptRepository $transcriptRepository,
+        private readonly \MageOS\AiShoppingAssistant\Model\Session\TranscriptView $transcriptView,
+        private readonly \MageOS\AiShoppingAssistant\Model\Agent\Presentation\Registry $presentationRegistry,
+        private readonly \MageOS\AiShoppingAssistant\Model\Config\StoreConfig $storeConfig,
         private readonly \Magento\Framework\Session\SessionManagerInterface $sessionManager,
         private readonly \Magento\Framework\App\RequestInterface $request,
         private readonly \Magento\Framework\App\Response\Http $response,

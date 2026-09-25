@@ -1,44 +1,44 @@
 <?php
 declare(strict_types=1);
 
-namespace MageOS\ClaudeConsumerAgent\Test\Unit\Tool;
+namespace MageOS\AiShoppingAssistant\Test\Unit\Tool;
 
 use Magento\Framework\Component\ComponentRegistrar;
 use Magento\Framework\Filesystem\Driver\File;
 use Magento\Framework\Lock\LockManagerInterface;
-use MageOS\ClaudeConsumerAgent\Api\StorefrontBackendInterface;
-use MageOS\ClaudeConsumerAgent\Model\Agent\AgentConfig;
-use MageOS\ClaudeConsumerAgent\Model\Agent\Fencing\Fence;
-use MageOS\ClaudeConsumerAgent\Model\Agent\Fencing\Sanitizer;
-use MageOS\ClaudeConsumerAgent\Model\Agent\Gate\CartWrite;
-use MageOS\ClaudeConsumerAgent\Model\Agent\Gate\Options;
-use MageOS\ClaudeConsumerAgent\Model\Agent\Gate\Provenance;
-use MageOS\ClaudeConsumerAgent\Model\Agent\Presentation\Enrich\Checkout;
-use MageOS\ClaudeConsumerAgent\Model\Agent\Presentation\Enrich\Comparison;
-use MageOS\ClaudeConsumerAgent\Model\Agent\Presentation\Enrich\OrderStatus;
-use MageOS\ClaudeConsumerAgent\Model\Agent\Presentation\Enrich\Products;
-use MageOS\ClaudeConsumerAgent\Model\Agent\Presentation\Enrich\Suggestions;
-use MageOS\ClaudeConsumerAgent\Model\Agent\Presentation\Registry as PresentationRegistry;
-use MageOS\ClaudeConsumerAgent\Model\Agent\Serializer;
-use MageOS\ClaudeConsumerAgent\Model\Agent\Skill\FrontMatter;
-use MageOS\ClaudeConsumerAgent\Model\Agent\Skill\Loader;
-use MageOS\ClaudeConsumerAgent\Model\Agent\Skill\Registry as SkillRegistry;
-use MageOS\ClaudeConsumerAgent\Model\Agent\Tool\CoreToolProvider;
-use MageOS\ClaudeConsumerAgent\Model\Agent\Tool\Definition;
-use MageOS\ClaudeConsumerAgent\Model\Agent\Tool\Handler\AddToCart;
-use MageOS\ClaudeConsumerAgent\Model\Agent\Tool\Handler\GetCart;
-use MageOS\ClaudeConsumerAgent\Model\Agent\Tool\Handler\GetFulfillmentOptions;
-use MageOS\ClaudeConsumerAgent\Model\Agent\Tool\Handler\GetOrders;
-use MageOS\ClaudeConsumerAgent\Model\Agent\Tool\Handler\GetOrderStatus;
-use MageOS\ClaudeConsumerAgent\Model\Agent\Tool\Handler\GetPreferences;
-use MageOS\ClaudeConsumerAgent\Model\Agent\Tool\Handler\GetProductDetails;
-use MageOS\ClaudeConsumerAgent\Model\Agent\Tool\Handler\LoadSkill;
-use MageOS\ClaudeConsumerAgent\Model\Agent\Tool\Handler\MemoryOff;
-use MageOS\ClaudeConsumerAgent\Model\Agent\Tool\Handler\RemoveFromCart;
-use MageOS\ClaudeConsumerAgent\Model\Agent\Tool\Handler\SearchCategories;
-use MageOS\ClaudeConsumerAgent\Model\Agent\Tool\Handler\SearchPolicies;
-use MageOS\ClaudeConsumerAgent\Model\Agent\Tool\Handler\SearchProducts;
-use MageOS\ClaudeConsumerAgent\Model\Agent\Tool\Handler\UpdateCartItem;
+use MageOS\AiShoppingAssistant\Api\StorefrontBackendInterface;
+use MageOS\AiShoppingAssistant\Model\Agent\AgentConfig;
+use MageOS\AiShoppingAssistant\Model\Agent\Fencing\Fence;
+use MageOS\AiShoppingAssistant\Model\Agent\Fencing\Sanitizer;
+use MageOS\AiShoppingAssistant\Model\Agent\Gate\CartWrite;
+use MageOS\AiShoppingAssistant\Model\Agent\Gate\Options;
+use MageOS\AiShoppingAssistant\Model\Agent\Gate\Provenance;
+use MageOS\AiShoppingAssistant\Model\Agent\Presentation\Enrich\Checkout;
+use MageOS\AiShoppingAssistant\Model\Agent\Presentation\Enrich\Comparison;
+use MageOS\AiShoppingAssistant\Model\Agent\Presentation\Enrich\OrderStatus;
+use MageOS\AiShoppingAssistant\Model\Agent\Presentation\Enrich\Products;
+use MageOS\AiShoppingAssistant\Model\Agent\Presentation\Enrich\Suggestions;
+use MageOS\AiShoppingAssistant\Model\Agent\Presentation\Registry as PresentationRegistry;
+use MageOS\AiShoppingAssistant\Model\Agent\Serializer;
+use MageOS\AiShoppingAssistant\Model\Agent\Skill\FrontMatter;
+use MageOS\AiShoppingAssistant\Model\Agent\Skill\Loader;
+use MageOS\AiShoppingAssistant\Model\Agent\Skill\Registry as SkillRegistry;
+use MageOS\AiShoppingAssistant\Model\Agent\Tool\CoreToolProvider;
+use MageOS\AiShoppingAssistant\Model\Agent\Tool\Definition;
+use MageOS\AiShoppingAssistant\Model\Agent\Tool\Handler\AddToCart;
+use MageOS\AiShoppingAssistant\Model\Agent\Tool\Handler\GetCart;
+use MageOS\AiShoppingAssistant\Model\Agent\Tool\Handler\GetFulfillmentOptions;
+use MageOS\AiShoppingAssistant\Model\Agent\Tool\Handler\GetOrders;
+use MageOS\AiShoppingAssistant\Model\Agent\Tool\Handler\GetOrderStatus;
+use MageOS\AiShoppingAssistant\Model\Agent\Tool\Handler\GetPreferences;
+use MageOS\AiShoppingAssistant\Model\Agent\Tool\Handler\GetProductDetails;
+use MageOS\AiShoppingAssistant\Model\Agent\Tool\Handler\LoadSkill;
+use MageOS\AiShoppingAssistant\Model\Agent\Tool\Handler\MemoryOff;
+use MageOS\AiShoppingAssistant\Model\Agent\Tool\Handler\RemoveFromCart;
+use MageOS\AiShoppingAssistant\Model\Agent\Tool\Handler\SearchCategories;
+use MageOS\AiShoppingAssistant\Model\Agent\Tool\Handler\SearchPolicies;
+use MageOS\AiShoppingAssistant\Model\Agent\Tool\Handler\SearchProducts;
+use MageOS\AiShoppingAssistant\Model\Agent\Tool\Handler\UpdateCartItem;
 use Psr\Log\LoggerInterface;
 use PHPUnit\Framework\TestCase;
 
@@ -47,7 +47,7 @@ final class CoreToolProviderTest extends TestCase
     private function realSkillRegistry(): SkillRegistry
     {
         $loader = new Loader(
-            [['module' => 'MageOS_ClaudeConsumerAgent', 'path' => 'skills', 'sortOrder' => 0]],
+            [['module' => 'MageOS_AiShoppingAssistant', 'path' => 'skills', 'sortOrder' => 0]],
             new ComponentRegistrar(),
             new File(),
             new FrontMatter()

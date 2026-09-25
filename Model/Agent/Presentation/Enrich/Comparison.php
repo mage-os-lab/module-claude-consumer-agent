@@ -1,10 +1,10 @@
 <?php
 declare(strict_types=1);
 
-namespace MageOS\ClaudeConsumerAgent\Model\Agent\Presentation\Enrich;
+namespace MageOS\AiShoppingAssistant\Model\Agent\Presentation\Enrich;
 
-use MageOS\ClaudeConsumerAgent\Model\Agent\Exception\PresentationRefused;
-use MageOS\ClaudeConsumerAgent\Model\Agent\Presentation\EnrichmentContext;
+use MageOS\AiShoppingAssistant\Model\Agent\Exception\PresentationRefused;
+use MageOS\AiShoppingAssistant\Model\Agent\Presentation\EnrichmentContext;
 
 final class Comparison
 {

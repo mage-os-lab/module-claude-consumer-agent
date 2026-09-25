@@ -1,10 +1,10 @@
 <?php
 declare(strict_types=1);
 
-namespace MageOS\ClaudeConsumerAgent\Model\Agent\Prompt;
+namespace MageOS\AiShoppingAssistant\Model\Agent\Prompt;
 
 /**
- * Pools every MageOS\ClaudeConsumerAgent\Api\Prompt\CoreFactProviderInterface bound in
+ * Pools every MageOS\AiShoppingAssistant\Api\Prompt\CoreFactProviderInterface bound in
  * di.xml. Keys carry the desired output order, the same convention Backend\Provider\
  * FulfillmentAggregator uses for its own provider pool.
  */

@@ -4,7 +4,7 @@ const test = require('node:test');
 const assert = require('node:assert/strict');
 const {load} = require('./support.cjs');
 
-const page = load('MageOS_ClaudeConsumerAgent/js/luma/model/page');
+const page = load('MageOS_AiShoppingAssistant/js/luma/model/page');
 
 function fakeDocument(classNames, productInputValue) {
     const classList = classNames.slice();

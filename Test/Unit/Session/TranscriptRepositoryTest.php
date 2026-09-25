@@ -1,12 +1,12 @@
 <?php
 declare(strict_types=1);
 
-namespace MageOS\ClaudeConsumerAgent\Test\Unit\Session;
+namespace MageOS\AiShoppingAssistant\Test\Unit\Session;
 
 use Magento\Framework\App\ResourceConnection;
 use Magento\Framework\DB\Adapter\AdapterInterface;
-use MageOS\ClaudeConsumerAgent\Model\Session\ResourceModel\Message;
-use MageOS\ClaudeConsumerAgent\Model\Session\TranscriptRepository;
+use MageOS\AiShoppingAssistant\Model\Session\ResourceModel\Message;
+use MageOS\AiShoppingAssistant\Model\Session\TranscriptRepository;
 use PHPUnit\Framework\TestCase;
 
 final class TranscriptRepositoryTest extends TestCase

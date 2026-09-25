@@ -1,19 +1,19 @@
 <?php
 declare(strict_types=1);
 
-namespace MageOS\ClaudeConsumerAgent\Test\Unit;
+namespace MageOS\AiShoppingAssistant\Test\Unit;
 
-use MageOS\ClaudeConsumerAgent\Model\Agent\Fencing\Fence;
-use MageOS\ClaudeConsumerAgent\Model\Agent\Fencing\Sanitizer;
-use MageOS\ClaudeConsumerAgent\Model\Agent\Serializer;
-use MageOS\ClaudeConsumerAgent\Model\Data\Cart;
-use MageOS\ClaudeConsumerAgent\Model\Data\CartItem;
-use MageOS\ClaudeConsumerAgent\Model\Data\FulfillmentOption;
-use MageOS\ClaudeConsumerAgent\Model\Data\Order;
-use MageOS\ClaudeConsumerAgent\Model\Data\OrderItem;
-use MageOS\ClaudeConsumerAgent\Model\Data\Policy;
-use MageOS\ClaudeConsumerAgent\Model\Data\Product;
-use MageOS\ClaudeConsumerAgent\Model\Data\ProductDetails;
+use MageOS\AiShoppingAssistant\Model\Agent\Fencing\Fence;
+use MageOS\AiShoppingAssistant\Model\Agent\Fencing\Sanitizer;
+use MageOS\AiShoppingAssistant\Model\Agent\Serializer;
+use MageOS\AiShoppingAssistant\Model\Data\Cart;
+use MageOS\AiShoppingAssistant\Model\Data\CartItem;
+use MageOS\AiShoppingAssistant\Model\Data\FulfillmentOption;
+use MageOS\AiShoppingAssistant\Model\Data\Order;
+use MageOS\AiShoppingAssistant\Model\Data\OrderItem;
+use MageOS\AiShoppingAssistant\Model\Data\Policy;
+use MageOS\AiShoppingAssistant\Model\Data\Product;
+use MageOS\AiShoppingAssistant\Model\Data\ProductDetails;
 use PHPUnit\Framework\TestCase;
 
 final class SerializerTest extends TestCase

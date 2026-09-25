@@ -4,8 +4,8 @@
         <referenceBlock name="aiagent.luma.ask" remove="true"/>
         <referenceContainer name="product.info.additional">
             <block name="aiagent.ask"
-                   class="MageOS\ClaudeConsumerAgent\Block\ProductAsk"
-                   template="MageOS_ClaudeConsumerAgent::product/ask.phtml"
+                   class="MageOS\AiShoppingAssistant\Block\ProductAsk"
+                   template="MageOS_AiShoppingAssistant::product/ask.phtml"
                    ifconfig="ai_integration/aiagent/general/product_block_enabled"/>
         </referenceContainer>
     </body>

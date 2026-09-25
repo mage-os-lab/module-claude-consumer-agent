@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-namespace MageOS\ClaudeConsumerAgent\Api\Prompt;
+namespace MageOS\AiShoppingAssistant\Api\Prompt;
 
 interface CoreFactProviderInterface
 {

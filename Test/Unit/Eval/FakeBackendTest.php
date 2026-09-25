@@ -1,14 +1,14 @@
 <?php
 declare(strict_types=1);
 
-namespace MageOS\ClaudeConsumerAgent\Test\Unit\Eval;
+namespace MageOS\AiShoppingAssistant\Test\Unit\Eval;
 
-use MageOS\ClaudeConsumerAgent\Model\Agent\Exception\SignInRequired;
-use MageOS\ClaudeConsumerAgent\Model\Agent\Exception\Unavailable;
-use MageOS\ClaudeConsumerAgent\Model\Agent\SessionContext;
-use MageOS\ClaudeConsumerAgent\Model\Data\PageContext;
-use MageOS\ClaudeConsumerAgent\Model\Data\SearchFilters;
-use MageOS\ClaudeConsumerAgent\Model\Eval\FakeBackend;
+use MageOS\AiShoppingAssistant\Model\Agent\Exception\SignInRequired;
+use MageOS\AiShoppingAssistant\Model\Agent\Exception\Unavailable;
+use MageOS\AiShoppingAssistant\Model\Agent\SessionContext;
+use MageOS\AiShoppingAssistant\Model\Data\PageContext;
+use MageOS\AiShoppingAssistant\Model\Data\SearchFilters;
+use MageOS\AiShoppingAssistant\Model\Eval\FakeBackend;
 use PHPUnit\Framework\TestCase;
 
 class FakeBackendTest extends TestCase

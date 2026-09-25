@@ -1,9 +1,9 @@
 <?php
 declare(strict_types=1);
 
-namespace MageOS\ClaudeConsumerAgent\Test\Unit\Schema;
+namespace MageOS\AiShoppingAssistant\Test\Unit\Schema;
 
-use MageOS\ClaudeConsumerAgent\Model\Agent\Schema\Validator;
+use MageOS\AiShoppingAssistant\Model\Agent\Schema\Validator;
 use PHPUnit\Framework\TestCase;
 
 final class ValidatorTest extends TestCase

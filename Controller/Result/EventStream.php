@@ -1,15 +1,15 @@
 <?php
 declare(strict_types=1);
 
-namespace MageOS\ClaudeConsumerAgent\Controller\Result;
+namespace MageOS\AiShoppingAssistant\Controller\Result;
 
 use Magento\Framework\App\Response\HttpInterface as HttpResponseInterface;
 use Magento\Framework\Controller\AbstractResult;
-use MageOS\ClaudeConsumerAgent\Model\Agent\Event;
-use MageOS\ClaudeConsumerAgent\Model\Agent\Event\SseFrame;
-use MageOS\ClaudeConsumerAgent\Model\Agent\SessionContext;
-use MageOS\ClaudeConsumerAgent\Model\Limits\SlotHandle;
-use MageOS\ClaudeConsumerAgent\Model\Session\Binding;
+use MageOS\AiShoppingAssistant\Model\Agent\Event;
+use MageOS\AiShoppingAssistant\Model\Agent\Event\SseFrame;
+use MageOS\AiShoppingAssistant\Model\Agent\SessionContext;
+use MageOS\AiShoppingAssistant\Model\Limits\SlotHandle;
+use MageOS\AiShoppingAssistant\Model\Session\Binding;
 
 /**
  * Stays non-final so a unit test can override write() and drainOutputBuffers(), the two
@@ -30,8 +30,8 @@ class EventStream extends AbstractResult
     private ?Event $busyEvent = null;
 
     public function __construct(
-        private readonly \MageOS\ClaudeConsumerAgent\Model\Agent\Turn\Orchestrator $orchestrator,
-        private readonly \MageOS\ClaudeConsumerAgent\Model\Config\StoreConfig $storeConfig,
+        private readonly \MageOS\AiShoppingAssistant\Model\Agent\Turn\Orchestrator $orchestrator,
+        private readonly \MageOS\AiShoppingAssistant\Model\Config\StoreConfig $storeConfig,
         private readonly \Psr\Log\LoggerInterface $logger
     ) {
     }

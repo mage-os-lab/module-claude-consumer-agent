@@ -1,10 +1,10 @@
 <?php
 declare(strict_types=1);
 
-namespace MageOS\ClaudeConsumerAgent\Model\Data;
+namespace MageOS\AiShoppingAssistant\Model\Data;
 
-use MageOS\ClaudeConsumerAgent\Api\Data\ProductDetailsInterface;
-use MageOS\ClaudeConsumerAgent\Api\Data\ProductInterface;
+use MageOS\AiShoppingAssistant\Api\Data\ProductDetailsInterface;
+use MageOS\AiShoppingAssistant\Api\Data\ProductInterface;
 
 final class ProductDetails implements ProductDetailsInterface
 {

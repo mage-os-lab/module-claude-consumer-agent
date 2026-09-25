@@ -1,9 +1,9 @@
 <?php
 declare(strict_types=1);
 
-namespace MageOS\ClaudeConsumerAgent\Model\Backend\Provider;
+namespace MageOS\AiShoppingAssistant\Model\Backend\Provider;
 
-use MageOS\ClaudeConsumerAgent\Api\Backend\StoreFactTitleResolverInterface;
+use MageOS\AiShoppingAssistant\Api\Backend\StoreFactTitleResolverInterface;
 
 final class StoreFactTitleResolver implements StoreFactTitleResolverInterface
 {

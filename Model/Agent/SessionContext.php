@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-namespace MageOS\ClaudeConsumerAgent\Model\Agent;
+namespace MageOS\AiShoppingAssistant\Model\Agent;
 
 use DateTimeImmutable;
 
@@ -12,7 +12,7 @@ final class SessionContext
         public readonly ?int $customerId,
         public readonly int $quoteId,
         public readonly int $storeId,
-        public readonly \MageOS\ClaudeConsumerAgent\Api\Data\PageContextInterface $page,
+        public readonly \MageOS\AiShoppingAssistant\Api\Data\PageContextInterface $page,
         public readonly \DateTimeImmutable $now
     ) {
     }

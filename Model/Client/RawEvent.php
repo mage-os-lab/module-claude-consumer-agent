@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-namespace MageOS\ClaudeConsumerAgent\Model\Client;
+namespace MageOS\AiShoppingAssistant\Model\Client;
 
 final class RawEvent
 {

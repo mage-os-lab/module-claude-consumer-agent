@@ -1,9 +1,9 @@
 <?php
 declare(strict_types=1);
 
-namespace MageOS\ClaudeConsumerAgent\Test\Unit\Data;
+namespace MageOS\AiShoppingAssistant\Test\Unit\Data;
 
-use MageOS\ClaudeConsumerAgent\Model\Data\SearchFilters;
+use MageOS\AiShoppingAssistant\Model\Data\SearchFilters;
 use PHPUnit\Framework\TestCase;
 
 final class SearchFiltersTest extends TestCase

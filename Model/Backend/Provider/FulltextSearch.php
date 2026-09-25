@@ -1,15 +1,15 @@
 <?php
 declare(strict_types=1);
 
-namespace MageOS\ClaudeConsumerAgent\Model\Backend\Provider;
+namespace MageOS\AiShoppingAssistant\Model\Backend\Provider;
 
 use Magento\Catalog\Model\Product\Visibility;
 use Magento\Framework\Api\Search\SearchCriteria;
 use Magento\Framework\Api\Search\SearchCriteriaBuilder;
 use Magento\Framework\Api\SortOrder;
-use MageOS\ClaudeConsumerAgent\Api\Backend\SearchProviderInterface;
-use MageOS\ClaudeConsumerAgent\Api\Data\SearchFiltersInterface;
-use MageOS\ClaudeConsumerAgent\Model\Agent\SessionContext;
+use MageOS\AiShoppingAssistant\Api\Backend\SearchProviderInterface;
+use MageOS\AiShoppingAssistant\Api\Data\SearchFiltersInterface;
+use MageOS\AiShoppingAssistant\Model\Agent\SessionContext;
 
 final class FulltextSearch implements SearchProviderInterface
 {
@@ -24,8 +24,8 @@ final class FulltextSearch implements SearchProviderInterface
         private readonly \Magento\Catalog\Api\CategoryListInterface $categoryList,
         private readonly \Magento\Framework\Api\SearchCriteriaBuilder $categorySearchCriteriaBuilder,
         private readonly \Magento\Store\Model\StoreManagerInterface $storeManager,
-        private readonly \MageOS\ClaudeConsumerAgent\Model\Backend\Provider\AllowedCategories $allowedCategories,
-        private readonly \MageOS\ClaudeConsumerAgent\Api\Backend\BestsellerRankInterface $bestsellerRank
+        private readonly \MageOS\AiShoppingAssistant\Model\Backend\Provider\AllowedCategories $allowedCategories,
+        private readonly \MageOS\AiShoppingAssistant\Api\Backend\BestsellerRankInterface $bestsellerRank
     ) {
     }
 

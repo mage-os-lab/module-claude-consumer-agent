@@ -1,5 +1,5 @@
 {
-    "name": "mage-os/module-claude-consumer-agent",
+    "name": "mage-os/module-ai-shopping-assistant",
     "description": "AI shopping assistant for Hyva and Luma storefronts, backed by the Claude Messages API.",
     "type": "magento2-module",
     "license": "OSL-3.0",
@@ -23,6 +23,9 @@
         "magento/module-shipping": "*",
         "guzzlehttp/guzzle": "^7.5"
     },
+    "replace": {
+        "mage-os/module-claude-consumer-agent": "*"
+    },
     "suggest": {
         "magento/module-inventory-sales-api": "Reserved stock aware fulfillment facts when MSI is installed",
         "hyva-themes/magento2-theme-module": "Hyvä storefront templates; Luma based themes need no Hyvä package"
@@ -32,7 +35,7 @@
             "registration.php"
         ],
         "psr-4": {
-            "MageOS\\ClaudeConsumerAgent\\": ""
+            "MageOS\\AiShoppingAssistant\\": ""
         }
     }
 }

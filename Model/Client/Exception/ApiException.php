@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-namespace MageOS\ClaudeConsumerAgent\Model\Client\Exception;
+namespace MageOS\AiShoppingAssistant\Model\Client\Exception;
 
 class ApiException extends \RuntimeException
 {

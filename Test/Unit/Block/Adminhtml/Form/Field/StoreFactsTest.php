@@ -1,14 +1,14 @@
 <?php
 declare(strict_types=1);
 
-namespace MageOS\ClaudeConsumerAgent\Test\Unit\Block\Adminhtml\Form\Field;
+namespace MageOS\AiShoppingAssistant\Test\Unit\Block\Adminhtml\Form\Field;
 
 use Magento\Backend\Block\Template\Context;
 use Magento\Framework\App\ObjectManager;
 use Magento\Framework\ObjectManagerInterface;
 use Magento\Framework\View\Helper\SecureHtmlRenderer;
 use Magento\Framework\View\LayoutInterface;
-use MageOS\ClaudeConsumerAgent\Block\Adminhtml\Form\Field\StoreFacts;
+use MageOS\AiShoppingAssistant\Block\Adminhtml\Form\Field\StoreFacts;
 use PHPUnit\Framework\TestCase;
 use ReflectionMethod;
 

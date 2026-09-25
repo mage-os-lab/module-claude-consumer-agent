@@ -5,7 +5,7 @@ const assert = require('node:assert/strict');
 const {load} = require('./support.cjs');
 
 function loadFormat(calls) {
-    return load('MageOS_ClaudeConsumerAgent/js/luma/model/format', {
+    return load('MageOS_AiShoppingAssistant/js/luma/model/format', {
         'Magento_Catalog/js/price-utils': {
             formatPriceLocale: function (amount, format) {
                 calls.push([amount, format]);

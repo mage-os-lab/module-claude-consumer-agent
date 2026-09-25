@@ -1,6 +1,6 @@
 define([
     'jquery',
-    'MageOS_ClaudeConsumerAgent/js/luma/model/sse',
+    'MageOS_AiShoppingAssistant/js/luma/model/sse',
     'mage/cookies'
 ], function ($, sse) {
     'use strict';

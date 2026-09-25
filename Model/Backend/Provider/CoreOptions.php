@@ -1,12 +1,12 @@
 <?php
 declare(strict_types=1);
 
-namespace MageOS\ClaudeConsumerAgent\Model\Backend\Provider;
+namespace MageOS\AiShoppingAssistant\Model\Backend\Provider;
 
 use Magento\Catalog\Api\Data\ProductCustomOptionInterface;
 use Magento\Catalog\Api\Data\ProductCustomOptionValuesInterface;
 use Magento\Catalog\Api\Data\ProductInterface;
-use MageOS\ClaudeConsumerAgent\Api\Backend\ProductOptionsProviderInterface;
+use MageOS\AiShoppingAssistant\Api\Backend\ProductOptionsProviderInterface;
 
 final class CoreOptions implements ProductOptionsProviderInterface
 {

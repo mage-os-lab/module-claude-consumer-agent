@@ -1,9 +1,9 @@
 <?php
 declare(strict_types=1);
 
-namespace MageOS\ClaudeConsumerAgent\Test\Unit\Agent\Tool;
+namespace MageOS\AiShoppingAssistant\Test\Unit\Agent\Tool;
 
-use MageOS\ClaudeConsumerAgent\Model\Agent\Tool\Definition;
+use MageOS\AiShoppingAssistant\Model\Agent\Tool\Definition;
 use PHPUnit\Framework\TestCase;
 
 final class DefinitionTest extends TestCase

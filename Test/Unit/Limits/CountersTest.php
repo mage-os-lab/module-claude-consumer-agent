@@ -1,13 +1,13 @@
 <?php
 declare(strict_types=1);
 
-namespace MageOS\ClaudeConsumerAgent\Test\Unit\Limits;
+namespace MageOS\AiShoppingAssistant\Test\Unit\Limits;
 
 use Magento\Framework\App\CacheInterface;
 use Magento\Framework\Lock\LockManagerInterface;
-use MageOS\ClaudeConsumerAgent\Model\Agent\AgentConfig;
-use MageOS\ClaudeConsumerAgent\Model\Limits\Counters;
-use MageOS\ClaudeConsumerAgent\Model\Limits\Exception\LimitExceeded;
+use MageOS\AiShoppingAssistant\Model\Agent\AgentConfig;
+use MageOS\AiShoppingAssistant\Model\Limits\Counters;
+use MageOS\AiShoppingAssistant\Model\Limits\Exception\LimitExceeded;
 use PHPUnit\Framework\MockObject\MockObject;
 use Psr\Log\LoggerInterface;
 use PHPUnit\Framework\TestCase;

@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-namespace MageOS\ClaudeConsumerAgent\Block\Adminhtml\Form\Field;
+namespace MageOS\AiShoppingAssistant\Block\Adminhtml\Form\Field;
 
 use Magento\Framework\View\Element\AbstractBlock;
 

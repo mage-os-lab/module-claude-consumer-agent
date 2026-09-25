@@ -4,15 +4,15 @@
         <referenceContainer name="before.body.end">
             <block name="aiagent.luma.root"
                    class="Magento\Framework\View\Element\Template"
-                   template="MageOS_ClaudeConsumerAgent::luma/root.phtml"
+                   template="MageOS_AiShoppingAssistant::luma/root.phtml"
                    ifconfig="ai_integration/aiagent/general/enabled">
                 <arguments>
-                    <argument name="view_model" xsi:type="object">MageOS\ClaudeConsumerAgent\ViewModel\LumaConfig</argument>
+                    <argument name="view_model" xsi:type="object">MageOS\AiShoppingAssistant\ViewModel\LumaConfig</argument>
                 </arguments>
             </block>
             <block name="aiagent.luma.launcher"
-                   class="MageOS\ClaudeConsumerAgent\Block\Launcher"
-                   template="MageOS_ClaudeConsumerAgent::luma/launcher.phtml"
+                   class="MageOS\AiShoppingAssistant\Block\Launcher"
+                   template="MageOS_AiShoppingAssistant::luma/launcher.phtml"
                    ifconfig="ai_integration/aiagent/general/launcher_enabled"/>
         </referenceContainer>
     </body>

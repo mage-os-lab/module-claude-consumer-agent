@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-namespace MageOS\ClaudeConsumerAgent\Api\Backend;
+namespace MageOS\AiShoppingAssistant\Api\Backend;
 
 use Magento\Catalog\Api\Data\ProductInterface;
 

@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-namespace MageOS\ClaudeConsumerAgent\Api\Data;
+namespace MageOS\AiShoppingAssistant\Api\Data;
 
 use DateTimeImmutable;
 
@@ -34,7 +34,7 @@ interface OrderInterface
     public function getPlacedAt(): DateTimeImmutable;
 
     /**
-     * @return \MageOS\ClaudeConsumerAgent\Api\Data\OrderItemInterface[]
+     * @return \MageOS\AiShoppingAssistant\Api\Data\OrderItemInterface[]
      */
     public function getItems(): array;
 

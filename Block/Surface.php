@@ -1,20 +1,20 @@
 <?php
 declare(strict_types=1);
 
-namespace MageOS\ClaudeConsumerAgent\Block;
+namespace MageOS\AiShoppingAssistant\Block;
 
 use Magento\Framework\View\Element\Template;
-use MageOS\ClaudeConsumerAgent\Model\Config\Source\SurfaceMode;
-use MageOS\ClaudeConsumerAgent\Model\Surface\Resolver;
-use MageOS\ClaudeConsumerAgent\ViewModel\Assistant;
+use MageOS\AiShoppingAssistant\Model\Config\Source\SurfaceMode;
+use MageOS\AiShoppingAssistant\Model\Surface\Resolver;
+use MageOS\AiShoppingAssistant\ViewModel\Assistant;
 
 class Surface extends Template
 {
     public function __construct(
         \Magento\Framework\View\Element\Template\Context $context,
-        private readonly \MageOS\ClaudeConsumerAgent\Model\Surface\Resolver $surfaceResolver,
-        private readonly \MageOS\ClaudeConsumerAgent\Model\Config\StoreConfig $storeConfig,
-        private readonly \MageOS\ClaudeConsumerAgent\ViewModel\Assistant $assistant,
+        private readonly \MageOS\AiShoppingAssistant\Model\Surface\Resolver $surfaceResolver,
+        private readonly \MageOS\AiShoppingAssistant\Model\Config\StoreConfig $storeConfig,
+        private readonly \MageOS\AiShoppingAssistant\ViewModel\Assistant $assistant,
         array $data = []
     ) {
         parent::__construct($context, $data);

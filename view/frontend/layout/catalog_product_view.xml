@@ -3,8 +3,8 @@
     <body>
         <referenceContainer name="product.info.extrahint">
             <block name="aiagent.luma.ask"
-                   class="MageOS\ClaudeConsumerAgent\Block\ProductAsk"
-                   template="MageOS_ClaudeConsumerAgent::luma/product-ask.phtml"
+                   class="MageOS\AiShoppingAssistant\Block\ProductAsk"
+                   template="MageOS_AiShoppingAssistant::luma/product-ask.phtml"
                    before="-"
                    ifconfig="ai_integration/aiagent/general/product_block_enabled"/>
         </referenceContainer>

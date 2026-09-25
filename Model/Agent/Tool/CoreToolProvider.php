@@ -1,10 +1,10 @@
 <?php
 declare(strict_types=1);
 
-namespace MageOS\ClaudeConsumerAgent\Model\Agent\Tool;
+namespace MageOS\AiShoppingAssistant\Model\Agent\Tool;
 
-use MageOS\ClaudeConsumerAgent\Api\Tool\ToolProviderInterface;
-use MageOS\ClaudeConsumerAgent\Model\Agent\AgentConfig;
+use MageOS\AiShoppingAssistant\Api\Tool\ToolProviderInterface;
+use MageOS\AiShoppingAssistant\Model\Agent\AgentConfig;
 
 /**
  * Ports shopping_agent.tools.registry.build_tools for v1: the built-in tools every
@@ -14,27 +14,27 @@ use MageOS\ClaudeConsumerAgent\Model\Agent\AgentConfig;
 final class CoreToolProvider implements ToolProviderInterface
 {
     public function __construct(
-        private readonly \MageOS\ClaudeConsumerAgent\Model\Agent\Tool\Handler\LoadSkill $loadSkill,
-        private readonly \MageOS\ClaudeConsumerAgent\Model\Agent\Tool\Handler\SearchProducts $searchProducts,
-        private readonly \MageOS\ClaudeConsumerAgent\Model\Agent\Tool\Handler\SearchCategories $searchCategories,
-        private readonly \MageOS\ClaudeConsumerAgent\Model\Agent\Tool\Handler\GetProductDetails $getProductDetails,
-        private readonly \MageOS\ClaudeConsumerAgent\Model\Agent\Tool\Handler\GetCart $getCart,
-        private readonly \MageOS\ClaudeConsumerAgent\Model\Agent\Tool\Handler\AddToCart $addToCart,
-        private readonly \MageOS\ClaudeConsumerAgent\Model\Agent\Tool\Handler\UpdateCartItem $updateCartItem,
-        private readonly \MageOS\ClaudeConsumerAgent\Model\Agent\Tool\Handler\RemoveFromCart $removeFromCart,
-        private readonly \MageOS\ClaudeConsumerAgent\Model\Agent\Tool\Handler\GetPreferences $getPreferences,
-        private readonly \MageOS\ClaudeConsumerAgent\Model\Agent\Tool\Handler\GetOrders $getOrders,
-        private readonly \MageOS\ClaudeConsumerAgent\Model\Agent\Tool\Handler\GetOrderStatus $getOrderStatus,
-        private readonly \MageOS\ClaudeConsumerAgent\Model\Agent\Tool\Handler\SearchPolicies $searchPolicies,
-        private readonly \MageOS\ClaudeConsumerAgent\Model\Agent\Tool\Handler\GetFulfillmentOptions $getFulfillmentOptions,
-        private readonly \MageOS\ClaudeConsumerAgent\Model\Agent\Tool\Handler\MemoryOff $memoryOff,
-        private readonly \MageOS\ClaudeConsumerAgent\Model\Agent\Skill\Registry $skills,
-        private readonly \MageOS\ClaudeConsumerAgent\Model\Agent\Presentation\Registry $presentation
+        private readonly \MageOS\AiShoppingAssistant\Model\Agent\Tool\Handler\LoadSkill $loadSkill,
+        private readonly \MageOS\AiShoppingAssistant\Model\Agent\Tool\Handler\SearchProducts $searchProducts,
+        private readonly \MageOS\AiShoppingAssistant\Model\Agent\Tool\Handler\SearchCategories $searchCategories,
+        private readonly \MageOS\AiShoppingAssistant\Model\Agent\Tool\Handler\GetProductDetails $getProductDetails,
+        private readonly \MageOS\AiShoppingAssistant\Model\Agent\Tool\Handler\GetCart $getCart,
+        private readonly \MageOS\AiShoppingAssistant\Model\Agent\Tool\Handler\AddToCart $addToCart,
+        private readonly \MageOS\AiShoppingAssistant\Model\Agent\Tool\Handler\UpdateCartItem $updateCartItem,
+        private readonly \MageOS\AiShoppingAssistant\Model\Agent\Tool\Handler\RemoveFromCart $removeFromCart,
+        private readonly \MageOS\AiShoppingAssistant\Model\Agent\Tool\Handler\GetPreferences $getPreferences,
+        private readonly \MageOS\AiShoppingAssistant\Model\Agent\Tool\Handler\GetOrders $getOrders,
+        private readonly \MageOS\AiShoppingAssistant\Model\Agent\Tool\Handler\GetOrderStatus $getOrderStatus,
+        private readonly \MageOS\AiShoppingAssistant\Model\Agent\Tool\Handler\SearchPolicies $searchPolicies,
+        private readonly \MageOS\AiShoppingAssistant\Model\Agent\Tool\Handler\GetFulfillmentOptions $getFulfillmentOptions,
+        private readonly \MageOS\AiShoppingAssistant\Model\Agent\Tool\Handler\MemoryOff $memoryOff,
+        private readonly \MageOS\AiShoppingAssistant\Model\Agent\Skill\Registry $skills,
+        private readonly \MageOS\AiShoppingAssistant\Model\Agent\Presentation\Registry $presentation
     ) {
     }
 
     /**
-     * @return \MageOS\ClaudeConsumerAgent\Model\Agent\Tool\Definition[]
+     * @return \MageOS\AiShoppingAssistant\Model\Agent\Tool\Definition[]
      */
     public function getTools(AgentConfig $config): array
     {
@@ -399,7 +399,7 @@ final class CoreToolProvider implements ToolProviderInterface
     }
 
     /**
-     * @return \MageOS\ClaudeConsumerAgent\Model\Agent\Tool\Definition[]
+     * @return \MageOS\AiShoppingAssistant\Model\Agent\Tool\Definition[]
      */
     private function presentationDefinitions(): array
     {

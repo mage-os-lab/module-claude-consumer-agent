@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-namespace MageOS\ClaudeConsumerAgent\ViewModel;
+namespace MageOS\AiShoppingAssistant\ViewModel;
 
 use Magento\Framework\View\Element\Block\ArgumentInterface;
 
@@ -13,8 +13,8 @@ final class LumaConfig implements ArgumentInterface
     private const CONTACT_URL_PATTERN = '#^(https?://|/(?![/\\\\])|mailto:|tel:)#i';
 
     public function __construct(
-        private readonly \MageOS\ClaudeConsumerAgent\ViewModel\Assistant $assistant,
-        private readonly \MageOS\ClaudeConsumerAgent\ViewModel\CartSection $cartSection,
+        private readonly \MageOS\AiShoppingAssistant\ViewModel\Assistant $assistant,
+        private readonly \MageOS\AiShoppingAssistant\ViewModel\CartSection $cartSection,
         private readonly \Magento\Framework\Locale\FormatInterface $localeFormat
     ) {
     }

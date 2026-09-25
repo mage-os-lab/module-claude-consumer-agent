@@ -1,14 +1,14 @@
 <?php
 declare(strict_types=1);
 
-namespace MageOS\ClaudeConsumerAgent\Api\Backend;
+namespace MageOS\AiShoppingAssistant\Api\Backend;
 
-use MageOS\ClaudeConsumerAgent\Model\Agent\SessionContext;
+use MageOS\AiShoppingAssistant\Model\Agent\SessionContext;
 
 interface PolicySourceInterface
 {
     /**
-     * @return \MageOS\ClaudeConsumerAgent\Api\Data\PolicyInterface[]
+     * @return \MageOS\AiShoppingAssistant\Api\Data\PolicyInterface[]
      */
     public function search(SessionContext $ctx, string $query): array;
 }

@@ -1,10 +1,10 @@
 <?php
 declare(strict_types=1);
 
-namespace MageOS\ClaudeConsumerAgent\Test\Unit\Client;
+namespace MageOS\AiShoppingAssistant\Test\Unit\Client;
 
-use MageOS\ClaudeConsumerAgent\Model\Client\FakeClient;
-use MageOS\ClaudeConsumerAgent\Model\Client\RawEvent;
+use MageOS\AiShoppingAssistant\Model\Client\FakeClient;
+use MageOS\AiShoppingAssistant\Model\Client\RawEvent;
 use PHPUnit\Framework\TestCase;
 
 final class FakeClientTest extends TestCase

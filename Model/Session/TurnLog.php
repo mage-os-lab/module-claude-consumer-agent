@@ -1,9 +1,9 @@
 <?php
 declare(strict_types=1);
 
-namespace MageOS\ClaudeConsumerAgent\Model\Session;
+namespace MageOS\AiShoppingAssistant\Model\Session;
 
-use MageOS\ClaudeConsumerAgent\Api\Turn\TurnLogInterface;
+use MageOS\AiShoppingAssistant\Api\Turn\TurnLogInterface;
 
 /**
  * A turn log failure must never break the turn it is recording, so record() swallows
@@ -12,7 +12,7 @@ use MageOS\ClaudeConsumerAgent\Api\Turn\TurnLogInterface;
 final class TurnLog implements TurnLogInterface
 {
     public function __construct(
-        private readonly \MageOS\ClaudeConsumerAgent\Model\Session\ResourceModel\Turn $resource,
+        private readonly \MageOS\AiShoppingAssistant\Model\Session\ResourceModel\Turn $resource,
         private readonly \Psr\Log\LoggerInterface $logger
     ) {
     }

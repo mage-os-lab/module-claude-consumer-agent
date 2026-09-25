@@ -1,15 +1,15 @@
 <?php
 declare(strict_types=1);
 
-namespace MageOS\ClaudeConsumerAgent\Cron;
+namespace MageOS\AiShoppingAssistant\Cron;
 
 use DateTimeImmutable;
 
 final class Retention
 {
     public function __construct(
-        private readonly \MageOS\ClaudeConsumerAgent\Model\Config\StoreConfig $storeConfig,
-        private readonly \MageOS\ClaudeConsumerAgent\Model\Session\ResourceModel\Session $resource,
+        private readonly \MageOS\AiShoppingAssistant\Model\Config\StoreConfig $storeConfig,
+        private readonly \MageOS\AiShoppingAssistant\Model\Session\ResourceModel\Session $resource,
         private readonly \Magento\Store\Model\StoreManagerInterface $storeManager,
         private readonly \Psr\Log\LoggerInterface $logger
     ) {

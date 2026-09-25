@@ -1,12 +1,12 @@
 <?php
 declare(strict_types=1);
 
-namespace MageOS\ClaudeConsumerAgent\Test\Unit\Console;
+namespace MageOS\AiShoppingAssistant\Test\Unit\Console;
 
 use Magento\Framework\App\ResourceConnection;
 use Magento\Framework\DB\Adapter\AdapterInterface;
 use Magento\Framework\DB\Select;
-use MageOS\ClaudeConsumerAgent\Console\Command\UsageReport;
+use MageOS\AiShoppingAssistant\Console\Command\UsageReport;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\Console\Tester\CommandTester;
 

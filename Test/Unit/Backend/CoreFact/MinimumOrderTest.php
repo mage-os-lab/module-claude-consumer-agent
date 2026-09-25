@@ -1,13 +1,13 @@
 <?php
 declare(strict_types=1);
 
-namespace MageOS\ClaudeConsumerAgent\Test\Unit\Backend\CoreFact;
+namespace MageOS\AiShoppingAssistant\Test\Unit\Backend\CoreFact;
 
 use Magento\Framework\App\Config\ScopeConfigInterface;
 use Magento\Framework\Exception\NoSuchEntityException;
 use Magento\Store\Model\Store;
 use Magento\Store\Model\StoreManagerInterface;
-use MageOS\ClaudeConsumerAgent\Model\Backend\Provider\CoreFact\MinimumOrder;
+use MageOS\AiShoppingAssistant\Model\Backend\Provider\CoreFact\MinimumOrder;
 use PHPUnit\Framework\TestCase;
 
 final class MinimumOrderTest extends TestCase

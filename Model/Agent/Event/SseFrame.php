@@ -1,9 +1,9 @@
 <?php
 declare(strict_types=1);
 
-namespace MageOS\ClaudeConsumerAgent\Model\Agent\Event;
+namespace MageOS\AiShoppingAssistant\Model\Agent\Event;
 
-use MageOS\ClaudeConsumerAgent\Model\Agent\Event;
+use MageOS\AiShoppingAssistant\Model\Agent\Event;
 
 final class SseFrame
 {

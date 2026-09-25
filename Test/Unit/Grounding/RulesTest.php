@@ -1,19 +1,19 @@
 <?php
 declare(strict_types=1);
 
-namespace MageOS\ClaudeConsumerAgent\Test\Unit\Grounding;
+namespace MageOS\AiShoppingAssistant\Test\Unit\Grounding;
 
 use Magento\Framework\App\Config\ScopeConfigInterface;
 use Magento\Store\Api\Data\StoreInterface;
 use Magento\Store\Model\StoreManagerInterface;
-use MageOS\ClaudeConsumerAgent\Api\Backend\SkuMatcherInterface;
-use MageOS\ClaudeConsumerAgent\Model\Agent\AgentConfig;
-use MageOS\ClaudeConsumerAgent\Model\Agent\Grounding\Rules;
-use MageOS\ClaudeConsumerAgent\Model\Agent\Grounding\SkuCandidates;
-use MageOS\ClaudeConsumerAgent\Model\Agent\Lexicon;
-use MageOS\ClaudeConsumerAgent\Model\Agent\SessionState;
-use MageOS\ClaudeConsumerAgent\Model\Config\StoreConfig;
-use MageOS\ClaudeConsumerAgent\Model\Data\PageContext;
+use MageOS\AiShoppingAssistant\Api\Backend\SkuMatcherInterface;
+use MageOS\AiShoppingAssistant\Model\Agent\AgentConfig;
+use MageOS\AiShoppingAssistant\Model\Agent\Grounding\Rules;
+use MageOS\AiShoppingAssistant\Model\Agent\Grounding\SkuCandidates;
+use MageOS\AiShoppingAssistant\Model\Agent\Lexicon;
+use MageOS\AiShoppingAssistant\Model\Agent\SessionState;
+use MageOS\AiShoppingAssistant\Model\Config\StoreConfig;
+use MageOS\AiShoppingAssistant\Model\Data\PageContext;
 use PHPUnit\Framework\TestCase;
 
 final class RulesTest extends TestCase

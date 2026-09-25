@@ -1,9 +1,9 @@
 <?php
 declare(strict_types=1);
 
-namespace MageOS\ClaudeConsumerAgent\Model\Data;
+namespace MageOS\AiShoppingAssistant\Model\Data;
 
-use MageOS\ClaudeConsumerAgent\Api\Data\UserPreferencesInterface;
+use MageOS\AiShoppingAssistant\Api\Data\UserPreferencesInterface;
 
 final class UserPreferences implements UserPreferencesInterface
 {

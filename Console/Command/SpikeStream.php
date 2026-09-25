@@ -1,20 +1,20 @@
 <?php
 declare(strict_types=1);
 
-namespace MageOS\ClaudeConsumerAgent\Console\Command;
+namespace MageOS\AiShoppingAssistant\Console\Command;
 
 use Magento\Framework\Console\Cli;
-use MageOS\ClaudeConsumerAgent\Model\Agent\Event;
-use MageOS\ClaudeConsumerAgent\Model\Agent\SessionContext;
-use MageOS\ClaudeConsumerAgent\Model\Agent\SessionState;
-use MageOS\ClaudeConsumerAgent\Model\Agent\Turn\Orchestrator;
-use MageOS\ClaudeConsumerAgent\Model\Client\Fixtures;
-use MageOS\ClaudeConsumerAgent\Model\Client\RawEvent;
-use MageOS\ClaudeConsumerAgent\Model\Data\PageContext;
-use MageOS\ClaudeConsumerAgent\Model\Session\Binding;
-use MageOS\ClaudeConsumerAgent\Model\Session\TranscriptRepository;
-use MageOS\ClaudeConsumerAgent\Model\Eval\InMemorySessions;
-use MageOS\ClaudeConsumerAgent\Model\Eval\InMemoryTranscripts;
+use MageOS\AiShoppingAssistant\Model\Agent\Event;
+use MageOS\AiShoppingAssistant\Model\Agent\SessionContext;
+use MageOS\AiShoppingAssistant\Model\Agent\SessionState;
+use MageOS\AiShoppingAssistant\Model\Agent\Turn\Orchestrator;
+use MageOS\AiShoppingAssistant\Model\Client\Fixtures;
+use MageOS\AiShoppingAssistant\Model\Client\RawEvent;
+use MageOS\AiShoppingAssistant\Model\Data\PageContext;
+use MageOS\AiShoppingAssistant\Model\Session\Binding;
+use MageOS\AiShoppingAssistant\Model\Session\TranscriptRepository;
+use MageOS\AiShoppingAssistant\Model\Eval\InMemorySessions;
+use MageOS\AiShoppingAssistant\Model\Eval\InMemoryTranscripts;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
@@ -39,9 +39,9 @@ class SpikeStream extends Command
     private const OPTION_RAW = 'raw';
 
     public function __construct(
-        private readonly \MageOS\ClaudeConsumerAgent\Api\Client\MessagesClientInterface $client,
-        private readonly \MageOS\ClaudeConsumerAgent\Api\StorefrontBackendInterface $backend,
-        private readonly \MageOS\ClaudeConsumerAgent\Model\Config\StoreConfig $config,
+        private readonly \MageOS\AiShoppingAssistant\Api\Client\MessagesClientInterface $client,
+        private readonly \MageOS\AiShoppingAssistant\Api\StorefrontBackendInterface $backend,
+        private readonly \MageOS\AiShoppingAssistant\Model\Config\StoreConfig $config,
         private readonly \Magento\Store\Model\StoreManagerInterface $storeManager,
         private readonly \Magento\Framework\ObjectManagerInterface $objectManager,
         private readonly \Magento\Framework\App\ResourceConnection $resourceConnection,
@@ -171,14 +171,14 @@ class SpikeStream extends Command
         }
     }
 
-    private function recordingClient(string $name): \MageOS\ClaudeConsumerAgent\Api\Client\MessagesClientInterface
+    private function recordingClient(string $name): \MageOS\AiShoppingAssistant\Api\Client\MessagesClientInterface
     {
         $inner = $this->client;
-        return new class ($inner, $name) implements \MageOS\ClaudeConsumerAgent\Api\Client\MessagesClientInterface {
+        return new class ($inner, $name) implements \MageOS\AiShoppingAssistant\Api\Client\MessagesClientInterface {
             private int $round = 0;
 
             public function __construct(
-                private readonly \MageOS\ClaudeConsumerAgent\Api\Client\MessagesClientInterface $inner,
+                private readonly \MageOS\AiShoppingAssistant\Api\Client\MessagesClientInterface $inner,
                 private readonly string $name
             ) {
             }

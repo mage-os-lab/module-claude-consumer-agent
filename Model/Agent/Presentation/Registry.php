@@ -1,13 +1,13 @@
 <?php
 declare(strict_types=1);
 
-namespace MageOS\ClaudeConsumerAgent\Model\Agent\Presentation;
+namespace MageOS\AiShoppingAssistant\Model\Agent\Presentation;
 
-use MageOS\ClaudeConsumerAgent\Api\Presentation\PresentationExtensionInterface;
+use MageOS\AiShoppingAssistant\Api\Presentation\PresentationExtensionInterface;
 
 final class Registry
 {
-    private const TEMPLATE_PREFIX = 'MageOS_ClaudeConsumerAgent::cards/';
+    private const TEMPLATE_PREFIX = 'MageOS_AiShoppingAssistant::cards/';
 
     /** @var array<string, Component> */
     private array $components;
@@ -16,11 +16,11 @@ final class Registry
      * @param PresentationExtensionInterface[] $extensions
      */
     public function __construct(
-        \MageOS\ClaudeConsumerAgent\Model\Agent\Presentation\Enrich\Products $products,
-        \MageOS\ClaudeConsumerAgent\Model\Agent\Presentation\Enrich\Comparison $comparison,
-        \MageOS\ClaudeConsumerAgent\Model\Agent\Presentation\Enrich\OrderStatus $orderStatus,
-        \MageOS\ClaudeConsumerAgent\Model\Agent\Presentation\Enrich\Checkout $checkout,
-        \MageOS\ClaudeConsumerAgent\Model\Agent\Presentation\Enrich\Suggestions $suggestions,
+        \MageOS\AiShoppingAssistant\Model\Agent\Presentation\Enrich\Products $products,
+        \MageOS\AiShoppingAssistant\Model\Agent\Presentation\Enrich\Comparison $comparison,
+        \MageOS\AiShoppingAssistant\Model\Agent\Presentation\Enrich\OrderStatus $orderStatus,
+        \MageOS\AiShoppingAssistant\Model\Agent\Presentation\Enrich\Checkout $checkout,
+        \MageOS\AiShoppingAssistant\Model\Agent\Presentation\Enrich\Suggestions $suggestions,
         array $extensions = []
     ) {
         $this->components = [

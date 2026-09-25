@@ -1,13 +1,13 @@
 <?php
 declare(strict_types=1);
 
-namespace MageOS\ClaudeConsumerAgent\Model\Agent\Turn;
+namespace MageOS\AiShoppingAssistant\Model\Agent\Turn;
 
-use MageOS\ClaudeConsumerAgent\Model\Agent\Turn\Exception\ApiStreamError;
-use MageOS\ClaudeConsumerAgent\Model\Agent\Turn\Item\TextDelta;
-use MageOS\ClaudeConsumerAgent\Model\Agent\Turn\Item\ToolUseClosed;
-use MageOS\ClaudeConsumerAgent\Model\Agent\Turn\Item\UnreadableToolInput;
-use MageOS\ClaudeConsumerAgent\Model\Client\RawEvent;
+use MageOS\AiShoppingAssistant\Model\Agent\Turn\Exception\ApiStreamError;
+use MageOS\AiShoppingAssistant\Model\Agent\Turn\Item\TextDelta;
+use MageOS\AiShoppingAssistant\Model\Agent\Turn\Item\ToolUseClosed;
+use MageOS\AiShoppingAssistant\Model\Agent\Turn\Item\UnreadableToolInput;
+use MageOS\AiShoppingAssistant\Model\Client\RawEvent;
 
 final class StreamedRound
 {

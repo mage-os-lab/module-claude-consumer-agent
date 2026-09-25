@@ -1,9 +1,9 @@
 <?php
 declare(strict_types=1);
 
-namespace MageOS\ClaudeConsumerAgent\Model\Agent\Tool;
+namespace MageOS\AiShoppingAssistant\Model\Agent\Tool;
 
-use MageOS\ClaudeConsumerAgent\Model\Agent\AgentConfig;
+use MageOS\AiShoppingAssistant\Model\Agent\AgentConfig;
 
 /**
  * The first entry in the injected provider pool is the core provider: its tools keep
@@ -17,16 +17,16 @@ final class Registry
     private array $byNameByStore = [];
 
     /**
-     * @param \MageOS\ClaudeConsumerAgent\Api\Tool\ToolProviderInterface[] $providers
+     * @param \MageOS\AiShoppingAssistant\Api\Tool\ToolProviderInterface[] $providers
      */
     public function __construct(
         private readonly array $providers,
-        private readonly \MageOS\ClaudeConsumerAgent\Model\Config\StoreConfig $storeConfig
+        private readonly \MageOS\AiShoppingAssistant\Model\Config\StoreConfig $storeConfig
     ) {
     }
 
     /**
-     * @return \MageOS\ClaudeConsumerAgent\Model\Agent\Tool\Definition[]
+     * @return \MageOS\AiShoppingAssistant\Model\Agent\Tool\Definition[]
      */
     public function definitions(int $storeId): array
     {
@@ -54,7 +54,7 @@ final class Registry
     }
 
     /**
-     * @return \MageOS\ClaudeConsumerAgent\Model\Agent\Tool\Definition[]
+     * @return \MageOS\AiShoppingAssistant\Model\Agent\Tool\Definition[]
      */
     private function buildDefinitions(int $storeId): array
     {

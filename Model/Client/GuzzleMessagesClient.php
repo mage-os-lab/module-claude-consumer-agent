@@ -1,10 +1,10 @@
 <?php
 declare(strict_types=1);
 
-namespace MageOS\ClaudeConsumerAgent\Model\Client;
+namespace MageOS\AiShoppingAssistant\Model\Client;
 
 use GuzzleHttp\Exception\ConnectException;
-use MageOS\ClaudeConsumerAgent\Api\Client\MessagesClientInterface;
+use MageOS\AiShoppingAssistant\Api\Client\MessagesClientInterface;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\StreamInterface;
 
@@ -28,9 +28,9 @@ final class GuzzleMessagesClient implements MessagesClientInterface
 
     public function __construct(
         private readonly \GuzzleHttp\ClientInterface $http,
-        private readonly \MageOS\ClaudeConsumerAgent\Model\Config\StoreConfig $config,
+        private readonly \MageOS\AiShoppingAssistant\Model\Config\StoreConfig $config,
         private readonly \Psr\Log\LoggerInterface $logger,
-        private readonly \MageOS\ClaudeConsumerAgent\Model\Client\Sleeper $sleeper
+        private readonly \MageOS\AiShoppingAssistant\Model\Client\Sleeper $sleeper
     ) {
     }
 

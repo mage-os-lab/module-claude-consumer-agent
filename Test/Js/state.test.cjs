@@ -17,14 +17,14 @@ function loadState(responses) {
             return Promise.resolve({json: () => Promise.resolve(replies[url] || {})});
         }
     };
-    const state = load('MageOS_ClaudeConsumerAgent/js/luma/model/state', {
+    const state = load('MageOS_AiShoppingAssistant/js/luma/model/state', {
         ko: ko,
         'Magento_Customer/js/customer-data': {
             get: () => ko.observable({}),
             reload: (names) => calls.reloads.push(names)
         },
-        'MageOS_ClaudeConsumerAgent/js/luma/model/transport': transport,
-        'MageOS_ClaudeConsumerAgent/js/luma/model/format': {
+        'MageOS_AiShoppingAssistant/js/luma/model/transport': transport,
+        'MageOS_AiShoppingAssistant/js/luma/model/format': {
             setPriceFormat: () => undefined,
             price: (amount) => '$' + Number(amount).toFixed(2),
             str: (template) => template,
@@ -146,7 +146,7 @@ test('a products card becomes a card view and unknown cards are ignored', () => 
     ]}});
     state.apply('ui', {component: 'mystery', payload: {}});
     assert.equal(assistant.cards().length, 1);
-    assert.equal(assistant.cards()[0].template, 'MageOS_ClaudeConsumerAgent/luma/cards/products');
+    assert.equal(assistant.cards()[0].template, 'MageOS_AiShoppingAssistant/luma/cards/products');
     assert.equal(assistant.cards()[0].items[0].priceText, '$34.00');
 });
 

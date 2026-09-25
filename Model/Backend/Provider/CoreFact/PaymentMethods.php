@@ -1,9 +1,9 @@
 <?php
 declare(strict_types=1);
 
-namespace MageOS\ClaudeConsumerAgent\Model\Backend\Provider\CoreFact;
+namespace MageOS\AiShoppingAssistant\Model\Backend\Provider\CoreFact;
 
-use MageOS\ClaudeConsumerAgent\Api\Prompt\CoreFactProviderInterface;
+use MageOS\AiShoppingAssistant\Api\Prompt\CoreFactProviderInterface;
 
 final class PaymentMethods implements CoreFactProviderInterface
 {

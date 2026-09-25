@@ -1,10 +1,10 @@
 <?php
 declare(strict_types=1);
 
-namespace MageOS\ClaudeConsumerAgent\Model\Backend\Provider;
+namespace MageOS\AiShoppingAssistant\Model\Backend\Provider;
 
 use Magento\Catalog\Api\Data\ProductInterface;
-use MageOS\ClaudeConsumerAgent\Api\Backend\ProductImageUrlInterface;
+use MageOS\AiShoppingAssistant\Api\Backend\ProductImageUrlInterface;
 
 final class HelperImageUrl implements ProductImageUrlInterface
 {

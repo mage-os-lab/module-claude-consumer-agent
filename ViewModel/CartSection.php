@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-namespace MageOS\ClaudeConsumerAgent\ViewModel;
+namespace MageOS\AiShoppingAssistant\ViewModel;
 
 use Magento\Framework\View\Element\Block\ArgumentInterface;
 

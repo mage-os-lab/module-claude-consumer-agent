@@ -1,11 +1,11 @@
 <?php
 declare(strict_types=1);
 
-namespace MageOS\ClaudeConsumerAgent\Model\Session;
+namespace MageOS\AiShoppingAssistant\Model\Session;
 
-use MageOS\ClaudeConsumerAgent\Api\Session\SessionRepositoryInterface;
-use MageOS\ClaudeConsumerAgent\Model\Agent\SessionContext;
-use MageOS\ClaudeConsumerAgent\Model\Agent\SessionState;
+use MageOS\AiShoppingAssistant\Api\Session\SessionRepositoryInterface;
+use MageOS\AiShoppingAssistant\Model\Agent\SessionContext;
+use MageOS\AiShoppingAssistant\Model\Agent\SessionState;
 
 /**
  * A signed-in customer may claim a guest row of the same quote, so a guest who signs in keeps the session.
@@ -13,8 +13,8 @@ use MageOS\ClaudeConsumerAgent\Model\Agent\SessionState;
 final class Repository implements SessionRepositoryInterface
 {
     public function __construct(
-        private readonly \MageOS\ClaudeConsumerAgent\Model\Session\ResourceModel\Session $resource,
-        private readonly \MageOS\ClaudeConsumerAgent\Model\Session\IdGenerator $idGenerator,
+        private readonly \MageOS\AiShoppingAssistant\Model\Session\ResourceModel\Session $resource,
+        private readonly \MageOS\AiShoppingAssistant\Model\Session\IdGenerator $idGenerator,
         private readonly \Psr\Log\LoggerInterface $logger
     ) {
     }

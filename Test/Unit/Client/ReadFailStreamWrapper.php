@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-namespace MageOS\ClaudeConsumerAgent\Test\Unit\Client;
+namespace MageOS\AiShoppingAssistant\Test\Unit\Client;
 
 /**
  * A stream whose reads fail without ever setting the timed_out flag, so a test can tell a
