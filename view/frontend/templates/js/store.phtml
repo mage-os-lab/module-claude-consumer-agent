@@ -119,7 +119,7 @@ $configJson = json_encode(
                     this.mode = 'stream';
                 }
                 try {
-                    this.sessionId = window.sessionStorage ? window.sessionStorage.getItem('aiagent_session') : null;
+                    this.sessionId = window.localStorage ? window.localStorage.getItem('aiagent_session') : null;
                 } catch (e) {
                     this.sessionId = null;
                 }
@@ -339,8 +339,8 @@ $configJson = json_encode(
             },
             persistSession() {
                 try {
-                    if (window.sessionStorage) {
-                        window.sessionStorage.setItem('aiagent_session', this.sessionId);
+                    if (window.localStorage) {
+                        window.localStorage.setItem('aiagent_session', this.sessionId);
                     }
                 } catch (e) {
                     return;
@@ -349,8 +349,8 @@ $configJson = json_encode(
             clearSession() {
                 this.sessionId = null;
                 try {
-                    if (window.sessionStorage) {
-                        window.sessionStorage.removeItem('aiagent_session');
+                    if (window.localStorage) {
+                        window.localStorage.removeItem('aiagent_session');
                     }
                 } catch (e) {
                     return;
@@ -361,8 +361,8 @@ $configJson = json_encode(
                     return;
                 }
                 try {
-                    if (window.sessionStorage) {
-                        window.sessionStorage.setItem('aiagent_open', '1');
+                    if (window.localStorage) {
+                        window.localStorage.setItem('aiagent_open', '1');
                     }
                 } catch (e) {
                     return;
@@ -373,8 +373,8 @@ $configJson = json_encode(
                     return;
                 }
                 try {
-                    if (window.sessionStorage) {
-                        window.sessionStorage.removeItem('aiagent_open');
+                    if (window.localStorage) {
+                        window.localStorage.removeItem('aiagent_open');
                     }
                 } catch (e) {
                     return;
@@ -386,7 +386,7 @@ $configJson = json_encode(
                 }
                 let stored = null;
                 try {
-                    stored = window.sessionStorage ? window.sessionStorage.getItem('aiagent_open') : null;
+                    stored = window.localStorage ? window.localStorage.getItem('aiagent_open') : null;
                 } catch (e) {
                     return false;
                 }

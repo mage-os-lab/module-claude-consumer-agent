@@ -96,7 +96,7 @@ define([
             this.config = config;
             format.setPriceFormat(config.priceFormat);
             this.mode = config.streaming === 'off' ? 'json' : readStorage('localStorage', MODE_KEY) || 'stream';
-            this.sessionId = readStorage('sessionStorage', SESSION_KEY);
+            this.sessionId = readStorage('localStorage', SESSION_KEY);
             this.page = pageModel.detect(config.page, document, window.location.search);
             resolveReady(this);
         },
@@ -348,25 +348,25 @@ define([
         },
 
         persistSession: function () {
-            writeStorage('sessionStorage', SESSION_KEY, this.sessionId);
+            writeStorage('localStorage', SESSION_KEY, this.sessionId);
         },
 
         rememberOpen: function () {
             if (!this.config.keepOpen) {
                 return;
             }
-            writeStorage('sessionStorage', OPEN_KEY, '1');
+            writeStorage('localStorage', OPEN_KEY, '1');
         },
 
         forgetOpen: function () {
             if (!this.config.keepOpen) {
                 return;
             }
-            removeStorage('sessionStorage', OPEN_KEY);
+            removeStorage('localStorage', OPEN_KEY);
         },
 
         shouldReopen: function () {
-            if (!this.config.keepOpen || readStorage('sessionStorage', OPEN_KEY) === null) {
+            if (!this.config.keepOpen || readStorage('localStorage', OPEN_KEY) === null) {
                 return false;
             }
             return typeof window.matchMedia === 'function' && window.matchMedia(WIDE_VIEWPORT_QUERY).matches;

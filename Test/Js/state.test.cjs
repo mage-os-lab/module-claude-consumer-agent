@@ -51,7 +51,7 @@ function fakeWindow(stored, wide) {
     return {
         calls: calls,
         items: items,
-        sessionStorage: {
+        localStorage: {
             getItem: (key) => {
                 calls.push(['get', key]);
                 return items.has(key) ? items.get(key) : null;
@@ -378,12 +378,20 @@ test('retry while a turn is running keeps the notice and sends nothing', () => {
     assert.deepEqual(calls.runs, ['hello', 'something else']);
 });
 
-test('opening the assistant stores the open flag for this tab', () => {
+test('opening the assistant stores the open flag for every tab', () => {
     const {state} = loadState();
     const win = fakeWindow({}, true);
     state.config.keepOpen = true;
     withWindow(win, () => state.rememberOpen());
     assert.equal(win.items.get('aiagent_open'), '1');
+});
+
+test('the session id is stored where every tab of the browser reads it', () => {
+    const {state} = loadState();
+    const win = fakeWindow({}, true);
+    state.sessionId = SESSION;
+    withWindow(win, () => state.persistSession());
+    assert.equal(win.items.get('aiagent_session'), SESSION);
 });
 
 test('closing the assistant removes the open flag', () => {
